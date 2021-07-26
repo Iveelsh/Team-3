@@ -1,0 +1,49 @@
+.none{
+    display: none;
+}
+.black{
+    background: black;
+    color: white;
+}
+
+.a {
+  display: flex;
+  flex-direction: row;
+  gap: 300px;
+}
+.b{
+    display: flex;
+    flex-direction: column;
+}
+.side{
+    position: absolute;
+width: 154px;
+height: 28px;
+left: 63px;
+top: 159px;
+border-radius: 30.9721px;
+}
+.side2{
+    position: absolute;
+width: 154px;
+height: 28px;
+left: 63px;
+top: 201px;
+border-radius: 30.9721px;
+}
+.side3{
+    position: absolute;
+width: 154px;
+height: 28px;
+left: 63px;
+top: 243px;
+border-radius: 30.9721px;
+}
+.side4{
+    position: absolute;
+width: 154px;
+height: 28px;
+left: 63px;
+top: 285px;
+border-radius: 30.9721px;
+}
