@@ -8,7 +8,7 @@
     <title>Document</title>
     </style>
   </head>
-  <body>
+  <body id="body">
     <div class="a">
       <div class="b">
         <button id="taskb" onclick="displaytask();" class="side-button">task</button>
@@ -16,9 +16,14 @@
         <button id="groupb" onclick="displaygroupinfo();" class="side-button">groupinfo</button>
         <button id="messb" onclick="displaymessage()" class="side-button">message</button>
       </div>
+      <div class="modal" id="modal">
+        <div class="modal-item">
+          modal gdfgdfhgfjghasoi niasuydias
+        </div>
+      </div>
       <div class="contents">
           <div id="task"> task </div>
-          <div id="wishlist" class="none" >wishlist</div>
+          <div id="wishlist" class="none" >wishlist <button onclick="modal()">modal</button></div>
           <div id="groupinfo" class="none" > groupinfo </div>
           <div id="message" class="none" > message</div>
       </div>
