@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style/sidebar.css">
-    <title>Document</title>
+    <title></title>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
     </style>
-  </head>
-  <body id="body">
+</head>
+
+<body id="body">
     <div class="a">
-      <div class="b">
-        <button id="taskb" onclick="displaytask();" class="side-button">task</button>
-        <button id="wishb" onclick="displaywishlist();" class="side-button">wishlist</button>
-        <button id="groupb" onclick="displaygroupinfo();" class="side-button">groupinfo</button>
-        <button id="messb" onclick="displaymessage()" class="side-button">message</button>
-      </div>
-      <div class="modal" id="modal">
-        <div class="modal-item">
-          modal gdfgdfhgfjghasoi niasuydias
+        <div class="b">
+            <button id="taskb" onclick="displaytask();" class="side-button">task</button>
+            <button id="wishb" onclick="displaywishlist();" class="side-button">wishlist</button>
+            <button id="groupb" onclick="displaygroupinfo();" class="side-button">groupinfo</button>
+            <button id="messb" onclick="displaymessage()" class="side-button">message</button>
         </div>
-      </div>
-      <div class="contents">
-          <div id="task"> task </div>
-          <div id="wishlist" class="none" >wishlist <button onclick="modal()">modal</button></div>
-          <div id="groupinfo" class="none" > groupinfo </div>
-          <div id="message" class="none" > message</div>
-      </div>
+        <div class="modal" id="modal">
+            <div class="modal-item">
+                modal gdfgdfhgfjghasoi niasuydias
+            </div>
+        </div>
+        <div class="contents">
+            <div id="task"> task <input type="text" id="filterinput"><button onclick="filter()">click me </button></div>
+            <div id="wishlist" class="none">wishlist <button onclick="modal()">modal</button></div>
+            <div id="groupinfo" class="none"> groupinfo fdsfsdf</button>
+            </div>
+            <div id="message" class="none"> message</div>
+        </div>
     </div>
-  </body>
-    <script src="../js/sidebar.js"></script>
+</body>
+<script src="../js/firebase.js"></script>
+<script src="../js/sidebar.js"></script>
+
 </html>
