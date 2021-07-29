@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../style/login.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -16,7 +15,7 @@
         <div class="Logo logo_header"></div>
     </div>
 
-    <div class="Login">        
+    <div class="Login">
         <div class="Nevtreh">Нэвтрэх</div>
 
         <div class="text Email">
@@ -25,7 +24,7 @@
             </span>
             <div class="position">Email</div>
         </div>
-        <input class="input Email_L">
+        <input id="email" class="input Email_L" placeholder="Email">
 
         <div class="text Password">
             <span class="material-icons">
@@ -33,30 +32,30 @@
             </span>
             <div class="position">Нууц үг</div>
         </div>
-        <input class="input Password_L">
+        <input placeholder="Password" id="password" class="input Password_L ">
 
-        <a class="forgot">Нууц үгээ мартсан уу?</a>
+        <a class="forgot ">Нууц үгээ мартсан уу?</a>
 
-        <button class="Back button_text">&#8592; Буцах</button>
-        <button class="Continue button_text">Үргэлжлүүлэх &#8594;</button>
+        <button class="Back button_text ">&#8592; Буцах</button>
+        <button class="Continue button_text " onclick="loginWithEmailAndPassword() ">Үргэлжлүүлэх &#8594;</button>
 
-        <div class="line one"></div>
-        <div class="or">Эсвэл</div>
-        <div class="line two"></div>
+        <div class="line one "></div>
+        <div class="or ">Эсвэл</div>
+        <div class="line two "></div>
 
-        <button class="container blue">
-            <span class="material-icons face">
+        <button class="container blue ">
+            <span class="material-icons face ">
                 facebook
             </span>
-            <div class="connect fb">
+            <div class="connect fb ">
                 Facebook хаягаар холбогдох
             </div>
         </button>
 
 
-        <button class="container white">
-            <img class="google" src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png">
-            <div class="connect gg">
+        <button class="container white ">
+            <img class="google " src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png ">
+            <div class="connect gg ">
                 Google хаягаар холбогдох
             </div>
         </button>
@@ -64,24 +63,24 @@
 
     </div>
 
-    <div class="footer">
-        <div class="Logo logo_footer"></div>
-        <div class="flex">
-            <a class="aboutus tuhai">Бидний Тухай</a>
-            <a class="aboutus holboo">Холбоо Барих</a>
-            <a class="aboutus asuultuud">Асуултууд</a>
+    <div class="footer ">
+        <div class="Logo logo_footer "></div>
+        <div class="flex ">
+            <a class="aboutus tuhai ">Бидний Тухай</a>
+            <a class="aboutus holboo ">Холбоо Барих</a>
+            <a class="aboutus asuultuud ">Асуултууд</a>
         </div>
 
 
 
-        <div class="longline"></div>
+        <div class="longline "></div>
 
-        <div class="middle">
-            <img class="logo" src="https://seeklogo.com/images/C/copyright-symbol-logo-8BD7CD1E77-seeklogo.com.png">
-            <div class="twenty1">2021</div>
+        <div class="middle ">
+            <img class="logo " src="https://seeklogo.com/images/C/copyright-symbol-logo-8BD7CD1E77-seeklogo.com.png ">
+            <div class="twenty1 ">2021</div>
         </div>
     </div>
 </body>
-<script src="../js/login.js"></script>
+<script src="../js/login.js "></script>
 
 </html>

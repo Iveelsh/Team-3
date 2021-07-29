@@ -1,4 +1,4 @@
-loginWithEmailAndPassword = () => {
+const loginWithEmailAndPassword = () => {
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
     firebase.auth().signInWithEmailAndPassword(email, password)
