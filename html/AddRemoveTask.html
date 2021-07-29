@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .input {
+        border: 4px black solid;
+    }
+    .button {
+        width: 70px;
+        height: 40px;
+        cursor: pointer;
+    }
+    ul li {
+        margin: 0;
+        padding: 0;
+        position: relative;
+        padding: 12px 8px 12px 40px;
+        width: 700px;
+        height: 300px;
+        list-style-type: none;
+        background: #eee;
+        font-size: 18px;
+    }
+
+    .name {
+        font-size: 14px;
+        color: red;
+    }
+
+    .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+  background-color: red;
+  border: 1px black solid;
+  width: 50px;
+  height: 30px;
+  cursor: pointer;
+}
+
+</style>
+<body>
+    <input class="input name" id="TaskName" type="text" placeholder="Task Name">
+    <input class="input" id="TaskPoint" type="number" placeholder="Point">
+    <input class="input des" id="TaskDes" type="text" placeholder="Description">
+
+    <button class="button" onclick="AddTask()">Add</button>
+
+    <ul id="list"></ul>
+</body>
+
+
+<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
+
+
+<script src="../js/firebase.js"></script>
+<script src="../js/AddRemoveTask.js"></script>
+</html>
