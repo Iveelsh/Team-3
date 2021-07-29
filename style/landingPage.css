@@ -1,0 +1,198 @@
+body {
+    margin: 0px;
+}
+
+.Header {
+    width: 100vw;
+    height: 98px;
+    background-color: lightgrey;
+    /* top: 0;
+    left: 0; */
+    position: relative;
+    /* margin-bottom: 100px; */
+}
+
+.Logo {
+    border-radius: 50%;
+    height: 58px;
+    width: 58px;
+    background-color: darkgray;
+}
+
+.logo_header {
+    position: absolute;
+    top: 20px;
+    left: 35px;
+}
+
+.footer {
+    width: 100vw;
+    height: 505px;
+    background-color: lightgrey;
+    position: relative;
+    top: 149px;
+}
+
+.logo_footer {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    top: 73px;
+}
+
+.aboutus {
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    font-weight: bold;
+    position: relative;
+}
+
+.tuhai {
+    top: 170px;
+}
+
+.holboo {
+    top: 170px;
+}
+
+.asuultuud {
+    top: 170px;
+}
+
+.longline {
+    width: 676px;
+    border: 1px solid #A9A9A9;
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    top: 243px;
+}
+
+.logo {
+    width: 8px;
+    height: 8px;
+    position: relative;
+    top: 248px;
+}
+
+.twenty1 {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    position: relative;
+    font-size: 9.15px;
+    top: 247px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.middle {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* ////////////////////////////// */
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+
+.first-row {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 100px;
+    width: 100%;
+}
+
+.welcome-texts {
+    width: 560px;
+    height: 364px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 30px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.logsign-buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.first-row-pic {
+    width: 560px;
+    height: 364px;
+    background-color: darkgray;
+}
+
+.second-row {
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    width: 270px;
+    font-size: 25px;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.icon {
+    width: 212px;
+    height: 208px;
+    border-radius: 50%;
+    background-color: darkgray;
+    margin-bottom: 50px;
+}
+
+.third-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+}
+
+.third-row-pic {
+    width: 1140px;
+    height: 437px;
+    background-color: darkgray;
+}
+
+.nevtreh-butn {
+    width: 212px;
+    height: 54px;
+    border-radius: 15px;
+    background-color: lightgrey;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: darkgray 2px solid;
+}
+
+.burtguuleh-butn {
+    width: 212px;
+    height: 54px;
+    border-radius: 15px;
+    background-color: darkgray;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px black solid;
+}
