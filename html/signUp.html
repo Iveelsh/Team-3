@@ -7,9 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../style/signUp.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
 <body>
@@ -17,24 +16,24 @@
         <div class="Logo logo_header"></div>
     </div>
 
-    <div class="Signup">        
+    <div class="Signup">
         <div class="Burtgel_uusgeh">Бүртгэл Үүсгэх</div>
- 
+
         <div class="text ner">
             <span class="material-icons">
                 account_circle
             </span>
             <div class="position">Нэр</div>
-        </div>     
-        <input class="input ner_L">
- 
+        </div>
+        <input placeholder="Ner" id="name" class="input ner_L">
+
         <div class="text Email">
             <span class="material-icons">
                 email
             </span>
             <div class="position">Email</div>
         </div>
-        <input class="input Email_L">
+        <input placeholder="Email" id="email" class="input Email_L">
 
         <div class="text Password">
             <span class="material-icons">
@@ -42,13 +41,13 @@
             </span>
             <div class="position">Нууц үг</div>
         </div>
-        <input class="input Password_L">
+        <input placeholder="Password" id="password" type="password" class="input Password_L">
 
         <div class="text Password_again">Нууц Үг Давтах</div>
-        <input class="input Password_again_L">
+        <input placeholder="Password" type="password" class="input Password_again_L">
 
         <button class="Back button_text">&#8592; Буцах</button>
-        <button class="Continue button_text">Үргэлжлүүлэх &#8594;</button>
+        <button onclick="signUpWithEmailAndPassword()" class="Continue button_text">Үргэлжлүүлэх &#8594;</button>
 
         <div class="line one"></div>
         <div class="or">Эсвэл</div>
