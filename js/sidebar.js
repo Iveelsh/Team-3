@@ -58,7 +58,7 @@ window.onclick = (event) => {
 }
 const addmodal = () => {
     let addmodal = document.getElementById("modal");
-    modal.style.display = "block";
+    addmodal.style.display = "block";
 }
 window.onclick = (event) => {
     let modal = document.getElementById("modal");
@@ -66,7 +66,16 @@ window.onclick = (event) => {
         modal.style.display = "none";
     }
 }
-
+const taskmodal = () => {
+    let taskmodal = document.getElementById("taskmodal");
+    taskmodal.style.display = "block"
+}
+window.onclick = (event) => {
+    let taskmodal = document.getElementById("taskmodal");
+    if (event.target == taskmodal) {
+        taskmodal.style.display = "none";
+    }
+}
 
 const filter = () => {
     let input = document.getElementById("filterinput").value;
