@@ -1,24 +1,121 @@
 .none {
-  display: none;
-}
-.black {
-  background: black;
-  color: white;
-}
-.modal{
     display: none;
-  position: fixed; 
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
 }
-.modal-item{
+
+.black {
+    background: black;
+    color: white;
+}
+
+.add {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 800px;
+    height: 10%;
+    border: 1px black solid;
+    border-radius: 14px;
+}
+
+.taskmodal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.qqqq {
+    margin-left: 27%;
+    border: 0;
+    border-radius: 14px;
+}
+
+.nemeh {
+    margin-top: 15px;
+    margin-left: 46%;
+    border-radius: 14px;
+    background: green;
+    width: 10%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qq {
+    margin-left: 27%;
+    padding-top: 10%;
+}
+
+.qqq {
+    margin-left: 27%;
+}
+
+.input1 {
+    border-radius: 14px;
+    height: 30px;
+    width: 160px;
+    border: 0;
+}
+
+.input2 {
+    border-radius: 14px;
+    width: 50px;
+    border: 0;
+}
+
+.row3 {
+    margin-left: 27%;
+    display: flex;
+    flex-direction: row;
+    gap: 300px;
+}
+
+.row2 {
+    margin-left: 27%;
+    margin-top: 10%;
+    display: flex;
+    flex-direction: row;
+    gap: 370px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 420px;
+}
+
+.taskmodal2 {
+    border-radius: 14px;
+    margin-left: 18%;
+    height: 80%;
+    width: 70%;
+    background: gray;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-item {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,142 +126,147 @@
     border: black solid 1px;
     background-color: blanchedalmond;
 }
-.opa{
+
+.opa {
     background-color: rgba(0, 0, 0, 0.534);
 }
 
 .contents {
-  width: 1000px;
-  height: 600px;
-  border: 1px black solid;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(128, 128, 128, 0.555);
-}
-.a {
-  display: flex;
-  flex-direction: row;
-  padding-left: 100px;
-  padding-right: 100px;
-  gap: 100px;
-  position: relative;
-    top: 174px;
-}
-.b {
-  display: flex;
-  flex-direction: column;
-}
-.side-button {
-  width: 180px;
-  height: 32px;
-  border: none;
-  border-radius: 30.9721px;
-  margin-bottom: 10px;
+    width: 1000px;
+    height: 600px;
+    border: 1px black solid;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    background: rgba(128, 128, 128, 0.555);
 }
 
-@media only screen and (min-width: 1600px) {
-  .a {
+.a {
     display: flex;
     flex-direction: row;
     padding-left: 100px;
     padding-right: 100px;
     gap: 100px;
-  }
+    position: relative;
+    top: 174px;
 }
 
-body{
-  margin:0px;
+.b {
+    display: flex;
+    flex-direction: column;
 }
+
+.side-button {
+    width: 180px;
+    height: 32px;
+    border: none;
+    border-radius: 30.9721px;
+    margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 1600px) {
+    .a {
+        display: flex;
+        flex-direction: row;
+        padding-left: 100px;
+        padding-right: 100px;
+        gap: 100px;
+    }
+}
+
+body {
+    margin: 0px;
+}
+
 .Header {
-  width: 100%;
-  height: 98px;
-  background-color: lightgray;
-  top: 0;
-  left: 0;
-  position: fixed;
+    width: 100%;
+    height: 98px;
+    background-color: lightgray;
+    top: 0;
+    left: 0;
+    position: fixed;
 }
 
 .Logo {
-  border-radius: 50%;
-  height: 58px;
-  width: 58px;
-  background-color: darkgray;
+    border-radius: 50%;
+    height: 58px;
+    width: 58px;
+    background-color: darkgray;
 }
 
 .logo_header {
-  position: absolute;
-  top: 20px;
-  left: 35px;
+    position: absolute;
+    top: 20px;
+    left: 35px;
 }
 
 .footer {
-  width: 100%;
-  height: 505px;
-  background-color: #C4C4C4;
-  position: relative;
-  top: 250px;
+    width: 100%;
+    height: 505px;
+    background-color: #C4C4C4;
+    position: relative;
+    top: 250px;
 }
 
 .logo_footer {
-  display: table;
-  margin-right: auto;
-  margin-left: auto;
-  position: relative;
-  top: 73px;
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    top: 73px;
 }
 
 .aboutus {
-  cursor: pointer;
-  font-family: 'Roboto', sans-serif;
-  color: black;
-  font-weight: bold;
-  position: relative;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    font-weight: bold;
+    position: relative;
 }
 
 .tuhai {
-  top: 170px;
+    top: 170px;
 }
 
 .holboo {
-  top: 170px;
+    top: 170px;
 }
 
 .asuultuud {
-  top: 170px;
+    top: 170px;
 }
 
 .longline {
-  width: 676px;
-  border: 1px solid #A9A9A9;
-  display: table;
-  margin-right: auto;
-  margin-left: auto;
-  position: relative;
-  top: 243px;
+    width: 676px;
+    border: 1px solid #A9A9A9;
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    top: 243px;
 }
 
 .logo {
-  width: 8px;
-  height: 8px;
-  position: relative;
-  top: 248px;
+    width: 8px;
+    height: 8px;
+    position: relative;
+    top: 248px;
 }
+
 .twenty1 {
-  font-family: 'Roboto', sans-serif;
-  color: black;
-  position: relative;
-  font-size: 9.15px;
-  top: 247px;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    position: relative;
+    font-size: 9.15px;
+    top: 247px;
 }
 
 .flex {
-  display: flex;
-  justify-content: space-evenly;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .middle {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
