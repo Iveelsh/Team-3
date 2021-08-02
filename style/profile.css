@@ -1,0 +1,141 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    width: 80vh;
+    border-radius: 14px;
+    background: grey;
+    margin-left: 30%;
+    margin-top: 10vh;
+}
+
+.profilepic {
+    margin-top: 30px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 1px black solid;
+    background: blanchedalmond;
+    margin-left: 30px;
+}
+
+.top {
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    height: 5vh;
+    background: #E7E7E7;
+    display: flex;
+    flex-direction: row;
+}
+
+.profile {
+    display: flex;
+    height: 30vh;
+    width: 100%;
+    background: rgb(168, 164, 144);
+}
+
+.name {
+    width: 150px;
+    height: 30px;
+    border-radius: 14px;
+    background: grey;
+}
+
+.phone {
+    width: 150px;
+    height: 30px;
+    border-radius: 14px;
+    background: grey;
+}
+
+.list {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.listitems {
+    color: white;
+    padding-top: 5px;
+    height: 13%;
+    width: 85%;
+    background: rgb(38, 38, 61);
+    border-radius: 14px;
+}
+
+.inneritem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.email {
+    width: 150px;
+    height: 30px;
+    border-radius: 14px;
+    background: grey;
+}
+
+.text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 200px;
+}
+
+.tasks {
+    height: 100%;
+    width: 100%;
+    background: #CFCFCF;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.row {
+    position: absolute;
+    padding-top: 150px;
+    padding-top: 3%;
+    margin-left: 13%;
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
+
+.row2 {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    margin-left: 13%;
+    padding-top: 7%;
+}
+
+.role {
+    height: 30px;
+    width: 130px;
+    background: grey;
+    border-radius: 14px;
+}

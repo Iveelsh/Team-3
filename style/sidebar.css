@@ -33,7 +33,7 @@
 }
 
 .qqqq {
-    margin-left: 27%;
+    margin-left: 24%;
     border: 0;
     border-radius: 14px;
 }
@@ -42,7 +42,7 @@
     margin-top: 15px;
     margin-left: 46%;
     border-radius: 14px;
-    background: green;
+    background: rgb(78, 211, 78);
     width: 10%;
     height: 5%;
     display: flex;
@@ -51,12 +51,12 @@
 }
 
 .qq {
-    margin-left: 27%;
+    margin-left: 24%;
     padding-top: 10%;
 }
 
 .qqq {
-    margin-left: 27%;
+    margin-left: 24%;
 }
 
 .input1 {
@@ -73,14 +73,14 @@
 }
 
 .row3 {
-    margin-left: 27%;
+    margin-left: 24%;
     display: flex;
     flex-direction: row;
     gap: 300px;
 }
 
 .row2 {
-    margin-left: 27%;
+    margin-left: 24%;
     margin-top: 10%;
     display: flex;
     flex-direction: row;
