@@ -91,8 +91,8 @@
                 <div class="creategroup-form">
                     <div class="small-container-text text-margin">Hervee ta etseg eh bol group uusgene uu.</div>
                     <div class="small-container-text">Group uusgeh</div>
-                    <input class="input-groupname small-container-margin" type="text" placeholder="Group name" />
-                    <div class="urgelj-button">Urgeljluuleh<span class="material-icons">
+                    <input id="groupName" class="input-groupname small-container-margin" type="text" placeholder="Group name" />
+                    <div onclick="createGroup()" class="urgelj-button">Urgeljluuleh<span class="material-icons">
                         east
                         </span></div>
                 </div>
@@ -115,8 +115,8 @@
                 <div class="joingroup-form">
                     <div class="small-container-text text-margin">Hervee ta huuhed bol bulgemd negdene uu</div>
                     <div class="small-container-text">Bulgemd negdeh</div>
-                    <input class="input-groupname small-container-margin" type="text" placeholder="Bulgem code" />
-                    <div class="urgelj-button">Urgeljluuleh<span class="material-icons">
+                    <input id="groupCode" class="input-groupname small-container-margin" type="text" placeholder="Bulgem code" />
+                    <div onclick="joinGroup()" class="urgelj-button">Urgeljluuleh<span class="material-icons">
                         east
                         </span></div>
 
@@ -146,6 +146,12 @@
 
     </div>
 </body>
+<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
+
+
+<script src="../js/firebase.js"></script>
 <script src="../js/groupAdd.js "></script>
 
 </html>
