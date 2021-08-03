@@ -54,10 +54,15 @@ const createGroup = () => {
         db.collection('groups').doc(roomCode).set({
             groupname: groupName,
             joinCode: roomCode,
+            members: [],
         })
-        db.collection('users').doc(userUid).set({
-            groupId: roomCode,
-        })
+        db.collection('users').doc(userUid).update({
+                groupId: roomCode,
+            })
+            // window.location.href = "../html/groupHomepage.html"
+    } else {
+        window.alert("Login first")
+        window.location.href = "../html/login.html"
     }
 
 
@@ -65,20 +70,31 @@ const createGroup = () => {
 
 
 const joinGroup = () => {
-    let groupCode = document.getElementById("groupCode").value;
-    let user = firebase.auth().currentUser;
-    let userUid = user.uid
+        let groupCode = document.getElementById("groupCode").value;
+        let user = firebase.auth().currentUser;
+        let userUid = user.uid
 
 
-    db.collection('groups').doc(groupCode).get().then(doc => {
-        console.log(doc.data())
-        if (doc.data()) {
-            db.collection('groups').doc(groupCode).doc("members").set({
-                userId: userUid,
-            })
-        } else {
-            window.alert("No Group Found")
-        }
-    })
 
-}
+        db.collection('groups').doc(groupCode).get().then(doc => {
+            console.log(doc.data())
+            if (doc.exists) {
+                db.doc(`groups/${groupCode}`).update({
+                        members: [...doc.data().members, userUid],
+                    })
+                    // db.collection(`groups/${groupCode}/members`).doc(userUid).set({
+                    //     members: userUid,
+                    // })
+                db.collection('users').doc(userUid).update({
+                        groupId: groupCode,
+                    })
+                    // window.location.href = "../html/groupHomepage.html"
+            } else {
+                window.alert("No Group Found")
+            }
+        })
+
+    }
+    // GroupCode: {
+    //     members: [],
+    // }
