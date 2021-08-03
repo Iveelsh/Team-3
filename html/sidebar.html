@@ -32,6 +32,52 @@
         </div>
         <div class="contents">
             <div id="task">
+
+                <!-- Dropdown -->
+
+                <!DOCTYPE html>
+                <html lang="en">
+                  <head>
+                    <meta charset="UTF-8" />
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                    <title>Document</title>
+                    <link
+                      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                      rel="stylesheet"
+                    />
+                    <link rel="stylesheet" href="../style/dropdown.css"/>
+                  </head>
+                
+                  <body>
+                    <div class="dropdown-container">
+                      <button
+                        id="Dropbtn"
+                        onclick="myfunction()"
+                        style="color: black"
+                      >
+                        <p class="paragraph white pointer">Бүх даалгавар</p>
+                        <span class="pointer material-icons arrow-icon icon">arrow_drop_down</span>
+                      </button>
+                      <div
+                        style="visibility: hidden;"
+                        id="Dropdowns"
+                        onmouseleave="dropLeavefunction()"
+                        onmouseenter="dropfunction()"
+                        class="drop-container"
+                      >
+                        <div class="pointer gray line-text" id="Wishlist">Шалгуулах даалгавар</div>
+                        <div class="pointer gray line-text" id="Home">Эзэнгүй даалгавар</div>
+                        <div class="pointer gray line-text" id="Settings">Хийж байгаа даалгавар</div>
+                    </div>
+                    </div>
+                  </body>
+                
+                  <script src="../js/dropdown.js"></script>
+                </html>
+                
+                <!-- /Dropdown -->
+
                 <div class="add">
                     <img onclick="taskmodal()" style="margin-top: 5px;" src="../assets/add_circle_outline_black_24dp.svg" height="25px" width="25px"> daalgavar nemeh
                 </div>
