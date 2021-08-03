@@ -7,6 +7,12 @@
     color: white;
 }
 
+.taskitem {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .add {
     margin-top: 18px;
     display: flex;
@@ -16,6 +22,34 @@
     height: 10%;
     border: 1px black solid;
     border-radius: 14px;
+}
+
+.taskcontainer {
+    width: 100%;
+    height: fit-content;
+}
+
+.taskbody {
+    height: 60px;
+    width: 800px;
+    border: 1px black solid;
+    border-radius: 14px;
+    margin-top: 5%;
+}
+
+.taskdate {
+    margin-top: 5px;
+    margin-left: 10px;
+    font-size: small;
+    color: rgba(0, 0, 0, 0.438);
+}
+
+.taskrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .taskmodal {
