@@ -76,7 +76,10 @@ window.onclick = (event) => {
         taskmodal.style.display = "none";
     }
 }
-
+const remove = () => {
+    let taskmodal = document.getElementById("taskmodal");
+    taskmodal.style.display = "none";
+}
 const filter = () => {
     let input = document.getElementById("filterinput").value;
     let div = document.createElement("div");

@@ -1,5 +1,5 @@
-let button = document.getElementById("button")
-    // let window = document.getElementsByClassName("small-container");
+let button = document.getElementById("button");
+
 
 const toggle = () => {
     if (screen1.classList.contains("displaychange")) {
@@ -31,4 +31,54 @@ const showCreateForm = () => {
     create.classList.add('group-toggled')
     create.classList.remove('group-hide-left')
         // join.style.display = "flex"
+}
+
+function makeid(length, char) {
+    var result = '';
+    var charactersLength = char.length;
+    for (var i = 0; i < length; i++) {
+        result += char.charAt(Math.floor(Math.random() *
+            charactersLength));
+    }
+    return result;
+}
+
+const createGroup = () => {
+    let groupName = document.getElementById("groupName").value;
+    let user = firebase.auth().currentUser;
+    // let roomCode
+    if (user) {
+        let userUid = user.uid
+        let roomCode = makeid(6, groupName)
+        console.log(roomCode);
+        db.collection('groups').doc(roomCode).set({
+            groupname: groupName,
+            joinCode: roomCode,
+        })
+        db.collection('users').doc(userUid).set({
+            groupId: roomCode,
+        })
+    }
+
+
+}
+
+
+const joinGroup = () => {
+    let groupCode = document.getElementById("groupCode").value;
+    let user = firebase.auth().currentUser;
+    let userUid = user.uid
+
+
+    db.collection('groups').doc(groupCode).get().then(doc => {
+        console.log(doc.data())
+        if (doc.data()) {
+            db.collection('groups').doc(groupCode).doc("members").set({
+                userId: userUid,
+            })
+        } else {
+            window.alert("No Group Found")
+        }
+    })
+
 }

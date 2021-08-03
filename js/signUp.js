@@ -10,6 +10,7 @@ const signUpWithEmailAndPassword = () => {
             db.collection("users").doc(uid).set({
                 name: name,
                 mail: email,
+                groupId: null,
             });
             console.log("success")
                 // ...
@@ -22,3 +23,25 @@ const signUpWithEmailAndPassword = () => {
         });
 
 }
+
+firebase.auth().onAuthStateChanged((user) => {
+    console.log("nevtersn")
+    if (user) {
+        window.location.href = "groupAdd.html"
+        let uid = user.uid;
+        db.collection("users").doc(uid).get().then((doc) => {
+            let data = doc.data();
+            if (!data.groupId) {
+                window.location.href = "../html/groupAdd.html"
+            } else {
+                window.location.href = "../html/groupHomepage.html"
+            }
+        })
+
+
+        // ...
+    } else {
+        // User is signed out
+        // ...
+    }
+});
