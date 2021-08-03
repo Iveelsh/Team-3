@@ -8,7 +8,7 @@
 }
 
 .add {
-    margin-top: 5%;
+    margin-top: 18px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,6 +30,18 @@
     overflow: auto;
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
+}
+
+ul li {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    height: 71px;
+    border: 1px black solid;
+    border-radius: 14px;
+    position: relative;
+    right: 38px;
 }
 
 .qqqq {
@@ -108,7 +120,7 @@
     padding-top: 100px;
     left: 0;
     top: 0;
-    width: 100%;
+    width: 700px;
     height: 100%;
     overflow: auto;
     background-color: rgb(0, 0, 0);
@@ -132,8 +144,8 @@
 }
 
 .contents {
-    width: 1000px;
-    height: 600px;
+    width: 1300px;
+    height: 703px;
     border: 1px black solid;
     border-radius: 14px;
     display: flex;
@@ -269,4 +281,43 @@ body {
 .middle {
     display: flex;
     justify-content: center;
+}
+
+.Bulgemiin_ner {
+    width: 316px;
+    height: 36.58px;
+    position: relative;
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+    background: #ADADAD;
+    border-radius: 9.31633px;
+    top: 9px;
+}
+
+.name_edit {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    size: 19.02px;
+    color: #9B9B9B;
+    position: relative;
+    top: 5px;
+    height: 22.66px;
+}
+
+.edit {
+    position: relative;
+    bottom: 26px;
+    left: 291px;
+}
+
+.members_text {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    size: 19.02px;
+    height: 22px;
+    color: #9B9B9B;
+    top: 26px;
+    right: 455px;
 }
