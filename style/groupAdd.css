@@ -125,8 +125,9 @@
         justify-content: flex-start;
         flex-direction: column;
         width: 352px;
-        font-size: 35px;
-        margin-bottom: 50px;
+        font-size: 25px;
+        margin-bottom: 30px;
+        width: fit-content;
     }
     
     .text-margin {
@@ -134,14 +135,15 @@
     }
     
     .groupjoin-button {
-        width: 350px;
-        height: 59px;
-        font-size: 30px;
+        width: 200px;
+        height: 40px;
+        font-size: 20px;
         background-color: #C4C4C4;
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 35px;
+        color: black;
     }
     
     .small-container-2 {
@@ -153,7 +155,7 @@
     }
     
     .small-container-margin {
-        margin-bottom: 80px;
+        margin-bottom: 40px;
     }
     
     .small-container-text {
@@ -161,7 +163,7 @@
     }
     
     .input-groupname {
-        height: 51px;
+        height: 30px;
         width: 321px;
         color: black;
     }
@@ -176,6 +178,7 @@
         width: 213px;
         border-radius: 35px;
         font-size: 20px;
+        margin-bottom: 50px;
     }
     
     .small-container-3 {
@@ -247,7 +250,7 @@
         color: white;
         display: flex;
         flex-direction: column;
-        /* align-items: center; */
+        align-items: center;
         position: relative;
     }
     
