@@ -37,86 +37,96 @@
 
                 <!DOCTYPE html>
                 <html lang="en">
-                  <head>
+
+                <head>
                     <meta charset="UTF-8" />
                     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                     <title>Document</title>
-                    <link
-                      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-                      rel="stylesheet"
-                    />
-                    <link rel="stylesheet" href="../style/dropdown.css"/>
-                  </head>
-                
-                  <body>
+                    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+                    <link rel="stylesheet" href="../style/dropdown.css" />
+                </head>
+
+                <body>
                     <div class="dropdown-container">
-                      <button
-                        id="Dropbtn"
-                        onclick="myfunction()"
-                        style="color: black"
-                      >
+                        <button id="Dropbtn" onclick="myfunction()" style="color: black">
                         <p class="paragraph white pointer">Бүх даалгавар</p>
                         <span class="pointer material-icons arrow-icon icon">arrow_drop_down</span>
                       </button>
-                      <div
-                        style="visibility: hidden;"
-                        id="Dropdowns"
-                        onmouseleave="dropLeavefunction()"
-                        onmouseenter="dropfunction()"
-                        class="drop-container"
-                      >
-                        <div class="pointer gray line-text" id="Wishlist">Шалгуулах даалгавар</div>
-                        <div class="pointer gray line-text" id="Home">Эзэнгүй даалгавар</div>
-                        <div class="pointer gray line-text" id="Settings">Хийж байгаа даалгавар</div>
+                        <div style="visibility: hidden;" id="Dropdowns" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="drop-container">
+                            <div class="pointer gray line-text" id="Wishlist">Шалгуулах даалгавар</div>
+                            <div class="pointer gray line-text" id="Home">Эзэнгүй даалгавар</div>
+                            <div class="pointer gray line-text" id="Settings">Хийж байгаа даалгавар</div>
+                        </div>
                     </div>
-                    </div>
-                  </body>
-                
-                  <script src="../js/dropdown.js"></script>
+                </body>
+
+                <script src="../js/dropdown.js"></script>
+
                 </html>
-                
+
                 <!-- /Dropdown -->
 
-                <div class="add">
-                    <img onclick="taskmodal()" style="margin-top: 5px;" src="../assets/add_circle_outline_black_24dp.svg" height="25px" width="25px"> daalgavar nemeh
-                </div>
-
-                <ul id="list"></ul>
-
-                <div id="taskmodal" class="taskmodal">
-                    <div class="taskmodal2">
-                        <div class="row">
-                            <div style="font-size: xx-large;margin-left: 45%;">daalgavar</div>
-                            <button onclick="remove()" style="border: 0;border-radius: 14px;">X</button>
-                        </div>
-                        <div class="row2">
-                            <div>daalgavriin ner</div>
-                            <div>daalgavriin onoo</div>
-                        </div>
-                        <div class="row3">
-                            <input class="input1" id="TaskName" type="text">
-                            <input class="input2" id="TaskPoint" type="number">
-                        </div>
-                        <div class="qq">daalgavriin tuhai</div>
-                        <div class="qqq">Date</div>
-                        <input class="qqqq" style="height: 30%; width: 50%;" id="TaskDes" type="text">
-                        <button class="nemeh" onclick="AddTask()">Nemeh</button>
+                <div style="overflow-x: scroll;" id="task">
+                    <div class="add">
+                        <img onclick="taskmodal()" style="margin-top: 5px;" src="../assets/add_circle_outline_black_24dp.svg" height="25px" width="25px"> daalgavar nemeh
                     </div>
-                </div>
-                <input type="text" id="filterinput"><button onclick="filter()">click me </button>
-            </div>
-            <div id="wishlist" class="none">wishlist <button onclick="modal()">modal</button></div>
 
-            <div id="groupinfo" class="none">
-                <div class="name_edit">Бүлгэмийн нэр</div>
-                <input type="text" class="Bulgemiin_ner">
-                <span class="material-icons edit">
+                    <!-- <ul id="list"></ul> -->
+
+                    <div id="taskmodal" class="taskmodal">
+                        <div class="taskmodal2">
+                            <div class="row">
+                                <div style="font-size: xx-large;margin-left: 45%;">daalgavar</div>
+                                <button onclick="remove()" style="border: 0;border-radius: 14px;">X</button>
+                            </div>
+                            <div class="row2">
+                                <div>daalgavriin ner</div>
+                                <div>daalgavriin onoo</div>
+                            </div>
+                            <div class="row3">
+                                <input class="input1" id="TaskName" type="text">
+                                <input class="input2" id="TaskPoint" type="number">
+                            </div>
+                            <div class="qq">daalgavriin tuhai</div>
+                            <div class="qqq">Date</div>
+                            <input class="qqqq" style="height: 30%; width: 50%;" id="TaskDes" type="text">
+                            <button class="nemeh" onclick="AddTask()">Nemeh</button>
+                        </div>
+                    </div>
+                    <input type="text" id="filterinput"><button onclick="filter()">click me </button>
+                    <div class="taskcontainer" id="taskcontainer">
+                        <div class="taskbody">
+                            <div class="taskdate" id="taskdate"></div>
+                            <div class="taskrow">
+                                <div id="taskname"></div>
+                                <div class="taskitem">
+                                    <img src="../assets/coin icon.svg">
+                                    <div id="point">
+                                    </div>
+                                    <div style="color: rgba(0, 0, 0, 0.363);">
+                                        |
+                                    </div>
+                                    <div id="assigneduser">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div id="wishlist" class="none">wishlist <button onclick="modal()">modal</button></div>
+
+                <div id="groupinfo" class="none">
+                    <div class="name_edit">Бүлгэмийн нэр</div>
+                    <input type="text" class="Bulgemiin_ner">
+                    <span class="material-icons edit">
                     edit
                 </span>
 
-                <div class="members_text">Гишүүд</div>
-            </div>
+                    <div class="members_text">Гишүүд</div>
+                </div>
 
             </div>
             <div id="message" class="none"> message</div>
