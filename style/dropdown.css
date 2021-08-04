@@ -17,6 +17,7 @@
 
 }
 
+
 .drop-container {
   width: 190px;
   height: 70px;
@@ -30,6 +31,9 @@
   margin-top: 20px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   transform: translatex(55px);
+  position: relative;
+    left: -138px;
+    top: 17px;
 }
 
 .d-icon {
@@ -80,6 +84,9 @@
   display: flex;
   border: none;
   margin: -17px;
+  position: relative;
+  top: 17px;
+  left: -138px;
 }
 
 #Dropdowns {
