@@ -20,7 +20,7 @@
 
     <div class="a">
         <div class="b">
-            <button id="taskb" onclick="displaytask();" class="side-button">task</button>
+            <button id="taskb" onclick="displaytask();" class="side-button , black">task</button>
             <button id="wishb" onclick="displaywishlist();" class="side-button">wishlist</button>
             <button id="groupb" onclick="displaygroupinfo();" class="side-button">groupinfo</button>
             <button id="messb" onclick="displaymessage()" class="side-button">message</button>
@@ -50,13 +50,14 @@
                 <body>
                     <div class="dropdown-container">
                         <button id="Dropbtn" onclick="myfunction()" style="color: black">
-                        <p class="paragraph white pointer">Бүх даалгавар</p>
+                        <p class="paragraph white pointer" id="filter">Бүх даалгавар</p>
                         <span class="pointer material-icons arrow-icon icon">arrow_drop_down</span>
                       </button>
                         <div style="visibility: hidden;" id="Dropdowns" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="drop-container">
-                            <div class="pointer gray line-text" id="Wishlist">Шалгуулах даалгавар</div>
-                            <div class="pointer gray line-text" id="Home">Эзэнгүй даалгавар</div>
-                            <div class="pointer gray line-text" id="Settings">Хийж байгаа даалгавар</div>
+                            <div class="pointer gray line-text" onclick="filter0()" id="Wishlist">Бүх даалгавар</div>
+                            <div class="pointer gray line-text" onclick="filter1()" id="Wishlist">Шалгуулах даалгавар</div>
+                            <div class="pointer gray line-text" onclick="filter2()" id="Home">Эзэнгүй даалгавар</div>
+                            <div class="pointer gray line-text" onclick="filter3()" id="Settings">Хийж байгаа даалгавар</div>
                         </div>
                     </div>
                 </body>
@@ -94,7 +95,7 @@
                             <button class="nemeh" onclick="AddTask()">Nemeh</button>
                         </div>
                     </div>
-                    <input type="text" id="filterinput"><button onclick="filter()">click me </button>
+
                     <div class="taskcontainer" id="taskcontainer">
 
 
