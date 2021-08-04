@@ -26,7 +26,8 @@
 
 .taskcontainer {
     width: 100%;
-    height: fit-content;
+    height: 490px;
+    overflow-y: scroll;
 }
 
 .taskbody {
