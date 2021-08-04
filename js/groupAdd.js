@@ -73,22 +73,27 @@ const joinGroup = () => {
     let user = firebase.auth().currentUser;
     let userUid = user.uid
 
+    if (user) {
+        db.collection('groups').doc(groupCode).get().then(doc => {
+            console.log(doc.data())
+            if (doc.exists) {
+                db.doc(`groups/${groupCode}`).update({
+                    members: [...doc.data().members, userUid],
+                })
 
+                db.collection('users').doc(userUid).update({
+                    groupId: groupCode,
+                })
+                window.location.href = "../html/groupHomepage.html"
+            } else {
+                window.alert("No Group Found")
+            }
+        })
 
-    db.collection('groups').doc(groupCode).get().then(doc => {
-        console.log(doc.data())
-        if (doc.exists) {
-            db.doc(`groups/${groupCode}`).update({
-                members: [...doc.data().members, userUid],
-            })
+    } else {
+        window.alert("Login first")
+        window.location.href = "../html/login.html"
+    }
 
-            db.collection('users').doc(userUid).update({
-                groupId: groupCode,
-            })
-            window.location.href = "../html/groupHomepage.html"
-        } else {
-            window.alert("No Group Found")
-        }
-    })
 
 }
