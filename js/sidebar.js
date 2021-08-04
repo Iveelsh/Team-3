@@ -552,7 +552,8 @@ db.collection("tasks").onSnapshot((querySnapshot) => {
         let data = doc.data()
         console.log(data);
         let li = document.createElement("li");
-        let t = document.createElement('h1');
+        let t = document.createElement("h1");
+        t.classList,add("")
         let p = document.createElement("h1");
         let remove = document.createElement("SPAN");
         let txt = document.createTextNode("\u00D7");
