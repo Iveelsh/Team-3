@@ -29,7 +29,7 @@
     height: 100%;
     overflow: auto;
     background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 ul li {
@@ -108,9 +108,14 @@ ul li {
 .taskmodal2 {
     border-radius: 14px;
     margin-left: 18%;
-    height: 80%;
-    width: 70%;
+    height: 517px;
+    width: 670px;
     background: gray;
+    position: relative;
+    top: 75px;
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .modal {
@@ -124,7 +129,7 @@ ul li {
     height: 100%;
     overflow: auto;
     background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .modal-item {
@@ -320,4 +325,95 @@ body {
     color: #9B9B9B;
     top: 26px;
     right: 455px;
+}
+
+/* Tuvshuu's modal */
+
+.Daalgavar_text {
+    width: 263px;
+    height: 38px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 32px;
+    color: #FFFFFF;
+    position: relative;
+    top: 39px;
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.Daalgavar_Ner_Text {
+    height: 18px;
+    width: 160px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15.11px;
+    color: #C4C4C4;
+}
+
+.Daalgavar_Ner_Input {
+    height: 32px;
+    width: 251px;
+    border-radius: 7.400000095367432px;
+    background: #C4C4C4;
+
+}
+.Daalgavar_Ner {
+    position: relative;
+    left: 64px;
+    top: 120px;
+}
+
+.Daalgavar_Onoo {
+    position: relative;
+    left: 402px;
+    top: 64px;
+}
+
+.Daalgavar_Onoo_Box {
+    height: 34px;
+    width: 84px;
+    background-color: #C4C4C4;
+    border-radius: 7.400000095367432px;
+}
+
+.coin {
+    position: relative;
+    top: 8px;
+    left: 8px;
+}
+
+.Daalgavar_Onoo_Input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    width: 43px;
+    position: relative;
+    left: 8px;
+    top: 4px;
+}
+
+.Daalgavar_Tailbar {
+    position: relative;
+    top: 92px;
+    left: 64px;
+}
+
+.Daalgavar_Tailbar_Input {
+    background: #C4C4C4;
+    width: 541px;
+    height: 130px;
+    border-radius: 7.4px;
+}
+
+.Add_Button{
+    height: 49.00000052715703px;
+    width: 131.01519916340794px;
+    border-radius: 9px;
+    background-color: #83C5BE;
+    color: white;
+    position: relative;
+    top: 128px;
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
 }

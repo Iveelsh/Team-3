@@ -76,10 +76,7 @@ window.onclick = (event) => {
         taskmodal.style.display = "none";
     }
 }
-const remove = () => {
-    let taskmodal = document.getElementById("taskmodal");
-    taskmodal.style.display = "none";
-}
+
 const filter = () => {
     let input = document.getElementById("filterinput").value;
     let div = document.createElement("div");
@@ -158,7 +155,8 @@ db.collection("tasks").onSnapshot((querySnapshot) => {
         let data = doc.data()
         console.log(data);
         let li = document.createElement("li");
-        let t = document.createElement('h1');
+        let t = document.createElement("h1");
+        t.classList,add("")
         let p = document.createElement("h1");
         let remove = document.createElement("SPAN");
         let txt = document.createTextNode("\u00D7");
