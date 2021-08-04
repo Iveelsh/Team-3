@@ -101,44 +101,83 @@ const filter = () => {
                 let statuss = data.Status;
                 let tasknamee = data.TaskName;
                 let taskdess = data.TaskDes;
-                let taskname = document.getElementById("taskname");
-                let taskdate = document.getElementById("taskdate");
-                let point = document.getElementById("point");
-                let assigneduser = document.getElementById("assigneduser");
-                let taskcontainer = document.getElementById("taskcontainer");
 
+
+                let taskcontainer = document.getElementById("taskcontainer");
                 let taskbody = document.createElement("div");
-                let taskdatee = document.createElement("div")
-                taskdatee.classList.add("taskdate");
-                let taskrow = document.createElement("div")
-                let tasknamediv = document.createElement('div');
-                let taskitem = document.createElement("div")
-                taskrow.appendChild(taskitem);
+                let taskdate = document.createElement("div");
+                let taskrow = document.createElement("div");
+                let taskname = document.createElement("div");
+                let taskitem = document.createElement("div");
                 let coinicon = document.createElement("img");
-                let pointdiv = document.createElement("div");
-                let wall = document.createElement("div")
-                wall.innerHTML = "|";
-                let user = document.createElement("div");
-                taskrow.classList.add("taskrow");
-                taskrow.appendChild(tasknamediv);
-                taskitem.classList.add("taskitem");
-                taskitem.appendChild(coinicon);
-                taskitem.appendChild(pointdiv);
-                taskitem.appendChild(wall);
-                taskitem.appendChild(user);
+                let point = document.createElement("div");
+                let wall = document.createElement("div");
+                let assigneduser = document.createElement("div");
+
+
+                taskcontainer.classList.add("taskcontainer");
                 taskbody.classList.add("taskbody");
-                taskbody.appendChild(taskdatee);
+                taskdate.classList.add("taskdate");
+                taskrow.classList.add("taskrow");
+                taskitem.classList.add("taskitem");
+                coinicon.src = "../assets/coin icon.svg"
+                wall.innerHTML = "|"
+
+
+                taskcontainer.appendChild(taskbody);
+                taskbody.appendChild(taskdate);
                 taskbody.appendChild(taskrow);
-                taskdatee.innerHTML = datee;
-                tasknamediv.innerHTML = tasknamee;
-                pointdiv.innerHTML = taskpointt;
-                user.innerHTM = assigneduserr
+                taskrow.appendChild(taskname);
+                taskrow.appendChild(taskitem);
+                taskitem.appendChild(coinicon);
+                taskitem.appendChild(point);
+                taskitem.appendChild(wall);
+                taskitem.appendChild(assigneduser);
+
+
                 taskdate.innerHTML = datee;
                 taskname.innerHTML = tasknamee;
                 point.innerHTML = taskpointt;
                 assigneduser.innerHTML = assigneduserr;
-                taskcontainer.innerHTML = '';
-                taskcontainer.appendChild(taskbody);
+
+                // let taskname = document.getElementById("taskname");
+                // let taskdate = document.getElementById("taskdate");
+                // let point = document.getElementById("point");
+                // let assigneduser = document.getElementById("assigneduser");
+                // let taskcontainer = document.getElementById("taskcontainer");
+
+                // let taskbody = document.createElement("div");
+                // let taskdatee = document.createElement("div")
+                // taskdatee.classList.add("taskdate");
+                // let taskrow = document.createElement("div")
+                // let tasknamediv = document.createElement('div');
+                // let taskitem = document.createElement("div")
+                // taskrow.appendChild(taskitem);
+                // let coinicon = document.createElement("img");
+                // let pointdiv = document.createElement("div");
+                // let wall = document.createElement("div")
+                // wall.innerHTML = "|";
+                // let user = document.createElement("div");
+                // taskrow.classList.add("taskrow");
+                // taskrow.appendChild(tasknamediv);
+                // taskitem.classList.add("taskitem");
+                // taskitem.appendChild(coinicon);
+                // taskitem.appendChild(pointdiv);
+                // taskitem.appendChild(wall);
+                // taskitem.appendChild(user);
+                // taskbody.classList.add("taskbody");
+                // taskbody.appendChild(taskdatee);
+                // taskbody.appendChild(taskrow);
+                // taskdatee.innerHTML = datee;
+                // tasknamediv.innerHTML = tasknamee;
+                // pointdiv.innerHTML = taskpointt;
+                // user.innerHTM = assigneduserr
+                // taskdate.innerHTML = datee;
+                // taskname.innerHTML = tasknamee;
+                // point.innerHTML = taskpointt;
+                // assigneduser.innerHTML = assigneduserr;
+                // taskcontainer.innerHTML = '';
+                // taskcontainer.appendChild(taskbody);
                 // task.appendChild(taskbody);
                 // taskdiv.innerHTML = `Task Point: ${taskpointt} `;
                 // userdiv.innerHTML = `AssignedUser: ${assigneduserr}`;
