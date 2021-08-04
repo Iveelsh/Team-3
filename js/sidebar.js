@@ -545,6 +545,7 @@ const AddTask = () => {
 
 
 db.collection("tasks").onSnapshot((querySnapshot) => {
+    let list =  document.getElementById("taskcontainer");
     list.innerHTML = "";
     querySnapshot.forEach((doc) => {
 
@@ -553,7 +554,7 @@ db.collection("tasks").onSnapshot((querySnapshot) => {
         console.log(data);
         let li = document.createElement("li");
         let t = document.createElement("h1");
-        t.classList,add("")
+        // t.classList.add("")
         let p = document.createElement("h1");
         let remove = document.createElement("SPAN");
         let txt = document.createTextNode("\u00D7");

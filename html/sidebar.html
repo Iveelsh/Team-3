@@ -10,6 +10,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="../style/dropdown.css" />
     </style>
 </head>
 
@@ -27,42 +29,27 @@
         </div>
         <div class="modal" id="modal">
             <div class="modal-item">
-                modal 
+                modal
             </div>
         </div>
         <div class="contents">
             <div id="task">
-                <!-- Dropdown -->
-
-                <!DOCTYPE html>
-                <html lang="en">
-
-                <head>
-                    <meta charset="UTF-8" />
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                    <title>Document</title>
-                    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-                    <link rel="stylesheet" href="../style/dropdown.css" />
-                </head>
-
-                <body>
                     <div class="dropdown-container">
                         <button id="Dropbtn" onclick="myfunction()" style="color: black">
-                        <p class="paragraph white pointer" id="filter">Бүх даалгавар</p>
-                        <span class="pointer material-icons arrow-icon icon">arrow_drop_down</span>
-                      </button>
-                        <div style="visibility: hidden;" id="Dropdowns" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="drop-container">
+                            <p class="paragraph white pointer" id="filter">Бүх даалгавар</p>
+                            <span class="pointer material-icons arrow-icon icon">arrow_drop_down</span>
+                        </button>
+                        <div style="visibility: hidden;" id="Dropdowns" onmouseleave="dropLeavefunction()"
+                            onmouseenter="dropfunction()" class="drop-container">
                             <div class="pointer gray line-text" onclick="filter0()" id="Wishlist">Бүх даалгавар</div>
-                            <div class="pointer gray line-text" onclick="filter1()" id="Wishlist">Шалгуулах даалгавар</div>
+                            <div class="pointer gray line-text" onclick="filter1()" id="Wishlist">Шалгуулах даалгавар
+                            </div>
                             <div class="pointer gray line-text" onclick="filter2()" id="Home">Эзэнгүй даалгавар</div>
-                            <div class="pointer gray line-text" onclick="filter3()" id="Settings">Хийж байгаа даалгавар</div>
+                            <div class="pointer gray line-text" onclick="filter3()" id="Settings">Хийж байгаа даалгавар
+                            </div>
                         </div>
                     </div>
-                  </body>
 
-                  <script src="../js/dropdown.js"></script>
-                </html>
 
                 <!-- /Dropdown -->
                 <div onclick="taskmodal()" class="add">
@@ -71,34 +58,32 @@
                 </div>
 
                 <div id="task">
-                    <div class="add">
-                        <img onclick="taskmodal()" style="margin-top: 5px;" src="../assets/add_circle_outline_black_24dp.svg" height="25px" width="25px"> daalgavar nemeh
-                    </div>
 
-                <div id="taskmodal" class="taskmodal">
-                    <div class="taskmodal2">
-                        <div class="Daalgavar_text">Даалгавар Нэмэх</div>
+                    <div id="taskmodal" class="taskmodal">
+                        <div class="taskmodal2">
+                            <div class="Daalgavar_text">Даалгавар Нэмэх</div>
 
-                        <div class="Daalgavar_Ner">
-                            <div class="Daalgavar_Ner_Text">Даалгаварын Нэр</div>
-                            <input id="TaskName" class="Daalgavar_Ner_Input">
-                        </div>
-
-                        <div class="Daalgavar_Onoo">
-                            <div class="Daalgavar_Ner_Text">Даалгаварын Оноо</div>
-
-                            <div class="Daalgavar_Onoo_Box">
-                                <img src="../assets/Coin.svg" class="coin">
-                                <input id="TaskPoint" type="number" class="Daalgavar_Onoo_Input">
+                            <div class="Daalgavar_Ner">
+                                <div class="Daalgavar_Ner_Text">Даалгаварын Нэр</div>
+                                <input id="TaskName" class="Daalgavar_Ner_Input">
                             </div>
-                        </div>
 
-                        <div class="Daalgavar_Tailbar">
-                            <div class="Daalgavar_Ner_Text">Даалгаварын Тайлбар</div>
-                            <textarea id="TaskDes" class="Daalgavar_Tailbar_Input"></textarea>
-                        </div>
+                            <div class="Daalgavar_Onoo">
+                                <div class="Daalgavar_Ner_Text">Даалгаварын Оноо</div>
 
-                        <button onclick="AddTask()" class="Add_Button">Нэмэх &#8594;</button>
+                                <div class="Daalgavar_Onoo_Box">
+                                    <img src="../assets/Coin.svg" class="coin">
+                                    <input id="TaskPoint" type="number" class="Daalgavar_Onoo_Input">
+                                </div>
+                            </div>
+
+                            <div class="Daalgavar_Tailbar">
+                                <div class="Daalgavar_Ner_Text">Даалгаварын Тайлбар</div>
+                                <textarea id="TaskDes" class="Daalgavar_Tailbar_Input"></textarea>
+                            </div>
+
+                            <button onclick="AddTask()" class="Add_Button">Нэмэх &#8594;</button>
+                        </div>
                     </div>
 
                     <div class="taskcontainer" id="taskcontainer">
@@ -106,17 +91,17 @@
 
                     </div>
 
+                    <input style="display: none;" type="text" id="filterinput"><button style="display: none;"
+                        onclick="filter()">click me </button>
                 </div>
-                <input style="display: none;" type="text" id="filterinput"><button style="display: none;" onclick="filter()">click me </button>
-            </div>
-            <div id="wishlist" class="none">wishlist <button onclick="modal()">modal</button></div>
+                <div id="wishlist" class="none">wishlist <button onclick="modal()">modal</button></div>
 
                 <div id="groupinfo" class="none">
                     <div class="name_edit">Бүлгэмийн нэр</div>
                     <input type="text" class="Bulgemiin_ner">
                     <span class="material-icons edit">
-                    edit
-                </span>
+                        edit
+                    </span>
 
                     <div class="members_text">Гишүүд</div>
                 </div>
@@ -147,6 +132,8 @@
 
 </body>
 <script src="../js/firebase.js"></script>
+<script src="../js/dropdown.js"></script>
+
 <script src="../js/sidebar.js"></script>
 
 </html>
