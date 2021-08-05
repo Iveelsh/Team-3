@@ -92,6 +92,13 @@ const renderTasks = (docs) => {
         let taskdess = data.TaskDes;
 
 
+        let taskinfomodalcont = document.createElement("div");
+        let taskmodal = document.createElement("div");
+        taskinfomodalcont.classList.add("modal");
+        taskinfomodalcont.appendChild(taskmodal);
+
+
+
         let taskcontainer = document.getElementById("taskcontainer");
         let taskbody = document.createElement("div");
         let taskdate = document.createElement("div");
@@ -104,13 +111,16 @@ const renderTasks = (docs) => {
         let assigneduser = document.createElement("div");
 
 
+
+
         taskcontainer.classList.add("taskcontainer");
         taskbody.classList.add("taskbody");
         taskdate.classList.add("taskdate");
         taskrow.classList.add("taskrow");
         taskitem.classList.add("taskitem");
         coinicon.src = "../assets/coin icon.svg"
-        wall.innerHTML = "|"
+        wall.innerHTML = "|";
+
 
 
         taskcontainer.appendChild(taskbody);
@@ -128,6 +138,29 @@ const renderTasks = (docs) => {
         taskname.innerHTML = tasknamee;
         point.innerHTML = taskpointt;
         assigneduser.innerHTML = assigneduserr;
+
+        taskbody.ondblclick = () => {
+
+            let infomodalcont = document.getElementById("infomodalcont");
+            infomodalcont.style.display = "block";
+            let modaluser = document.getElementById("modaluser");
+            let modalpoint = document.getElementById("modalpoint");
+            let modalstatus = document.getElementById("modalstatus");
+            let modaldesc = document.getElementById("modaldesc");
+            let modaldate = document.getElementById("modaldate");
+            modaluser.innerHTML = `assigneduser: ${assigneduserr}`;
+            modalpoint.innerHTML = `taskpoint: ${taskpointt}`;
+            modalstatus.innerHTML = `sstatus: ${statuss}`;
+            modaldesc.innerHTML = `description: ${taskdess}`;
+            modaldate.innerHTML = `date: ${datee}`;
+        }
+        window.onclick = (event) => {
+            let modal = document.getElementById("infomodalcont");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
     });
 
 }
@@ -139,7 +172,7 @@ const filterByStatus = (status) => {
     switch (status) {
         case 'all':
             change.innerHTML = "Бүх даалгавар";
-            db.collection("tasks").get().then(docs =>  renderTasks(docs))
+            db.collection("tasks").get().then(docs => renderTasks(docs))
             break;
         case 'unassigned':
             change.innerHTML = "Эзэнгүй даалгавар";
@@ -163,19 +196,20 @@ const filterByStatus = (status) => {
 
 }
 
+
 const AddTask = () => {
     let TaskName = document.getElementById("TaskName").value;
     let TaskDes = document.getElementById("TaskDes").value;
     let TaskPoint = document.getElementById("TaskPoint").value;
     let list = document.getElementById("list");
     db.collection("tasks").add({
-        TaskName: TaskName,
-        TaskDes: TaskDes,
-        TaskPoint: TaskPoint,
-        CreatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-        AssignedUser: '',
-        Status: '',
-    })
+            TaskName: TaskName,
+            TaskDes: TaskDes,
+            TaskPoint: TaskPoint,
+            CreatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            AssignedUser: '',
+            Status: '',
+        })
         .then(() => {
             console.log("Document successfully written!");
         })
