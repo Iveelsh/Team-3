@@ -50,22 +50,12 @@ const modal = () => {
     let modal = document.getElementById("modal");
     modal.style.display = "block";
 }
-window.onclick = (event) => {
-    let modal = document.getElementById("modal");
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+
 const addmodal = () => {
     let addmodal = document.getElementById("modal");
     addmodal.style.display = "block";
 }
-window.onclick = (event) => {
-    let modal = document.getElementById("modal");
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+
 const taskmodal = () => {
     let taskmodal = document.getElementById("taskmodal");
     taskmodal.style.display = "block"
@@ -76,6 +66,12 @@ window.onclick = (event) => {
         taskmodal.style.display = "none";
     }
 }
+
+function closeModal() {
+    let taskmodal = document.getElementById("taskmodal");
+    taskmodal.style.display = "none";
+}
+
 const remove = () => {
     let taskmodal = document.getElementById("taskmodal");
     taskmodal.style.display = "none";
