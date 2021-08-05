@@ -34,21 +34,36 @@
         </div>
         <div class="contents">
             <div id="task">
-                    <div class="dropdown-container">
-                        <button id="Dropbtn" onclick="myfunction()" style="color: black">
+
+
+
+
+                <div id="infomodalcont" class="modal">
+                    <div id="infomodal" class="infomodal">
+                        <div id="modaluser">user</div>
+                        <div id="modalpoint">point</div>
+                        <div id="modalstatus">status</div>
+                        <div id="modaldesc">description</div>
+                        <div id="modaldate">date</div>
+                    </div>
+                </div>
+
+
+
+                <div class="dropdown-container">
+                    <button id="Dropbtn" onclick="myfunction()" style="color: black">
                             <p class="paragraph white pointer" id="filter">Бүх даалгавар</p>
                             <span class="pointer material-icons arrow-icon icon">arrow_drop_down</span>
                         </button>
-                        <div style="visibility: hidden;" id="Dropdowns" onmouseleave="dropLeavefunction()"
-                            onmouseenter="dropfunction()" class="drop-container">
-                            <div class="pointer gray line-text" onclick="filterByStatus('all')" id="Wishlist">Бүх даалгавар</div>
-                            <div class="pointer gray line-text" onclick="filterByStatus('inreview')" id="Wishlist">Шалгуулах даалгавар
-                            </div>
-                            <div class="pointer gray line-text" onclick="filterByStatus('unassigned')" id="Home">Эзэнгүй даалгавар</div>
-                            <div class="pointer gray line-text" onclick="filterByStatus('inprogress')" id="Settings">Хийж байгаа даалгавар
-                            </div>
+                    <div style="visibility: hidden;" id="Dropdowns" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="drop-container">
+                        <div class="pointer gray line-text" onclick="filterByStatus('all')" id="Wishlist">Бүх даалгавар</div>
+                        <div class="pointer gray line-text" onclick="filterByStatus('inreview')" id="Wishlist">Шалгуулах даалгавар
+                        </div>
+                        <div class="pointer gray line-text" onclick="filterByStatus('unassigned')" id="Home">Эзэнгүй даалгавар</div>
+                        <div class="pointer gray line-text" onclick="filterByStatus('inprogress')" id="Settings">Хийж байгаа даалгавар
                         </div>
                     </div>
+                </div>
 
 
                 <!-- /Dropdown -->
@@ -93,8 +108,7 @@
 
                     </div>
 
-                    <input style="display: none;" type="text" id="filterinput"><button style="display: none;"
-                        onclick="filter()">click me </button>
+                    <input style="display: none;" type="text" id="filterinput"><button style="display: none;" onclick="filter()">click me </button>
                 </div>
                 <div id="wishlist" class="none">wishlist <button onclick="modal()">modal</button></div>
 
