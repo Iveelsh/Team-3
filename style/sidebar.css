@@ -420,13 +420,13 @@ body {
 .Daalgavar_Ner {
     position: relative;
     left: 64px;
-    top: 120px;
+    top: 64px;
 }
 
 .Daalgavar_Onoo {
     position: relative;
     left: 402px;
-    top: 64px;
+    top: 10px;
 }
 
 .Daalgavar_Onoo_Box {
@@ -454,7 +454,7 @@ body {
 
 .Daalgavar_Tailbar {
     position: relative;
-    top: 92px;
+    top: 51px;
     left: 64px;
 }
 
@@ -472,7 +472,7 @@ body {
     background-color: #83C5BE;
     color: white;
     position: relative;
-    top: 128px;
+    top: 84px;
     display: table;
     margin-right: auto;
     margin-left: auto;
