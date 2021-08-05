@@ -6,6 +6,10 @@ let task = document.getElementById("task");
 let wishlist = document.getElementById("wishlist");
 let groupinfo = document.getElementById("groupinfo");
 let message = document.getElementById("message");
+
+let user;
+let groupId;
+
 const displaytask = () => {
     task.classList.remove("none");
     wishlist.classList.add("none");
@@ -82,7 +86,7 @@ const renderTasks = (docs) => {
     let taskcontainer = document.getElementById("taskcontainer");
     taskcontainer.innerHTML = "";
     docs.forEach((doc) => {
-        console.log(doc.data());
+        // console.log(doc.data());
         let data = doc.data();
         let taskpointt = doc.data().TaskPoint;
         let assigneduserr = doc.data().AssignedUser;
@@ -168,64 +172,86 @@ const renderTasks = (docs) => {
 
 
 const filterByStatus = (status) => {
-    let change = document.getElementById("filter");
-    switch (status) {
-        case 'all':
-            change.innerHTML = "Бүх даалгавар";
-            db.collection("tasks").get().then(docs => renderTasks(docs))
-            break;
-        case 'unassigned':
-            change.innerHTML = "Эзэнгүй даалгавар";
-            db.collection("tasks").where("AssignedUser", "==", "")
-                .get()
-                .then((docs) => {
-                    renderTasks(docs);
-                })
-            break;
-        case 'inreview':
-            change.innerHTML = "Шалгуулах даалгавар";
+    if (user) {
+        let change = document.getElementById("filter");
+        switch (status) {
+            case 'all':
+                change.innerHTML = "Бүх даалгавар";
+                db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc').get().then(docs => renderTasks(docs))
+                break;
+            case 'unassigned':
+                change.innerHTML = "Эзэнгүй даалгавар";
+                db.collection(`groups/${groupId}/tasks`).where("AssignedUser", "==", "")
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs);
+                    })
+                break;
+            case 'inreview':
+                change.innerHTML = "Шалгуулах даалгавар";
 
-        case 'inprogress':
-            change.innerHTML = "Хийж байшаа даалгавар";
-            db.collection("tasks").where("Status", "==", status)
-                .get()
-                .then((docs) => {
-                    renderTasks(docs)
-                })
+            case 'inprogress':
+                change.innerHTML = "Хийж байшаа даалгавар";
+                db.collection(`groups/${groupId}/tasks`).where("Status", "==", status)
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs)
+                    })
+        }
+    } else {
+        window.alert("please login");
+        // window.location.href = "../html/landingPage.html";
     }
-
 }
 
+
+firebase.auth().onAuthStateChanged((u) => {
+    if (u) {
+        user = u
+        let userUid = user.uid
+        let userGroup = db.collection('users').doc(userUid);
+        userGroup.get().then((doc) => {
+            groupId = doc.data().groupId;
+            db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
+                renderTasks(querySnapshot)
+            })
+        }).then(() => {
+            console.log("render success");
+        }).catch((error) => {
+            console.log(error);
+        })
+    } else {
+        console.log("please login")
+        window.location.href = "../html/landingPage.html"
+    }
+});
 
 const AddTask = () => {
     let TaskName = document.getElementById("TaskName").value;
     let TaskDes = document.getElementById("TaskDes").value;
     let TaskPoint = document.getElementById("TaskPoint").value;
-    let list = document.getElementById("list");
-    db.collection("tasks").add({
-            TaskName: TaskName,
-            TaskDes: TaskDes,
-            TaskPoint: TaskPoint,
-            CreatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-            AssignedUser: '',
-            Status: '',
-        })
-        .then(() => {
-            console.log("Document successfully written!");
-        })
-        .catch((error) => {
-            console.error("Error writing document: ", error);
-        });
-
-
-    document.getElementById("TaskName").value = "";
-    document.getElementById("TaskDes").value = "";
-    document.getElementById("TaskPoint").value = "";
-
+    if (user) {
+        db.collection(`groups/${groupId}/tasks`).doc().set({
+                TaskName: TaskName,
+                TaskDes: TaskDes,
+                TaskPoint: TaskPoint,
+                CreatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                AssignedUser: '',
+                Status: '',
+            })
+            .then(() => {
+                let taskmodal = document.getElementById("taskmodal");
+                taskmodal.style.display = "none"
+                document.getElementById("TaskName").value = "";
+                document.getElementById("TaskDes").value = "";
+                document.getElementById("TaskPoint").value = "";
+                console.log("Document successfully written!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+    } else {
+        window.alert("Please login");
+        window.location.href = "../html/landingPage.html"
+    }
 }
-
-
-
-db.collection("tasks").onSnapshot((querySnapshot) => {
-    renderTasks(querySnapshot)
-});
