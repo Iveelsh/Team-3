@@ -143,7 +143,10 @@ const renderTasks = (docs) => {
         point.innerHTML = taskpointt;
         assigneduser.innerHTML = assigneduserr;
 
-        taskbody.ondblclick = () => {
+        
+        taskbody.style.cursor ="pointer";
+        taskbody
+        taskbody.onclick = () => {
 
             let infomodalcont = document.getElementById("infomodalcont");
             infomodalcont.style.display = "block";
