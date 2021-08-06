@@ -49,18 +49,11 @@
     margin-top: 5%;
 }
 
-.texthover {
-    background: rgb(0, 0, 0);
-    color: white;
-    /* box-shadow: 1px 4px 0px 1px rgba(0,0,0,0.75);
--webkit-box-shadow: 1px 4px 0px 1px rgba(0,0,0,0.75);
--moz-box-shadow: 1px 4px 0px 1px rgba(0,0,0,0.75); */
-}
-
 .taskdate {
     margin-top: 5px;
     margin-left: 10px;
     font-size: small;
+    color: rgba(0, 0, 0, 0.438);
 }
 
 .taskrow {
@@ -498,24 +491,4 @@ body {
     display: table;
     margin-right: auto;
     margin-left: auto;
-}
-
-::-webkit-scrollbar {
-    width: 6px;
-    height: 4px;
-}
-
- ::-webkit-scrollbar-thumb {
-    background: #000000;
-    border-radius: 30px;
-}
-
- ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.397);
-}
-
- ::-webkit-scrollbar-track {
-    background: #f2f2f200;
-    border-radius: 0px;
-    box-shadow: inset -10px -10px 0px -30px #f0f0f000;
 }

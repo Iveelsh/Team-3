@@ -23,8 +23,8 @@ const signUpWithEmailAndPassword = () => {
             console.log(uid)
             await db.collection("users").doc(uid).set({
                 name: name,
-                mail: email,
-                groupId: null,
+                mail: email
+                    // groupId:
             });
 
             window.location.href = "../html/groupAdd.html"
