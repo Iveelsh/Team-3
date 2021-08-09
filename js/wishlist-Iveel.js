@@ -168,9 +168,7 @@ const renderTasks = (docs) => {
                 modal.style.display = "none";
             }
         }
-
     });
-
 }
 
 const renderWishlist = (docs) => {
@@ -182,7 +180,8 @@ const renderWishlist = (docs) => {
         let userWishPoint = data.point;
         let wishAddedDate = data.CreatedAt.toDate();
 
-        let wishlistBody = document.getElementById("wishlist");
+        let wishlistContent = document.getElementById("wish-content")
+
 
         let taskinfomodalcont = document.createElement("div");
         let taskmodal = document.createElement("div");
@@ -217,7 +216,7 @@ const renderWishlist = (docs) => {
         coinShow.classList.add("coin-show");
         coinIcon.src = "../assets/coin icon.svg"
 
-        wishlistBody.appendChild(wishContainer);
+        wishlistContent.appendChild(wishContainer);
         wishContainer.appendChild(profileWishContainer);
         profileWishContainer.appendChild(profileIcon);
         profileWishContainer.appendChild(post);
@@ -233,17 +232,55 @@ const renderWishlist = (docs) => {
             // let wishUser = document.getElementById("wishuser");
             let wishPoint = document.getElementById("wishPoint");
             let wishDesc = document.getElementById("wishDesc");
+
+            if (userWishPoint) {
+                wishPoint.innerHTML = data.point;
+            } else {
+                console.log('no pooint')
+                pointInput = document.createElement("input");
+                pointInput.type = "number";
+                pointInput.id = "addedpoint";
+                wishPoint.appendChild(pointInput)
+            }
             // let wishDate = document.getElementById("wishDate");
             // wishUser.innerHTML = `assigneduser: ${wishUser}`;
-            wishPoint.innerHTML = data.point;
             wishDesc.innerHTML = data.wish;
             // wishDate.innerHTML = `date: ${wishDate}`;
+
+
+            let addPoint = document.getElementById("addPoint");
+            addPoint.onclick = async() => {
+                let addedPoint = document.getElementById("addedpoint").value;
+                if (addedPoint) {
+                    data.point = addedPoint
+                    console.log('helli')
+                    db.collection(`groups/${groupId}/wishlist`).doc(doc.id).update({
+                            point: addedPoint
+                        }).then(() => {
+                            let wishModal = document.getElementById("wishinfomodal");
+                            let wishPoint = document.getElementById("wishPoint");
+                            let wishDesc = document.getElementById("wishDesc");
+                            wishModal.style.display = "none";
+                            wishPoint.innerHTML = ''
+                            wishDesc.innerHTML = ''
+                            console.log("Added point successfully")
+                        })
+                        .catch((error) => {
+                            console.error("Error adding point ", error);
+                        });
+                }
+            }
         }
         window.onclick = (event) => {
             let wishModal = document.getElementById("wishinfomodal");
+            let wishPoint = document.getElementById("wishPoint");
+            let wishDesc = document.getElementById("wishDesc");
             if (event.target == wishModal) {
                 wishModal.style.display = "none";
+                wishPoint.innerHTML = ''
+                wishDesc.innerHTML = ''
             }
+
         }
         date.innerHTML = wishAddedDate;
         wish.innerHTML = userWish;
@@ -295,9 +332,11 @@ firebase.auth().onAuthStateChanged((u) => {
         userGroup.get().then((doc) => {
             groupId = doc.data().groupId;
             db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
+                // document.getElementById("wishlist").innerHTML = "";
                 renderTasks(querySnapshot)
             })
             db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
+                document.getElementById("wish-content").innerHTML = "";
                 renderWishlist(querySnapshot)
             })
         }).then(() => {
@@ -334,6 +373,30 @@ const AddTask = () => {
             })
             .catch((error) => {
                 console.error("Error writing document: ", error);
+            });
+    } else {
+        window.alert("Please login");
+        window.location.href = "../html/landingPage.html"
+    }
+}
+const addPoint = () => {
+    let wishName = document.getElementById("wishDesc").value;
+    let addedPoint = document.getElementById("addedPoint").value;
+    if (user && addedPoint) {
+        db.collection(`groups/${groupId}/tasks`).doc().update({
+                point: addedPoint,
+            })
+            .then(() => {
+                let wishModal = document.getElementById("wishinfomodal");
+                let wishPoint = document.getElementById("wishPoint");
+                let wishDesc = document.getElementById("wishDesc");
+                wishModal.style.display = "none";
+                wishPoint.innerHTML = ''
+                wishDesc.innerHTML = ''
+                console.log("Added point successfully")
+            })
+            .catch((error) => {
+                console.error("Error adding point ", error);
             });
     } else {
         window.alert("Please login");
