@@ -33,6 +33,13 @@
     cursor: pointer;
 }
 
+.close_2 {
+    position: relative;
+    top: -72px;
+    left: 600px;
+    cursor: pointer;
+}
+
 .taskcontainer {
     width: 100%;
     height: 551px;
@@ -191,7 +198,7 @@ ul li {
     width: 670px;
     background: gray;
     position: relative;
-    top: 75px;
+    top: 140px;
     display: table;
     margin-right: auto;
     margin-left: auto;
@@ -417,6 +424,21 @@ body {
     color: #FFFFFF;
     position: relative;
     top: 39px;
+
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.Daalgavar {
+    width: 160px;
+    height: 38px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 32px;
+    color: #FFFFFF;
+    position: relative;
+    top: 39px;
+
     display: table;
     margin-right: auto;
     margin-left: auto;
@@ -443,10 +465,22 @@ body {
     top: 64px;
 }
 
+.Daalgavar_Ner_2 {
+    position: relative;
+    left: 64px;
+    top: 32px;
+}
+
 .Daalgavar_Onoo {
     position: relative;
-    left: 402px;
+    left: 472px;
     top: 10px;
+}
+
+.Daalgavar_Onoo_2 {
+    position: relative;
+    left: 472px;
+    top: -19px;
 }
 
 .Daalgavar_Onoo_Box {
@@ -474,7 +508,13 @@ body {
 
 .Daalgavar_Tailbar {
     position: relative;
-    top: 51px;
+    top: 44px;
+    left: 64px;
+}
+
+.Daalgavar_Tailbar_2 {
+    position: relative;
+    top: 18px;
     left: 64px;
 }
 
@@ -483,16 +523,28 @@ body {
     width: 541px;
     height: 130px;
     border-radius: 7.4px;
+    resize: none;
 }
 
 .Add_Button {
-    height: 49.00000052715703px;
-    width: 131.01519916340794px;
+    height: 51px;
     border-radius: 9px;
     background-color: #83C5BE;
     color: white;
     position: relative;
-    top: 84px;
+    top: 74px;
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.Add_Button_2 {
+    height: 51px;
+    border-radius: 9px;
+    background-color: #83C5BE;
+    color: white;
+    position: relative;
+    top: 32px;
     display: table;
     margin-right: auto;
     margin-left: auto;
@@ -517,3 +569,74 @@ body {
     border-radius: 0px;
     box-shadow: inset -10px -10px 0px -30px #f0f0f000;
 }
+
+#modaldate {
+    height: 18px;
+    width: 102px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15.72px;
+    color: black;
+}
+
+.profile {
+    position: relative;
+    top: -24px;
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.profile_img {
+    width: 109px;
+    height: 109px;
+    border-radius: 50%;
+    background-color: #C4C4C4;
+    ;
+}
+
+.user_name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15.35px;
+    color: black;
+    position: relative;
+    top: 11px;
+    left: 11px;
+}
+
+.edit_position {
+    position: relative;
+    top: -16px;
+    left: 88px;
+    color: white;
+}
+
+.edit_position_2 {
+    position: relative;
+    left: -32px;
+    top: -4px;
+}
+
+.Ustgah {
+    position: relative;
+    top: 1px;
+    left: 1px;
+}
+
+.Ustgah_text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15.67px;
+    width: 48px;
+    height: 18.61px;
+    position: relative;
+    top: -13px;
+    left: 38px;
+    color: red;
+}
+
+.position_2 {
+    position: relative;
+    top: -36px;
+    left: 13px;
+    color: red;
+}
+
