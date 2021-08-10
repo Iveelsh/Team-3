@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="../style/sidebarTuvshuu.css" />
+    <link rel="stylesheet" href="../style/dropdown.css" />
     </style>
 </head>
 
@@ -46,11 +47,23 @@
 
                         <div class="Daalgavar">Даалгавар</div>
 
-
-                            <span class="material-icons position_2">
+                            <!-- <span class="material-icons position_2">
                                 delete
-                            </span>                           
+                            </span> -->
 
+                            <div class="dropdown-container_2">
+                                <button id="Dropbtn_2" onclick="myfunction()">
+                                        <!-- <p class="paragraph white pointer" id="filter">Бүх даалгавар</p> -->
+                                        <span class="material-icons">
+                                            more_horiz
+                                        </span>
+                                </button>
+                                <div style="visibility: hidden;" id="Dropdowns" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="drop-container">
+                                    <!-- <div class="pointer gray line-text" onclick="filterByStatus('all')" id="Wishlist">Бүх даалгавар</div>
+                                    <div class="pointer gray line-text" onclick="filterByStatus('inreview')" id="Wishlist">Шалгуулах даалгавар</div> -->
+                                    
+                                </div>
+                            </div>
 
 
                             <img onclick="closeModal()" class="close_2" src="../assets/Close.svg">
@@ -70,24 +83,19 @@
 
                                 <div class="Daalgavar_Onoo_Box">
                                     <img src="../assets/Coin.svg" class="coin">
-                                    <input id="TaskPoint" type="number" class="Daalgavar_Onoo_Input">
+                                    <input id="modalpoint" type="number" class="Daalgavar_Onoo_Input">
 
-                                    <span class="material-icons edit_position">
+                                    <!-- <span class="material-icons edit_position">
                                         edit
-                                    </span>
+                                    </span> -->
                                 </div>
                             </div>
 
                             <div class="Daalgavar_Tailbar_2">
                                 <div class="Daalgavar_Ner_Text">Даалгаварын Тайлбар</div>
                                 <div id="modaldate"></div>
-                                <textarea id="TaskDes"  class="Daalgavar_Tailbar_Input"></textarea>
-
-
-                                <span class="material-icons edit_position_2">
-                                    edit
-                                </span>
-                    
+                              
+                                <textarea id="modaldesc"  class="Daalgavar_Tailbar_Input"></textarea>
 
                             </div>
 
