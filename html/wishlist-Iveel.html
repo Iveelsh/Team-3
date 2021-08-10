@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="contents">
-            <div id="task">
+            <div id="task" class="task">
 
                 <div id="infomodalcont" class="modal">
                     <div id="infomodal" class="infomodal">
@@ -58,10 +58,10 @@
                 </div>
 
                 <!-- /Dropdown -->
-                <div onclick="taskmodal()" class="add">
+                <!-- <div onclick="taskmodal()" class="add">
                     <img src="../assets/Add_Logo.svg" class="Add_Logo" style="cursor: pointer;">
                     <div class="Daalgavar_Nemeh_Text">Даалгавар Нэмэх</div>
-                </div>
+                </div> -->
 
                 <!-- <div id="task"> -->
                 <div id="taskmodal" class="taskmodal">
@@ -93,9 +93,15 @@
                     </div>
                 </div>
 
-                <div class="taskcontainer" id="taskcontainer">
+                <div>
+                    <div onclick="taskmodal()" class="add">
+                        <img src="../assets/Add_Logo.svg" class="Add_Logo" style="cursor: pointer;">
+                        <div class="Daalgavar_Nemeh_Text">Даалгавар Нэмэх</div>
+                    </div>
+                    <div class="taskcontainer" id="taskcontainer">
 
 
+                    </div>
                 </div>
 
                 <input style="display: none;" type="text" id="filterinput"><button style="display: none;" onclick="filter()">click me </button>
