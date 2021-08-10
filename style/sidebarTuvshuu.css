@@ -615,8 +615,6 @@ body {
     color: black;
 }
 
-
-
 .position_2 {
     position: relative;
     left: 608px;
@@ -628,3 +626,15 @@ body {
     color: red;
 }
 
+#Dropbtn_2 {
+    height: 5.95px;
+    width: 25px;
+    background: none;
+    display: flex;
+    border: none;
+    margin: -17px;
+    position: relative;
+    top: 0px;
+    left: 34px;
+    color: white;
+}
