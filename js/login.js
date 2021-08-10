@@ -7,7 +7,7 @@ firebase.auth().onAuthStateChanged((user) => {
             if (!data.groupId) {
                 window.location.href = "../html/groupAdd.html"
             } else {
-                window.location.href = "../html/groupHomepage.html"
+                window.location.href = "../html/sidebar.html"
             }
         })
     } else {
