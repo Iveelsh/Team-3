@@ -53,10 +53,13 @@ const createGroup = async() => {
         await db.collection('groups').doc(roomCode).set({
             groupname: groupName,
             joinCode: roomCode,
-            members: [],
+        })
+        await db.collection(`groups/${roomCode}/members`).add({
+            member: user.uid
         })
         await db.collection('users').doc(userUid).update({
             groupId: roomCode,
+            role: 'admin',
         })
         window.location.href = "../html/groupHomepage.html"
     } else {
@@ -74,26 +77,23 @@ const joinGroup = async() => {
     let userUid = user.uid
 
     if (user) {
-        db.collection('groups').doc(groupCode).get().then(doc => {
+        db.collection('groups').doc(groupCode).get().then(async(doc) => {
             console.log(doc.data())
             if (doc.exists) {
-                await db.doc(`groups/${groupCode}`).update({
-                    members: [...doc.data().members, userUid],
+                await db.collection(`groups/${groupCode}/members`).add({
+                    member: user.uid
                 })
-
                 await db.collection('users').doc(userUid).update({
                     groupId: groupCode,
+                    role: 'kid',
                 })
                 window.location.href = "../html/groupHomepage.html"
             } else {
                 window.alert("No Group Found")
             }
         })
-
     } else {
         window.alert("Login first")
         window.location.href = "../html/login.html"
     }
-
-
 }
