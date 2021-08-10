@@ -84,7 +84,7 @@ const joinGroup = async() => {
                 await db.collection('users').doc(userUid).update({
                     groupId: groupCode,
                 })
-                window.location.href = "../html/groupHomepage.html"
+                window.location.href = "../html/sidebar.html"
             } else {
                 window.alert("No Group Found")
             }
