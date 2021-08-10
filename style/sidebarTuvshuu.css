@@ -33,6 +33,13 @@
     cursor: pointer;
 }
 
+.close_2 {
+    position: relative;
+    top: -13px;
+    left: 574px;
+    cursor: pointer;
+}
+
 .taskcontainer {
     width: 100%;
     height: 551px;
@@ -99,7 +106,7 @@
     position: relative;
     top: 14px;
 }
-
+/* 
 ul li {
     margin-top: 5%;
     display: flex;
@@ -171,7 +178,7 @@ ul li {
     display: flex;
     flex-direction: row;
     gap: 420px;
-}
+} */
 
 .taskmodal2 {
     border-radius: 14px;
@@ -191,7 +198,7 @@ ul li {
     width: 670px;
     background: gray;
     position: relative;
-    top: 75px;
+    top: 140px;
     display: table;
     margin-right: auto;
     margin-left: auto;
@@ -417,6 +424,21 @@ body {
     color: #FFFFFF;
     position: relative;
     top: 39px;
+
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.Daalgavar {
+    width: 160px;
+    height: 38px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 32px;
+    color: #FFFFFF;
+    position: relative;
+    top: 39px;
+
     display: table;
     margin-right: auto;
     margin-left: auto;
@@ -443,10 +465,22 @@ body {
     top: 64px;
 }
 
+.Daalgavar_Ner_2 {
+    position: relative;
+    left: 64px;
+    top: 81px;
+}
+
 .Daalgavar_Onoo {
     position: relative;
-    left: 402px;
+    left: 472px;
     top: 10px;
+}
+
+.Daalgavar_Onoo_2 {
+    position: relative;
+    left: 472px;
+    top: 30px;
 }
 
 .Daalgavar_Onoo_Box {
@@ -474,7 +508,13 @@ body {
 
 .Daalgavar_Tailbar {
     position: relative;
-    top: 51px;
+    top: 44px;
+    left: 64px;
+}
+
+.Daalgavar_Tailbar_2 {
+    position: relative;
+    top: 67px;
     left: 64px;
 }
 
@@ -483,16 +523,28 @@ body {
     width: 541px;
     height: 130px;
     border-radius: 7.4px;
+    resize: none;
 }
 
 .Add_Button {
-    height: 49.00000052715703px;
-    width: 131.01519916340794px;
+    height: 51px;
     border-radius: 9px;
     background-color: #83C5BE;
     color: white;
     position: relative;
-    top: 84px;
+    top: 74px;
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.Add_Button_2 {
+    height: 51px;
+    border-radius: 9px;
+    background-color: #83C5BE;
+    color: white;
+    position: relative;
+    top: 81px;
     display: table;
     margin-right: auto;
     margin-left: auto;
@@ -517,3 +569,62 @@ body {
     border-radius: 0px;
     box-shadow: inset -10px -10px 0px -30px #f0f0f000;
 }
+
+#modaldate {
+    height: 18px;
+    width: 102px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15.72px;
+    color: black;
+}
+
+.profile {
+    position: relative;
+    top: 25px;
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.profile_img {
+    width: 109px;
+    height: 109px;
+    border-radius: 50%;
+    background-color: #C4C4C4;
+    ;
+}
+
+.user_name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15.35px;
+    color: black;
+    position: relative;
+    top: 11px;
+    left: 11px;
+}
+
+.edit_position {
+    position: relative;
+    top: -224px;
+    left: 136px;
+    color: white;
+    cursor: pointer;
+}
+
+.edit_position:hover {
+    color: black;
+}
+
+
+
+.position_2 {
+    position: relative;
+    left: 608px;
+    top: 13px;
+    color: white;
+}
+
+.position_2:hover {
+    color: red;
+}
+
