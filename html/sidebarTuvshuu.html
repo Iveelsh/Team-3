@@ -36,11 +36,11 @@
 
                 <div id="infomodalcont" class="modal">
                     <div id="infomodal" class="infomodal">
-                        <!-- <div id="modaluser">user</div>
+                        <div id="modaluser">user</div>
                         <div id="modalpoint">point</div>
                         <div id="modalstatus">status</div>
-                        <div id="modaldesc">description</div> -->
-                        <!-- <div id="modaldate">date</div> -->
+                        <div id="modaldesc">description</div> 
+                         <div id="modaldate">date</div>
 
                         <div class="Daalgavar">Даалгавар</div>
 
@@ -51,14 +51,27 @@
                         <div class="dropdown-container_2">
                             <button id="Dropbtn_2" onclick="myfunction()">
                                         <!-- <p class="paragraph white pointer" id="filter">Бүх даалгавар</p> -->
-                                        <span class="material-icons">
-                                            more_horiz
-                                        </span>
-                                </button>
-                            <div style="visibility: hidden;" id="Dropdowns" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="drop-container">
-                                <!-- <div class="pointer gray line-text" onclick="filterByStatus('all')" id="Wishlist">Бүх даалгавар</div>
-                                    <div class="pointer gray line-text" onclick="filterByStatus('inreview')" id="Wishlist">Шалгуулах даалгавар</div> -->
+                                    <span class="material-icons">
+                                        more_horiz
+                                    </span>
+                            </button>
 
+
+                            <div style="visibility: hidden;" id="Dropdowns_2" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="arrow-up"></div>
+                            <div style="visibility: hidden;" id="Dropdowns" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="drop-container_2">
+                                <div class="pointer gray_2 line-text_2" onclick="filterByStatus('all')" id="Wishlist">
+                                    <span id="Ustgah" class="material-icons white_2">
+                                        delete
+                                    </span>
+                                    <div id="Ustgah" class="white_2">Устгах</div>
+                                </div>
+                                    <div class="pointer Zasah gray_2 line-text_2" onclick="filterByStatus('inreview')" id="Wishlist">
+                                        <span class="material-icons white_2">
+                                            edit
+                                        </span>
+                                        <div style="color : white">Засах</div>
+                                        
+                                    </div>
                             </div>
                         </div>
 

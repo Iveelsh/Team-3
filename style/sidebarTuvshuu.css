@@ -35,7 +35,7 @@
 
 .close_2 {
     position: relative;
-    top: -13px;
+    top: -56px;
     left: 574px;
     cursor: pointer;
 }
@@ -468,7 +468,7 @@ body {
 .Daalgavar_Ner_2 {
     position: relative;
     left: 64px;
-    top: 81px;
+    top: 38px;
 }
 
 .Daalgavar_Onoo {
@@ -480,7 +480,7 @@ body {
 .Daalgavar_Onoo_2 {
     position: relative;
     left: 472px;
-    top: 30px;
+    top: -13px;
 }
 
 .Daalgavar_Onoo_Box {
@@ -514,7 +514,7 @@ body {
 
 .Daalgavar_Tailbar_2 {
     position: relative;
-    top: 67px;
+    top: 24px;
     left: 64px;
 }
 
@@ -544,7 +544,7 @@ body {
     background-color: #83C5BE;
     color: white;
     position: relative;
-    top: 81px;
+    top: 38px;
     display: table;
     margin-right: auto;
     margin-left: auto;
@@ -580,7 +580,7 @@ body {
 
 .profile {
     position: relative;
-    top: 25px;
+    top: -27px;
     display: table;
     margin-right: auto;
     margin-left: auto;
@@ -637,4 +637,52 @@ body {
     top: 0px;
     left: 34px;
     color: white;
+}
+
+.drop-container_2 {
+    width: 97px;
+    height: 70px;
+    border-radius: 8px;
+    background-color: #C4C4C4;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 30px;
+    left: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.arrow-up {
+    width: 0;
+    height: 0px;
+    position: relative;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #C4C4C4;
+    left: 30px;
+    top: 30px;
+}
+
+.gray_2 {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    left: 11px;
+    display: flex;
+    align-items: center;
+}
+
+.line-text_2 {
+    white-space: nowrap;
+
+}
+
+
+.white_2 {
+    color: white;
+}
+
+.red {
+    color: red;
 }
