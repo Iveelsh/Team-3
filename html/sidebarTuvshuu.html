@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../style/sidebar.css">
+    <!-- <link rel="stylesheet" href="../style/sidebar.css"> -->
     <title></title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -32,10 +32,7 @@
             </div>
         </div>
         <div class="contents">
-            <div id="task">
-
-
-
+            <div id="task" style="display: flex;">
 
                 <div id="infomodalcont" class="modal">
                     <div id="infomodal" class="infomodal">
@@ -47,59 +44,59 @@
 
                         <div class="Daalgavar">Даалгавар</div>
 
-                            <!-- <span class="material-icons position_2">
+                        <!-- <span class="material-icons position_2">
                                 delete
                             </span> -->
 
-                            <div class="dropdown-container_2">
-                                <button id="Dropbtn_2" onclick="myfunction()">
+                        <div class="dropdown-container_2">
+                            <button id="Dropbtn_2" onclick="myfunction()">
                                         <!-- <p class="paragraph white pointer" id="filter">Бүх даалгавар</p> -->
                                         <span class="material-icons">
                                             more_horiz
                                         </span>
                                 </button>
-                                <div style="visibility: hidden;" id="Dropdowns" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="drop-container">
-                                    <!-- <div class="pointer gray line-text" onclick="filterByStatus('all')" id="Wishlist">Бүх даалгавар</div>
+                            <div style="visibility: hidden;" id="Dropdowns" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="drop-container">
+                                <!-- <div class="pointer gray line-text" onclick="filterByStatus('all')" id="Wishlist">Бүх даалгавар</div>
                                     <div class="pointer gray line-text" onclick="filterByStatus('inreview')" id="Wishlist">Шалгуулах даалгавар</div> -->
-                                    
-                                </div>
+
                             </div>
+                        </div>
 
 
-                            <img onclick="closeModal()" class="close_2" src="../assets/Close.svg">
+                        <img onclick="closeModal()" class="close_2" src="../assets/Close.svg">
 
-                            <div class="profile">
-                                <div class="profile_img" onclick="switchkids()"></div>
-                                <div class="user_name"  >USER NAME</div>
-                            </div>
+                        <div class="profile">
+                            <div class="profile_img" onclick="switchkids()"></div>
+                            <div class="user_name">USER NAME</div>
+                        </div>
 
-                            <div class="Daalgavar_Ner_2">
-                                <div class="Daalgavar_Ner_Text">Даалгаварын Нэр</div>
-                                <div id="TaskName" class="Daalgavar_Ner_Input"></div>
-                            </div>
+                        <div class="Daalgavar_Ner_2">
+                            <div class="Daalgavar_Ner_Text">Даалгаварын Нэр</div>
+                            <div id="TaskName" class="Daalgavar_Ner_Input"></div>
+                        </div>
 
-                            <div class="Daalgavar_Onoo_2">
-                                <div class="Daalgavar_Ner_Text">Даалгаварын Оноо</div>
+                        <div class="Daalgavar_Onoo_2">
+                            <div class="Daalgavar_Ner_Text">Даалгаварын Оноо</div>
 
-                                <div class="Daalgavar_Onoo_Box">
-                                    <img src="../assets/Coin.svg" class="coin">
-                                    <input id="modalpoint" type="number" class="Daalgavar_Onoo_Input">
+                            <div class="Daalgavar_Onoo_Box">
+                                <img src="../assets/Coin.svg" class="coin">
+                                <input id="modalpoint" type="number" class="Daalgavar_Onoo_Input">
 
-                                    <!-- <span class="material-icons edit_position">
+                                <!-- <span class="material-icons edit_position">
                                         edit
                                     </span> -->
-                                </div>
                             </div>
+                        </div>
 
-                            <div class="Daalgavar_Tailbar_2">
-                                <div class="Daalgavar_Ner_Text">Даалгаварын Тайлбар</div>
-                                <div id="modaldate"></div>
-                              
-                                <textarea id="modaldesc"  class="Daalgavar_Tailbar_Input"></textarea>
+                        <div class="Daalgavar_Tailbar_2">
+                            <div class="Daalgavar_Ner_Text">Даалгаварын Тайлбар</div>
+                            <div id="modaldate"></div>
 
-                            </div>
+                            <textarea id="modaldesc" class="Daalgavar_Tailbar_Input"></textarea>
 
-                            <button onclick="AddTask()" class="Add_Button_2">Нэмэх &#8594;</button>
+                        </div>
+
+                        <button onclick="AddTask()" class="Add_Button_2">Нэмэх &#8594;</button>
                     </div>
                 </div>
 
@@ -122,10 +119,10 @@
 
 
                 <!-- /Dropdown -->
-                <div onclick="taskmodal()" class="add">
+                <!-- <div onclick="taskmodal()" class="add">
                     <img src="../assets/Add_Logo.svg" class="Add_Logo" style="cursor: pointer;">
                     <div class="Daalgavar_Nemeh_Text">Даалгавар Нэмэх</div>
-                </div>
+                </div> -->
 
                 <div id="task">
 
@@ -157,10 +154,15 @@
                             <button onclick="AddTask()" class="Add_Button">Нэмэх &#8594;</button>
                         </div>
                     </div>
+                    <div>
+                        <div onclick="taskmodal()" class="add">
+                            <img src="../assets/Add_Logo.svg" class="Add_Logo" style="cursor: pointer;">
+                            <div class="Daalgavar_Nemeh_Text">Даалгавар Нэмэх</div>
+                        </div>
+                        <div class="taskcontainer" id="taskcontainer">
 
-                    <div class="taskcontainer" id="taskcontainer">
 
-
+                        </div>
                     </div>
 
                     <input style="display: none;" type="text" id="filterinput"><button style="display: none;" onclick="filter()">click me </button>
