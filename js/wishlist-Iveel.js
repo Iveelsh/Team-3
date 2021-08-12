@@ -201,8 +201,9 @@ const renderWishlist = (docs) => {
             let point = document.createElement("div")
             coinShow.appendChild(point);
             point.innerHTML = userWishPoint
+                // point.
         } else {
-            let point = document.createElement("input")
+            let point = document.createElement("div")
             coinShow.appendChild(point);
             point.classList.add("wishpoint-input");
         }
@@ -232,11 +233,17 @@ const renderWishlist = (docs) => {
             // let wishUser = document.getElementById("wishuser");
             let wishPoint = document.getElementById("wishPoint");
             let wishDesc = document.getElementById("wishDesc");
+            let addPoint = document.getElementById("addPoint");
+
 
             if (userWishPoint) {
+                addPoint.classList.add("none")
+                console.log("has points")
                 wishPoint.innerHTML = data.point;
+                // wishPoint.onclick = ""
             } else {
                 console.log('no pooint')
+                addPoint.classList.remove("none")
                 pointInput = document.createElement("input");
                 pointInput.type = "number";
                 pointInput.id = "addedpoint";
@@ -248,7 +255,6 @@ const renderWishlist = (docs) => {
             // wishDate.innerHTML = `date: ${wishDate}`;
 
 
-            let addPoint = document.getElementById("addPoint");
             addPoint.onclick = async() => {
                 let addedPoint = document.getElementById("addedpoint").value;
                 if (addedPoint) {

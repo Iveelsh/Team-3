@@ -552,11 +552,18 @@ body {
     display: flex;
     margin-right: 37px;
     justify-content: flex-end;
+    width: 5%;
+    height: 50%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px
 }
 
 .wishpoint-input {
-    width: 30%;
     margin-left: 20px;
+    background-color: white;
 }
 
 .wish-date {
