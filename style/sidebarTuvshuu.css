@@ -538,17 +538,6 @@ body {
     margin-left: auto;
 }
 
-.Add_Button_2 {
-    height: 51px;
-    border-radius: 9px;
-    background-color: #83C5BE;
-    color: white;
-    position: relative;
-    top: 38px;
-    display: table;
-    margin-right: auto;
-    margin-left: auto;
-}
 
 ::-webkit-scrollbar {
     width: 6px;
@@ -685,4 +674,77 @@ body {
 
 .red {
     color: red;
+}
+
+.container_button {
+    height: 50px;
+    width: 216px;
+    border-radius: 25px;
+    background-color: white;
+    position: relative;
+    top: 38px;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    border: 2px solid #FFFFFF;
+    
+}
+
+.X_container {
+    width: 108px;
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    align-items: center;
+}
+
+.X {
+    position: relative;
+    left: 12px;
+    font-size: 38px;
+    color: #172662;
+}
+
+.Y_container {
+    width: 108px;
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    align-items: center;
+}
+
+.Y {
+    width: 31.35px;
+    height: 21.61px;
+    position: relative;
+    left: 12px;
+    bottom: 5px;
+    font-size: 40px;
+    color: #172662;
+}
+
+.circle {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background-color: white;
+    position: relative;
+    top: 13px;
+    left: 34px;
+    border-right: #172662 solid 3px;
+}
+
+.circle_2 {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background-color: white;
+    position: relative;
+    top: -12px;
+    left: -67px;
+    border-left: #172662 solid 3px;
 }
