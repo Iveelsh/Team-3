@@ -244,52 +244,52 @@ const renderWishlist = (docs) => {
         wishContainer.appendChild(coinShow);
         coinShow.appendChild(coinIcon);
 
-        wishContainer.onclick = () => {
-            console.log('clicked')
-            let wishInfoModal = document.getElementById("wishinfomodal");
-            wishInfoModal.style.display = "block";
-            // let wishUser = document.getElementById("wishuser");
-            let wishPoint = document.getElementById("wishPoint");
-            let wishDesc = document.getElementById("wishDesc");
+        // wishContainer.onclick = () => {
+        //     console.log('clicked')
+        //     let wishInfoModal = document.getElementById("wishinfomodal");
+        //     wishInfoModal.style.display = "block";
+        //     // let wishUser = document.getElementById("wishuser");
+        //     let wishPoint = document.getElementById("wishPoint");
+        //     let wishDesc = document.getElementById("wishDesc");
 
-            if (userWishPoint) {
-                wishPoint.innerHTML = data.point;
-            } else {
-                console.log('no pooint')
-                pointInput = document.createElement("input");
-                pointInput.type = "number";
-                pointInput.id = "addedpoint";
-                wishPoint.appendChild(pointInput)
-            }
-            // let wishDate = document.getElementById("wishDate");
-            // wishUser.innerHTML = `assigneduser: ${wishUser}`;
-            wishDesc.innerHTML = data.wish;
-            // wishDate.innerHTML = `date: ${wishDate}`;
+        //     if (userWishPoint) {
+        //         wishPoint.innerHTML = data.point;
+        //     } else {
+        //         console.log('no pooint')
+        //         pointInput = document.createElement("input");
+        //         pointInput.type = "number";
+        //         pointInput.id = "addedpoint";
+        //         wishPoint.appendChild(pointInput)
+        //     }
+        //     // let wishDate = document.getElementById("wishDate");
+        //     // wishUser.innerHTML = `assigneduser: ${wishUser}`;
+        //     wishDesc.innerHTML = data.wish;
+        //     // wishDate.innerHTML = `date: ${wishDate}`;
 
 
-            let addPoint = document.getElementById("addPoint");
-            addPoint.onclick = async() => {
-                let addedPoint = document.getElementById("addedpoint").value;
-                if (addedPoint) {
-                    data.point = addedPoint
-                    console.log('helli')
-                    db.collection(`groups/${groupId}/wishlist`).doc(doc.id).update({
-                            point: addedPoint
-                        }).then(() => {
-                            let wishModal = document.getElementById("wishinfomodal");
-                            let wishPoint = document.getElementById("wishPoint");
-                            let wishDesc = document.getElementById("wishDesc");
-                            wishModal.style.display = "none";
-                            wishPoint.innerHTML = ''
-                            wishDesc.innerHTML = ''
-                            console.log("Added point successfully")
-                        })
-                        .catch((error) => {
-                            console.error("Error adding point ", error);
-                        });
-                }
-            }
-        }
+        //     let addPoint = document.getElementById("addPoint");
+        //     addPoint.onclick = async() => {
+        //         let addedPoint = document.getElementById("addedpoint").value;
+        //         if (addedPoint) {
+        //             data.point = addedPoint
+        //             console.log('helli')
+        //             db.collection(`groups/${groupId}/wishlist`).doc(doc.id).update({
+        //                     point: addedPoint
+        //                 }).then(() => {
+        //                     let wishModal = document.getElementById("wishinfomodal");
+        //                     let wishPoint = document.getElementById("wishPoint");
+        //                     let wishDesc = document.getElementById("wishDesc");
+        //                     wishModal.style.display = "none";
+        //                     wishPoint.innerHTML = ''
+        //                     wishDesc.innerHTML = ''
+        //                     console.log("Added point successfully")
+        //                 })
+        //                 .catch((error) => {
+        //                     console.error("Error adding point ", error);
+        //                 });
+        //         }
+        //     }
+        // }
         window.onclick = (event) => {
             let wishModal = document.getElementById("wishinfomodal");
             let wishPoint = document.getElementById("wishPoint");
