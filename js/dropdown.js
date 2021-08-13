@@ -34,7 +34,7 @@ let Wishlist = document.getElementById("Wishlist");
 let Settings = document.getElementById("Settings");
 let Tasks = document.getElementById("Tasks");
 
-let ustgah = document.getElementById("Wishlist");
+let ustgah = document.getElementById("Delete");
 
 ustgah.addEventListener("onmouseover", () => {
   ustgah.setAttribute("class", "red")

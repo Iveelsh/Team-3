@@ -59,7 +59,7 @@
 
                             <div style="visibility: hidden;" id="Dropdowns_2" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="arrow-up"></div>
                             <div style="visibility: hidden;" id="Dropdowns" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="drop-container_2">
-                                <div class="pointer gray_2 line-text_2" onclick="filterByStatus('all')" id="Wishlist">
+                                <div class="pointer gray_2 line-text_2" onclick="Destroy()" id="Delete">
                                     <span id="Ustgah" class="material-icons white_2">
                                         delete
                                     </span>
@@ -76,16 +76,16 @@
                         </div>
 
 
-                        <img onclick="closeModal()" class="close_2" src="../assets/Close.svg">
+                        <img onclick="closeModal2()" class="close_2" src="../assets/Close.svg">
 
                         <div class="profile">
                             <div class="profile_img" onclick="switchkids()"></div>
-                            <div class="user_name">USER NAME</div>
+                            <div class="user_name" id="modaluser"></div>
                         </div>
 
                         <div class="Daalgavar_Ner_2">
                             <div class="Daalgavar_Ner_Text">Даалгаварын Нэр</div>
-                            <div id="TaskName" class="Daalgavar_Ner_Input"></div>
+                            <div id="modalname" class="Daalgavar_Ner_Input"></div>
                         </div>
 
                         <div class="Daalgavar_Onoo_2">
@@ -93,19 +93,19 @@
 
                             <div class="Daalgavar_Onoo_Box">
                                 <img src="../assets/Coin.svg" class="coin">
-                                <input id="modalpoint" type="number" class="Daalgavar_Onoo_Input">
+                                <div id="modalpoint" class="Daalgavar_Onoo_Input_2"></div>
 
                                 <!-- <span class="material-icons edit_position">
                                         edit
                                     </span> -->
                             </div>
                         </div>
-
+        
                         <div class="Daalgavar_Tailbar_2">
                             <div class="Daalgavar_Ner_Text">Даалгаварын Тайлбар</div>
                             <div id="modaldate"></div>
 
-                            <textarea id="modaldesc" class="Daalgavar_Tailbar_Input"></textarea>
+                            <div id="modaldesc" class="Daalgavar_Tailbar_Input"></div>
 
                         </div>
 
@@ -238,7 +238,7 @@
 
 <script src="../js/firebase.js"></script>
 
-<script src="../js/sidebar.js"></script>
+<script src="../js/sidebarTuvshuu.js"></script>
 <script src="../js/dropdown.js"></script>
 
 </html>
