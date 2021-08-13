@@ -522,14 +522,15 @@ body {
 /* /////////////////////////////////////*/
 
 .wish-container {
-    height: 10%;
+    height: 50px;
     width: 85%;
-    background-color: #999999;
+    /* background-color: #999999; */
     margin-top: 30px;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 5px;
 }
 
 .wishlist {
@@ -540,6 +541,7 @@ body {
     justify-content: flex-start;
     flex-direction: column;
     align-items: center;
+    padding: 20px;
 }
 
 .profile-wish {
@@ -658,7 +660,7 @@ body {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .wish-screen {
@@ -714,4 +716,42 @@ body {
 
 .husliin-ner-content {
     margin-bottom: 100px;
+}
+
+.wish-contain {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    height: 50px;
+    justify-content: space-evenly;
+    background-color: #999999;
+}
+
+.deletewish-butn {
+    background-color: red;
+    /* width: 0%; */
+    /* height: 100%; */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    /* transition: 1s left ease; */
+}
+
+.wish-contain-hovered {
+    display: flex;
+    width: 90%;
+    align-items: center;
+    height: 50px;
+    justify-content: space-evenly;
+    background-color: #999999;
+}
+
+.deletewish-butn-hovered {
+    background-color: red;
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transition: 1s left ease; */
 }
