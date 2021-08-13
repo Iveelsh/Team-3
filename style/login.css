@@ -1,13 +1,17 @@
-body{
-    margin:0px;
+body {
+    margin: 0px;
+    background: rgb(56, 93, 209);
+    background: linear-gradient(180deg, rgba(56, 93, 209, 1) 0%, rgba(166, 131, 195, 1) 50%, rgba(255, 210, 189, 1) 100%);
 }
+
 .Header {
     width: 100%;
     height: 98px;
-    background-color: lightgray;
+    background: #212D69;
     top: 0;
     left: 0;
     position: absolute;
+    color: white;
 }
 
 .Logo {
@@ -23,6 +27,11 @@ body{
     left: 35px;
 }
 
+button {
+    border: 0;
+    cursor: pointer;
+}
+
 .Login {
     display: table;
     margin-right: auto;
@@ -32,8 +41,10 @@ body{
     width: 595px;
     top: 118px;
     border-radius: 20px;
-    background-color: lightgray;
+    background: #212D69;
+    color: white;
 }
+
 .Nevtreh {
     display: table;
     margin-right: auto;
@@ -44,6 +55,7 @@ body{
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
 }
+
 .text {
     Width: 31px;
     height: 20px;
@@ -117,6 +129,7 @@ body{
     border: 1px #858585 solid;
     position: relative;
 }
+
 .one {
     top: 298px;
     left: 74px;
@@ -133,6 +146,7 @@ body{
     position: relative;
     top: 289px;
 }
+
 .two {
     top: 281px;
     left: 321px;
@@ -141,9 +155,10 @@ body{
 .footer {
     width: 100%;
     height: 505px;
-    background-color: #C4C4C4;
+    background: #212D69;
     position: relative;
     top: 149px;
+    color: white;
 }
 
 .logo_footer {
@@ -164,14 +179,17 @@ body{
 
 .tuhai {
     top: 170px;
+    color: white;
 }
 
 .holboo {
     top: 170px;
+    color: white;
 }
 
 .asuultuud {
     top: 170px;
+    color: white;
 }
 
 .longline {
@@ -190,6 +208,7 @@ body{
     position: relative;
     top: 248px;
 }
+
 .twenty1 {
     font-family: 'Roboto', sans-serif;
     color: black;
@@ -248,6 +267,20 @@ body{
     position: relative;
 }
 
+.qwer {
+    margin-left: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.qwe {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 50px;
+}
+
 .fb {
     color: white;
     bottom: 12px;
@@ -263,16 +296,16 @@ body{
     position: relative;
     top: 4px;
     left: 1px;
-} 
+}
 
-.forgot{
+.forgot {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 10.1838px;
     line-height: 12px;
     text-decoration-line: underline;
-    color: #000000;
+    color: white;
     cursor: pointer;
     position: relative;
     top: 196px;
