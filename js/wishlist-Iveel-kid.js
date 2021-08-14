@@ -116,6 +116,10 @@ const remove = () => {
     let taskmodal = document.getElementById("taskmodal");
     taskmodal.style.display = "none";
 }
+const wishInfoModalClose = () => {
+    let wishInfoModal = document.getElementById("wishinfomodal");
+    wishInfoModal.style.display = "none";
+}
 
 
 const renderTasks = (docs) => {
@@ -341,17 +345,20 @@ const renderWishlist = (docs) => {
             //     }
             // }
         }
-        window.onclick = (event) => {
-            let wishModal = document.getElementById("wishinfomodal");
-            let wishPoint = document.getElementById("wishPoint");
-            let wishDesc = document.getElementById("wishDesc");
-            if (event.target == wishModal) {
-                wishModal.style.display = "none";
-                wishPoint.innerHTML = ''
-                wishDesc.innerHTML = ''
-            }
 
-        }
+        // window.onclick = (event) => {
+        //     let wishModal = document.getElementById("wishinfomodal");
+        //     let wishPoint = document.getElementById("wishPoint");
+        //     let wishDesc = document.getElementById("wishDesc");
+        //     if (event.target == wishModal) {
+        //         wishModal.style.display = "none";
+        //         wishPoint.innerHTML = ''
+        //         wishDesc.innerHTML = ''
+        //     }
+
+        // }
+
+
         date.innerHTML = wishAddedDate;
         wish.innerHTML = userWish;
     })
