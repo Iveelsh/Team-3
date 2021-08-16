@@ -1,10 +1,20 @@
-body{
-    margin:0px;
+body {
+    margin: 0px;
+    background: rgb(8, 27, 86);
+    background: linear-gradient(180deg, rgba(8, 27, 86, 1) 0%, rgba(166, 131, 195, 1) 50%, rgba(255, 210, 189, 1) 100%);
 }
+
+button {
+    border: 1px black solid;
+}
+
 .Header {
+    display: flex;
+    align-items: center;
     width: 100vw;
     height: 98px;
-    background-color: lightgray;
+    background-color: #172662;
+    color: white;
     top: 0;
     left: 0;
     position: absolute;
@@ -17,10 +27,10 @@ body{
     background-color: darkgray;
 }
 
-.logo_header {
-    position: absolute;
-    top: 20px;
-    left: 35px;
+.a69 {
+    margin-left: 30px;
+    display: flex;
+    flex-direction: row;
 }
 
 .Signup {
@@ -32,8 +42,10 @@ body{
     width: 676px;
     top: 118px;
     border-radius: 20px;
-    background-color: lightgray;
+    background: white;
+    color: #1d2a66;
 }
+
 .Burtgel_uusgeh {
     display: table;
     margin-right: auto;
@@ -44,6 +56,7 @@ body{
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
 }
+
 .text {
     Width: 31px;
     height: 20px;
@@ -52,6 +65,7 @@ body{
     white-space: nowrap;
     display: flex;
 }
+
 .ner {
     left: 93px;
     top: 102px;
@@ -138,6 +152,7 @@ body{
     border: 1px #858585 solid;
     position: relative;
 }
+
 .one {
     top: 323px;
     left: 115px;
@@ -154,21 +169,30 @@ body{
     position: relative;
     top: 315px;
 }
+
 .two {
     top: 306px;
     left: 358px;
 }
 
 .footer {
+    background: #172662;
+    color: white;
     width: 100vw;
     height: 505px;
-    background-color: #C4C4C4;
     position: relative;
     top: 149px;
+}
 
+.footer69 {
+    padding-top: 50px;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
 }
 
 .logo_footer {
+    background: rgba(255, 255, 255, 0);
     display: table;
     margin-right: auto;
     margin-left: auto;
@@ -179,7 +203,7 @@ body{
 .aboutus {
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
-    color: black;
+    color: white;
     font-weight: bold;
     position: relative;
 }
@@ -198,7 +222,7 @@ body{
 
 .longline {
     width: 676px;
-    border: 1px solid #A9A9A9;
+    border: 1px solid #ffffff;
     display: table;
     margin-right: auto;
     margin-left: auto;
@@ -211,10 +235,12 @@ body{
     height: 8px;
     position: relative;
     top: 248px;
+    color: white;
 }
+
 .twenty1 {
     font-family: 'Roboto', sans-serif;
-    color: black;
+    color: white;
     position: relative;
     font-size: 9.15px;
     top: 247px;
@@ -231,12 +257,14 @@ body{
     background-color: #2E399E;
     top: 373px;
     left: 115px;
+    cursor: pointer;
 }
 
 .white {
     background-color: white;
     top: 373px;
     left: 123px;
+    cursor: pointer;
 }
 
 .flex {
