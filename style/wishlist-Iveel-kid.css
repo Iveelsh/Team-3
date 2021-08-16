@@ -239,9 +239,9 @@ ul li {
 .a {
     display: flex;
     flex-direction: row;
-    padding-left: 100px;
-    padding-right: 100px;
-    gap: 100px;
+    /* padding-left: 100px; */
+    /* padding-right: 100px; */
+    /* gap: 100px; */
     position: relative;
     top: 174px;
 }

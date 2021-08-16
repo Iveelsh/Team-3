@@ -7,11 +7,18 @@ firebase.auth().onAuthStateChanged((user) => {
             if (!data.groupId) {
                 window.location.href = "../html/groupAdd.html"
             } else {
-                window.location.href = "../html/sidebar.html"
+                if (data.role === "admin") {
+                    window.location.href = "../html/wishlist-Iveel.html"
+                } else if (data.role == "kid") {
+                    window.location.href = "../html/wishlist-Iveel-kid.html"
+                } else {
+                    console.log("error")
+                }
+
             }
         })
     } else {
-        console.log("signed out")
+        window.location.href = "../html/login.html"
     }
 });
 
@@ -21,6 +28,15 @@ const loginWithEmailAndPassword = () => {
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
             let user = userCredential.user;
+            console.log(user)
+
+            // if(user) {
+            //     let uid = user.uid;
+            //     db.collection("users").doc(uid).get().then((doc) => {
+            //         let data = doc.data();
+            //         if()
+            //     })
+            // }
 
         })
 }
