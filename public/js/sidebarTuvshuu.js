@@ -127,7 +127,7 @@ const renderTasks = (docs) => {
         taskdate.classList.add("taskdate");
         taskrow.classList.add("taskrow");
         taskitem.classList.add("taskitem");
-        coinicon.src = "assets/coin icon.svg"
+        coinicon.src = "../assets/coin icon.svg"
         wall.innerHTML = "|";
 
 
@@ -170,12 +170,31 @@ const renderTasks = (docs) => {
             let modaldesc = document.getElementById("modaldesc");
             let modaldate = document.getElementById("modaldate");
             let modalname = document.getElementById("modalname");
-            modaluser.innerHTML = assigneduserr;
+            modaluser.innerHTML =  assigneduserr;
             modalpoint.innerHTML = taskpointt;
             // modalstatus.innerHTML = statuss;
             modaldesc.innerHTML = taskdess;
             modaldate.innerHTML = datee;
             modalname.innerHTML = tasknamee;
+
+            // let deletemodal = document.createElement("div");
+            // deletemodal.className = "deletemodal"; 
+            // taskcontainer.appendChild(deletemodal);
+            // let box1 = document.createElement("div");
+            // let box2 = document.createElement("div");
+            // box1.className = "box";
+            // box2.className = "box";
+            // deletemodal.appendChild(box1);
+            // deletemodal.appendChild(box2);
+            document.getElementById('delete-task').onclick = () => {
+                db.doc(`groups/${groupId}/tasks/${doc.id}`).delete();
+                deletemodal.style.display = "none";
+                infomodalcont.style.display = "none";
+            }
+
+            document.getElementById('nope').onclick = () => {
+                deletemodal.style.display = "none";
+            }
         }
         window.onclick = (event) => {
             let modal = document.getElementById("infomodalcont");
@@ -188,6 +207,10 @@ const renderTasks = (docs) => {
 
 }
 
+const Destroy = () => {
+    deletemodal.style.display = "block";
+    deletemodal.style.zIndex = "10";
+}
 
 
 const filterByStatus = (status) => {
@@ -219,7 +242,7 @@ const filterByStatus = (status) => {
         }
     } else {
         window.alert("please login");
-        // window.location.href = "index.html";
+        // window.location.href = "../html/landingPage.html";
     }
 }
 
@@ -241,7 +264,7 @@ firebase.auth().onAuthStateChanged((u) => {
         })
     } else {
         console.log("please login")
-        window.location.href = "index.html"
+        window.location.href = "../html/landingPage.html"
     }
 });
 
@@ -271,13 +294,10 @@ const AddTask = () => {
             });
     } else {
         window.alert("Please login");
-        window.location.href = "index.html"
+        window.location.href = "../html/landingPage.html"
     }
 }
 
-function Destroy() {
-    db.doc(`groups/${groupId}/tasks/${doc.id}`).delete().catch((err) => console.log(err))
-}
 
 // remove_2.onclick = (() => {
 //     db.doc(`groups/${groupId}/tasks/${doc.id}`).delete().catch((err) => console.log(err))
