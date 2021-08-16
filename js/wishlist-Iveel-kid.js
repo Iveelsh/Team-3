@@ -7,6 +7,23 @@ let wishlist = document.getElementById("wishlist");
 let groupinfo = document.getElementById("groupinfo");
 let message = document.getElementById("message");
 
+let wishContainer = document.getElementsByClassName("wish-container")[0];
+wishContainer.addEventListener("mouseover", () => {
+    let wishContain = document.getElementsByClassName("wish-contain")[0];
+    let deleteButn = document.getElementsByClassName("deletewish-butn")[0];
+    deleteButn.style.width = " 10%";
+    deleteButn.style.display = "flex"
+    wishContain.style.width = "90%"
+})
+wishContainer.addEventListener("mouseout", () => {
+    let wishContain = document.getElementsByClassName("wish-contain")[0];
+    let deleteButn = document.getElementsByClassName("deletewish-butn")[0];
+    deleteButn.style.width = " 0%";
+    wishContain.style.width = "100%"
+    deleteButn.style.display = "none"
+
+})
+
 let user;
 let groupId;
 
@@ -98,6 +115,10 @@ const closeAddWishModal = () => {
 const remove = () => {
     let taskmodal = document.getElementById("taskmodal");
     taskmodal.style.display = "none";
+}
+const wishInfoModalClose = () => {
+    let wishInfoModal = document.getElementById("wishinfomodal");
+    wishInfoModal.style.display = "none";
 }
 
 
@@ -202,12 +223,14 @@ const renderWishlist = (docs) => {
         let wishlistContent = document.getElementById("wish-content")
 
 
-        let taskinfomodalcont = document.createElement("div");
-        let taskmodal = document.createElement("div");
-        taskinfomodalcont.classList.add("modal");
-        taskinfomodalcont.appendChild(taskmodal);
+        // let taskinfomodalcont = document.createElement("div");
+        // let taskmodal = document.createElement("div");
+        // taskinfomodalcont.classList.add("modal");
+        // taskinfomodalcont.appendChild(taskmodal);
 
         let wishContainer = document.createElement("div")
+        let wishContain = document.createElement("div")
+        let deleteButn = document.createElement("div")
         let profileWishContainer = document.createElement("div")
         let profileIcon = document.createElement("span")
         let post = document.createElement("div")
@@ -227,6 +250,9 @@ const renderWishlist = (docs) => {
         }
 
         wishContainer.classList.add("wish-container")
+        wishContain.classList.add("wish-contain")
+        deleteButn.classList.add("deletewish-butn")
+        deleteButn.innerHTML = "Delete"
         profileWishContainer.classList.add("profile-wish");
         profileIcon.classList.add("material-icons");
         // post.classList.add("")
@@ -236,15 +262,44 @@ const renderWishlist = (docs) => {
         coinIcon.src = "../assets/coin icon.svg"
 
         wishlistContent.appendChild(wishContainer);
-        wishContainer.appendChild(profileWishContainer);
+        wishContainer.appendChild(wishContain);
+        wishContainer.appendChild(deleteButn)
+        wishContain.appendChild(profileWishContainer);
         profileWishContainer.appendChild(profileIcon);
         profileWishContainer.appendChild(post);
         post.appendChild(date)
         post.appendChild(wish)
-        wishContainer.appendChild(coinShow);
+        wishContain.appendChild(coinShow);
         coinShow.appendChild(coinIcon);
 
-        wishContainer.onclick = () => {
+
+        wishContainer.addEventListener("mouseover", () => {
+            wishContain.classList.remove("wish-contain")
+            wishContain.classList.add("wish-contain-hovered")
+            deleteButn.classList.add("deletewish-butn-hovered");
+            deleteButn.classList.remove("deletewish-butn");
+        })
+        wishContainer.addEventListener("mouseout", () => {
+            wishContain.classList.remove("wish-contain-hovered")
+            wishContain.classList.add("wish-contain")
+            deleteButn.classList.add("deletewish-butn");
+            deleteButn.classList.remove("deletewish-butn-hovered");
+
+        })
+        deleteButn.onclick = () => {
+            console.log("delet button clicked")
+            if (user) {
+                db.doc(`groups/${groupId}/wishlist/${doc.id}`).delete().then(() => {
+                    console.log("Document successfully deleted!");
+                }).catch((error) => {
+                    console.error("Error removing document: ", error);
+                });
+            } else {
+                console.log("logged out")
+            }
+        }
+
+        wishContain.onclick = () => {
             console.log('clicked')
             let wishInfoModal = document.getElementById("wishinfomodal");
             wishInfoModal.style.display = "block";
@@ -290,17 +345,20 @@ const renderWishlist = (docs) => {
             //     }
             // }
         }
-        window.onclick = (event) => {
-            let wishModal = document.getElementById("wishinfomodal");
-            let wishPoint = document.getElementById("wishPoint");
-            let wishDesc = document.getElementById("wishDesc");
-            if (event.target == wishModal) {
-                wishModal.style.display = "none";
-                wishPoint.innerHTML = ''
-                wishDesc.innerHTML = ''
-            }
 
-        }
+        // window.onclick = (event) => {
+        //     let wishModal = document.getElementById("wishinfomodal");
+        //     let wishPoint = document.getElementById("wishPoint");
+        //     let wishDesc = document.getElementById("wishDesc");
+        //     if (event.target == wishModal) {
+        //         wishModal.style.display = "none";
+        //         wishPoint.innerHTML = ''
+        //         wishDesc.innerHTML = ''
+        //     }
+
+        // }
+
+
         date.innerHTML = wishAddedDate;
         wish.innerHTML = userWish;
     })
