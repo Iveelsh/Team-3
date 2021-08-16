@@ -76,6 +76,11 @@ function closeModal() {
     taskmodal.style.display = "none";
 }
 
+function closeModal2() {
+    let infomodalcont = document.getElementById("infomodalcont");
+    infomodalcont.style.display = "none";
+}
+
 const remove = () => {
     let taskmodal = document.getElementById("taskmodal");
     taskmodal.style.display = "none";
@@ -95,10 +100,13 @@ const renderTasks = (docs) => {
         let tasknamee = data.TaskName;
         let taskdess = data.TaskDes;
 
-        // let taskinfomodalcont = document.createElement("div");
-        // let taskmodal = document.createElement("div");
-        // taskinfomodalcont.classList.add("modal");
-        // taskinfomodalcont.appendChild(taskmodal);
+
+        let taskinfomodalcont = document.createElement("div");
+        let taskmodal = document.createElement("div");
+        taskinfomodalcont.classList.add("modal");
+        taskinfomodalcont.appendChild(taskmodal);
+
+
 
         let taskcontainer = document.getElementById("taskcontainer");
         let taskbody = document.createElement("div");
@@ -111,13 +119,18 @@ const renderTasks = (docs) => {
         let wall = document.createElement("div");
         let assigneduser = document.createElement("div");
 
+
+
+
         taskcontainer.classList.add("taskcontainer");
         taskbody.classList.add("taskbody");
         taskdate.classList.add("taskdate");
         taskrow.classList.add("taskrow");
         taskitem.classList.add("taskitem");
-        coinicon.src = "../assets/coin icon.svg"
+        coinicon.src = "assets/coin icon.svg"
         wall.innerHTML = "|";
+
+
 
         taskcontainer.appendChild(taskbody);
         taskbody.appendChild(taskdate);
@@ -156,11 +169,13 @@ const renderTasks = (docs) => {
             let modalstatus = document.getElementById("modalstatus");
             let modaldesc = document.getElementById("modaldesc");
             let modaldate = document.getElementById("modaldate");
-            modaluser.innerHTML = `assigneduser: ${assigneduserr}`;
-            modalpoint.innerHTML = `taskpoint: ${taskpointt}`;
-            modalstatus.innerHTML = `sstatus: ${statuss}`;
-            modaldesc.innerHTML = `description: ${taskdess}`;
-            modaldate.innerHTML = `date: ${datee}`;
+            let modalname = document.getElementById("modalname");
+            modaluser.innerHTML = assigneduserr;
+            modalpoint.innerHTML = taskpointt;
+            // modalstatus.innerHTML = statuss;
+            modaldesc.innerHTML = taskdess;
+            modaldate.innerHTML = datee;
+            modalname.innerHTML = tasknamee;
         }
         window.onclick = (event) => {
             let modal = document.getElementById("infomodalcont");
@@ -168,129 +183,8 @@ const renderTasks = (docs) => {
                 modal.style.display = "none";
             }
         }
+
     });
-}
-
-const renderWishlist = (docs) => {
-    console.log("Wishlist render success")
-    docs.forEach((doc) => {
-        let data = doc.data();
-        let wishUser = data.user
-        let userWish = data.wish;
-        let userWishPoint = data.point;
-        let wishAddedDate = data.CreatedAt.toDate();
-
-        let wishlistContent = document.getElementById("wish-content")
-
-
-        let taskinfomodalcont = document.createElement("div");
-        let taskmodal = document.createElement("div");
-        taskinfomodalcont.classList.add("modal");
-        taskinfomodalcont.appendChild(taskmodal);
-
-        let wishContainer = document.createElement("div")
-        let profileWishContainer = document.createElement("div")
-        let profileIcon = document.createElement("span")
-        let post = document.createElement("div")
-        let date = document.createElement("div")
-        let wish = document.createElement("div")
-        let coinShow = document.createElement("div")
-        let coinIcon = document.createElement("div")
-
-        if (userWishPoint) {
-            let point = document.createElement("div")
-            coinShow.appendChild(point);
-            point.innerHTML = userWishPoint
-                // point.
-        } else {
-            let point = document.createElement("div")
-            coinShow.appendChild(point);
-            point.classList.add("wishpoint-input");
-        }
-
-        wishContainer.classList.add("wish-container")
-        profileWishContainer.classList.add("profile-wish");
-        profileIcon.classList.add("material-icons");
-        // post.classList.add("")
-        date.classList.add("wish-date")
-        wish.classList.add("wish")
-        coinShow.classList.add("coin-show");
-        coinIcon.src = "../assets/coin icon.svg"
-
-        wishlistContent.appendChild(wishContainer);
-        wishContainer.appendChild(profileWishContainer);
-        profileWishContainer.appendChild(profileIcon);
-        profileWishContainer.appendChild(post);
-        post.appendChild(date)
-        post.appendChild(wish)
-        wishContainer.appendChild(coinShow);
-        coinShow.appendChild(coinIcon);
-
-        wishContainer.onclick = () => {
-            console.log('clicked')
-            let wishInfoModal = document.getElementById("wishinfomodal");
-            wishInfoModal.style.display = "block";
-            // let wishUser = document.getElementById("wishuser");
-            let wishPoint = document.getElementById("wishPoint");
-            let wishDesc = document.getElementById("wishDesc");
-            let addPoint = document.getElementById("addPoint");
-
-
-            if (userWishPoint) {
-                addPoint.classList.add("none")
-                console.log("has points")
-                wishPoint.innerHTML = data.point;
-                // wishPoint.onclick = ""
-            } else {
-                console.log('no pooint')
-                addPoint.classList.remove("none")
-                pointInput = document.createElement("input");
-                pointInput.type = "number";
-                pointInput.id = "addedpoint";
-                wishPoint.appendChild(pointInput)
-            }
-            // let wishDate = document.getElementById("wishDate");
-            // wishUser.innerHTML = `assigneduser: ${wishUser}`;
-            wishDesc.innerHTML = data.wish;
-            // wishDate.innerHTML = `date: ${wishDate}`;
-
-
-            addPoint.onclick = async() => {
-                let addedPoint = document.getElementById("addedpoint").value;
-                if (addedPoint) {
-                    data.point = addedPoint
-                    console.log('helli')
-                    db.collection(`groups/${groupId}/wishlist`).doc(doc.id).update({
-                            point: addedPoint
-                        }).then(() => {
-                            let wishModal = document.getElementById("wishinfomodal");
-                            let wishPoint = document.getElementById("wishPoint");
-                            let wishDesc = document.getElementById("wishDesc");
-                            wishModal.style.display = "none";
-                            wishPoint.innerHTML = ''
-                            wishDesc.innerHTML = ''
-                            console.log("Added point successfully")
-                        })
-                        .catch((error) => {
-                            console.error("Error adding point ", error);
-                        });
-                }
-            }
-        }
-        window.onclick = (event) => {
-            let wishModal = document.getElementById("wishinfomodal");
-            let wishPoint = document.getElementById("wishPoint");
-            let wishDesc = document.getElementById("wishDesc");
-            if (event.target == wishModal) {
-                wishModal.style.display = "none";
-                wishPoint.innerHTML = ''
-                wishDesc.innerHTML = ''
-            }
-
-        }
-        date.innerHTML = wishAddedDate;
-        wish.innerHTML = userWish;
-    })
 
 }
 
@@ -325,7 +219,7 @@ const filterByStatus = (status) => {
         }
     } else {
         window.alert("please login");
-        // window.location.href = "../html/landingPage.html";
+        // window.location.href = "index.html";
     }
 }
 
@@ -338,12 +232,7 @@ firebase.auth().onAuthStateChanged((u) => {
         userGroup.get().then((doc) => {
             groupId = doc.data().groupId;
             db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
-                // document.getElementById("wishlist").innerHTML = "";
                 renderTasks(querySnapshot)
-            })
-            db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
-                document.getElementById("wish-content").innerHTML = "";
-                renderWishlist(querySnapshot)
             })
         }).then(() => {
             console.log("render success");
@@ -352,7 +241,7 @@ firebase.auth().onAuthStateChanged((u) => {
         })
     } else {
         console.log("please login")
-        window.location.href = "../html/landingPage.html"
+        window.location.href = "index.html"
     }
 });
 
@@ -382,30 +271,14 @@ const AddTask = () => {
             });
     } else {
         window.alert("Please login");
-        window.location.href = "../html/landingPage.html"
+        window.location.href = "index.html"
     }
 }
-const addPoint = () => {
-    let wishName = document.getElementById("wishDesc").value;
-    let addedPoint = document.getElementById("addedPoint").value;
-    if (user && addedPoint) {
-        db.collection(`groups/${groupId}/tasks`).doc().update({
-                point: addedPoint,
-            })
-            .then(() => {
-                let wishModal = document.getElementById("wishinfomodal");
-                let wishPoint = document.getElementById("wishPoint");
-                let wishDesc = document.getElementById("wishDesc");
-                wishModal.style.display = "none";
-                wishPoint.innerHTML = ''
-                wishDesc.innerHTML = ''
-                console.log("Added point successfully")
-            })
-            .catch((error) => {
-                console.error("Error adding point ", error);
-            });
-    } else {
-        window.alert("Please login");
-        window.location.href = "../html/landingPage.html"
-    }
+
+function Destroy() {
+    db.doc(`groups/${groupId}/tasks/${doc.id}`).delete().catch((err) => console.log(err))
 }
+
+// remove_2.onclick = (() => {
+//     db.doc(`groups/${groupId}/tasks/${doc.id}`).delete().catch((err) => console.log(err))
+// })

@@ -105,7 +105,7 @@ const renderTasks = (docs) => {
 
         let taskcontainer = document.getElementById("taskcontainer");
         let taskbody = document.createElement("div");
-        let taskdate = document.createElement("div");
+        let taskdate = document.createElement("span");
         let taskrow = document.createElement("div");
         let taskname = document.createElement("div");
         let taskitem = document.createElement("div");
@@ -122,7 +122,7 @@ const renderTasks = (docs) => {
         taskdate.classList.add("taskdate");
         taskrow.classList.add("taskrow");
         taskitem.classList.add("taskitem");
-        coinicon.src = "../assets/coin icon.svg"
+        coinicon.src = "assets/coin icon.svg"
         wall.innerHTML = "|";
 
 
@@ -143,7 +143,19 @@ const renderTasks = (docs) => {
         point.innerHTML = taskpointt;
         assigneduser.innerHTML = assigneduserr;
 
-        taskbody.ondblclick = () => {
+
+        taskbody.style.cursor = "pointer";
+        taskbody.addEventListener('mouseover', () => {
+            taskbody.classList.add("texthover");
+            taskdate.classList.add("texthover")
+        });
+        taskbody.style.cursor = "pointer";
+        taskbody.addEventListener('mouseout', () => {
+            taskbody.classList.remove("texthover");
+            taskdate.classList.remove("texthover");
+        });
+
+        taskbody.onclick = () => {
 
             let infomodalcont = document.getElementById("infomodalcont");
             infomodalcont.style.display = "block";
@@ -200,7 +212,7 @@ const filterByStatus = (status) => {
         }
     } else {
         window.alert("please login");
-        // window.location.href = "../html/landingPage.html";
+        // window.location.href = "index.html";
     }
 }
 
@@ -222,7 +234,7 @@ firebase.auth().onAuthStateChanged((u) => {
         })
     } else {
         console.log("please login")
-        window.location.href = "../html/landingPage.html"
+        window.location.href = "index.html"
     }
 });
 
@@ -252,6 +264,6 @@ const AddTask = () => {
             });
     } else {
         window.alert("Please login");
-        window.location.href = "../html/landingPage.html"
+        window.location.href = "index.html"
     }
 }

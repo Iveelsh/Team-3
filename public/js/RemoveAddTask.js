@@ -22,7 +22,7 @@ const AddTask = () => {
             });
     } else {
         window.alert("Please login");
-        window.location.href = "../html/landingPage.html"
+        window.location.href = "landingPage.html"
     }
 }
 

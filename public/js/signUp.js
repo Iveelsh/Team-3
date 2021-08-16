@@ -1,24 +1,25 @@
-let user = firebase.auth().currentUser;
-if (user) {
-    let uid = user.uid;
-    db.collection("users").doc(uid).get().then((doc) => {
-        let data = doc.data();
-        if (!data.groupId) {
-            window.location.href = "../html/groupAdd.html"
-        } else {
-            if (data.role === "admin") {
-                window.location.href = "../html/wishlist-Iveel.html"
-            } else if (data.role == "kid") {
-                window.location.href = "../html/wishlist-Iveel-kid.html"
+firebase.auth().onAuthStateChanged((user) => {
+    console.log("nevtersn")
+    if (user) {
+        let uid = user.uid;
+        db.collection("users").doc(uid).get().then((doc) => {
+            let data = doc.data();
+            if (!data.groupId) {
+                window.location.href = "./groupAdd.html"
             } else {
-                console.log("error")
-            }
-        }
-    })
-} else {
-    window.location.href = "../html/login.html"
+                if (data.role === "admin") {
+                    window.location.href = "wishlist-Iveel.html"
+                } else if (data.role == "kid") {
+                    window.location.href = "wishlist-Iveel-kid.html"
+                } else {
+                    console.log("error")
+                }
 
-}
+            }
+        })
+    }
+});
+
 
 const signUpWithEmailAndPassword = () => {
     let name = document.getElementById("name").value;
@@ -36,7 +37,7 @@ const signUpWithEmailAndPassword = () => {
                     // groupId:
             });
 
-            window.location.href = "../html/groupAdd.html"
+            window.location.href = "groupAdd.html"
             console.log("success")
                 // ...
         })

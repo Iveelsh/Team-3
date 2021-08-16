@@ -76,11 +76,6 @@ function closeModal() {
     taskmodal.style.display = "none";
 }
 
-function closeModal2() {
-    let infomodalcont = document.getElementById("infomodalcont");
-    infomodalcont.style.display = "none";
-}
-
 const remove = () => {
     let taskmodal = document.getElementById("taskmodal");
     taskmodal.style.display = "none";
@@ -110,7 +105,7 @@ const renderTasks = (docs) => {
 
         let taskcontainer = document.getElementById("taskcontainer");
         let taskbody = document.createElement("div");
-        let taskdate = document.createElement("span");
+        let taskdate = document.createElement("div");
         let taskrow = document.createElement("div");
         let taskname = document.createElement("div");
         let taskitem = document.createElement("div");
@@ -127,7 +122,7 @@ const renderTasks = (docs) => {
         taskdate.classList.add("taskdate");
         taskrow.classList.add("taskrow");
         taskitem.classList.add("taskitem");
-        coinicon.src = "../assets/coin icon.svg"
+        coinicon.src = "assets/coin icon.svg"
         wall.innerHTML = "|";
 
 
@@ -148,19 +143,7 @@ const renderTasks = (docs) => {
         point.innerHTML = taskpointt;
         assigneduser.innerHTML = assigneduserr;
 
-
-        taskbody.style.cursor = "pointer";
-        taskbody.addEventListener('mouseover', () => {
-            taskbody.classList.add("texthover");
-            taskdate.classList.add("texthover")
-        });
-        taskbody.style.cursor = "pointer";
-        taskbody.addEventListener('mouseout', () => {
-            taskbody.classList.remove("texthover");
-            taskdate.classList.remove("texthover");
-        });
-
-        taskbody.onclick = () => {
+        taskbody.ondblclick = () => {
 
             let infomodalcont = document.getElementById("infomodalcont");
             infomodalcont.style.display = "block";
@@ -169,13 +152,11 @@ const renderTasks = (docs) => {
             let modalstatus = document.getElementById("modalstatus");
             let modaldesc = document.getElementById("modaldesc");
             let modaldate = document.getElementById("modaldate");
-            let modalname = document.getElementById("modalname");
-            modaluser.innerHTML =  assigneduserr;
-            modalpoint.innerHTML = taskpointt;
-            // modalstatus.innerHTML = statuss;
-            modaldesc.innerHTML = taskdess;
-            modaldate.innerHTML = datee;
-            modalname.innerHTML = tasknamee;
+            modaluser.innerHTML = `assigneduser: ${assigneduserr}`;
+            modalpoint.innerHTML = `taskpoint: ${taskpointt}`;
+            modalstatus.innerHTML = `sstatus: ${statuss}`;
+            modaldesc.innerHTML = `description: ${taskdess}`;
+            modaldate.innerHTML = `date: ${datee}`;
         }
         window.onclick = (event) => {
             let modal = document.getElementById("infomodalcont");
@@ -219,7 +200,7 @@ const filterByStatus = (status) => {
         }
     } else {
         window.alert("please login");
-        // window.location.href = "../html/landingPage.html";
+        // window.location.href = "index.html";
     }
 }
 
@@ -241,7 +222,7 @@ firebase.auth().onAuthStateChanged((u) => {
         })
     } else {
         console.log("please login")
-        window.location.href = "../html/landingPage.html"
+        window.location.href = "index.html"
     }
 });
 
@@ -271,14 +252,6 @@ const AddTask = () => {
             });
     } else {
         window.alert("Please login");
-        window.location.href = "../html/landingPage.html"
+        window.location.href = "index.html"
     }
 }
-
-function Destroy() {
-     db.doc(`groups/${groupId}/tasks/${doc.id}`).delete().catch((err) => console.log(err))
-}
-
-// remove_2.onclick = (() => {
-//     db.doc(`groups/${groupId}/tasks/${doc.id}`).delete().catch((err) => console.log(err))
-// })

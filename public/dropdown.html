@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="./style/dropdown.css" />
+</head>
+
+<body>
+    <div class="dropdown-container">
+        <button id="Dropbtn" onmouseleave="showfunction()" onclick="myfunction()" style="color: white">
+        <span class="pointer material-icons account-icon">account_circle</span>
+      </button>
+        <div style="visibility: hidden;" id="Dropdowns" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="drop-container">
+            <div class="pointer gray" id="Wishlist"> <span class=" d-icon material-icons">person</span> Profile</div>
+            <div class="pointer gray" id="Home"> <span class=" d-icon material-icons">settings</span> Settings</div>
+            <div class="pointer red" id="Settings"> <span class="d-icon material-icons">logout</span> Log out</div>
+        </div>
+    </div>
+</body>
+
+<script src="./js/dropdown.js"></script>
+
+</html>

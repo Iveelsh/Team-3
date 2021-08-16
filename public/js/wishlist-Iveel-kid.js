@@ -156,7 +156,7 @@ const renderTasks = (docs) => {
         taskdate.classList.add("taskdate");
         taskrow.classList.add("taskrow");
         taskitem.classList.add("taskitem");
-        coinicon.src = "../assets/coin icon.svg"
+        coinicon.src = "assets/coin icon.svg"
         wall.innerHTML = "|";
 
         taskcontainer.appendChild(taskbody);
@@ -259,7 +259,7 @@ const renderWishlist = (docs) => {
         date.classList.add("wish-date")
         wish.classList.add("wish")
         coinShow.classList.add("coin-show");
-        coinIcon.src = "../assets/coin icon.svg"
+        coinIcon.src = "assets/coin icon.svg"
 
         wishlistContent.appendChild(wishContainer);
         wishContainer.appendChild(wishContain);
@@ -396,7 +396,7 @@ const filterByStatus = (status) => {
         }
     } else {
         window.alert("please login");
-        // window.location.href = "../html/landingPage.html";
+        // window.location.href = "../landingPage.html";
     }
 }
 
@@ -423,7 +423,7 @@ firebase.auth().onAuthStateChanged((u) => {
         })
     } else {
         console.log("please login")
-        window.location.href = "../html/landingPage.html"
+        window.location.href = "landingPage.html"
     }
 });
 
@@ -453,7 +453,7 @@ const AddTask = () => {
             });
     } else {
         window.alert("Please login");
-        window.location.href = "../html/landingPage.html"
+        window.location.href = "index.html"
     }
 }
 const addWish = () => {
@@ -474,7 +474,7 @@ const addWish = () => {
             });
     } else {
         window.alert("Please login");
-        window.location.href = "../html/landingPage.html"
+        window.location.href = "index.html"
     }
 }
 const addPoint = () => {
@@ -498,7 +498,7 @@ const addPoint = () => {
                 });
         } else {
             window.alert("Please login");
-            window.location.href = "../html/landingPage.html"
+            window.location.href = "index.html"
         }
     }
     // const wishmodal = () => {

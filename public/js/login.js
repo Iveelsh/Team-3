@@ -5,20 +5,18 @@ firebase.auth().onAuthStateChanged((user) => {
         db.collection("users").doc(uid).get().then((doc) => {
             let data = doc.data();
             if (!data.groupId) {
-                window.location.href = "../html/groupAdd.html"
+                window.location.href = "groupAdd.html"
             } else {
                 if (data.role === "admin") {
-                    window.location.href = "../html/wishlist-Iveel.html"
+                    window.location.href = "wishlist-Iveel.html"
                 } else if (data.role == "kid") {
-                    window.location.href = "../html/wishlist-Iveel-kid.html"
+                    window.location.href = "wishlist-Iveel-kid.html"
                 } else {
                     console.log("error")
                 }
 
             }
         })
-    } else {
-        window.location.href = "../html/login.html"
     }
 });
 
