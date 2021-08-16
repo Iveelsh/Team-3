@@ -6,9 +6,18 @@ if (user) {
         if (!data.groupId) {
             window.location.href = "../html/groupAdd.html"
         } else {
-            window.location.href = "../html/groupHomepage.html"
+            if (data.role === "admin") {
+                window.location.href = "../html/wishlist-Iveel.html"
+            } else if (data.role == "kid") {
+                window.location.href = "../html/wishlist-Iveel-kid.html"
+            } else {
+                console.log("error")
+            }
         }
     })
+} else {
+    window.location.href = "../html/login.html"
+
 }
 
 const signUpWithEmailAndPassword = () => {

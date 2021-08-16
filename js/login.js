@@ -18,7 +18,7 @@ firebase.auth().onAuthStateChanged((user) => {
             }
         })
     } else {
-        console.log("signed out")
+        window.location.href = "../html/login.html"
     }
 });
 
