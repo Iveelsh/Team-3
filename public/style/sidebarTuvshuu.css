@@ -761,3 +761,76 @@ body {
     left: -67px;
     border-left: #172662 solid 3px;
 }
+
+.deletemodal {
+    border-radius: 14px;
+    height: 313.9524230957031px;
+    width: 603px;
+    background: white;
+    position: absolute;
+    top: 153px;
+    display: none;
+    left: 33px;
+}
+
+.pic {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    top: 26px;
+}
+
+.makesuretext {
+    height: 36px;
+    width: 470px;
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: 'Roboto', sans-serif;
+    font-size: 31.12px;
+    color: #232E6A;
+    position: relative;
+    top: 40px;
+}
+
+.box {
+    height: 44px;
+    width: 115px;
+    border-radius: 5px;
+    border: 1px solid #232E6A;
+    cursor: pointer;
+}
+
+.pos1 {
+    background-color: #232E6A;
+    position: relative;
+    top: 66px;
+    left: 162px;
+}
+.tiim {
+    color: white;
+    height: 22px;
+    width: 47px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 19.02px;
+    position: relative;
+    top: 9px;
+    left: 32px;
+}
+.pos2 {
+    background-color: white;
+    position: relative;
+    top: 20px;
+    left: 330px;
+}
+.ugui {
+    color: #232E6A;
+    height: 22px;
+    width: 47px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 19.02px;
+    position: relative;
+    top: 9px;
+    left: 32px;
+}
