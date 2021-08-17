@@ -318,12 +318,19 @@ const switchkids = () => {
                         let memberAssign = document.createElement("div")
                         let memberName = document.createElement("div")
                         let memberPoint = document.createElement("div")
+                        let memberProfile = document.createElement("img");
 
                         memberContainer.appendChild(memberAssign)
+                        memberAssign.appendChild(memberProfile)
                         memberAssign.appendChild(memberName)
                         memberAssign.appendChild(memberPoint)
 
+                        memberProfile.className = "member_profile";
+                        memberName.className = "member_name";
+                        memberPoint.className = "member_point"
+
                         memberAssign.setAttribute("class", "member-assign");
+                        memberProfile.setAttribute("src","../public/assets/AccountCircle.svg" )
 
                         memberName.innerHTML = doc.data().name
 
