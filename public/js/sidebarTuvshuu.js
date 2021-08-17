@@ -170,7 +170,7 @@ const renderTasks = (docs) => {
             let modaldesc = document.getElementById("modaldesc");
             let modaldate = document.getElementById("modaldate");
             let modalname = document.getElementById("modalname");
-            modaluser.innerHTML =  assigneduserr;
+            modaluser.innerHTML = assigneduserr;
             modalpoint.innerHTML = taskpointt;
             // modalstatus.innerHTML = statuss;
             modaldesc.innerHTML = taskdess;
@@ -298,6 +298,70 @@ const AddTask = () => {
     }
 }
 
+const switchkids = () => {
+    // console.log(docs)
+    let assignKidModal = document.getElementById("assign-kids-modal-screen");
+    assignKidModal.style.display = "flex";
+    if (user) {
+        let userUid = user.uid
+
+        let userGroup = db.collection('users').doc(userUid);
+        userGroup.get().then((doc) => {
+            groupId = doc.data().groupId;
+            db.collection("users").where("groupId", "==", groupId)
+                .get()
+                .then((querySnapshot) => {
+                    let memberContainer = document.getElementById("members-container");
+                    memberContainer.innerHTML = ''
+                    querySnapshot.forEach((doc) => {
+                        console.log(doc.data().name);
+                        let memberAssign = document.createElement("div")
+                        let memberName = document.createElement("div")
+                        let memberPoint = document.createElement("div")
+
+                        memberContainer.appendChild(memberAssign)
+                        memberAssign.appendChild(memberName)
+                        memberAssign.appendChild(memberPoint)
+
+                        memberAssign.setAttribute("class", "member-assign");
+
+                        memberName.innerHTML = doc.data().name
+
+                        if (!doc.data().point) {
+                            memberPoint.innerHTML = "0"
+                        } else {
+                            memberPoint.innerHTML = doc.data().point
+                        }
+
+                        memberAssign.onclick = async() => {
+                            // console.log(doc.data())
+                            let taskName = document.getElementById("modalname").innerHTML
+                            console.log(taskName)
+                            console.log(groupId)
+                            await db.collection(`groups/${groupId}/tasks`).where("TaskName", "==", taskName)
+                                .get().then((querySnapshot) => {
+                                    querySnapshot.forEach((docs) => {
+                                        docs.ref.update({
+                                            AssignedUser: memberName.innerHTML,
+                                            Status: "inprogress"
+                                        })
+                                    })
+                                })
+                            assignKidModal.style.display = "none"
+                        }
+                    });
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+        })
+    }
+    let closeAssignKidsModal = document.getElementById("closeAssignKidsModal");
+    closeAssignKidsModal.onclick = () => {
+        assignKidModal.style.display = "none";
+        console.log("close")
+    }
+}
 
 // remove_2.onclick = (() => {
 //     db.doc(`groups/${groupId}/tasks/${doc.id}`).delete().catch((err) => console.log(err))

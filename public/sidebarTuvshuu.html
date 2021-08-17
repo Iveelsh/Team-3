@@ -9,8 +9,8 @@
     <title></title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link rel="stylesheet" href="../style/sidebarTuvshuu.css" />
-    <link rel="stylesheet" href="../style/dropdown.css" />
+    <link rel="stylesheet" href="../public/style/sidebarTuvshuu.css" />
+    <link rel="stylesheet" href="../public/style/dropdown.css" />
     </style>
 </head>
 
@@ -77,13 +77,13 @@
                                     </span>
                                     <div id="Ustgah_2" class="white_2">Устгах</div>
                                 </div>
-                                    <div class="pointer Zasah gray_2 line-text_2" onclick="filterByStatus('inreview')" id="Wishlist">
-                                        <span id="Zasah" class="material-icons white_2">
+                                <div class="pointer Zasah gray_2 line-text_2" onclick="filterByStatus('inreview')" id="Wishlist">
+                                    <span id="Zasah" class="material-icons white_2">
                                             edit
                                         </span>
-                                        <div id="Zasah_2" style="color : white">Засах</div>
-                                        
-                                    </div>
+                                    <div id="Zasah_2" style="color : white">Засах</div>
+
+                                </div>
                             </div>
                         </div>
 
@@ -112,7 +112,7 @@
                                     </span> -->
                             </div>
                         </div>
-        
+
                         <div class="Daalgavar_Tailbar_2">
                             <div class="Daalgavar_Ner_Text">Даалгаварын Тайлбар</div>
                             <div id="modaldate"></div>
@@ -218,12 +218,27 @@
                     <div class="members_text">Гишүүд</div>
                 </div>
 
+                <div class="assign-kids-modal-screen" id="assign-kids-modal-screen">
+                    <div class="assign-kids-modal-container " id="assign-kids-modal-container">
+                        <div class="first-row-assign">
+                            <div>Gishuud</div>
+                            <div id="closeAssignKidsModal">X</div>
+                        </div>
+                        <div id="members-container" class="members-container">
+                            <div class="member-assign">
+                                <!-- <div>name</div> -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div id="message" class="none"> message</div>
             </div>
-            <div id="message" class="none"> message</div>
         </div>
+
+
     </div>
-
-
     <div class="footer">
         <div class="Logo logo_footer"></div>
         <div class="flex">
@@ -248,9 +263,9 @@
 <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
 
 
-<script src="../js/firebase.js"></script>
+<script src="../public/js/firebase.js"></script>
 
-<script src="../js/sidebarTuvshuu.js"></script>
-<script src="../js/dropdown.js"></script>
+<script src="../public/js/sidebarTuvshuu.js"></script>
+<script src="../public/js/dropdown.js"></script>
 
 </html>
