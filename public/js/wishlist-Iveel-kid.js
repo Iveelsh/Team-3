@@ -8,6 +8,7 @@ let groupinfo = document.getElementById("groupinfo");
 let message = document.getElementById("message");
 
 let wishContainer = document.getElementsByClassName("wish-container")[0];
+
 wishContainer.addEventListener("mouseover", () => {
     let wishContain = document.getElementsByClassName("wish-contain")[0];
     let deleteButn = document.getElementsByClassName("deletewish-butn")[0];
@@ -213,14 +214,21 @@ const renderTasks = (docs) => {
 
 const renderWishlist = (docs) => {
     console.log("Wishlist render success")
-    docs.forEach((doc) => {
+    docs.forEach(async(doc) => {
+        // console.log(doc.data())
+        // console.log(user.uid)
+        let wishByUser;
+        await db.collection('users').doc(user.uid).get().then((doc) => {
+            wishByUser = doc.data().name;
+        })
         let data = doc.data();
-        let wishUser = data.user
-        let userWish = data.wish;
         let userWishPoint = data.point;
         let wishAddedDate = data.CreatedAt.toDate();
+        let userWish = data.wish;
+
 
         let wishlistContent = document.getElementById("wish-content")
+
 
 
         // let taskinfomodalcont = document.createElement("div");
@@ -232,6 +240,8 @@ const renderWishlist = (docs) => {
         let wishContain = document.createElement("div")
         let deleteButn = document.createElement("div")
         let profileWishContainer = document.createElement("div")
+        let nameIcon = document.createElement("div")
+        let userName = document.createElement("div")
         let profileIcon = document.createElement("span")
         let post = document.createElement("div")
         let date = document.createElement("div")
@@ -265,10 +275,12 @@ const renderWishlist = (docs) => {
         wishContainer.appendChild(wishContain);
         wishContainer.appendChild(deleteButn)
         wishContain.appendChild(profileWishContainer);
-        profileWishContainer.appendChild(profileIcon);
+        profileWishContainer.appendChild(nameIcon);
         profileWishContainer.appendChild(post);
         post.appendChild(date)
         post.appendChild(wish)
+        nameIcon.appendChild(profileIcon)
+        nameIcon.appendChild(userName)
         wishContain.appendChild(coinShow);
         coinShow.appendChild(coinIcon);
 
@@ -303,7 +315,7 @@ const renderWishlist = (docs) => {
             console.log('clicked')
             let wishInfoModal = document.getElementById("wishinfomodal");
             wishInfoModal.style.display = "block";
-            // let wishUser = document.getElementById("wishuser");
+            let wishUser = document.getElementById("wishuser");
             let wishPoint = document.getElementById("wishPoint");
             let wishDesc = document.getElementById("wishDesc");
             let addPoint = document.getElementById("addPoint");
@@ -317,50 +329,16 @@ const renderWishlist = (docs) => {
                 console.log('no pooint')
 
             }
-            // let wishDate = document.getElementById("wishDate");
-            // wishUser.innerHTML = `assigneduser: ${wishUser}`;
             wishDesc.innerHTML = userWish
-                // wishDate.innerHTML = `date: ${wishDate}`;
+                // console.log(doc.data().user)
+            wishUser.innerHTML = doc.data().userName
 
 
-            // addPoint.onclick = async() => {
-            //     let addedPoint = document.getElementById("addedpoint").value;
-            //     if (addedPoint) {
-            //         data.point = addedPoint
-            //         console.log('helli')
-            //         db.collection(`groups/${groupId}/wishlist`).doc(doc.id).update({
-            //                 point: addedPoint
-            //             }).then(() => {
-            //                 let wishModal = document.getElementById("wishinfomodal");
-            //                 let wishPoint = document.getElementById("wishPoint");
-            //                 let wishDesc = document.getElementById("wishDesc");
-            //                 wishModal.style.display = "none";
-            //                 wishPoint.innerHTML = ''
-            //                 wishDesc.innerHTML = ''
-            //                 console.log("Added point successfully")
-            //             })
-            //             .catch((error) => {
-            //                 console.error("Error adding point ", error);
-            //             });
-            //     }
-            // }
         }
-
-        // window.onclick = (event) => {
-        //     let wishModal = document.getElementById("wishinfomodal");
-        //     let wishPoint = document.getElementById("wishPoint");
-        //     let wishDesc = document.getElementById("wishDesc");
-        //     if (event.target == wishModal) {
-        //         wishModal.style.display = "none";
-        //         wishPoint.innerHTML = ''
-        //         wishDesc.innerHTML = ''
-        //     }
-
-        // }
-
 
         date.innerHTML = wishAddedDate;
         wish.innerHTML = userWish;
+        userName.innerHTML = wishByUser;
     })
 
 }
@@ -456,10 +434,16 @@ const AddTask = () => {
         window.location.href = "index.html"
     }
 }
-const addWish = () => {
+const addWish = async() => {
     let wishName = document.getElementById("addedwish").value;
+    let userName;
+    console.log(user)
     if (user) {
+        await db.collection('users').doc(user.uid).get().then((doc) => {
+            userName = doc.data().name
+        })
         db.collection(`groups/${groupId}/wishlist`).doc().set({
+                userName: userName,
                 wish: wishName,
                 CreatedAt: firebase.firestore.FieldValue.serverTimestamp(),
             })

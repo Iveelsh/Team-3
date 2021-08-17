@@ -173,9 +173,12 @@ const renderTasks = (docs) => {
 
 const renderWishlist = (docs) => {
     console.log("Wishlist render success")
-    docs.forEach((doc) => {
+    docs.forEach(async(doc) => {
+        let wishByUser;
+        await db.collection('users').doc(user.uid).get().then((doc) => {
+            wishByUser = doc.data().name;
+        })
         let data = doc.data();
-        let wishUser = data.user
         let userWish = data.wish;
         let userWishPoint = data.point;
         let wishAddedDate = data.CreatedAt.toDate();
@@ -190,6 +193,8 @@ const renderWishlist = (docs) => {
 
         let wishContainer = document.createElement("div")
         let profileWishContainer = document.createElement("div")
+        let nameIcon = document.createElement("div")
+        let userName = document.createElement("div")
         let profileIcon = document.createElement("span")
         let post = document.createElement("div")
         let date = document.createElement("div")
@@ -219,10 +224,12 @@ const renderWishlist = (docs) => {
 
         wishlistContent.appendChild(wishContainer);
         wishContainer.appendChild(profileWishContainer);
-        profileWishContainer.appendChild(profileIcon);
+        profileWishContainer.appendChild(nameIcon);
         profileWishContainer.appendChild(post);
         post.appendChild(date)
         post.appendChild(wish)
+        nameIcon.appendChild(profileIcon)
+        nameIcon.appendChild(userName)
         wishContainer.appendChild(coinShow);
         coinShow.appendChild(coinIcon);
 
@@ -230,7 +237,7 @@ const renderWishlist = (docs) => {
             console.log('clicked')
             let wishInfoModal = document.getElementById("wishinfomodal");
             wishInfoModal.style.display = "block";
-            // let wishUser = document.getElementById("wishuser");
+            let wishUser = document.getElementById("wishuser");
             let wishPoint = document.getElementById("wishPoint");
             let wishDesc = document.getElementById("wishDesc");
             let addPoint = document.getElementById("addPoint");
@@ -252,6 +259,9 @@ const renderWishlist = (docs) => {
             // let wishDate = document.getElementById("wishDate");
             // wishUser.innerHTML = `assigneduser: ${wishUser}`;
             wishDesc.innerHTML = data.wish;
+            wishUser.innerHTML = doc.data().userName
+
+
             // wishDate.innerHTML = `date: ${wishDate}`;
 
 
@@ -290,6 +300,7 @@ const renderWishlist = (docs) => {
         }
         date.innerHTML = wishAddedDate;
         wish.innerHTML = userWish;
+        userName.innerHTML = wishByUser;
     })
 
 }
