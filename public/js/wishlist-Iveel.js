@@ -139,7 +139,7 @@ const renderTasks = (docs) => {
         taskbody.style.cursor = "pointer";
         taskbody.addEventListener('mouseover', () => {
             taskbody.classList.add("texthover");
-            taskdate.classList.add("texthover")
+            taskdate.classList.add("texthover");
         });
         taskbody.style.cursor = "pointer";
         taskbody.addEventListener('mouseout', () => {

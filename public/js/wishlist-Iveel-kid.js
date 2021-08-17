@@ -252,7 +252,7 @@ const renderWishlist = (docs) => {
         if (userWishPoint) {
             let point = document.createElement("div")
             coinShow.appendChild(point);
-            point.innerHTML = userWishPoint
+            point.innerHTML = userWishPoint;
         } else {
             let point = document.createElement("div")
             coinShow.appendChild(point);
