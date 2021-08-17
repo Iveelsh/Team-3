@@ -851,21 +851,32 @@ body {
 }
 
 .assign-kids-modal-container {
-    border-radius: 14px;
+    /* border-radius: 14px;
     height: fit-content;
     width: 30%;
     background: gray;
     position: relative;
     /* top: 75px; */
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px; */ 
+
+    width: 710px;
+    border-radius: 15px;
+    background-color: #FAFAFA;;
+    position: relative;
+    bottom: 115px;
+    height: fit-content;
 }
 
 .first-row-assign {
-    width: 100%;
+    width: 666px;
+    height: 90px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
+    background-color: #FAFAFA;
+    position: relative;
+    left: 13px;
 }
 
 .members-container {
@@ -878,6 +889,55 @@ body {
 
 .member-assign {
     display: flex;
-    width: 100%;
-    justify-content: space-around;
+    width: 710px;
+    height: 126px;
+    background-color: white;
+    border-bottom: 1px solid #CFCFCF;
+    border-radius: 15px;
+    align-items: center;
+}
+.members_text {
+    height: 43px;
+    width: 128px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 35.64px;
+    color: #212D5B;
+
+}
+.X_2 {
+    display: flex;
+    align-items: center;
+    position: relative;
+    left: 12px;
+    font-size: 47px;
+    color: #172662;
+    cursor: pointer;
+}
+
+.member_profile {
+    position: relative;
+    left: 62px;
+}
+
+.member_name {
+    position: relative;
+    left: 94px;
+    color: #172662;
+    font-family: 'Roboto', sans-serif;
+    font-size: 31px;
+    width: 118px;
+    cursor: pointer;
+}
+
+.member_point {
+    position: relative;
+    left: 400px;
+    color: #172662;
+    font-family: 'Roboto', sans-serif;
+    font-size: 28.12px;
+}
+
+.Coin_2 {
+    position: relative;
+    left: 305px;
 }

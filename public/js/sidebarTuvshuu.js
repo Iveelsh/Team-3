@@ -127,7 +127,7 @@ const renderTasks = (docs) => {
         taskdate.classList.add("taskdate");
         taskrow.classList.add("taskrow");
         taskitem.classList.add("taskitem");
-        coinicon.src = "../assets/coin icon.svg"
+        coinicon.src = "../public/assets/Coin.svg"
         wall.innerHTML = "|";
 
 
@@ -318,12 +318,23 @@ const switchkids = () => {
                         let memberAssign = document.createElement("div")
                         let memberName = document.createElement("div")
                         let memberPoint = document.createElement("div")
+                        let memberProfile = document.createElement("img");
+                        let Coin = document.createElement("img");
 
                         memberContainer.appendChild(memberAssign)
+                        memberAssign.appendChild(memberProfile)
                         memberAssign.appendChild(memberName)
                         memberAssign.appendChild(memberPoint)
+                        memberAssign.appendChild(Coin)
+
+                        memberProfile.className = "member_profile";
+                        memberName.className = "member_name";
+                        memberPoint.className = "member_point"
+                        Coin.className = "Coin_2"
 
                         memberAssign.setAttribute("class", "member-assign");
+                        memberProfile.setAttribute("src","../public/assets/AccountCircle.svg" )
+                        Coin.setAttribute("src","../public/assets/BigCoin.svg")
 
                         memberName.innerHTML = doc.data().name
 
