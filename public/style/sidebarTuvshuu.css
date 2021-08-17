@@ -921,13 +921,23 @@ body {
 
 .member_name {
     position: relative;
-    left: 100px;
+    left: 94px;
     color: #172662;
+    font-family: 'Roboto', sans-serif;
+    font-size: 31px;
+    width: 118px;
+    cursor: pointer;
 }
 
 .member_point {
     position: relative;
-    left: 200px;
+    left: 400px;
     color: #172662;
+    font-family: 'Roboto', sans-serif;
+    font-size: 28.12px;
+}
 
+.Coin_2 {
+    position: relative;
+    left: 305px;
 }
