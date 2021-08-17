@@ -62,7 +62,7 @@ const addmodal = () => {
 
 const taskmodal = () => {
     let taskmodal = document.getElementById("taskmodal");
-    taskmodal.style.display = "block"
+    taskmodal.style.display = "block";
 }
 window.onclick = (event) => {
     let taskmodal = document.getElementById("taskmodal");
@@ -116,7 +116,7 @@ const renderTasks = (docs) => {
         taskdate.classList.add("taskdate");
         taskrow.classList.add("taskrow");
         taskitem.classList.add("taskitem");
-        coinicon.src = "assets/coin icon.svg"
+        coinicon.src = "assets/coin icon.svg";
         wall.innerHTML = "|";
 
         taskcontainer.appendChild(taskbody);
