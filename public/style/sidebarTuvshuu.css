@@ -712,7 +712,7 @@ body {
 .X {
     position: relative;
     left: 12px;
-    font-size: 38px;
+    font-size: 38px !important;
     color: #172662;
 }
 

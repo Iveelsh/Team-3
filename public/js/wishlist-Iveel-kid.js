@@ -131,7 +131,7 @@ const renderTasks = (docs) => {
         let data = doc.data();
         let taskpointt = doc.data().TaskPoint;
         let assigneduserr = doc.data().AssignedUser;
-        let datee = doc.data().CreatedAt.toDate();
+        let datee = convertDate(doc.data().CreatedAt.toDate())
         let statuss = data.Status;
         let tasknamee = data.TaskName;
         let taskdess = data.TaskDes;
@@ -223,7 +223,7 @@ const renderWishlist = (docs) => {
         })
         let data = doc.data();
         let userWishPoint = data.point;
-        let wishAddedDate = data.CreatedAt.toDate();
+        let wishAddedDate = convertDate(doc.data().CreatedAt.toDate())
         let userWish = data.wish;
 
 

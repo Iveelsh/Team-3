@@ -61,7 +61,7 @@ const createGroup = async() => {
             groupId: roomCode,
             role: 'admin',
         })
-        window.location.href = "wishlist-Iveel.html"
+        window.location.href = "groupHomepage.html"
     } else {
         window.alert("Login first")
         window.location.href = "index.html"

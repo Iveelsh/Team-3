@@ -1,6 +1,9 @@
 let Dropdown_2 = document.getElementById("Dropdowns_2");
 let Dropdown = document.getElementById("Dropdowns");
 
+let Dropdown_21 = document.getElementById("Dropdowns_21");
+let Dropdown_22 = document.getElementById("Dropdowns_22");
+
 function myfunction() {
   let container = document.getElementById("dropdown-container");
   let btn = document.getElementById("Dropbtn");
@@ -28,6 +31,30 @@ function dropLeavefunction() {
   Dropdown.style.visibility = "hidden";
   Dropdown_2.style.visibility = "hidden";
 }
+
+function myfunction2() {
+  let container = document.getElementById("dropdown-container");
+  let btn = document.getElementById("Dropbtn");
+
+  Dropdown_21.style.visibility = "visible";
+  Dropdown_22.style.visibility = "visible";
+}
+
+function dropfunction2() {
+  let container = document.getElementById("dropdown-container");
+  let btn = document.getElementById("Dropbtn");
+
+  Dropdown_21.style.visibility = "visible";
+  Dropdown_22.style.visibility = "visible";
+}
+function dropLeavefunction2() {
+  let container = document.getElementById("dropdown-container");
+  let btn = document.getElementById("Dropbtn");
+
+  Dropdown_21.style.visibility = "hidden";
+  Dropdown_22.style.visibility = "hidden";
+}
+
 
 let Home = document.getElementById("Home");
 let Wishlist = document.getElementById("Wishlist");
@@ -66,25 +93,26 @@ let x_cont = document.getElementById("X_container");
 let y_cont = document.getElementById("Y_container");
 
 x_cont.onmouseover = () => {
+  document.getElementById("X_container").style.backgroundColor = "white";
+  document.getElementById("circle").style.backgroundColor = "white";
+  document.getElementById("X").style.color = "#172662" ;
+}
+
+x_cont.onmouseleave = () => {
   document.getElementById("X_container").style.backgroundColor = "#172662";
   document.getElementById("circle").style.backgroundColor = "#172662";
   document.getElementById("X").style.color = "white";
 }
 
-x_cont.onmouseleave = () => {
-  document.getElementById("X_container").style.backgroundColor = "white";
-  document.getElementById("circle").style.backgroundColor = "white";
-  document.getElementById("X").style.color = "#172662";
+y_cont.onmouseover = () => {
+  document.getElementById("Y_container").style.backgroundColor = "white";
+  document.getElementById("circle_2").style.backgroundColor = "white";
+  document.getElementById("Y").style.color = "#172662";
 }
 
-y_cont.onmouseover = () => {
+y_cont.onmouseleave = () => {
   document.getElementById("Y_container").style.backgroundColor = "#172662";
   document.getElementById("circle_2").style.backgroundColor = "#172662";
   document.getElementById("Y").style.color = "white";
 }
 
-y_cont.onmouseleave = () => {
-  document.getElementById("Y_container").style.backgroundColor = "white";
-  document.getElementById("circle_2").style.backgroundColor = "white";
-  document.getElementById("Y").style.color = "#172662";
-}
