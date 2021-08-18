@@ -5,10 +5,10 @@ firebase.auth().onAuthStateChanged((user) => {
         db.collection("users").doc(uid).get().then((doc) => {
             let data = doc.data();
             if (!data.groupId) {
-                window.location.href = "./groupAdd.html"
+                window.location.href = "groupAdd.html"
             } else {
                 if (data.role === "admin") {
-                    window.location.href = "wishlist-Iveel.html"
+                    window.location.href = "groupHomepage.html"
                 } else if (data.role == "kid") {
                     window.location.href = "wishlist-Iveel-kid.html"
                 } else {

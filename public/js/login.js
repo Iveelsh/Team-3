@@ -8,7 +8,7 @@ firebase.auth().onAuthStateChanged((user) => {
                 window.location.href = "groupAdd.html"
             } else {
                 if (data.role === "admin") {
-                    window.location.href = "wishlist-Iveel.html"
+                    window.location.href = "groupHomepage.html"
                 } else if (data.role == "kid") {
                     window.location.href = "wishlist-Iveel-kid.html"
                 } else {
