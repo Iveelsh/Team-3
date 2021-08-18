@@ -15,6 +15,16 @@
 <body id="body">
     <div class="Header">
         <div class="Logo logo_header"></div>
+        <div class="profileDropdownContainer">
+            <button class="profileButton" onclick="displayProfileDrop()">
+            <span class="pointer material-icons account-icon">account_circle</span>
+          </button>
+            <div style="visibility:hidden" class="profile-dropdown">
+                <div class="pointer"> <span class=" d-icon material-icons">person</span> Profile</div>
+                <div class="pointer"> <span class=" d-icon material-icons">settings</span> Settings</div>
+                <div class="pointer" onclick="logOut()"> <span class="d-icon material-icons">logout</span> Log out</div>
+            </div>
+        </div>
     </div>
 
     <div class="a">

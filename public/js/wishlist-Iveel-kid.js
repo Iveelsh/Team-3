@@ -462,29 +462,47 @@ const addWish = async() => {
     }
 }
 const addPoint = () => {
-        let wishName = document.getElementById("wishDesc").value;
-        let addedPoint = document.getElementById("addedPoint").value;
-        if (user && addedPoint) {
-            db.collection(`groups/${groupId}/tasks`).doc().update({
-                    point: addedPoint,
-                })
-                .then(() => {
-                    let wishModal = document.getElementById("wishinfomodal");
-                    let wishPoint = document.getElementById("wishPoint");
-                    let wishDesc = document.getElementById("wishDesc");
-                    wishModal.style.display = "none";
-                    wishPoint.innerHTML = ''
-                    wishDesc.innerHTML = ''
-                    console.log("Added point successfully")
-                })
-                .catch((error) => {
-                    console.error("Error adding point ", error);
-                });
-        } else {
-            window.alert("Please login");
-            window.location.href = "index.html"
-        }
+    let wishName = document.getElementById("wishDesc").value;
+    let addedPoint = document.getElementById("addedPoint").value;
+    if (user && addedPoint) {
+        db.collection(`groups/${groupId}/tasks`).doc().update({
+                point: addedPoint,
+            })
+            .then(() => {
+                let wishModal = document.getElementById("wishinfomodal");
+                let wishPoint = document.getElementById("wishPoint");
+                let wishDesc = document.getElementById("wishDesc");
+                wishModal.style.display = "none";
+                wishPoint.innerHTML = ''
+                wishDesc.innerHTML = ''
+                console.log("Added point successfully")
+            })
+            .catch((error) => {
+                console.error("Error adding point ", error);
+            });
+    } else {
+        window.alert("Please login");
+        window.location.href = "index.html"
     }
-    // const wishmodal = () => {
+}
+const logOut = () => {
+    firebase.auth().signOut().then(() => {
+        console.log("Succesfully logged out")
+        window.location.href = "index.html"
+    }).catch((error) => {
+        console.log(error)
+    });
+}
 
-// }
+const displayProfileDrop = () => {
+    let profileDrop = document.getElementsByClassName("profile-dropdown")[0];
+    if (profileDrop.style.visibility == "hidden") {
+        profileDrop.style.visibility = "visible";
+    } else {
+        profileDrop.style.visibility = "hidden";
+    }
+    // profileDrop.addEventListener("mouseout", () => {
+    //     profileDrop.style.visibility = "hidden";
+
+    // })
+}
