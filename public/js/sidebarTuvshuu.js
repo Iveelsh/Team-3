@@ -333,8 +333,8 @@ const switchkids = () => {
                         Coin.className = "Coin_2"
 
                         memberAssign.setAttribute("class", "member-assign");
-                        memberProfile.setAttribute("src","../public/assets/AccountCircle.svg" )
-                        Coin.setAttribute("src","../public/assets/BigCoin.svg")
+                        memberProfile.setAttribute("src", "../public/assets/AccountCircle.svg")
+                        Coin.setAttribute("src", "../public/assets/BigCoin.svg")
 
                         memberName.innerHTML = doc.data().name
 
@@ -359,6 +359,8 @@ const switchkids = () => {
                                     })
                                 })
                             assignKidModal.style.display = "none"
+                            let infomodalcont = document.getElementById("infomodalcont");
+                            infomodalcont.style.display = "none"
                         }
                     });
                 })
