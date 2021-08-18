@@ -61,10 +61,10 @@ const createGroup = async() => {
             groupId: roomCode,
             role: 'admin',
         })
-        window.location.href = "groupHomepage.html"
+        window.location.href = "wishlist-Iveel.html"
     } else {
         window.alert("Login first")
-        window.location.href = "login.html"
+        window.location.href = "index.html"
     }
 
 
@@ -87,13 +87,13 @@ const joinGroup = async() => {
                     groupId: groupCode,
                     role: 'kid',
                 })
-                window.location.href = "sidebar.html"
+                window.location.href = "wishlist-Iveel-kid.html"
             } else {
                 window.alert("No Group Found")
             }
         })
     } else {
         window.alert("Login first")
-        window.location.href = "login.html"
+        window.location.href = "index.html"
     }
 }
