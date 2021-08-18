@@ -363,7 +363,7 @@ firebase.auth().onAuthStateChanged((u) => {
         })
     } else {
         console.log("please login")
-        window.location.href = "landingPage.html"
+        window.location.href = "index.html"
     }
 });
 
@@ -419,4 +419,27 @@ const addPoint = () => {
         window.alert("Please login");
         window.location.href = "landingPage.html"
     }
+}
+
+
+const logOut = () => {
+    firebase.auth().signOut().then(() => {
+        console.log("Succesfully logged out")
+        window.location.href = "index.html"
+    }).catch((error) => {
+        console.log(error)
+    });
+}
+
+const displayProfileDrop = () => {
+    let profileDrop = document.getElementsByClassName("profile-dropdown")[0];
+    if (profileDrop.style.visibility == "hidden") {
+        profileDrop.style.visibility = "visible";
+    } else {
+        profileDrop.style.visibility = "hidden";
+    }
+    // profileDrop.addEventListener("mouseout", () => {
+    //     profileDrop.style.visibility = "hidden";
+
+    // })
 }
