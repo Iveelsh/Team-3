@@ -21,8 +21,8 @@
             <!-- PROFILE DROPDOWN -->
             <div class="profile-dropdown-cont">
                 <button class="profile-btn" onclick="displayProfileDrop()">
-          <img src="./assets/profile.svg" width="34px" />
-        </button>
+            <img src="./assets/profile.svg" width="34px" />
+          </button>
                 <div class="profile-dropdown-content">
                     <div><span class="material-icons">person</span> Profile</div>
                     <div><span class="material-icons">settings</span> Settings</div>
@@ -38,17 +38,17 @@
         <div class="main">
             <div class="side-menu">
                 <button id="taskb" onclick="displaytask();" class="side-button black">
-          Даалгавар
-        </button>
+            Даалгавар
+          </button>
                 <button id="wishb" onclick="displaywishlist();" class="side-button">
-          Хүслийн жагсаалт
-        </button>
+            Хүслийн жагсаалт
+          </button>
                 <button id="groupb" onclick="displaygroupinfo();" class="side-button">
-          Бүлгэмийн мэдээлэл
-        </button>
+            Бүлгэмийн мэдээлэл
+          </button>
                 <button id="messb" onclick="displaymessage()" class="side-button">
-          Харилцан яриа
-        </button>
+            Харилцан яриа
+          </button>
             </div>
             <div class="modal" id="modal">
                 <div class="modal-item">modal</div>
@@ -85,10 +85,10 @@
                                 <div class="gray-border" id="task-description">Desc</div>
                             </div>
                             <div class="column center">
-                                <button id="assign-task-btn" class="row">
-                  <img src="./assets/assign.svg" alt="" />
-                  <div>Даалгавар авах</div>
-                </button>
+                                <button class="assign-task-btn" class="row">
+                    <img src="./assets/assign.svg" alt="" />
+                    <div>Даалгавар авах</div>
+                  </button>
                             </div>
                         </div>
                     </div>
@@ -96,11 +96,11 @@
 
                     <div class="dropdown-container">
                         <button id="Dropbtn" onclick="myfunction()" style="color: black">
-              <p class="paragraph white pointer" id="filter">Бүх даалгавар</p>
-              <span class="pointer material-icons arrow-icon icon"
-                >arrow_drop_down</span
-              >
-            </button>
+                <p class="paragraph white pointer" id="filter">Бүх даалгавар</p>
+                <span class="pointer material-icons arrow-icon icon"
+                  >arrow_drop_down</span
+                >
+              </button>
                         <div style="visibility: hidden" id="Dropdowns" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="drop-container">
                             <div class="pointer gray line-text" onclick="filterByStatus('all')" id="Wishlist">
                                 Бүх даалгавар
@@ -122,8 +122,8 @@
                     <!-- TASK LIST END-->
 
                     <input style="display: none" type="text" id="filterinput" /><button style="display: none" onclick="filter()">
-            click me
-          </button>
+              click me
+            </button>
                 </div>
                 <div id="wishlist" class="wishlist none">
                     <div id="wishinfomodal" class="wishmodal">
@@ -133,14 +133,43 @@
                                 <div class="margin-wish">
                                     <div>husliin ner</div>
                                     <div id="wishuser">aaa</div>
-                                    <div id="wishDesc" class="wishDesc">husliin description</div>
+
+                                    <div id="wishDesc" class="wishDesc">
+                                        husliin description
+                                    </div>
                                 </div>
                                 <div id="wishPoint" class="margin-point"></div>
-                                <div id="addPoint" class="ilgeeh-button">Ilgeeh</div>
+                                <!-- <div id="addPoint" class="ilgeeh-button">Ilgeeh</div> -->
+                            </div>
+                            <div onclick="wishInfoModalClose()">X</div>
+                        </div>
+                    </div>
+                    <div id="wishaddmodal-full" class="wishaddmodal-full">
+                        <div id="wishaddmodal" class="wishaddmodal column">
+                            <div class="row blue-text relative center">
+                                <div class="big-text">Хүсэл нэмэх</div>
+                                <img onclick="closeAddWishModal()" class="close-modal" src="./assets/Close.svg" />
+                            </div>
+                            <div class="column center">
+                                <div>
+                                    <div class="blue-text small-text">Хүслийн нэр</div>
+                                    <input type="text" class="gray-border" id="addwish">
+
+                                </div>
+                                <button class="add-wish-btn" onclick="addWish()">
+                                    Нэмэх
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div id="wish-content" class="wish-content"></div>
+                    <div class="add-wish blue-text column center small-text" onclick="wishmodal()">
+                        <span class="material-icons">
+                            add_circle
+                            </span>
+                        <div>Хүсэл нэмэх</div>
+                    </div>
+                    <div class="column" id="wish-container">
+                    </div>
                 </div>
                 <div id="groupinfo" class="none">
                     <div class="name_edit">Бүлгэмийн нэр</div>

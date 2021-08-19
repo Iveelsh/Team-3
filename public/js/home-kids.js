@@ -209,66 +209,68 @@ const Destroy = () => {
 const renderWishlist = (docs) => {
     console.log("Wishlist render success")
     docs.forEach(async(doc) => {
-        let wishByUser;
-        await db.collection('users').doc(user.uid).get().then((doc) => {
-            wishByUser = doc.data().name;
-        })
+        console.log(doc.data())
         let data = doc.data();
         let userWish = data.wish;
         let userWishPoint = data.point;
         let wishAddedDate = convertDate(doc.data().CreatedAt.toDate())
 
-        let wishlistContent = document.getElementById("wish-content")
+        let wishes = document.getElementById("wish-container")
+
+        let wishBody = document.createElement('div')
+        wishBody.classList.add('wish-body', 'task-body', 'row');
+        let icon = document.createElement('img')
+        icon.src = "./assets/wishlist.svg"
+        wishBody.appendChild(icon);
+
+        let wish = document.createElement('div')
+        wish.classList.add('w100', 'column');
+        wishBody.appendChild(wish)
+
+        let date = document.createElement('span')
+        date.classList.add('date', 'blue-text');
+        date.innerHTML = wishAddedDate;
+        wish.appendChild(date)
+
+        let wishrow = document.createElement('div')
+        wishrow.classList.add('row', 'task-general')
+        wish.appendChild(wishrow)
+
+        let wishname = document.createElement('div')
+        wishname.classList.add('blue-text', 'bold')
+        wishname.innerHTML = userWish
+        wishrow.appendChild(wishname)
 
 
-        let taskinfomodalcont = document.createElement("div");
-        let taskmodal = document.createElement("div");
-        taskinfomodalcont.classList.add("modal");
-        taskinfomodalcont.appendChild(taskmodal);
+        let coinrow = document.createElement('div')
+        coinrow.classList.add('row', 'info')
+        wishrow.appendChild(coinrow)
 
-        let wishContainer = document.createElement("div")
-        let profileWishContainer = document.createElement("div")
-        let nameIcon = document.createElement("div")
-        let userName = document.createElement("div")
-        let profileIcon = document.createElement("span")
-        let post = document.createElement("div")
-        let date = document.createElement("div")
-        let wish = document.createElement("div")
-        let coinShow = document.createElement("div")
-        let coinIcon = document.createElement("div")
 
-        if (userWishPoint) {
-            let point = document.createElement("div")
-            coinShow.appendChild(point);
-            point.innerHTML = userWishPoint
-                // point.
-        } else {
-            let point = document.createElement("div")
-            coinShow.appendChild(point);
-            point.classList.add("wishpoint-input");
-        }
+        let coin = document.createElement('img')
+        coin.src = "./assets/Coin.svg"
+        coinrow.appendChild(coin)
+        let point = document.createElement('div')
+        point.innerHTML = userWishPoint ? userWishPoint : ''
+        coinrow.appendChild(point)
 
-        wishContainer.classList.add("wish-container")
-        profileWishContainer.classList.add("profile-wish");
-        profileIcon.classList.add("material-icons");
-        // post.classList.add("")
-        date.classList.add("wish-date")
-        wish.classList.add("wish")
-        coinShow.classList.add("coin-show");
-        coinIcon.src = "./assets/coin icon.svg"
 
-        wishlistContent.appendChild(wishContainer);
-        wishContainer.appendChild(profileWishContainer);
-        profileWishContainer.appendChild(nameIcon);
-        profileWishContainer.appendChild(post);
-        post.appendChild(date)
-        post.appendChild(wish)
-        nameIcon.appendChild(profileIcon)
-        nameIcon.appendChild(userName)
-        wishContainer.appendChild(coinShow);
-        coinShow.appendChild(coinIcon);
 
-        wishContainer.onclick = () => {
+        wishes.appendChild(wishBody)
+
+        // if (userWishPoint) {
+        //     let point = document.createElement("div")
+        //     coinShow.appendChild(point);
+        //     point.innerHTML = userWishPoint
+        //         // point.
+        // } else {
+        //     let point = document.createElement("div")
+        //     coinShow.appendChild(point);
+        //     point.classList.add("wishpoint-input");
+        // }
+
+
+        wishBody.onclick = () => {
             console.log('clicked')
             let wishInfoModal = document.getElementById("wishinfomodal");
             wishInfoModal.style.display = "block";
@@ -333,9 +335,6 @@ const renderWishlist = (docs) => {
             }
 
         }
-        date.innerHTML = wishAddedDate;
-        wish.innerHTML = userWish;
-        userName.innerHTML = wishByUser;
     })
 
 }
@@ -388,7 +387,7 @@ firebase.auth().onAuthStateChanged((u) => {
                 renderTasks(querySnapshot)
             })
             db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
-                document.getElementById("wish-content").innerHTML = "";
+                document.getElementById("wish-container").innerHTML = "";
                 renderWishlist(querySnapshot)
             })
         }).then(() => {
@@ -419,8 +418,46 @@ const displayProfileDrop = () => {
     } else {
         profileDrop.style.display = "none";
     }
-    // profileDrop.addEventListener("mouseout", () => {
-    //     profileDrop.style.visibility = "hidden";
+}
 
-    // })
+
+const addWish = async() => {
+    let wishName = document.getElementById("addwish").value;
+    let userName;
+    console.log(user)
+    if (user) {
+        await db.collection('users').doc(user.uid).get().then((doc) => {
+            userName = doc.data().name
+        })
+        db.collection(`groups/${groupId}/wishlist`).doc().set({
+                userName: userName,
+                wish: wishName,
+                CreatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            })
+            .then(() => {
+                let wishmodal = document.getElementById("wishaddmodal-full");
+                wishmodal.style.display = "none";
+                document.getElementById("addwish").value = "";
+                console.log("Wish successfully written!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+    } else {
+        window.alert("Please login");
+        window.location.href = "index.html"
+    }
+}
+const wishmodal = () => {
+    let wishmodal = document.getElementById("wishaddmodal-full");
+    wishmodal.style.display = "block"
+}
+const closeAddWishModal = () => {
+    let wishmodal = document.getElementById("wishaddmodal-full");
+    console.log("hello")
+    wishmodal.style.display = "none";
+}
+const wishInfoModalClose = () => {
+    let wishInfoModal = document.getElementById("wishinfomodal");
+    wishInfoModal.style.display = "none";
 }
