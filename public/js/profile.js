@@ -102,22 +102,22 @@ const renderusertask = () => {
     row.appendChild(coin);
     row.appendChild(itemm);
 
-    date.innerHTML = doc.data().date;
-    item.innerHTML = doc.data().taskname;
-    itemm.innerHTML = doc.date().point;
+    // date.innerHTML = doc.data().date;
+    // item.innerHTML = doc.data().taskname;
+    // itemm.innerHTML = doc.date().point;
 
     container.appendChild(taskbody);
 }
 
 
-db.collection("groups").where("fuck", "==", userGroup)
-    .get()
-    .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-        });
-    })
-    .catch((error) => {
-        console.log("Error getting documents: ", error);
-    });
+// db.collection("groups").where("fuck", "==", userGroup)
+//     .get()
+//     .then((querySnapshot) => {
+//         querySnapshot.forEach((doc) => {
+//             // doc.data() is never undefined for query doc snapshots
+//             console.log(doc.id, " => ", doc.data());
+//         });
+//     })
+//     .catch((error) => {
+//         console.log("Error getting documents: ", error);
+//     });
