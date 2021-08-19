@@ -7,59 +7,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./style/landingPage.css">
+    <link rel="stylesheet" href="./style/header-footer.css" />
 </head>
 
-<body>
-    <div class="Header">
-        <div class="Logo logo_header"></div>
-    </div>
-    <div class="content">
-        <div class="first-row">
-            <div class="welcome-texts">
-                <div>Таны гэр бүл гэрийн ажлаас болж уурлаж бухимдаад, маргаан үүсээд байгаа юм биш биз?</div>
-                <div>Манай вэбсайт нь хүүхэд болон эцэг эхийн харилцааг сайжруулж гэрийн асуудлийг шийдэж өгнө.</div>
-                <div class="logsign-buttons">
-                    <div onclick="logInPage()" class="nevtreh-butn">Нэвтрэх</div>
-                    <div onclick="signUpPage()" class="burtguuleh-butn">Бүртгүүлэх</div>
+<body id="body">
+    <div class="everything">
+        <!-- HEADER START -->
+        <div class="header">
+            <img src="./assets/logo.svg" class="logo" />
+
+            <div class="login_signup">
+                <div onclick="logInPage()" class="login">Нэвтрэх</div>
+                <div onclick="signUpPage()" class="signup">Бүртгүүлэх</div>
+            </div>
+        </div>
+        <!-- HEADER END-->
+
+        <div class="first">
+            <div class="text_box">
+                <div class="question">Таны гэр бүл гэрийн ажлаас
+                    болж уурлаж бухимдаад байгаа юм биш биз?</div>
+    
+                <div class="answer">Тэгвэл манай вэбсайт нь хүүхэд болон эцэг эхийн харилцааг сайжруулж гэрийн ажлийг энэ тэнцүү хувиарлахад туслах болно.</div>
+    
+                <div class="login_signup_2">
+                    <div onclick="logInPage()" class="login small blueborder">Нэвтрэх</div>
+                    <div onclick="signUpPage()" class="signup blueborder">Бүртгүүлэх</div>
                 </div>
             </div>
-            <div class="first-row-pic"></div>
+
+            <img src="./assets/first.svg">
         </div>
-        <div class="second-row">
-            <div class="icon-container">
-                <div class="icon"></div>
-                <div>Huuhduud haruitslagaa meden, etseg ehee hundlen duulgavartai bolnoo.</div>
-            </div>
-            <div class="icon-container">
-                <div class="icon"></div>
-                <div>Etseg ehiinhe stressiig bagasgaj, heregtei zuilee margaangui avch bolnoo.</div>
-            </div>
-            <div class="icon-container">
-                <div class="icon"></div>
-                <div>Etseg ehiinhe stressiig bagasgaj, heregtei zuilee margaangui avch bolnoo.</div>
+
+        <div class="second">
+
+            <img src="./assets/second.svg">
+
+            <div class="text_box_2">
+                <div class="question_2">ХАРИУЦЛАГА</div>
+    
+                <div class="answer answer_2">Хүүхдүүд хариуцлагаа ухаарч, эцэг эхээ хүндлэн дуулгавартай болно.</div>
             </div>
         </div>
-        <div class="third-row">
-            <div class="third-row-pic"></div>
+
+        <div class="third">
+            <div class="text_box_3">
+                <div class="question_3">БАГА СТРЕСС</div>
+    
+                <div class="answer_3">Эцэг эхийнхээ стрессийг багасгаж, хэрэгтэй зүйлээ маргаангүй авч болно.</div>
+
+            </div>
+
+            <img src="./assets/third.svg">
+        </div>
+
+
+        <!-- FOOTER START -->
+        <div class="footer">
+            <img src="./assets/logo.svg" class="logo-footer" />
+            <div class="footer-text">
+                <a class="">Бидний Тухай</a>
+                <a class="aboutus holboo">Холбоо Барих</a>
+                <a class="aboutus asuultuud">Асуултууд</a>
+            </div>
+            <div class="copyright">
+                <div class="longline"></div>
+                <div>© 2021</div>
+            </div>
         </div>
     </div>
-    <div class="footer ">
-        <div class="Logo logo_footer "></div>
-        <div class="flex ">
-            <a class="aboutus tuhai ">Бидний Тухай</a>
-            <a class="aboutus holboo ">Холбоо Барих</a>
-            <a class="aboutus asuultuud ">Асуултууд</a>
-        </div>
-
-
-
-        <div class="longline "></div>
-
-        <div class="middle ">
-            <img class="logo " src="https://seeklogo.com/images/C/copyright-symbol-logo-8BD7CD1E77-seeklogo.com.png ">
-            <div class="twenty1 ">2021</div>
-        </div>
-    </div>
+    <!-- FOOTER END -->
 </body>
 <script src="./js/landingPage.js"></script>
 
