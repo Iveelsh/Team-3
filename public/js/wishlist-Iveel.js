@@ -200,7 +200,7 @@ const renderWishlist = (docs) => {
         let date = document.createElement("div")
         let wish = document.createElement("div")
         let coinShow = document.createElement("div")
-        let coinIcon = document.createElement("div")
+        let coinIcon = document.createElement("img")
 
         if (userWishPoint) {
             let point = document.createElement("div")
@@ -216,7 +216,11 @@ const renderWishlist = (docs) => {
         wishContainer.classList.add("wish-container")
         profileWishContainer.classList.add("profile-wish");
         profileIcon.classList.add("material-icons");
+        profileIcon.classList.add("profileIcon");
+
         // post.classList.add("")
+        nameIcon.classList.add("nameIcon")
+        post.classList.add("wishPost")
         date.classList.add("wish-date")
         wish.classList.add("wish")
         coinShow.classList.add("coin-show");
@@ -230,8 +234,10 @@ const renderWishlist = (docs) => {
         post.appendChild(wish)
         nameIcon.appendChild(profileIcon)
         nameIcon.appendChild(userName)
-        wishContainer.appendChild(coinShow);
         coinShow.appendChild(coinIcon);
+        wishContainer.appendChild(coinShow);
+
+        profileIcon.innerHTML = 'account_circle'
 
         wishContainer.onclick = () => {
             console.log('clicked')
@@ -287,17 +293,29 @@ const renderWishlist = (docs) => {
                 }
             }
         }
-        window.onclick = (event) => {
+
+        let wishCloseButton = document.getElementById("wishinfo-closebutton");
+        wishCloseButton.onclick = () => {
             let wishModal = document.getElementById("wishinfomodal");
             let wishPoint = document.getElementById("wishPoint");
             let wishDesc = document.getElementById("wishDesc");
-            if (event.target == wishModal) {
-                wishModal.style.display = "none";
-                wishPoint.innerHTML = ''
-                wishDesc.innerHTML = ''
-            }
 
+            wishModal.style.display = "none";
+            wishPoint.innerHTML = ''
+            wishDesc.innerHTML = ''
         }
+
+        // window.onclick = (event) => {
+        //     let wishModal = document.getElementById("wishinfomodal");
+        //     let wishPoint = document.getElementById("wishPoint");
+        //     let wishDesc = document.getElementById("wishDesc");
+        //     if (event.target == wishModal) {
+        //         wishModal.style.display = "none";
+        //         wishPoint.innerHTML = ''
+        //         wishDesc.innerHTML = ''
+        //     }
+
+        // }
         date.innerHTML = wishAddedDate;
         wish.innerHTML = userWish;
         userName.innerHTML = wishByUser;

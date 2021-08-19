@@ -524,12 +524,15 @@ body {
 .wish-container {
     height: 10%;
     width: 85%;
-    background-color: #999999;
+    background-color: white;
     margin-top: 30px;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 5px;
+    border: 1px grey solid;
+    box-shadow: 1px 1px 1px 1px grey;
 }
 
 .wishlist {
@@ -550,15 +553,15 @@ body {
 
 .coin-show {
     display: flex;
-    margin-right: 37px;
-    justify-content: flex-end;
-    width: 5%;
+    margin-right: 20px;
+    width: 60px;
     height: 50%;
     background: white;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    border-radius: 5px
+    border-radius: 5px;
+    border: 1px solid yellow;
 }
 
 .wishpoint-input {
@@ -600,14 +603,15 @@ body {
 .wishmodal-screen {
     border-radius: 14px;
     margin-left: 18%;
-    height: 50%;
-    width: 60%;
-    background: gray;
+    height: 353px;
+    width: 670px;
+    background: white;
     position: relative;
     top: 75px;
     display: flex;
     margin-right: auto;
     margin-left: auto;
+    font-family: 'Roboto', sans-serif;
 }
 
 .margin-onoo {
@@ -619,46 +623,81 @@ body {
     display: flex;
     height: 20%;
     width: 40%;
-    align-items: center;
+    align-items: flex-start;
     JUSTIFY-CONTENT: center;
     flex-direction: column;
 }
 
 .margin-point {
-    height: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 10px;
 }
 
 .ilgeeh-button {
-    background-color: #83C5BE;
-    height: 12%;
-    width: 17%;
+    background-color: #212D5B;
+    height: 50px;
+    width: 135px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
+    color: white;
 }
 
 .wishDesc {
-    background-color: #C4C4C4;
+    background-color: whitesmoke;
     height: 40%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
+    border: gray 1px solid;
 }
 
 .wish-content {
     overflow-y: scroll;
     height: 100%;
-    width: 100%;
+    width: 1000px;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     align-items: center;
+    background-color: white;
+    border-radius: 14px;
+}
+
+
+/* safdghiuodjaksn */
+
+#wishinfo-closebutton {
+    margin: 10px 10px 0px 0px;
+    font-size: 20px;
+}
+
+.nameIcon {
+    margin-right: 20px;
+    height: 100%;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profileIcon {
+    font-size: 40px !important;
+    color: #172662;
+}
+
+.wishPost {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    color: #172662;
 }
 
 
