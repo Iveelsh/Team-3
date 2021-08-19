@@ -54,6 +54,7 @@ body {
     padding: 10px;
     top: 100%;
     right: 0;
+    border-radius: 5px;
 }
 
 .profile-dropdown-content div {
@@ -64,9 +65,10 @@ body {
     margin-bottom: 4px;
 }
 
-.profile-dropdown-content div:hover {
+
+/* .profile-dropdown-content div:hover {
     text-decoration: underline;
-}
+} */
 
 .footer {
     width: calc(100%-80px);
@@ -106,4 +108,8 @@ body {
     align-items: center;
     gap: 10px;
     font-size: 12px;
+}
+
+.underline:hover {
+    text-decoration: underline;
 }
