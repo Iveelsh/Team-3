@@ -1,6 +1,6 @@
-* {
+/* * {
     font-family: Roboto;
-}
+} */
 
 .taskbody {
     width: 100%;
@@ -130,7 +130,8 @@
     right: 0;
 }
 
-.point {}
+
+/* .point {} */
 
 #task-point {
     border-bottom: 1px solid #CBCBCB;

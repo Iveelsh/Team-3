@@ -170,8 +170,11 @@ const renderTasks = (docs) => {
             taskdate.classList.remove("texthover");
         });
 
-        taskbody.onclick = () => {
-
+        taskbody.onclick = async() => {
+            let userName;
+            await db.collection('users').doc(user.uid).get().then((docs) => {
+                userName = docs.data().name;
+            })
             let infomodalcont = document.getElementById("infomodalcont");
             infomodalcont.style.display = "block";
             let modaluser = document.getElementById("task-user");
@@ -180,6 +183,12 @@ const renderTasks = (docs) => {
             let modaldesc = document.getElementById("task-description");
             let modaldate = document.getElementById("task-date");
             let modalname = document.getElementById("task-name");
+            let assignButton = document.getElementById("assign-task-btn");
+            console.log(doc.data().AssignedUser)
+            if (doc.data().AssignedUser == userName) {
+                assignButton.style.display = "none";
+            }
+
             modaluser.innerHTML = assigneduserr;
             modalpoint.innerHTML = taskpointt ? taskpointt : 0;
             // modalstatus.innerHTML = statuss;
@@ -344,10 +353,12 @@ const renderWishlist = (docs) => {
 const filterByStatus = (status) => {
     if (user) {
         let change = document.getElementById("filter");
+        console.log(status)
         switch (status) {
             case 'all':
                 change.innerHTML = "Бүх даалгавар";
-                db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc').get().then(docs => renderTasks(docs))
+                db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc').get().then(docs =>
+                    renderTasks(docs))
                 break;
             case 'unassigned':
                 change.innerHTML = "Эзэнгүй даалгавар";
@@ -360,13 +371,20 @@ const filterByStatus = (status) => {
             case 'inreview':
                 change.innerHTML = "Шалгуулах даалгавар";
 
+                db.collection(`groups/${groupId}/tasks`).where("Status", "==", status)
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs);
+                    })
+                break;
             case 'inprogress':
-                change.innerHTML = "Хийж байшаа даалгавар";
+                change.innerHTML = "Хийж байгаа даалгавар";
                 db.collection(`groups/${groupId}/tasks`).where("Status", "==", status)
                     .get()
                     .then((docs) => {
                         renderTasks(docs)
                     })
+                break;
         }
     } else {
         window.alert("please login");
