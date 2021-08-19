@@ -144,7 +144,7 @@
     word-wrap: break-word;
 }
 
-#assign-task-btn {
+.assign-task-btn {
     background: #212D5B;
     border-radius: 34px;
     border: none;
@@ -228,15 +228,23 @@
 
 /* wish */
 
-.wish-container {
-    height: 10%;
-    width: 85%;
-    background-color: #999999;
-    margin-top: 30px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.add-wish {
+    padding: 8px;
+    width: 100%;
+    background: #FFFFFF;
+    border: 3px solid #1E2A67;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+#wish-container {
+    width: 100%;
+}
+
+.wish-body {
+    justify-content: start;
+    padding-left: 30px;
+    gap: 30px;
 }
 
 .wishlist {
@@ -249,36 +257,8 @@
     align-items: center;
 }
 
-.profile-wish {
-    width: 46%;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.coin-show {
-    display: flex;
-    margin-right: 37px;
-    justify-content: flex-end;
-    width: 5%;
-    height: 50%;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px
-}
-
-.wishpoint-input {
-    margin-left: 20px;
-    background-color: white;
-}
-
-.wish-date {
-    font-size: 13px;
-}
-
-.wish {
-    font-size: 18px;
+.w100 {
+    width: 100%;
 }
 
 .wishmodal {
@@ -358,12 +338,49 @@
     border-radius: 5px;
 }
 
-.wish-content {
-    overflow-y: scroll;
-    height: 100%;
+.wishaddmodal-full {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
     width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.459);
+}
+
+.wishaddmodal {
+    border-radius: 14px;
+    margin-left: 18%;
+    gap: 40px;
+    width: 50%;
+    background: white;
+    position: relative;
+    top: 119px;
     display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 30px;
+    padding-bottom: 50px;
+}
+
+.add-wish-btn {
+    border-radius: 5px;
+    background: #212D5B;
+    border: none;
+    color: white;
+    font-size: 18px;
+    line-height: 25px;
+    justify-content: center;
+    padding: 10px;
+    width: 150px;
+    gap: 10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#addwish {
+    width: 251px;
 }
