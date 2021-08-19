@@ -157,7 +157,7 @@ const renderTasks = (docs) => {
         taskdate.classList.add("taskdate");
         taskrow.classList.add("taskrow");
         taskitem.classList.add("taskitem");
-        coinicon.src = "assets/coin icon.svg"
+        coinicon.src = "./assets/coin icon.svg"
         wall.innerHTML = "|";
 
         taskcontainer.appendChild(taskbody);
@@ -269,7 +269,7 @@ const renderWishlist = (docs) => {
         date.classList.add("wish-date")
         wish.classList.add("wish")
         coinShow.classList.add("coin-show");
-        coinIcon.src = "assets/coin icon.svg"
+        coinIcon.src = "./assets/coin icon.svg"
 
         wishlistContent.appendChild(wishContainer);
         wishContainer.appendChild(wishContain);

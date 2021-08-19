@@ -127,7 +127,7 @@ const renderTasks = (docs) => {
         taskdate.classList.add("taskdate");
         taskrow.classList.add("taskrow");
         taskitem.classList.add("taskitem");
-        coinicon.src = "../public/assets/Coin.svg"
+        coinicon.src = "./assets/Coin.svg"
         wall.innerHTML = "|";
 
 
@@ -260,7 +260,7 @@ const renderWishlist = (docs) => {
         date.classList.add("wish-date")
         wish.classList.add("wish")
         coinShow.classList.add("coin-show");
-        coinIcon.src = "assets/coin icon.svg"
+        coinIcon.src = "./assets/coin icon.svg"
 
         wishlistContent.appendChild(wishContainer);
         wishContainer.appendChild(profileWishContainer);
@@ -472,8 +472,8 @@ const switchkids = () => {
                         Coin.className = "Coin_2"
 
                         memberAssign.setAttribute("class", "member-assign");
-                        memberProfile.setAttribute("src", "../public/assets/AccountCircle.svg")
-                        Coin.setAttribute("src", "../public/assets/BigCoin.svg")
+                        memberProfile.setAttribute("src", "./assets/AccountCircle.svg")
+                        Coin.setAttribute("src", "./assets/BigCoin.svg")
 
                         memberName.innerHTML = doc.data().name
 
