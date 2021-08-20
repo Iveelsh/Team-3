@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="./style/dropdown.css" />
     <link rel="stylesheet" href="./style/header-footer.css" />
-    <link rel="stylesheet" href="./style/home-kids.css" />
+    <link rel="stylesheet" href="./style/home-parents.css" />
 </head>
 
 <body id="body">
@@ -21,8 +21,8 @@
             <!-- PROFILE DROPDOWN -->
             <div class="profile-dropdown-cont">
                 <button class="profile-btn" onclick="displayProfileDrop()">
-            <img src="./assets/profile.svg" width="34px" />
-          </button>
+          <img src="./assets/profile.svg" width="34px" style = "cursor: pointer"/>
+        </button>
                 <div class="profile-dropdown-content">
                     <div><span class="material-icons">person</span>
                         <div class="underline">Profile</div>
@@ -90,10 +90,34 @@
                                 <div class="gray-border" id="task-description">Desc</div>
                             </div>
                             <div class="column center">
-                                <button onclick="Assignkids()" class="assign-task-btn" class="row">
-                    <img src="./assets/assign.svg" alt="" />
-                    <div>Даалгавар авах</div>
-                  </button>
+                                <button onclick="" class="assignKidButton ">
+                                    <img src="./assets/assign.svg" alt="" />
+                                    <div>Даалгавар өгөх</div>
+                                </button>
+                            </div>
+
+                            <div class="assign-kids-modal-screen" id="assign-kids-modal-screen">
+                                <div class="assign-kids-modal-container " id="assign-kids-modal-container">
+                                    <div class="row relative center">
+                                        <div class="blue-text big-text center">Гишүүд</div>
+                                        <img id="closeAssignKidsModal" class="close-modal" src="./assets/Close.svg" />
+                                    </div>
+
+                                    <div id="members-container" class="column">
+                                        <!-- <div class="row">
+                                            <div class="row">
+                                                <div>Name</div>
+                                                <div>Profile</div>
+                                            </div>
+                                            <div class="row">
+                                                <div>point</div>
+                                                <div>Coin</div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -123,8 +147,47 @@
                     </div>
 
                     <!-- TASK LIST START-->
+                    <div class="column" style="width:100%">
 
-                    <div class="column" id="taskcontainer"></div>
+                        <div id="taskmodal" class="taskmodal">
+                            <div class="taskmodal2 column">
+                                <div class="row blue-text relative center">
+                                    <div class="big-text">Даалгавар нэмэх</div>
+                                    <img onclick="closeModal()" class="close-modal" src="./assets/Close.svg" />
+                                </div>
+                                <div class="row">
+                                    <div class="column">
+                                        <div class="blue-text small-text">Даалгаварын нэр</div>
+                                        <input class="gray-border" type="text" id="TaskName" />
+                                    </div>
+                                    <div class="column">
+                                        <div class="blue-text small-text">Даалгаварын оноо</div>
+                                        <input class="gray-border" type="number" id="TaskPoint" />
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="blue-text small-text">Даалгаварын тухай</div>
+                                    <input class="gray-border" type="text" id="TaskDes" />
+                                </div>
+                                <div class=" center column ">
+                                    <button onclick="AddTask()" class="addTaskButton row ">
+                                    <!-- <img src="./assets/assign.svg " alt=" " /> -->
+                                    <div>Нэмэх</div>
+                                  </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 100%; " class="add-wish blue-text column center small-text " onclick="taskmodal() ">
+                            <span class="material-icons ">
+                    add_circle
+                    </span>
+                            <div>Даалгавар нэмэх</div>
+                        </div>
+                        <div class="column" id="taskcontainer">
+
+                        </div>
+                    </div>
+
                     <!-- TASK LIST END-->
 
                     <input style="display: none" type="text" id="filterinput" /><button style="display: none" onclick="filter()">
@@ -133,29 +196,30 @@
                 </div>
                 <div id="wishlist" class="wishlist none">
 
-                    <div id="wishaddmodal-full" class="wishaddmodal-full">
-                        <div id="wishaddmodal" class="wishaddmodal column">
+                    <div id="wishinfomodal" class="wishinfomodal">
+                        <div id="wishmodal" class="wishmodal column">
                             <div class="row blue-text relative center">
-                                <div class="big-text">Хүсэл нэмэх</div>
-                                <img onclick="closeAddWishModal()" class="close-modal" src="./assets/Close.svg" />
+                                <div class="big-text blue-text">Оноо</div>
+                                <img onclick="wishInfoModalClose()" class="close-modal" src="./assets/Close.svg" />
                             </div>
                             <div class="column center">
-                                <div>
-                                    <div class="blue-text small-text">Хүслийн нэр</div>
-                                    <input type="text" class="gray-border" id="addwish">
-
-                                </div>
-                                <button class="add-wish-btn" onclick="addWish()">
-                                    Нэмэх
-                                </button>
+                                <div id="wishuser" class="blue-text small-text">Name</div>
+                                <div id="wishName" class="gray-border small-text blue-text">wish</div>
                             </div>
+                            <div class="column center">
+                                <div class=" row gray-border">
+                                    <img src="./assets/Coin.svg" />
+                                    <input id="addedpoint" class="gray-border " />
+                                </div>
+                            </div>
+                            <div class=" center column ">
+                                <button id="addPointButton" class="addWishPointButton row center ">
+                                    <!-- <img src="./assets/assign.svg " alt=" " /> -->
+                                    <div>Илгээх</div>
+                                  </button>
+                            </div>
+
                         </div>
-                    </div>
-                    <div class="add-wish blue-text column center small-text" onclick="wishmodal()">
-                        <span class="material-icons">
-                            add_circle
-                            </span>
-                        <div>Хүсэл нэмэх</div>
                     </div>
                     <div class="column" id="wish-container">
                     </div>
@@ -198,6 +262,6 @@
 <script src="./js/utility.js"></script>
 
 <script src="./js/dropdown.js"></script>
-<script src="./js/home-kids.js"></script>
+<script src="./js/home-parents.js"></script>
 
 </html>

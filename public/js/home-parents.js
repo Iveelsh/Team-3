@@ -86,7 +86,6 @@ const remove = () => {
     taskmodal.style.display = "none";
 }
 
-
 const renderTasks = (docs) => {
     let taskcontainer = document.getElementById("taskcontainer");
     taskcontainer.innerHTML = "";
@@ -119,9 +118,6 @@ const renderTasks = (docs) => {
         let wall = document.createElement("div");
         let assigneduser = document.createElement("div");
 
-
-
-
         taskcontainer.classList.add("taskcontainer");
 
         taskbody.classList.add("task-body");
@@ -140,8 +136,6 @@ const renderTasks = (docs) => {
         coinicon.src = "./assets/Coin.svg"
         wall.innerHTML = "|";
 
-
-
         taskcontainer.appendChild(taskbody);
         taskbody.appendChild(taskdate);
         taskbody.appendChild(taskrow);
@@ -151,7 +145,6 @@ const renderTasks = (docs) => {
         taskitem.appendChild(point);
         taskitem.appendChild(wall);
         taskitem.appendChild(assigneduser);
-
 
         taskdate.innerHTML = datee;
         taskname.innerHTML = tasknamee;
@@ -183,22 +176,92 @@ const renderTasks = (docs) => {
             let modaldesc = document.getElementById("task-description");
             let modaldate = document.getElementById("task-date");
             let modalname = document.getElementById("task-name");
-            let assignButton = document.getElementsByClassName("assign-task-btn")[0];
-            console.log(doc.data().AssignedUser)
-            if (doc.data().AssignedUser == userName) {
-                assignButton.style.display = "none";
+            let assignKidButton = document.getElementsByClassName("assignKidButton")[0];
+
+            if (doc.data().AssignedUser) {
+                assignKidButton.style.display = "none";
             } else {
-                assignButton.style.display = "";
+                assignKidButton.style.display = "";
             }
-            assignButton.onclick = () => {
-                db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
-                    AssignedUser: userName,
-                }).then(() => {
-                    infomodalcont.style.display = "none";
+            assignKidButton.onclick = () => {
+                let groupId;
+                let assignKidModal = document.getElementById("assign-kids-modal-screen");
+                assignKidModal.style.display = "flex";
+                console.log('wut')
+                console.log(doc.data())
+                console.log(user.uid)
+                let userUid = user.uid
+                let userGroup = db.collection('users').doc(userUid);
+                userGroup.get().then((doc) => {
+                    groupId = doc.data().groupId;
+                    db.collection('users').where("groupId", "==", groupId)
+                        .get().then((querySnapshot) => {
+                            let memberContainer = document.getElementById("members-container");
+                            memberContainer.innerHTML = ''
+                            querySnapshot.forEach((doc) => {
+                                if (doc.data().role == 'kid') {
+                                    console.log(doc.data().name)
+                                    let memberProfileCont = document.createElement('div');
+                                    let memberNameCont = document.createElement('div');
+                                    let memberName = document.createElement('div')
+                                    let memberPointCont = document.createElement('div');
+                                    let memberPoint = document.createElement('div');
+                                    let coin = document.createElement('img');
 
+                                    memberProfileCont.classList.add('row');
+                                    memberProfileCont.classList.add('gray-border')
+                                    memberNameCont.classList.add("row");
+                                    memberPointCont.classList.add('row');
+                                    memberName.classList.add("big-text");
+                                    memberName.classList.add("blue-text");
+                                    memberPoint.classList.add("big-text")
+
+
+                                    memberContainer.appendChild(memberProfileCont)
+
+                                    memberProfileCont.appendChild(memberNameCont);
+                                    memberProfileCont.appendChild(memberPointCont);
+                                    memberNameCont.appendChild(memberName);
+                                    memberPointCont.appendChild(memberPoint);
+                                    memberPointCont.appendChild(coin);
+
+                                    memberName.innerHTML = doc.data().name;
+
+                                    if (!doc.data().point) {
+                                        memberPoint.innerHTML = "0"
+                                    } else {
+                                        memberPoint.innerHTML = doc.data().point
+                                    }
+                                    coin.setAttribute("src", "./assets/Coin.svg")
+
+                                    memberProfileCont.onclick = async() => {
+                                        console.log(tasknamee)
+                                        console.log(groupId)
+                                        await db.collection(`groups/${groupId}/tasks`).where("TaskName", "==", tasknamee)
+                                            .get().then((querySnapshot) => {
+                                                querySnapshot.forEach((docs) => {
+                                                    docs.ref.update({
+                                                        AssignedUser: memberName.innerHTML,
+                                                        Status: "inprogress"
+                                                    })
+                                                })
+                                            })
+                                        assignKidModal.style.display = "none"
+                                        let infomodalcont = document.getElementById("infomodalcont");
+                                        infomodalcont.style.display = "none"
+                                    }
+
+                                }
+                            })
+                        })
                 })
+                let closeAssignKidsModal = document.getElementById("closeAssignKidsModal");
+                closeAssignKidsModal.onclick = () => {
+                    assignKidModal.style.display = "none";
+                }
 
             }
+
 
             modaluser.innerHTML = assigneduserr;
             modalpoint.innerHTML = taskpointt ? taskpointt : 0;
@@ -206,6 +269,8 @@ const renderTasks = (docs) => {
             modaldesc.innerHTML = taskdess;
             modaldate.innerHTML = datee;
             modalname.innerHTML = tasknamee;
+
+
 
             // document.getElementById('nope').onclick = () => {
             //     deletemodal.style.display = "none";
@@ -278,71 +343,46 @@ const renderWishlist = (docs) => {
 
         wishes.appendChild(wishBody)
 
-        // if (userWishPoint) {
-        //     let point = document.createElement("div")
-        //     coinShow.appendChild(point);
-        //     point.innerHTML = userWishPoint
-        //         // point.
-        // } else {
-        //     let point = document.createElement("div")
-        //     coinShow.appendChild(point);
-        //     point.classList.add("wishpoint-input");
-        // }
 
 
         wishBody.onclick = () => {
             console.log(doc.data())
-            let wishInfoModal = document.getElementById("wishinfomodal");
-            wishInfoModal.style.display = "block";
-            let wishUser = document.getElementById("wishuser");
-            let wishPoint = document.getElementById("wishPoint");
-            let wishDesc = document.getElementById("wishDesc");
-            let addPoint = document.getElementById("addPoint");
-
-
-            if (userWishPoint) {
-                addPoint.classList.add("none")
-                console.log("has points")
-                wishPoint.innerHTML = data.point;
-                // wishPoint.onclick = ""
-            } else {
-                console.log('no pooint')
-                addPoint.classList.remove("none")
-                pointInput = document.createElement("input");
-                pointInput.type = "number";
-                pointInput.id = "addedpoint";
-                wishPoint.appendChild(pointInput)
+            if (!doc.data().point) {
+                console.log('wut')
+                let wishInfoModal = document.getElementById("wishinfomodal");
+                wishInfoModal.style.display = "block";
+                let wishUser = document.getElementById("wishuser");
+                // let wishPoint = document.getElementById("wishPoint");
+                let wishName = document.getElementById("wishName");
+                // let addPoint = document.getElementById("addPoint");
+                wishName.innerHTML = data.wish;
+                wishUser.innerHTML = doc.data().userName
             }
-            // let wishDate = document.getElementById("wishDate");
-            // wishUser.innerHTML = `assigneduser: ${wishUser}`;
-            wishDesc.innerHTML = data.wish;
-            wishUser.innerHTML = doc.data().userName
+            let addPointButton = document.getElementById("addPointButton");
 
+            addPointButton.onclick = () => {
+                let wishInfoModal = document.getElementById("wishinfomodal");
+                let wishName = document.getElementById("wishName");
 
-            // wishDate.innerHTML = `date: ${wishDate}`;
-
-
-            addPoint.onclick = async() => {
+                console.log('ilgeeh')
                 let addedPoint = document.getElementById("addedpoint").value;
                 if (addedPoint) {
-                    data.point = addedPoint
-                    console.log('helli')
+                    // db.collection(`groups/${groupId}/wishlist`).get().then((querySnapshot) => {
+                    //     querySnapshot.forEach((doc) => {
+                    //         console.log(doc.id, " => ", doc.data());
+                    //     });
+                    // });
+
                     db.collection(`groups/${groupId}/wishlist`).doc(doc.id).update({
-                            point: addedPoint
-                        }).then(() => {
-                            let wishModal = document.getElementById("wishinfomodal");
-                            let wishPoint = document.getElementById("wishPoint");
-                            let wishDesc = document.getElementById("wishDesc");
-                            wishModal.style.display = "none";
-                            wishPoint.innerHTML = ''
-                            wishDesc.innerHTML = ''
-                            console.log("Added point successfully")
+                            point: addedPoint,
                         })
-                        .catch((error) => {
-                            console.error("Error adding point ", error);
-                        });
+                        .then(() => {
+                            wishInfoModal.style.display = "none";
+                            wishName.innerHTML = '';
+                        })
                 }
             }
+
         }
         window.onclick = (event) => {
             let wishModal = document.getElementById("wishinfomodal");
@@ -358,8 +398,6 @@ const renderWishlist = (docs) => {
     })
 
 }
-
-
 
 const filterByStatus = (status) => {
     if (user) {
@@ -403,7 +441,6 @@ const filterByStatus = (status) => {
     }
 }
 
-
 firebase.auth().onAuthStateChanged((u) => {
     if (u) {
         user = u
@@ -412,11 +449,11 @@ firebase.auth().onAuthStateChanged((u) => {
         userGroup.get().then((doc) => {
             groupId = doc.data().groupId;
             db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
-                // document.getElementById("wishlist").innerHTML = "";
                 renderTasks(querySnapshot)
             })
             db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
                 document.getElementById("wish-container").innerHTML = "";
+
                 renderWishlist(querySnapshot)
             })
         }).then(() => {
@@ -490,3 +527,47 @@ const wishInfoModalClose = () => {
     let wishInfoModal = document.getElementById("wishinfomodal");
     wishInfoModal.style.display = "none";
 }
+const AddTask = () => {
+    let TaskName = document.getElementById("TaskName").value;
+    let TaskDes = document.getElementById("TaskDes").value;
+    let TaskPoint = document.getElementById("TaskPoint").value;
+    if (user) {
+        db.collection(`groups/${groupId}/tasks`).doc().set({
+                TaskName: TaskName,
+                TaskDes: TaskDes,
+                TaskPoint: TaskPoint,
+                CreatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                AssignedUser: '',
+                Status: '',
+            })
+            .then(() => {
+                let taskmodal = document.getElementById("taskmodal");
+                taskmodal.style.display = "none"
+                document.getElementById("TaskName").value = "";
+                document.getElementById("TaskDes").value = "";
+                document.getElementById("TaskPoint").value = "";
+                console.log("Document successfully written!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+    } else {
+        window.alert("Please login");
+        window.location.href = "landingPage.html"
+    }
+}
+
+// const addPoint = () => {
+//     console.log('ilgeeh')
+//     let addedPoint = document.getElementById("addedpoint").value;
+//     console.log(addedPoint)
+//     if (addedPoint) {
+//         db.collection(`groups/${groupId}/wishlist`).doc().update({
+//                 point: addedPoint,
+//             })
+//             .then(() => {
+//                 wishInfoModal.style.display = "none";
+//                 wishName.innerHTML = '';
+//             })
+//     }
+// }
