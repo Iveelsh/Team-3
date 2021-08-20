@@ -6,24 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <link rel="stylesheet" href="../public/style/profile.css">
+    <link rel="stylesheet" href="./style/profile.css">
 </head>
 
 <body>
     <div class="Header">
         <div class="qwer">
-            <img src="../public/assets/logo.svg" alt="">
+            <img src="./assets/logo.svg" alt="">
         </div>
         <div class="family">
             My family
         </div>
-        <img class="proicon" src="../public/assets/account_circle_black_24dp.svg" height="50px" width="50px">
+        <img class="proicon" src="./assets/account_circle_black_24dp.svg" height="50px" width="50px">
     </div>
-    <img src="../public/assets/Group 265.svg" class="backpic">
+    <img src="./assets/Group 265.svg" class="backpic">
 
     <div class="container">
         <div class="top">
-            <img style="cursor: pointer;" src="../public/assets/urgeljluuleh button.svg"> Нүүр хуудас
+            <img style="cursor: pointer;" src="./assets/urgeljluuleh button.svg"> Нүүр хуудас
         </div>
         <div class="middle">
             <div onmouseover="prohover()" onmouseleave="prohoverr()" class="profile">
@@ -40,7 +40,7 @@
                     <div class="name">
                         <div id="name"></div>
                         <div class="edit1 ">
-                            <img src="../public/assets/edit.png">
+                            <img src="./assets/edit.png">
                         </div>
 
                     </div>
@@ -50,7 +50,7 @@
                     <div class="email ">
                         <div id="email"></div>
                         <div class="edit2 ">
-                            <img src="../public/assets/edit.png">
+                            <img src="./assets/edit.png">
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                     <div class="phone ">
                         <div id="phone"></div>
                         <div class="edit4 ">
-                            <img src="../public/assets/edit.png">
+                            <img src="./assets/edit.png">
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                 <div class="column bot ">
                     <span class="daalgavar ">Бүх даалгаварууд</span>
                     <div class="down ">
-                        <span id="droptext">last year</span><img onclick="drop()" style="cursor: pointer; " src="../public/assets/Vector.svg">
+                        <span id="droptext">last year</span><img onclick="drop()" style="cursor: pointer; " src="./assets/Vector.svg">
                     </div>
                     <div id="dropdown" class="drop none">
                         <div onclick="change( 'year') " class="dropitem ">last year</div>
@@ -121,7 +121,7 @@
     </div>
     <div class="footer ">
         <div class="qwe ">
-            <img src="../public/assets/logo.svg">
+            <img src="./assets/logo.svg">
         </div>
         <div class="flex ">
             <a class="aboutus tuhai ">Бидний Тухай</a>
@@ -142,7 +142,7 @@
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
-<script src="../public/js/firebase.js"></script>
-<script src="../public/js/profile.js"></script>
+<script src="./js/firebase.js"></script>
+<script src="./js/profile.js"></script>
 
 </html>
