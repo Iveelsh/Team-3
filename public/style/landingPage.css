@@ -187,3 +187,44 @@
 .smm {
     width: 100%;
 }
+
+.pos1 {
+    position: absolute;
+    top: 185px;
+    left: -30px;
+}
+.pos2 {
+    position: absolute;
+    top: 185px;
+    left: 790px;
+}
+.pos3 {
+    position: absolute;
+    top: 167px;
+    left: 1400px;
+}
+.pos4 {
+    position: absolute;
+    top: 841px;
+    left: 347px;
+}
+.pos5 {
+    position: absolute;
+    top: 1140px;
+    left: 30px;
+}
+.pos6 {
+    position: absolute;
+    top: 1441px;
+    left: 1454px;
+}
+.pos7 {
+    position: absolute;
+    top: 1724px;
+    left: 611px;
+}
+.pos8 {
+    position: absolute;
+    top: 2037px;
+    left: -80px;
+}
