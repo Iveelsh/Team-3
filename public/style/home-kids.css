@@ -386,3 +386,7 @@
 #addwish {
     width: 251px;
 }
+
+#doneTask {
+    display: none;
+}

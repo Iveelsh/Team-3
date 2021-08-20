@@ -177,11 +177,25 @@ const renderTasks = (docs) => {
             let modaldate = document.getElementById("task-date");
             let modalname = document.getElementById("task-name");
             let assignKidButton = document.getElementsByClassName("assignKidButton")[0];
+            let didTaskButton = document.getElementById("didTaskButton");
 
             if (doc.data().AssignedUser) {
                 assignKidButton.style.display = "none";
             } else {
                 assignKidButton.style.display = "";
+            }
+            if (doc.data().Status === 'inreview') {
+                didTaskButton.style.display = "block"
+            } else {
+                didTaskButton.style.display = "none"
+            }
+            didTaskButton.onclick = () => {
+                db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
+                    Status: 'Done',
+                }).then(() => {
+                    let infomodalcont = document.getElementById("infomodalcont");
+                    infomodalcont.style.display = "none"
+                })
             }
             assignKidButton.onclick = () => {
                 let groupId;
@@ -406,8 +420,11 @@ const filterByStatus = (status) => {
         switch (status) {
             case 'all':
                 change.innerHTML = "Бүх даалгавар";
-                db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc').get().then(docs =>
-                    renderTasks(docs))
+                db.collection(`groups/${groupId}/tasks`).where("Status", "!=", "inreview")
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs);
+                    })
                 break;
             case 'unassigned':
                 change.innerHTML = "Эзэнгүй даалгавар";
@@ -448,9 +465,11 @@ firebase.auth().onAuthStateChanged((u) => {
         let userGroup = db.collection('users').doc(userUid);
         userGroup.get().then((doc) => {
             groupId = doc.data().groupId;
-            db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
-                renderTasks(querySnapshot)
-            })
+            db.collection(`groups/${groupId}/tasks`).where("Status", "!=", "inreview")
+                .get()
+                .then((docs) => {
+                    renderTasks(docs);
+                })
             db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
                 document.getElementById("wish-container").innerHTML = "";
 

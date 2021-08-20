@@ -183,13 +183,41 @@ const renderTasks = (docs) => {
             let modaldesc = document.getElementById("task-description");
             let modaldate = document.getElementById("task-date");
             let modalname = document.getElementById("task-name");
-            let assignButton = document.getElementsByClassName("assign-task-btn")[0];
+            let assignButton = document.getElementById("getTask");
+            let doneTaskButton = document.getElementById("doneTask");
+
             console.log(doc.data().AssignedUser)
-            if (doc.data().AssignedUser == userName) {
-                assignButton.style.display = "none";
+            if (doc.data().AssignedUser) {
+                if (doc.data().AssignedUser === userName) {
+                    if (doc.data().Status === 'inreview') {
+                        assignButton.style.display = "none"
+                        doneTaskButton.style.display = "none"
+                    } else {
+                        assignButton.style.display = "none"
+                        doneTaskButton.style.display = "block"
+                    }
+                } else {
+                    assignButton.style.display = "none"
+                    doneTaskButton.style.display = "none"
+
+                }
             } else {
                 assignButton.style.display = "";
             }
+
+            doneTaskButton.onclick = () => {
+                console.log(doc.data())
+                db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
+                    Status: 'inreview',
+                }).then(() => {
+                    console.log('changed status to review')
+                    infomodalcont.style.display = "none";
+                }).catch((error) => {
+                    console.log(error)
+                })
+            }
+
+
             assignButton.onclick = () => {
                 db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
                     AssignedUser: userName,
@@ -197,7 +225,6 @@ const renderTasks = (docs) => {
                     infomodalcont.style.display = "none";
 
                 })
-
             }
 
             modaluser.innerHTML = assigneduserr;
@@ -217,6 +244,7 @@ const renderTasks = (docs) => {
                 modal.style.display = "none";
             }
         }
+
     });
 }
 
@@ -368,8 +396,11 @@ const filterByStatus = (status) => {
         switch (status) {
             case 'all':
                 change.innerHTML = "Бүх даалгавар";
-                db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc').get().then(docs =>
-                    renderTasks(docs))
+                db.collection(`groups/${groupId}/tasks`).where("Status", "!=", "inreview")
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs);
+                    })
                 break;
             case 'unassigned':
                 change.innerHTML = "Эзэнгүй даалгавар";
@@ -411,10 +442,11 @@ firebase.auth().onAuthStateChanged((u) => {
         let userGroup = db.collection('users').doc(userUid);
         userGroup.get().then((doc) => {
             groupId = doc.data().groupId;
-            db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
-                // document.getElementById("wishlist").innerHTML = "";
-                renderTasks(querySnapshot)
-            })
+            db.collection(`groups/${groupId}/tasks`).where("Status", "!=", "inreview")
+                .get()
+                .then((docs) => {
+                    renderTasks(docs);
+                })
             db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
                 document.getElementById("wish-container").innerHTML = "";
                 renderWishlist(querySnapshot)
