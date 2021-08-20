@@ -340,6 +340,7 @@ const renderWishlist = (docs) => {
         coinrow.appendChild(point)
 
 
+
         wishes.appendChild(wishBody)
 
 
@@ -356,22 +357,32 @@ const renderWishlist = (docs) => {
                 // let addPoint = document.getElementById("addPoint");
                 wishName.innerHTML = data.wish;
                 wishUser.innerHTML = doc.data().userName
+            }
+            let addPointButton = document.getElementById("addPointButton");
 
-                let addPointButton = document.getElementById("addPointButton");
+            addPointButton.onclick = () => {
+                let wishInfoModal = document.getElementById("wishinfomodal");
+                let wishName = document.getElementById("wishName");
 
-                addPointButton.onclick = () => {
-                    // let addedPoint = document.getElementById("addedPoint");
-                    // if (addedPoint) {
-                    //     db.collection(`groups/${groupId}/tasks`).doc().update({
-                    //             point: addedPoint,
-                    //         })
-                    //         .then(() => {
-                    //             wishInfoModal.style.display = "none";
-                    //             wishName.innerHTML = '';
-                    //         })
-                    // }
+                console.log('ilgeeh')
+                let addedPoint = document.getElementById("addedpoint").value;
+                if (addedPoint) {
+                    // db.collection(`groups/${groupId}/wishlist`).get().then((querySnapshot) => {
+                    //     querySnapshot.forEach((doc) => {
+                    //         console.log(doc.id, " => ", doc.data());
+                    //     });
+                    // });
+
+                    db.collection(`groups/${groupId}/wishlist`).doc(doc.id).update({
+                            point: addedPoint,
+                        })
+                        .then(() => {
+                            wishInfoModal.style.display = "none";
+                            wishName.innerHTML = '';
+                        })
                 }
             }
+
         }
         window.onclick = (event) => {
             let wishModal = document.getElementById("wishinfomodal");
@@ -441,6 +452,8 @@ firebase.auth().onAuthStateChanged((u) => {
                 renderTasks(querySnapshot)
             })
             db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
+                document.getElementById("wish-container").innerHTML = "";
+
                 renderWishlist(querySnapshot)
             })
         }).then(() => {
@@ -543,3 +556,18 @@ const AddTask = () => {
         window.location.href = "landingPage.html"
     }
 }
+
+// const addPoint = () => {
+//     console.log('ilgeeh')
+//     let addedPoint = document.getElementById("addedpoint").value;
+//     console.log(addedPoint)
+//     if (addedPoint) {
+//         db.collection(`groups/${groupId}/wishlist`).doc().update({
+//                 point: addedPoint,
+//             })
+//             .then(() => {
+//                 wishInfoModal.style.display = "none";
+//                 wishName.innerHTML = '';
+//             })
+//     }
+// }
