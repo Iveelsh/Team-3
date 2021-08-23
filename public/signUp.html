@@ -7,104 +7,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./style/signUp.css">
+    <link rel="stylesheet" href="./style/header-footer.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900" rel="stylesheet">
 </head>
 
 <body>
-    <div class="Header">
-        <div class="a69">
-            <img src="./assets/logo.svg">
-        </div>
+    <div class="everything">
 
-    </div>
-
-    <div class="Signup">
-        <div class="Burtgel_uusgeh">Бүртгэл Үүсгэх</div>
-
-        <div class="text ner">
-            <span class="material-icons">
-                account_circle
-            </span>
-            <div class="position">Нэр</div>
-        </div>
-        <input placeholder="Ner" id="name" class="input ner_L">
-
-        <div class="text Email">
-            <span class="material-icons">
-                email
-            </span>
-            <div class="position">Email</div>
-        </div>
-        <input placeholder="Email" id="email" class="input Email_L">
-
-        <div class="text Password">
-            <span class="material-icons">
-                lock
-            </span>
-            <div class="position">Нууц үг</div>
-        </div>
-        <input placeholder="Password" id="password" type="password" class="input Password_L">
-
-        <div class="text Password_again">Нууц Үг Давтах</div>
-        <input placeholder="Password" type="password" class="input Password_again_L">
-
-        <button class="Back button_text">&#8592; Буцах</button>
-        <button onclick="signUpWithEmailAndPassword()" class="Continue button_text">Үргэлжлүүлэх &#8594;</button>
-
-        <div class="line one"></div>
-        <div class="or">Эсвэл</div>
-        <div class="line two"></div>
-
-        <button class="container blue">
-            <span class="material-icons face">
-                facebook
-            </span>
-            <div class="connect fb">
-                Facebook хаягаар холбогдох
+        <!-- HEADER START -->
+        <div class="header">
+            <img src="./assets/logo.svg" class="logo" />
+            <div>
+                <a class="login-btn" href="./login.html">Нэвтрэх</a>
+                <a class="signup-btn" href="./signUp.html"> Бүртгүүлэх</a>
             </div>
-        </button>
+        </div>
+        <!-- HEADER END-->
 
+        <div class="login center">
 
-        <button class="container white">
-            <img class="google" src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png">
-            <div class="connect gg">
-                Google хаягаар холбогдох
+            <div class="big-text"> Бүртгүүлэх</div>
+            <div class="column big-gap">
+                <div class="column">
+                    <div class="row">
+                        <span class="material-icons-outlined">
+                            account_circle
+                        </span>
+                        <div>Нэр</div>
+                    </div>
+                    <input type="text" id="name">
+                </div>
+                <div class="column">
+                    <div class="row">
+                        <span class="material-icons-outlined">
+                                email
+                            </span>
+                        <div>И-мэйл</div>
+                    </div>
+                    <input type="email" id="email">
+                </div>
+                <div class="column">
+                    <div class="row">
+                        <span class="material-icons-outlined">
+                                lock
+                            </span>
+                        <div>Нууц үг</div>
+                    </div>
+                    <input type="password" id="password">
+                </div>
+                <div class="column">
+                    <div class="row">
+                        <span class="material-icons-outlined">
+                                lock
+                            </span>
+                        <div>Нууц үг /давтах/</div>
+                    </div>
+                    <input type="password" id="password">
+                </div>
             </div>
-        </button>
+            <button class="login-form-btn" onclick="loginWithEmailAndPassword()">Бүртгүүлэх</button>
+            <div class="column">
+                <div class="gray-text">Бүртгэлтэй юу?</div>
+                <a href="./login.html" class="signup-txt">Тэгвэл энд дарж нэвтэрнэ үү</a>
+            </div>
+            <div class="column w100">
+                <div class="or"><span>Эсвэл</span></div>
+                <button class="google row center" onclick="loginWithGoogle()">
+                    <img src="./assets/google.svg" alt="" srcset="">
+                    Gmail-ээр нэвтрэх
+                </button>
+
+            </div>
+        </div>
 
 
+        <!-- FOOTER START -->
+        <div class="footer">
+            <img src="./assets/logo.svg" class="logo-footer" />
+            <div class="footer-text">
+                <a class="">Бидний Тухай</a>
+                <a class="aboutus holboo">Холбоо Барих</a>
+                <a class="aboutus asuultuud">Асуултууд</a>
+            </div>
+            <div class="copyright">
+                <div class="longline"></div>
+                <div>© 2021</div>
+            </div>
+        </div>
     </div>
-
-    <div class="footer">
-        <div class="footer69">
-            <img src="./assets/logo.svg">
-
-        </div>
-
-        <div class="flex">
-            <a class="aboutus tuhai">Бидний Тухай</a>
-            <a class="aboutus holboo">Холбоо Барих</a>
-            <a class="aboutus asuultuud">Асуултууд</a>
-        </div>
-
-
-
-        <div class="longline"></div>
-
-        <div class="middle">
-            <img class="logo" src="https://seeklogo.com/images/C/copyright-symbol-logo-8BD7CD1E77-seeklogo.com.png">
-            <div class="twenty1">2021</div>
-        </div>
+    <!-- FOOTER END -->
     </div>
-
 </body>
-<!-- //firebase link, firestoer link, firebase auth link -->
+
 <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
-
-
 <script src="./js/firebase.js"></script>
 <script src="./js/signUp.js"></script>
 
