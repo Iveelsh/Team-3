@@ -185,9 +185,14 @@ const renderTasks = (docs) => {
             let modalname = document.getElementById("task-name");
             let assignButton = document.getElementById("getTask");
             let doneTaskButton = document.getElementById("doneTask");
+            let taskProfile = document.getElementById("picture")
+
 
             console.log(doc.data().AssignedUser)
+
             if (doc.data().AssignedUser) {
+                taskProfile.removeAttribute("src")
+
                 if (doc.data().AssignedUser === userName) {
                     if (doc.data().Status === 'inreview') {
                         assignButton.style.display = "none"
@@ -203,6 +208,8 @@ const renderTasks = (docs) => {
                 }
             } else {
                 assignButton.style.display = "";
+                taskProfile.src = "./assets/noUserProfile.svg";
+
             }
 
             doneTaskButton.onclick = () => {
@@ -212,6 +219,7 @@ const renderTasks = (docs) => {
                 }).then(() => {
                     console.log('changed status to review')
                     infomodalcont.style.display = "none";
+
                 }).catch((error) => {
                     console.log(error)
                 })
@@ -265,6 +273,9 @@ const renderWishlist = (docs) => {
 
         let wishes = document.getElementById("wish-container")
 
+        let wishWithButtonCont = document.createElement("div")
+        wishWithButtonCont.classList.add("row")
+
         let wishBody = document.createElement('div')
         wishBody.classList.add('wish-body', 'task-body', 'row');
         let icon = document.createElement('img')
@@ -302,9 +313,17 @@ const renderWishlist = (docs) => {
         point.innerHTML = userWishPoint ? userWishPoint : ''
         coinrow.appendChild(point)
 
+        let wishDeleteButton = document.createElement('div')
+        let wishDeleteIcon = document.createElement('span')
+        wishDeleteIcon.classList.add("material-icons")
+        wishDeleteIcon.innerHTML = "delete"
+        wishDeleteButton.classList.add("wishDeleteButton", "center", "column", "small-text")
+        wishDeleteButton.innerHTML = "Устгах"
+        wishDeleteButton.appendChild(wishDeleteIcon)
 
-
-        wishes.appendChild(wishBody)
+        wishWithButtonCont.appendChild(wishBody)
+        wishWithButtonCont.appendChild(wishDeleteButton)
+        wishes.appendChild(wishWithButtonCont)
 
         // if (userWishPoint) {
         //     let point = document.createElement("div")
@@ -318,60 +337,26 @@ const renderWishlist = (docs) => {
         // }
 
 
-        wishBody.onclick = () => {
+        wishWithButtonCont.addEventListener("mouseover", () => {
+            wishDeleteButton.style.display = "flex"
+            wishBody.style.width = "90%"
+            wishDeleteButton.style.width = "10%"
+        })
+        wishWithButtonCont.addEventListener("mouseout", () => {
+            wishDeleteButton.style.display = "none"
+
+            wishBody.style.width = "100%"
+            wishDeleteButton.style.width = "0%"
+        })
+
+        wishDeleteButton.onclick = () => {
             console.log(doc.data())
-            let wishInfoModal = document.getElementById("wishinfomodal");
-            wishInfoModal.style.display = "block";
-            let wishUser = document.getElementById("wishuser");
-            let wishPoint = document.getElementById("wishPoint");
-            let wishDesc = document.getElementById("wishDesc");
-            let addPoint = document.getElementById("addPoint");
-
-
-            if (userWishPoint) {
-                addPoint.classList.add("none")
-                console.log("has points")
-                wishPoint.innerHTML = data.point;
-                // wishPoint.onclick = ""
-            } else {
-                console.log('no pooint')
-                addPoint.classList.remove("none")
-                pointInput = document.createElement("input");
-                pointInput.type = "number";
-                pointInput.id = "addedpoint";
-                wishPoint.appendChild(pointInput)
-            }
-            // let wishDate = document.getElementById("wishDate");
-            // wishUser.innerHTML = `assigneduser: ${wishUser}`;
-            wishDesc.innerHTML = data.wish;
-            wishUser.innerHTML = doc.data().userName
-
-
-            // wishDate.innerHTML = `date: ${wishDate}`;
-
-
-            addPoint.onclick = async() => {
-                let addedPoint = document.getElementById("addedpoint").value;
-                if (addedPoint) {
-                    data.point = addedPoint
-                    console.log('helli')
-                    db.collection(`groups/${groupId}/wishlist`).doc(doc.id).update({
-                            point: addedPoint
-                        }).then(() => {
-                            let wishModal = document.getElementById("wishinfomodal");
-                            let wishPoint = document.getElementById("wishPoint");
-                            let wishDesc = document.getElementById("wishDesc");
-                            wishModal.style.display = "none";
-                            wishPoint.innerHTML = ''
-                            wishDesc.innerHTML = ''
-                            console.log("Added point successfully")
-                        })
-                        .catch((error) => {
-                            console.error("Error adding point ", error);
-                        });
-                }
-            }
+            db.collection(`groups/${groupId}/wishlist`).doc(doc.id).delete().then(() => {
+                console.log('successfully deleted')
+            })
         }
+
+
         window.onclick = (event) => {
             let wishModal = document.getElementById("wishinfomodal");
             let wishPoint = document.getElementById("wishPoint");
@@ -396,9 +381,8 @@ const filterByStatus = (status) => {
         switch (status) {
             case 'all':
                 change.innerHTML = "Бүх даалгавар";
-                db.collection(`groups/${groupId}/tasks`).where("Status", "!=", "inreview")
-                    .get()
-                    .then((docs) => {
+                db.collection(`groups/${groupId}/tasks`).where("Status", "!=", "done")
+                    .onSnapshot((docs) => {
                         renderTasks(docs);
                     })
                 break;
@@ -442,9 +426,8 @@ firebase.auth().onAuthStateChanged((u) => {
         let userGroup = db.collection('users').doc(userUid);
         userGroup.get().then((doc) => {
             groupId = doc.data().groupId;
-            db.collection(`groups/${groupId}/tasks`).where("Status", "!=", "inreview")
-                .get()
-                .then((docs) => {
+            db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc')
+                .onSnapshot((docs) => {
                     renderTasks(docs);
                 })
             db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {

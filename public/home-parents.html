@@ -64,11 +64,45 @@
                     <div id="infomodalcont" class="modal">
                         <div id="infomodal" class="task-modal">
                             <div class="row relative center">
+                                <div class="column blue-text small-text taskinfomenubutton">
+                                    <div onclick="showTaskInfoMenu()"><span class="material-icons">
+                                        more_horiz
+                                        </span></div>
+                                    <div id="taskInfoMenu" class="column gray-border none">
+                                        <div class="row">
+                                            <div><span class="material-icons">
+                                                delete
+                                                </span>
+                                            </div>
+                                            <div class="underline" id='deleteTaskButton'>Устгах</div>
+                                        </div>
+                                        <div class="row">
+                                            <div><span class="material-icons">
+                                                edit
+                                                </span></div>
+                                            <div class="underline" id="editTaskButton">Засах</div>
+                                        </div>
+                                    </div>
+                                    <div id="deleteModalScreen" class="deleteModalScreen none">
+                                        <div id="deleteModal" class="deleteModal center column">
+                                            <div class="row center">
+                                                <img src="assets/dizzy-new-idea 2.svg" />
+                                            </div>
+                                            <div class="row center">
+                                                <div class="big-text blue-text">Та устгахад итгэлтэй байна уу ?</div>
+                                            </div>
+                                            <div class="row center">
+                                                <div id="deleteTask" class="tiimButton center">Tiim</div>
+                                                <div onclick="closeDeleteModalScreen()" class="uguiButton center">Ugui</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="blue-text big-text center">Даалгавар</div>
                                 <img onclick="closeModal2()" class="close-modal" src="./assets/Close.svg" />
                             </div>
                             <div class="column center">
-                                <div id="picture"></div>
+                                <img id="picture" />
                                 <div class="blue-text small-text" id="task-user">User</div>
                             </div>
                             <div class="row">
@@ -90,6 +124,7 @@
                                 <div class="gray-border" id="task-description">Desc</div>
                             </div>
                             <div class="column center">
+                                <button id="finishedEditButton" class="finishedEditButton none"> Засаж Дууссан</button>
                                 <button onclick="" class="assignKidButton ">
                                     <img src="./assets/assign.svg" alt="" />
                                     <div>Даалгавар өгөх</div>
@@ -210,7 +245,7 @@
                                 <div id="wishName" class="gray-border small-text blue-text">wish</div>
                             </div>
                             <div class="column center">
-                                <div class=" row gray-border">
+                                <div class=" row">
                                     <img src="./assets/Coin.svg" />
                                     <input id="addedpoint" class="gray-border " />
                                 </div>

@@ -79,6 +79,17 @@ function closeModal() {
 function closeModal2() {
     let infomodalcont = document.getElementById("infomodalcont");
     infomodalcont.style.display = "none";
+    let taskInfoMenu = document.getElementById("taskInfoMenu");
+    taskInfoMenu.classList.add('none')
+    let finishedEditButton = document.getElementById("finishedEditButton");
+    finishedEditButton.classList.add("none")
+}
+
+const closeDeleteModalScreen = () => {
+    let deleteModalScreen = document.getElementById("deleteModalScreen");
+    deleteModalScreen.classList.add('none')
+    let taskInfoMenu = document.getElementById("taskInfoMenu");
+    taskInfoMenu.classList.add("none")
 }
 
 const remove = () => {
@@ -108,6 +119,10 @@ const renderTasks = (docs) => {
 
 
         let taskcontainer = document.getElementById("taskcontainer");
+        let deleteTaskButton = document.getElementById('deleteTaskButton');
+        let deleteTask = document.getElementById("deleteTask")
+
+
         let taskbody = document.createElement("div");
         let taskdate = document.createElement("span");
         let taskrow = document.createElement("div");
@@ -178,17 +193,25 @@ const renderTasks = (docs) => {
             let modalname = document.getElementById("task-name");
             let assignKidButton = document.getElementsByClassName("assignKidButton")[0];
             let didTaskButton = document.getElementById("didTaskButton");
+            let deleteModalScreen = document.getElementById("deleteModalScreen")
+            let editTaskButton = document.getElementById("editTaskButton");
+            let taskProfile = document.getElementById("picture")
+
 
             if (doc.data().AssignedUser) {
+                taskProfile.removeAttribute("src")
                 assignKidButton.style.display = "none";
             } else {
+                taskProfile.src = "./assets/noUserProfile.svg";
                 assignKidButton.style.display = "";
             }
+
             if (doc.data().Status === 'inreview') {
                 didTaskButton.style.display = "block"
             } else {
                 didTaskButton.style.display = "none"
             }
+
             didTaskButton.onclick = () => {
                 db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
                     Status: 'Done',
@@ -196,6 +219,49 @@ const renderTasks = (docs) => {
                     let infomodalcont = document.getElementById("infomodalcont");
                     infomodalcont.style.display = "none"
                 })
+            }
+
+            deleteTaskButton.onclick = () => {
+                console.log(doc.data())
+                deleteModalScreen.classList.remove("none")
+            }
+
+
+            deleteTask.onclick = () => {
+                db.collection(`groups/${groupId}/tasks`).doc(doc.id).delete().then(() => {
+                    console.log('deleted data')
+                    let taskInfoMenu = document.getElementById("taskInfoMenu");
+
+                    infomodalcont.style.display = "none"
+                    deleteModalScreen.classList.add("none")
+                    taskInfoMenu.classList.add('none')
+
+
+                })
+            }
+
+            editTaskButton.onclick = () => {
+                // modalname.setAttribute("contenteditable", "true")
+
+                let finishedEditButton = document.getElementById("finishedEditButton")
+                finishedEditButton.classList.remove('none')
+                let taskInfoMenu = document.getElementById("taskInfoMenu");
+                taskInfoMenu.classList.add('none')
+
+                modalname.setAttribute("contenteditable", 'true')
+                modalpoint.setAttribute("contenteditable", 'true')
+                modaldesc.setAttribute("contenteditable", 'true')
+
+                finishedEditButton.onclick = async() => {
+                    await db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
+                        TaskName: modalname.innerHTML,
+                        TaskPoint: modalpoint.innerHTML,
+                        TaskDes: modaldesc.innerHTML,
+                    })
+                    finishedEditButton.classList.add('none')
+                    console.log('dun')
+
+                }
             }
             assignKidButton.onclick = () => {
                 let groupId;
@@ -276,8 +342,11 @@ const renderTasks = (docs) => {
 
             }
 
-
-            modaluser.innerHTML = assigneduserr;
+            if (assigneduserr) {
+                modaluser.innerHTML = assigneduserr;
+            } else {
+                modaluser.innerHTML = 'User'
+            }
             modalpoint.innerHTML = taskpointt ? taskpointt : 0;
             // modalstatus.innerHTML = statuss;
             modaldesc.innerHTML = taskdess;
@@ -361,17 +430,15 @@ const renderWishlist = (docs) => {
 
         wishBody.onclick = () => {
             console.log(doc.data())
-            if (!doc.data().point) {
-                console.log('wut')
-                let wishInfoModal = document.getElementById("wishinfomodal");
-                wishInfoModal.style.display = "block";
-                let wishUser = document.getElementById("wishuser");
-                // let wishPoint = document.getElementById("wishPoint");
-                let wishName = document.getElementById("wishName");
-                // let addPoint = document.getElementById("addPoint");
-                wishName.innerHTML = data.wish;
-                wishUser.innerHTML = doc.data().userName
-            }
+            console.log('wut')
+            let wishInfoModal = document.getElementById("wishinfomodal");
+            wishInfoModal.style.display = "block";
+            let wishUser = document.getElementById("wishuser");
+            // let wishPoint = document.getElementById("wishPoint");
+            let wishName = document.getElementById("wishName");
+            // let addPoint = document.getElementById("addPoint");
+            wishName.innerHTML = data.wish;
+            wishUser.innerHTML = doc.data().userName
             let addPointButton = document.getElementById("addPointButton");
 
             addPointButton.onclick = () => {
@@ -379,8 +446,8 @@ const renderWishlist = (docs) => {
                 let wishName = document.getElementById("wishName");
 
                 console.log('ilgeeh')
-                let addedPoint = document.getElementById("addedpoint").value;
-                if (addedPoint) {
+                let addedPoint = document.getElementById("addedpoint")
+                if (addedPoint.value) {
                     // db.collection(`groups/${groupId}/wishlist`).get().then((querySnapshot) => {
                     //     querySnapshot.forEach((doc) => {
                     //         console.log(doc.id, " => ", doc.data());
@@ -388,13 +455,15 @@ const renderWishlist = (docs) => {
                     // });
 
                     db.collection(`groups/${groupId}/wishlist`).doc(doc.id).update({
-                            point: addedPoint,
+                            point: addedPoint.value,
                         })
                         .then(() => {
                             wishInfoModal.style.display = "none";
                             wishName.innerHTML = '';
+                            addedPoint.value = ''
                         })
                 }
+                //delete after not editing
             }
 
         }
@@ -465,9 +534,9 @@ firebase.auth().onAuthStateChanged((u) => {
         let userGroup = db.collection('users').doc(userUid);
         userGroup.get().then((doc) => {
             groupId = doc.data().groupId;
-            db.collection(`groups/${groupId}/tasks`).where("Status", "!=", "inreview")
-                .get()
-                .then((docs) => {
+            db.collection(`groups/${groupId}/tasks`).where("Status", "!=", "Done")
+                .onSnapshot((docs) => {
+                    console.log("here")
                     renderTasks(docs);
                 })
             db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
@@ -544,7 +613,10 @@ const closeAddWishModal = () => {
 }
 const wishInfoModalClose = () => {
     let wishInfoModal = document.getElementById("wishinfomodal");
+    let addedPointInput = document.getElementById("addedpoint");
     wishInfoModal.style.display = "none";
+    addedPointInput.value = '';
+
 }
 const AddTask = () => {
     let TaskName = document.getElementById("TaskName").value;
@@ -593,4 +665,12 @@ const AddTask = () => {
 
 const goToProfile = () => {
     window.location.href = "profile.html"
+}
+const showTaskInfoMenu = () => {
+    let taskInfoMenu = document.getElementById("taskInfoMenu");
+    if (taskInfoMenu.classList.contains("none")) {
+        taskInfoMenu.classList.remove("none")
+    } else {
+        taskInfoMenu.classList.add("none")
+    }
 }
