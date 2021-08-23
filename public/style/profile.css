@@ -329,3 +329,29 @@ body {
     left: 95%;
     top: 30%;
 }
+
+.cont {
+    width: 410px;
+    height: 135px;
+    border-radius: 50%;
+    background-color: #EFEFEF;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.secondary {
+    height: 52.6px;
+    width: 52.6px;
+    
+}
+
+.baby {
+    width: 52.6px;
+    height: 52.6px;
+}
+
+.primary {
+    height: 109px;
+    width: 109px;
+}
