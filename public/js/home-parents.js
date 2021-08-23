@@ -79,13 +79,23 @@ function closeModal() {
 function closeModal2() {
     let infomodalcont = document.getElementById("infomodalcont");
     infomodalcont.style.display = "none";
+    let taskInfoMenu = document.getElementById("taskInfoMenu");
+    taskInfoMenu.classList.add('none')
+    let finishedEditButton = document.getElementById("finishedEditButton");
+    finishedEditButton.classList.add("none")
+}
+
+const closeDeleteModalScreen = () => {
+    let deleteModalScreen = document.getElementById("deleteModalScreen");
+    deleteModalScreen.classList.add('none')
+    let taskInfoMenu = document.getElementById("taskInfoMenu");
+    taskInfoMenu.classList.add("none")
 }
 
 const remove = () => {
     let taskmodal = document.getElementById("taskmodal");
     taskmodal.style.display = "none";
 }
-
 
 const renderTasks = (docs) => {
     let taskcontainer = document.getElementById("taskcontainer");
@@ -109,6 +119,10 @@ const renderTasks = (docs) => {
 
 
         let taskcontainer = document.getElementById("taskcontainer");
+        let deleteTaskButton = document.getElementById('deleteTaskButton');
+        let deleteTask = document.getElementById("deleteTask")
+
+
         let taskbody = document.createElement("div");
         let taskdate = document.createElement("span");
         let taskrow = document.createElement("div");
@@ -118,9 +132,6 @@ const renderTasks = (docs) => {
         let point = document.createElement("div");
         let wall = document.createElement("div");
         let assigneduser = document.createElement("div");
-
-
-
 
         taskcontainer.classList.add("taskcontainer");
 
@@ -140,8 +151,6 @@ const renderTasks = (docs) => {
         coinicon.src = "./assets/Coin.svg"
         wall.innerHTML = "|";
 
-
-
         taskcontainer.appendChild(taskbody);
         taskbody.appendChild(taskdate);
         taskbody.appendChild(taskrow);
@@ -151,7 +160,6 @@ const renderTasks = (docs) => {
         taskitem.appendChild(point);
         taskitem.appendChild(wall);
         taskitem.appendChild(assigneduser);
-
 
         taskdate.innerHTML = datee;
         taskname.innerHTML = tasknamee;
@@ -183,64 +191,169 @@ const renderTasks = (docs) => {
             let modaldesc = document.getElementById("task-description");
             let modaldate = document.getElementById("task-date");
             let modalname = document.getElementById("task-name");
-            let assignButton = document.getElementById("getTask");
-            let doneTaskButton = document.getElementById("doneTask");
+            let assignKidButton = document.getElementsByClassName("assignKidButton")[0];
+            let didTaskButton = document.getElementById("didTaskButton");
+            let deleteModalScreen = document.getElementById("deleteModalScreen")
+            let editTaskButton = document.getElementById("editTaskButton");
             let taskProfile = document.getElementById("picture")
 
 
-            console.log(doc.data().AssignedUser)
-
             if (doc.data().AssignedUser) {
                 taskProfile.removeAttribute("src")
+                assignKidButton.style.display = "none";
+            } else {
+                taskProfile.src = "./assets/noUserProfile.svg";
+                assignKidButton.style.display = "";
+            }
 
-                if (doc.data().AssignedUser === userName) {
-                    if (doc.data().Status === 'inreview') {
-                        assignButton.style.display = "none"
-                        doneTaskButton.style.display = "none"
-                    } else {
-                        assignButton.style.display = "none"
-                        doneTaskButton.style.display = "block"
-                    }
-                } else {
-                    assignButton.style.display = "none"
-                    doneTaskButton.style.display = "none"
+            if (doc.data().Status === 'inreview') {
+                didTaskButton.style.display = "block"
+            } else {
+                didTaskButton.style.display = "none"
+            }
+
+            didTaskButton.onclick = () => {
+                db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
+                    Status: 'Done',
+                }).then(() => {
+                    let infomodalcont = document.getElementById("infomodalcont");
+                    infomodalcont.style.display = "none"
+                })
+            }
+
+            deleteTaskButton.onclick = () => {
+                console.log(doc.data())
+                deleteModalScreen.classList.remove("none")
+            }
+
+
+            deleteTask.onclick = () => {
+                db.collection(`groups/${groupId}/tasks`).doc(doc.id).delete().then(() => {
+                    console.log('deleted data')
+                    let taskInfoMenu = document.getElementById("taskInfoMenu");
+
+                    infomodalcont.style.display = "none"
+                    deleteModalScreen.classList.add("none")
+                    taskInfoMenu.classList.add('none')
+
+
+                })
+            }
+
+            editTaskButton.onclick = () => {
+                // modalname.setAttribute("contenteditable", "true")
+
+                let finishedEditButton = document.getElementById("finishedEditButton")
+                finishedEditButton.classList.remove('none')
+                let taskInfoMenu = document.getElementById("taskInfoMenu");
+                taskInfoMenu.classList.add('none')
+
+                modalname.setAttribute("contenteditable", 'true')
+                modalpoint.setAttribute("contenteditable", 'true')
+                modaldesc.setAttribute("contenteditable", 'true')
+
+                finishedEditButton.onclick = async() => {
+                    await db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
+                        TaskName: modalname.innerHTML,
+                        TaskPoint: modalpoint.innerHTML,
+                        TaskDes: modaldesc.innerHTML,
+                    })
+                    finishedEditButton.classList.add('none')
+                    console.log('dun')
 
                 }
-            } else {
-                assignButton.style.display = "";
-                taskProfile.src = "./assets/noUserProfile.svg";
-
             }
-
-            doneTaskButton.onclick = () => {
+            assignKidButton.onclick = () => {
+                let groupId;
+                let assignKidModal = document.getElementById("assign-kids-modal-screen");
+                assignKidModal.style.display = "flex";
+                console.log('wut')
                 console.log(doc.data())
-                db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
-                    Status: 'inreview',
-                }).then(() => {
-                    console.log('changed status to review')
-                    infomodalcont.style.display = "none";
+                console.log(user.uid)
+                let userUid = user.uid
+                let userGroup = db.collection('users').doc(userUid);
+                userGroup.get().then((doc) => {
+                    groupId = doc.data().groupId;
+                    db.collection('users').where("groupId", "==", groupId)
+                        .get().then((querySnapshot) => {
+                            let memberContainer = document.getElementById("members-container");
+                            memberContainer.innerHTML = ''
+                            querySnapshot.forEach((doc) => {
+                                if (doc.data().role == 'kid') {
+                                    console.log(doc.data().name)
+                                    let memberProfileCont = document.createElement('div');
+                                    let memberNameCont = document.createElement('div');
+                                    let memberName = document.createElement('div')
+                                    let memberPointCont = document.createElement('div');
+                                    let memberPoint = document.createElement('div');
+                                    let coin = document.createElement('img');
 
-                }).catch((error) => {
-                    console.log(error)
+                                    memberProfileCont.classList.add('row');
+                                    memberProfileCont.classList.add('gray-border')
+                                    memberNameCont.classList.add("row");
+                                    memberPointCont.classList.add('row');
+                                    memberName.classList.add("big-text");
+                                    memberName.classList.add("blue-text");
+                                    memberPoint.classList.add("big-text")
+
+
+                                    memberContainer.appendChild(memberProfileCont)
+
+                                    memberProfileCont.appendChild(memberNameCont);
+                                    memberProfileCont.appendChild(memberPointCont);
+                                    memberNameCont.appendChild(memberName);
+                                    memberPointCont.appendChild(memberPoint);
+                                    memberPointCont.appendChild(coin);
+
+                                    memberName.innerHTML = doc.data().name;
+
+                                    if (!doc.data().point) {
+                                        memberPoint.innerHTML = "0"
+                                    } else {
+                                        memberPoint.innerHTML = doc.data().point
+                                    }
+                                    coin.setAttribute("src", "./assets/Coin.svg")
+
+                                    memberProfileCont.onclick = async() => {
+                                        console.log(tasknamee)
+                                        console.log(groupId)
+                                        await db.collection(`groups/${groupId}/tasks`).where("TaskName", "==", tasknamee)
+                                            .get().then((querySnapshot) => {
+                                                querySnapshot.forEach((docs) => {
+                                                    docs.ref.update({
+                                                        AssignedUser: memberName.innerHTML,
+                                                        Status: "inprogress"
+                                                    })
+                                                })
+                                            })
+                                        assignKidModal.style.display = "none"
+                                        let infomodalcont = document.getElementById("infomodalcont");
+                                        infomodalcont.style.display = "none"
+                                    }
+
+                                }
+                            })
+                        })
                 })
+                let closeAssignKidsModal = document.getElementById("closeAssignKidsModal");
+                closeAssignKidsModal.onclick = () => {
+                    assignKidModal.style.display = "none";
+                }
+
             }
 
-
-            assignButton.onclick = () => {
-                db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
-                    AssignedUser: userName,
-                }).then(() => {
-                    infomodalcont.style.display = "none";
-
-                })
+            if (assigneduserr) {
+                modaluser.innerHTML = assigneduserr;
+            } else {
+                modaluser.innerHTML = 'User'
             }
-
-            modaluser.innerHTML = assigneduserr;
             modalpoint.innerHTML = taskpointt ? taskpointt : 0;
             // modalstatus.innerHTML = statuss;
             modaldesc.innerHTML = taskdess;
             modaldate.innerHTML = datee;
             modalname.innerHTML = tasknamee;
+
+
 
             // document.getElementById('nope').onclick = () => {
             //     deletemodal.style.display = "none";
@@ -252,7 +365,6 @@ const renderTasks = (docs) => {
                 modal.style.display = "none";
             }
         }
-
     });
 }
 
@@ -272,9 +384,6 @@ const renderWishlist = (docs) => {
         let wishAddedDate = convertDate(doc.data().CreatedAt.toDate())
 
         let wishes = document.getElementById("wish-container")
-
-        let wishWithButtonCont = document.createElement("div")
-        wishWithButtonCont.classList.add("row")
 
         let wishBody = document.createElement('div')
         wishBody.classList.add('wish-body', 'task-body', 'row');
@@ -313,50 +422,51 @@ const renderWishlist = (docs) => {
         point.innerHTML = userWishPoint ? userWishPoint : ''
         coinrow.appendChild(point)
 
-        let wishDeleteButton = document.createElement('div')
-        let wishDeleteIcon = document.createElement('span')
-        wishDeleteIcon.classList.add("material-icons")
-        wishDeleteIcon.innerHTML = "delete"
-        wishDeleteButton.classList.add("wishDeleteButton", "center", "column", "small-text")
-        wishDeleteButton.innerHTML = "Устгах"
-        wishDeleteButton.appendChild(wishDeleteIcon)
-
-        wishWithButtonCont.appendChild(wishBody)
-        wishWithButtonCont.appendChild(wishDeleteButton)
-        wishes.appendChild(wishWithButtonCont)
-
-        // if (userWishPoint) {
-        //     let point = document.createElement("div")
-        //     coinShow.appendChild(point);
-        //     point.innerHTML = userWishPoint
-        //         // point.
-        // } else {
-        //     let point = document.createElement("div")
-        //     coinShow.appendChild(point);
-        //     point.classList.add("wishpoint-input");
-        // }
 
 
-        wishWithButtonCont.addEventListener("mouseover", () => {
-            wishDeleteButton.style.display = "flex"
-            wishBody.style.width = "90%"
-            wishDeleteButton.style.width = "10%"
-        })
-        wishWithButtonCont.addEventListener("mouseout", () => {
-            wishDeleteButton.style.display = "none"
+        wishes.appendChild(wishBody)
 
-            wishBody.style.width = "100%"
-            wishDeleteButton.style.width = "0%"
-        })
 
-        wishDeleteButton.onclick = () => {
+
+        wishBody.onclick = () => {
             console.log(doc.data())
-            db.collection(`groups/${groupId}/wishlist`).doc(doc.id).delete().then(() => {
-                console.log('successfully deleted')
-            })
+            console.log('wut')
+            let wishInfoModal = document.getElementById("wishinfomodal");
+            wishInfoModal.style.display = "block";
+            let wishUser = document.getElementById("wishuser");
+            // let wishPoint = document.getElementById("wishPoint");
+            let wishName = document.getElementById("wishName");
+            // let addPoint = document.getElementById("addPoint");
+            wishName.innerHTML = data.wish;
+            wishUser.innerHTML = doc.data().userName
+            let addPointButton = document.getElementById("addPointButton");
+
+            addPointButton.onclick = () => {
+                let wishInfoModal = document.getElementById("wishinfomodal");
+                let wishName = document.getElementById("wishName");
+
+                console.log('ilgeeh')
+                let addedPoint = document.getElementById("addedpoint")
+                if (addedPoint.value) {
+                    // db.collection(`groups/${groupId}/wishlist`).get().then((querySnapshot) => {
+                    //     querySnapshot.forEach((doc) => {
+                    //         console.log(doc.id, " => ", doc.data());
+                    //     });
+                    // });
+
+                    db.collection(`groups/${groupId}/wishlist`).doc(doc.id).update({
+                            point: addedPoint.value,
+                        })
+                        .then(() => {
+                            wishInfoModal.style.display = "none";
+                            wishName.innerHTML = '';
+                            addedPoint.value = ''
+                        })
+                }
+                //delete after not editing
+            }
+
         }
-
-
         window.onclick = (event) => {
             let wishModal = document.getElementById("wishinfomodal");
             let wishPoint = document.getElementById("wishPoint");
@@ -372,8 +482,6 @@ const renderWishlist = (docs) => {
 
 }
 
-
-
 const filterByStatus = (status) => {
     if (user) {
         let change = document.getElementById("filter");
@@ -381,8 +489,9 @@ const filterByStatus = (status) => {
         switch (status) {
             case 'all':
                 change.innerHTML = "Бүх даалгавар";
-                db.collection(`groups/${groupId}/tasks`).where("Status", "!=", "done")
-                    .onSnapshot((docs) => {
+                db.collection(`groups/${groupId}/tasks`).where("Status", "!=", "inreview")
+                    .get()
+                    .then((docs) => {
                         renderTasks(docs);
                     })
                 break;
@@ -418,7 +527,6 @@ const filterByStatus = (status) => {
     }
 }
 
-
 firebase.auth().onAuthStateChanged((u) => {
     if (u) {
         user = u
@@ -426,12 +534,14 @@ firebase.auth().onAuthStateChanged((u) => {
         let userGroup = db.collection('users').doc(userUid);
         userGroup.get().then((doc) => {
             groupId = doc.data().groupId;
-            db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc')
+            db.collection(`groups/${groupId}/tasks`).where("Status", "!=", "Done")
                 .onSnapshot((docs) => {
+                    console.log("here")
                     renderTasks(docs);
                 })
             db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
                 document.getElementById("wish-container").innerHTML = "";
+
                 renderWishlist(querySnapshot)
             })
         }).then(() => {
@@ -503,5 +613,64 @@ const closeAddWishModal = () => {
 }
 const wishInfoModalClose = () => {
     let wishInfoModal = document.getElementById("wishinfomodal");
+    let addedPointInput = document.getElementById("addedpoint");
     wishInfoModal.style.display = "none";
+    addedPointInput.value = '';
+
+}
+const AddTask = () => {
+    let TaskName = document.getElementById("TaskName").value;
+    let TaskDes = document.getElementById("TaskDes").value;
+    let TaskPoint = document.getElementById("TaskPoint").value;
+    if (user) {
+        db.collection(`groups/${groupId}/tasks`).doc().set({
+                TaskName: TaskName,
+                TaskDes: TaskDes,
+                TaskPoint: TaskPoint,
+                CreatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                AssignedUser: '',
+                Status: '',
+            })
+            .then(() => {
+                let taskmodal = document.getElementById("taskmodal");
+                taskmodal.style.display = "none"
+                document.getElementById("TaskName").value = "";
+                document.getElementById("TaskDes").value = "";
+                document.getElementById("TaskPoint").value = "";
+                console.log("Document successfully written!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+    } else {
+        window.alert("Please login");
+        window.location.href = "landingPage.html"
+    }
+}
+
+// const addPoint = () => {
+//     console.log('ilgeeh')
+//     let addedPoint = document.getElementById("addedpoint").value;
+//     console.log(addedPoint)
+//     if (addedPoint) {
+//         db.collection(`groups/${groupId}/wishlist`).doc().update({
+//                 point: addedPoint,
+//             })
+//             .then(() => {
+//                 wishInfoModal.style.display = "none";
+//                 wishName.innerHTML = '';
+//             })
+//     }
+// }
+
+const goToProfile = () => {
+    window.location.href = "profile.html"
+}
+const showTaskInfoMenu = () => {
+    let taskInfoMenu = document.getElementById("taskInfoMenu");
+    if (taskInfoMenu.classList.contains("none")) {
+        taskInfoMenu.classList.remove("none")
+    } else {
+        taskInfoMenu.classList.add("none")
+    }
 }

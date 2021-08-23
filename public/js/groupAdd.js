@@ -61,7 +61,7 @@ const createGroup = async() => {
             groupId: roomCode,
             role: 'admin',
         })
-        window.location.href = "groupHomepage.html"
+        window.location.href = "home-parents.html"
     } else {
         window.alert("Login first")
         window.location.href = "index.html"
@@ -87,7 +87,7 @@ const joinGroup = async() => {
                     groupId: groupCode,
                     role: 'kid',
                 })
-                window.location.href = "wishlist-Iveel-kid.html"
+                window.location.href = "home-kids.html"
             } else {
                 window.alert("No Group Found")
             }

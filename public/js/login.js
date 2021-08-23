@@ -8,9 +8,9 @@ firebase.auth().onAuthStateChanged((user) => {
                 window.location.href = "groupAdd.html"
             } else {
                 if (data.role === "admin") {
-                    window.location.href = "groupHomepage.html"
+                    window.location.href = "home-parents.html"
                 } else if (data.role == "kid") {
-                    window.location.href = "wishlist-Iveel-kid.html"
+                    window.location.href = "home-kids.html"
                 } else {
                     console.log("error")
                 }
@@ -37,4 +37,28 @@ const loginWithEmailAndPassword = () => {
             // }
 
         })
+}
+const loginWithGoogle = () => {
+    let provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+            /** @type {firebase.auth.OAuthCredential} */
+            var credential = result.credential;
+
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            var token = credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+            // ...
+        }).catch((error) => {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+        });
 }
