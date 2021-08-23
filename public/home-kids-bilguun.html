@@ -21,12 +21,10 @@
             <!-- PROFILE DROPDOWN -->
             <div class="profile-dropdown-cont">
                 <button class="profile-btn" onclick="displayProfileDrop()">
-<<<<<<< HEAD
             <img src="./assets/profile.svg" width="34px" />
-          </button> =======
+          </button>
                 <img src="./assets/profile.svg" width="34px" style="cursor: pointer" />
                 </button>
-                >>>>>>> 5a7227c (css)
                 <div class="profile-dropdown-content">
                     <div><span class="material-icons">person</span>
                         <div class="underline">Profile</div>
@@ -186,7 +184,7 @@
 
                     <div class="groupcontainer">
                         <div class="grouptopcontainer">
-                            <div>
+                            <div class="fit">
                                 <span>Бүлгэмийн нэр</span>
                                 <div class="grouptopfield">
                                     <div id="groupname">
@@ -195,7 +193,7 @@
                                     <img class="editicon" src="./assets/Vectorrrrrrr.svg">
                                 </div>
                             </div>
-                            <div>
+                            <div class="fit">
                                 <span>Бүлгэмийн код</span>
                                 <div class="grouptopfield">
                                     <div id="groupcode">
@@ -205,19 +203,69 @@
                             </div>
 
                         </div>
-                        <div class="groupusercontainer">
+
+                        <div id="containerrr" class="groupusercontainer ">
+                            <button onclick="creategroupuserbody()">AAAAAA</button>
+                            <!-- 
                             <div class="groupuserbody">
-                                <img style="margin-left: 15px;" src="./assets/poroooo.svg">
+
                                 <div class="roww">
-                                    <div class="column">
-                                        <span class="role">Role</span>
-                                        <span class="username">UserName</span>
-                                    </div>
                                     <div class="row">
+                                        <img style="margin-left: 15px;" src="./assets/poroooo.svg">
+                                        <div class="column">
+                                            <span class="role">Role</span>
+                                            <span class="username">UserName</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row groupuserpoint">
+                                        <img src="./assets/BigCoin.svg" height="25px" width="25px">
+                                        <div style="padding-right: 25px;" id="point">0</div>
+                                        <img src="./assets/add_circle_black_24dp.svg">
+                                        <div class="columm relative">
+                                            <span class="material-icons blue-text" onclick="toggleGroupMenu()">
+                                                    more_vert
+                                                    </span>
+
+                                            <div class="sidemenu absolute" id="group-menu-content">
+                                                <div class="menuitem" id="his" onclick="qwerty('history')">Түүх харах</div>
+                                                <div class="menuitem" id="admin" onclick="qwerty('admin')">Админ болгох</div>
+                                                <div class="menuitem" id="kick" onclick="qwerty('kick')">Бүлгэмээс гаргах</div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
 
-                            </div>
+
+
+                            </div> -->
+
+
+
+
+                            <!-- <div id="addpoint" class="addpoint">
+                                <div class="inneraddpoint">
+                                    <span style="font-size: xx-large;">Оноо бэлэглэх</span>
+                                    <div class="column" style="display: flex; align-items: center;">
+                                        <img src="./assets/ppppppppppppp.svg">
+                                        <span style="font-size: x-large;">User name</span>
+                                    </div>
+
+                                    <div class="columnnn">
+                                        <div class="column">
+                                            <input class="pointinput" type="number">
+                                        </div>
+                                        <img src="./assets/coin icon.svg" height="25px" width="25px">
+                                        <img src="./assets/Line 30.svg" height="20px" width="70px">
+                                    </div>
+                                    <div class="confirm">
+                                        Бэлэглэх <img src="./assets/qqqqqqqqq.svg">
+                                    </div>
+                                </div>
+                            </div> -->
+
+
                         </div>
                     </div>
 
