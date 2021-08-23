@@ -101,6 +101,8 @@ const renderTasks = (docs) => {
         // taskinfomodalcont.appendChild(taskmodal);
 
         let taskcontainer = document.getElementById("taskcontainer");
+        let deleteTaskButton = document.getElementById('deleteTaskButton')
+
         let taskbody = document.createElement("div");
         let taskdate = document.createElement("span");
         let taskrow = document.createElement("div");
@@ -146,6 +148,10 @@ const renderTasks = (docs) => {
             taskbody.classList.remove("texthover");
             taskdate.classList.remove("texthover");
         });
+
+        deleteTaskButton.onclick = () => {
+            console.log(doc.data())
+        }
 
         taskbody.onclick = () => {
 

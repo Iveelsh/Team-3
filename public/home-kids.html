@@ -68,7 +68,7 @@
                                 <img onclick="closeModal2()" class="close-modal" src="./assets/Close.svg" />
                             </div>
                             <div class="column center">
-                                <div id="picture"></div>
+                                <img id="picture" />
                                 <div class="blue-text small-text" id="task-user">User</div>
                             </div>
                             <div class="row">
@@ -90,10 +90,14 @@
                                 <div class="gray-border" id="task-description">Desc</div>
                             </div>
                             <div class="column center">
-                                <button onclick="Assignkids()" class="assign-task-btn" class="row">
-                    <img src="./assets/assign.svg" alt="" />
-                    <div>Даалгавар авах</div>
-                  </button>
+                                <button class="assign-task-btn row" id="getTask">
+                                <img src="./assets/assign.svg" alt="" />
+                                <div>Даалгавар авах</div>
+                                </button>
+
+                                <button onclick="changeTaskDone()" class="assign-task-btn row" id="doneTask">
+                                    <div>Duussan</div>
+                                </button>
                             </div>
                         </div>
                     </div>
