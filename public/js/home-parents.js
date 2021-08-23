@@ -571,3 +571,7 @@ const AddTask = () => {
 //             })
 //     }
 // }
+
+const goToProfile = () => {
+    window.location.href = "profile.html"
+}
