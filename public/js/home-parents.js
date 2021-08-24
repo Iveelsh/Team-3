@@ -97,14 +97,29 @@ const remove = () => {
     taskmodal.style.display = "none";
 }
 
-const renderTasks = (docs) => {
+const renderTasks = async(docs) => {
     let taskcontainer = document.getElementById("taskcontainer");
     taskcontainer.innerHTML = "";
-    docs.forEach((doc) => {
+    await docs.forEach(async(doc) => {
         // console.log(doc.data());
         let data = doc.data();
         let taskpointt = doc.data().TaskPoint;
         let assigneduserr = doc.data().AssignedUser;
+        let assigneduserrName
+        if(assigneduserr){
+            assigneduserrName = await db.collection('users').doc(doc.data().AssignedUser).get();
+
+        }
+        console.log(assigneduserrName);
+
+        assigneduserrName = assigneduserrName?.data()?.name;
+        console.log(assigneduserrName);
+        // db.collection('users').doc(doc.data().AssignedUser).get().then((docs) => {
+        //     assigneduserrName = docs.data().name
+        //     console.log(docs.data().name)
+
+        // })
+
         let datee = convertDate(doc.data().CreatedAt.toDate());
         let statuss = data.Status;
         let tasknamee = data.TaskName;
@@ -164,7 +179,12 @@ const renderTasks = (docs) => {
         taskdate.innerHTML = datee;
         taskname.innerHTML = tasknamee;
         point.innerHTML = taskpointt;
-        assigneduser.innerHTML = assigneduserr;
+        if(assigneduserr){
+            assigneduser.innerHTML = assigneduserrName;
+        }else{
+            assigneduser.innerHTML = assigneduserr;
+
+        }
 
 
         taskbody.style.cursor = "pointer";
@@ -288,6 +308,8 @@ const renderTasks = (docs) => {
                                     let memberPoint = document.createElement('div');
                                     let coin = document.createElement('img');
 
+                                    let memberNameId = doc.id;
+
                                     memberProfileCont.classList.add('row');
                                     memberProfileCont.classList.add('gray-border')
                                     memberNameCont.classList.add("row");
@@ -321,7 +343,7 @@ const renderTasks = (docs) => {
                                             .get().then((querySnapshot) => {
                                                 querySnapshot.forEach((docs) => {
                                                     docs.ref.update({
-                                                        AssignedUser: memberName.innerHTML,
+                                                        AssignedUser: memberNameId,
                                                         Status: "inprogress"
                                                     })
                                                 })
@@ -343,7 +365,7 @@ const renderTasks = (docs) => {
             }
 
             if (assigneduserr) {
-                modaluser.innerHTML = assigneduserr;
+                modaluser.innerHTML = assigneduserrName;
             } else {
                 modaluser.innerHTML = 'User'
             }
@@ -544,10 +566,43 @@ firebase.auth().onAuthStateChanged((u) => {
 
                 renderWishlist(querySnapshot)
             })
-        }).then(() => {
-            console.log("render success");
-        }).catch((error) => {
-            console.log(error);
+
+            // MESSENGER CHAT
+
+            db.collection(`groups/${groupId}/chats`).orderBy("time", "desc").onSnapshot((docs) => {
+                screen.innerHTML = ""
+                docs.forEach((doc) => {
+                    let row = document.createElement("div");
+                    let user = document.createElement("div");
+                    let chatContainer = document.createElement("div");
+                    let chat = document.createElement("div");
+                    let button = document.createElement("button")
+
+                    user.innerHTML = doc.data().username
+                    chat.innerHTML = doc.data().text
+                    button.innerHTML = "X"
+                    const deleteDoc = () => {
+                        doc.ref.delete();
+                    }
+
+                    row.setAttribute("class", "row")
+                    user.setAttribute("class", "user")
+                    chat.setAttribute("class", "chat")
+                    chatContainer.setAttribute("class", "chat-container")
+                    chatContainer.classList.add("row")
+                    button.setAttribute("class", "buttonC")
+                    button.addEventListener('click', deleteDoc)
+
+                    row.appendChild(user)
+                    row.appendChild(chatContainer)
+                    chatContainer.appendChild(chat)
+                    chatContainer.appendChild(button)
+                    screen.appendChild(row)
+                        // console.log("appended")
+                });
+            })
+
+            // MESSENGER CHAT
         })
     } else {
         console.log("please login")
@@ -674,3 +729,33 @@ const showTaskInfoMenu = () => {
         taskInfoMenu.classList.add("none")
     }
 }
+
+// MESSENGER CHAT
+
+let username = document.getElementById("username");
+let chat = document.getElementById("chat");
+let screen = document.getElementById("screen");
+let sendBut = document.getElementById("sendButn");
+// let file = document.getElementById("file");
+// let fileButn = document.getElementById("sendButn");
+
+// let set = document.getElementById("setname");
+
+// screen.scrollTop = screen.scrollHeight
+
+
+sendBut.addEventListener('click', () => {
+    if (username.value !== '' && chat.value !== '') {
+        db.collection(`groups/${groupId}/chats`).doc().set({
+            username: username.value.trim(),
+            text: chat.value.trim(),
+            time: firebase.firestore.FieldValue.serverTimestamp()
+        }).then((docRef) => {
+            // console.log("Document written with ID: ", docRef.id);
+            // username.value = ''
+            chat.value = ''
+        }).catch((error) => {
+            console.error("Error adding document: ", error);
+        });
+    }
+})
