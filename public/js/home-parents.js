@@ -544,10 +544,43 @@ firebase.auth().onAuthStateChanged((u) => {
 
                 renderWishlist(querySnapshot)
             })
-        }).then(() => {
-            console.log("render success");
-        }).catch((error) => {
-            console.log(error);
+
+            // MESSENGER CHAT
+
+            db.collection(`groups/${groupId}/chats`).orderBy("time", "desc").onSnapshot((docs) => {
+                screen.innerHTML = ""
+                docs.forEach((doc) => {
+                    let row = document.createElement("div");
+                    let user = document.createElement("div");
+                    let chatContainer = document.createElement("div");
+                    let chat = document.createElement("div");
+                    let button = document.createElement("button")
+
+                    user.innerHTML = doc.data().username
+                    chat.innerHTML = doc.data().text
+                    button.innerHTML = "X"
+                    const deleteDoc = () => {
+                        doc.ref.delete();
+                    }
+
+                    row.setAttribute("class", "row")
+                    user.setAttribute("class", "user")
+                    chat.setAttribute("class", "chat")
+                    chatContainer.setAttribute("class", "chat-container")
+                    chatContainer.classList.add("row")
+                    button.setAttribute("class", "buttonC")
+                    button.addEventListener('click', deleteDoc)
+
+                    row.appendChild(user)
+                    row.appendChild(chatContainer)
+                    chatContainer.appendChild(chat)
+                    chatContainer.appendChild(button)
+                    screen.appendChild(row)
+                        // console.log("appended")
+                });
+            })
+
+            // MESSENGER CHAT
         })
     } else {
         console.log("please login")
@@ -674,3 +707,33 @@ const showTaskInfoMenu = () => {
         taskInfoMenu.classList.add("none")
     }
 }
+
+// MESSENGER CHAT
+
+let username = document.getElementById("username");
+let chat = document.getElementById("chat");
+let screen = document.getElementById("screen");
+let sendBut = document.getElementById("sendButn");
+// let file = document.getElementById("file");
+// let fileButn = document.getElementById("sendButn");
+
+// let set = document.getElementById("setname");
+
+// screen.scrollTop = screen.scrollHeight
+
+
+sendBut.addEventListener('click', () => {
+    if (username.value !== '' && chat.value !== '') {
+        db.collection(`groups/${groupId}/chats`).doc().set({
+            username: username.value.trim(),
+            text: chat.value.trim(),
+            time: firebase.firestore.FieldValue.serverTimestamp()
+        }).then((docRef) => {
+            // console.log("Document written with ID: ", docRef.id);
+            // username.value = ''
+            chat.value = ''
+        }).catch((error) => {
+            console.error("Error adding document: ", error);
+        });
+    }
+})
