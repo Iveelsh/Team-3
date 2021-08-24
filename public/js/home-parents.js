@@ -556,7 +556,7 @@ firebase.auth().onAuthStateChanged((u) => {
         let userGroup = db.collection('users').doc(userUid);
         userGroup.get().then((doc) => {
             groupId = doc.data().groupId;
-            db.collection(`groups/${groupId}/tasks`).where("Status", "!=", "Done")
+            db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc')
                 .onSnapshot((docs) => {
                     console.log("here")
                     renderTasks(docs);
