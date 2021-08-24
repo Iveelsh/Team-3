@@ -343,7 +343,9 @@ body {
 .secondary {
     height: 52.6px;
     width: 52.6px;
-    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .baby {
@@ -354,4 +356,7 @@ body {
 .primary {
     height: 109px;
     width: 109px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
