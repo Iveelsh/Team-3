@@ -240,6 +240,7 @@ const renderTasks = async(docs) => {
             assignButton.onclick = () => {
                 db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
                     AssignedUser: user.uid,
+                    Status: 'inprogress',
                 }).then(() => {
                     infomodalcont.style.display = "none";
 
