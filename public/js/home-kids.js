@@ -87,14 +87,20 @@ const remove = () => {
 }
 
 
-const renderTasks = (docs) => {
+const renderTasks = async(docs) => {
     let taskcontainer = document.getElementById("taskcontainer");
     taskcontainer.innerHTML = "";
-    docs.forEach((doc) => {
+    await docs.forEach(async(doc) => {
         // console.log(doc.data());
         let data = doc.data();
         let taskpointt = doc.data().TaskPoint;
         let assigneduserr = doc.data().AssignedUser;
+        let assigneduserrName
+        if(assigneduserr){
+            assigneduserrName = await db.collection('users').doc(doc.data().AssignedUser).get();
+        }
+        assigneduserrName = assigneduserrName?.data()?.name;
+
         let datee = convertDate(doc.data().CreatedAt.toDate());
         let statuss = data.Status;
         let tasknamee = data.TaskName;
@@ -156,7 +162,12 @@ const renderTasks = (docs) => {
         taskdate.innerHTML = datee;
         taskname.innerHTML = tasknamee;
         point.innerHTML = taskpointt;
-        assigneduser.innerHTML = assigneduserr;
+        if(assigneduserr){
+            assigneduser.innerHTML = assigneduserrName;
+        }else{
+            assigneduser.innerHTML = assigneduserr;
+
+        }
 
 
         taskbody.style.cursor = "pointer";
@@ -173,7 +184,7 @@ const renderTasks = (docs) => {
         taskbody.onclick = async() => {
             let userName;
             await db.collection('users').doc(user.uid).get().then((docs) => {
-                userName = docs.data().name;
+                userName = docs.id;
             })
             let infomodalcont = document.getElementById("infomodalcont");
             infomodalcont.style.display = "block";
@@ -228,14 +239,18 @@ const renderTasks = (docs) => {
 
             assignButton.onclick = () => {
                 db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
-                    AssignedUser: userName,
+                    AssignedUser: user.uid,
                 }).then(() => {
                     infomodalcont.style.display = "none";
 
                 })
             }
 
-            modaluser.innerHTML = assigneduserr;
+            if (assigneduserr) {
+                modaluser.innerHTML = assigneduserrName;
+            } else {
+                modaluser.innerHTML = 'User'
+            }
             modalpoint.innerHTML = taskpointt ? taskpointt : 0;
             // modalstatus.innerHTML = statuss;
             modaldesc.innerHTML = taskdess;

@@ -97,14 +97,29 @@ const remove = () => {
     taskmodal.style.display = "none";
 }
 
-const renderTasks = (docs) => {
+const renderTasks = async(docs) => {
     let taskcontainer = document.getElementById("taskcontainer");
     taskcontainer.innerHTML = "";
-    docs.forEach((doc) => {
+    await docs.forEach(async(doc) => {
         // console.log(doc.data());
         let data = doc.data();
         let taskpointt = doc.data().TaskPoint;
         let assigneduserr = doc.data().AssignedUser;
+        let assigneduserrName
+        if(assigneduserr){
+            assigneduserrName = await db.collection('users').doc(doc.data().AssignedUser).get();
+
+        }
+        console.log(assigneduserrName);
+
+        assigneduserrName = assigneduserrName?.data()?.name;
+        console.log(assigneduserrName);
+        // db.collection('users').doc(doc.data().AssignedUser).get().then((docs) => {
+        //     assigneduserrName = docs.data().name
+        //     console.log(docs.data().name)
+
+        // })
+
         let datee = convertDate(doc.data().CreatedAt.toDate());
         let statuss = data.Status;
         let tasknamee = data.TaskName;
@@ -164,7 +179,12 @@ const renderTasks = (docs) => {
         taskdate.innerHTML = datee;
         taskname.innerHTML = tasknamee;
         point.innerHTML = taskpointt;
-        assigneduser.innerHTML = assigneduserr;
+        if(assigneduserr){
+            assigneduser.innerHTML = assigneduserrName;
+        }else{
+            assigneduser.innerHTML = assigneduserr;
+
+        }
 
 
         taskbody.style.cursor = "pointer";
@@ -288,6 +308,8 @@ const renderTasks = (docs) => {
                                     let memberPoint = document.createElement('div');
                                     let coin = document.createElement('img');
 
+                                    let memberNameId = doc.id;
+
                                     memberProfileCont.classList.add('row');
                                     memberProfileCont.classList.add('gray-border')
                                     memberNameCont.classList.add("row");
@@ -321,7 +343,7 @@ const renderTasks = (docs) => {
                                             .get().then((querySnapshot) => {
                                                 querySnapshot.forEach((docs) => {
                                                     docs.ref.update({
-                                                        AssignedUser: memberName.innerHTML,
+                                                        AssignedUser: memberNameId,
                                                         Status: "inprogress"
                                                     })
                                                 })
@@ -343,7 +365,7 @@ const renderTasks = (docs) => {
             }
 
             if (assigneduserr) {
-                modaluser.innerHTML = assigneduserr;
+                modaluser.innerHTML = assigneduserrName;
             } else {
                 modaluser.innerHTML = 'User'
             }
