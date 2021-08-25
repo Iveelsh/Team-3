@@ -405,11 +405,11 @@
 
 .grouptopfield {
     display: flex;
-    height: 30%;
+    padding: 5px;
     width: auto;
     border-radius: 9px;
     border: 2px #172662 solid;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -423,27 +423,23 @@
 }
 
 .editicon {
-    position: absolute;
-    margin-left: 95px;
+    height: 18px;
+    width: 16px;
     cursor: pointer;
 }
 
 .editiconn {
     cursor: pointer;
-    position: absolute;
-    margin-left: 95px;
 }
 
 .groupuserbody {
-    display: flex;
-    align-items: center;
-    max-height: 17%;
-    min-height: 17%;
+    filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.25));
+    box-sizing: border-box;
     width: 100%;
     border-radius: 7.4px;
-    border: 1px rgb(151, 151, 151) solid;
-    filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.25));
-    z-index: 1;
+    margin-top: 8px;
+    background-color: white;
+    padding: 10px;
 }
 
 .role {
@@ -548,7 +544,25 @@
     box-sizing: border-box;
 }
 
-.menuitem {
+.menuitem1 {
+    height: 33.3%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+.menuitem2 {
+    height: 33.3%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+.menuitem3 {
     height: 33.3%;
     display: flex;
     align-items: center;
@@ -599,4 +613,39 @@
     height: auto;
     max-width: 35%;
     min-width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menuitem1:hover {
+    transition: 0.3s;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    background-color: #172662;
+    color: white;
+}
+
+.menuitem2:hover {
+    transition: 0.3s;
+    background-color: #172662;
+    color: white;
+}
+
+.menuitem3:hover {
+    transition: 0.3s;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    background: #172662;
+    color: white;
+}
+
+.groupcode {
+    width: 90%;
+    height: 100%;
+}
+
+.groupname {
+    width: 100%;
+    height: 100%;
 }
