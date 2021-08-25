@@ -9,7 +9,7 @@ let message = document.getElementById("message");
 
 let user;
 let groupId;
-
+let userDoc;
 const displaytask = () => {
     task.classList.remove("none");
     wishlist.classList.add("none");
@@ -106,7 +106,7 @@ const renderTasks = async(docs) => {
         let taskpointt = doc.data().TaskPoint;
         let assigneduserr = doc.data().AssignedUser;
         let assigneduserrName
-        if(assigneduserr){
+        if (assigneduserr) {
             assigneduserrName = await db.collection('users').doc(doc.data().AssignedUser).get();
 
         }
@@ -179,9 +179,9 @@ const renderTasks = async(docs) => {
         taskdate.innerHTML = datee;
         taskname.innerHTML = tasknamee;
         point.innerHTML = taskpointt;
-        if(assigneduserr){
+        if (assigneduserr) {
             assigneduser.innerHTML = assigneduserrName;
-        }else{
+        } else {
             assigneduser.innerHTML = assigneduserr;
 
         }
@@ -556,6 +556,8 @@ firebase.auth().onAuthStateChanged((u) => {
         let userGroup = db.collection('users').doc(userUid);
         userGroup.get().then((doc) => {
             groupId = doc.data().groupId;
+            userDoc = doc.data()
+            
             db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc')
                 .onSnapshot((docs) => {
                     console.log("here")
@@ -569,36 +571,10 @@ firebase.auth().onAuthStateChanged((u) => {
 
             // MESSENGER CHAT
 
-            db.collection(`groups/${groupId}/chats`).orderBy("time", "desc").onSnapshot((docs) => {
+            db.collection(`groups/${groupId}/chats`).orderBy("time", "desc").get().then((docs) => {
                 screen.innerHTML = ""
-                docs.forEach((doc) => {
-                    let row = document.createElement("div");
-                    let user = document.createElement("div");
-                    let chatContainer = document.createElement("div");
-                    let chat = document.createElement("div");
-                    let button = document.createElement("button")
-
-                    user.innerHTML = doc.data().username
-                    chat.innerHTML = doc.data().text
-                    button.innerHTML = "X"
-                    const deleteDoc = () => {
-                        doc.ref.delete();
-                    }
-
-                    row.setAttribute("class", "row")
-                    user.setAttribute("class", "user")
-                    chat.setAttribute("class", "chat")
-                    chatContainer.setAttribute("class", "chat-container")
-                    chatContainer.classList.add("row")
-                    button.setAttribute("class", "buttonC")
-                    button.addEventListener('click', deleteDoc)
-
-                    row.appendChild(user)
-                    row.appendChild(chatContainer)
-                    chatContainer.appendChild(chat)
-                    chatContainer.appendChild(button)
-                    screen.appendChild(row)
-                        // console.log("appended")
+                docs.docs.forEach((doc) => {
+                    renderChats(doc)
                 });
             })
 
@@ -731,31 +707,70 @@ const showTaskInfoMenu = () => {
 }
 
 // MESSENGER CHAT
-
-let username = document.getElementById("username");
 let chat = document.getElementById("chat");
 let screen = document.getElementById("screen");
 let sendBut = document.getElementById("sendButn");
-// let file = document.getElementById("file");
-// let fileButn = document.getElementById("sendButn");
-
-// let set = document.getElementById("setname");
-
-// screen.scrollTop = screen.scrollHeight
-
-
 sendBut.addEventListener('click', () => {
-    if (username.value !== '' && chat.value !== '') {
+    if (chat.value !== '') {
         db.collection(`groups/${groupId}/chats`).doc().set({
-            username: username.value.trim(),
-            text: chat.value.trim(),
+            user: user.uid,
+            text: chat.innerHTML.trim(),
             time: firebase.firestore.FieldValue.serverTimestamp()
         }).then((docRef) => {
-            // console.log("Document written with ID: ", docRef.id);
-            // username.value = ''
-            chat.value = ''
+            let row = document.createElement("div");
+            let user = document.createElement("div");
+            let userName = document.createElement("div");
+            let chatContainer = document.createElement("div");
+            let chatEl = document.createElement("div");
+    
+            userName.innerHTML = userDoc.name
+            chatEl.innerHTML = chat.innerHTML.trim()
+            userName.setAttribute('class', 'user')
+            row.setAttribute("class", "chat-ind")
+            user.setAttribute("class", "user-pic")
+            chatEl.classList.add('chat', 'bubble')
+            chatContainer.setAttribute("class", "chat-container")
+            chatContainer.classList.add("row")
+    
+            row.appendChild(user)
+            row.appendChild(chatContainer)
+            chatContainer.appendChild(userName)
+            chatContainer.appendChild(chatEl)
+            screen.prepend(row)
+
+            chat.innerHTML = ''
         }).catch((error) => {
             console.error("Error adding document: ", error);
         });
     }
 })
+
+const renderChats = (doc) => {
+let data=doc.data();
+    db.doc(`users/${data.user}`).get().then((doc) => {
+        let userData = doc.data()
+
+        let row = document.createElement("div");
+        let user = document.createElement("div");
+        let userName = document.createElement("div");
+        let chatContainer = document.createElement("div");
+        let chat = document.createElement("div");
+
+        userName.innerHTML = doc.data().name
+        chat.innerHTML = data.text
+        userName.setAttribute('class', 'user')
+
+        row.setAttribute("class", "chat-ind")
+        user.setAttribute("class", "user-pic")
+        chat.classList.add('chat', 'bubble')
+        chatContainer.setAttribute("class", "chat-container")
+
+        row.appendChild(user)
+        row.appendChild(chatContainer)
+        chatContainer.appendChild(userName)
+        chatContainer.appendChild(chat)
+        screen.appendChild(row)
+
+
+    })
+}
