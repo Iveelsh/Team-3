@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="./style/profile.css">
+    <link rel="stylesheet" href="./style/dropdown.css" />
+    <link rel="stylesheet" href="./style/header-footer.css" />
+</head>
+
+<body>
+    <div class="everything">
+        <div class="header">
+            <img src="./assets/logo.svg" class="logo" />
+            <div class="header-text">My family</div>
+            <!-- PROFILE DROPDOWN -->
+            <div class="profile-dropdown-cont">
+                <button class="profile-btn" onclick="displayProfileDrop()">
+                    <img src="./assets/profile.svg" width="34px" />
+                </button>
+                <div class="profile-dropdown-content">
+                    <div><span class="material-icons">person</span>
+                        <div class="underline">Home page</div>
+                    </div>
+                    <div onclick="logOut()">
+                        <span class="material-icons">logout</span>
+                        <div class="underline">Log out</div>
+                    </div>
+                </div>
+            </div>
+            <!-- PROFILE DROPDOWN -->
+        </div>
+        <!-- HEADER END-->
+        <img src="./assets/Group 265.svg" class="backpic">
+
+        <div class="container">
+            <div class="pro-container">
+                <div class="top">
+                    <div class="Back">
+                        <span class="material-icons size" onclick="BackToHomeKids()">
+                            arrow_back
+                        </span>
+                        Нүүр Хуудас
+                    </div>
+                </div>
+                <div class="pro-cont" id="not-change">
+                    <div class="cont_hidden">
+                        <img id="profile-pic" class="primary" />
+                    </div>
+                </div>
+
+                <div class="pro-cont none" id="change-pic">
+                    <div class="cont">
+                        <div>
+                            <img style="cursor: pointer;" src="./assets/back.svg" onclick="back()">
+                        </div>
+
+                        <img id="neg" class="secondary" />
+                        <img id="hoyr" class="primary" />
+
+                        <img id="gurav" class="secondary" />
+
+                        <div>
+                            <img style="cursor: pointer;" src="./assets/next.svg" onclick="next()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="information">
+                    <div class="row">
+                        <div class="input">
+                            <span class="input-small">Нэр</span>
+                            <div class="name">
+                                <div id="name"></div>
+                            </div>
+                        </div>
+                        <div class="input">
+                            <span class="input-small">Үүрэг</span>
+                            <div class="role ">
+                                <div id="role"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input">
+                            <span class="input-small">И-майл</span>
+                            <div class="email ">
+                                <div id="email"></div>
+                            </div>
+                        </div>
+                        <div class="input">
+                            <span class="input-small">Утасны дугаар</span>
+                            <div class="phone ">
+                                <div id="phone"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="blue_button" id="change" onclick="goToEdit()">Өөрчлөх</button>
+                <div class="row_2 none" id="change-btns">
+                    <button class="white_button" onclick="backToPro()">Буцах</button>
+                    <button class="blue_button" onclick="edit()">Хадгалах</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <img src="./assets/logo.svg" class="logo-footer" />
+        <div class="footer-text">
+            <a class="">Бидний Тухай</a>
+            <a class="aboutus holboo">Холбоо Барих</a>
+            <a class="aboutus asuultuud">Асуултууд</a>
+        </div>
+        <div class="copyright">
+            <div class="longline"></div>
+            <div>© 2021</div>
+        </div>
+    </div>
+    </div>
+</body>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+<script src="./js/firebase.js"></script>
+<script src="./js/profile.js"></script>
+</html>
