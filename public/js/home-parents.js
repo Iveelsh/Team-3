@@ -832,7 +832,7 @@ const creategroupuserbody = (memberId, deleteId) => {
             let rowgroupuserpoint = document.createElement("div");
             let bigcoinimg = document.createElement("img");
             let point = document.createElement("div");
-            let addcircleimg = document.createElement("img");
+            // let addcircleimg = document.createElement("img");
             let columnrelative = document.createElement("div");
             let materialiconbluetext = document.createElement("span");
             let sidemenuabsolute = document.createElement("div");
@@ -856,7 +856,8 @@ const creategroupuserbody = (memberId, deleteId) => {
             bigcoinimg.style.height = "25px";
             bigcoinimg.style.width = "25px";
             point.style.paddingRight = "25px";
-            addcircleimg.src = "./assets/add_circle_black_24dp.svg";
+            point.style.cursor = "pointer";
+            // addcircleimg.src = "./assets/add_circle_black_24dp.svg";
             columnrelative.classList.add("column");
             columnrelative.classList.add("relative");
             materialiconbluetext.classList.add("material-icons");
@@ -866,7 +867,7 @@ const creategroupuserbody = (memberId, deleteId) => {
             menuitem.classList.add("menuitem1"); //tuuh
             menuitem2.classList.add("menuitem2"); //admin
             menuitem3.classList.add("menuitem3"); //bulgem
-            addcircleimg.style.cursor = "pointer";
+            // addcircleimg.style.cursor = "pointer";
 
             menuitem.onclick = () => {
                 console.log('tuuh')
@@ -895,9 +896,12 @@ const creategroupuserbody = (memberId, deleteId) => {
             materialiconbluetext.innerHTML = "more_vert";
             materialiconbluetext.style.cursor = "pointer";
             materialiconbluetext.onclick = a = () => {
+                let pointAddKidModal = document.getElementById("pointAddKidModal");
                 if (sidemenuabsolute.classList.contains("flex")) {
+                    pointAddKidModal.style.display = "none"
                     sidemenuabsolute.classList.remove("flex");
                 } else {
+                    pointAddKidModal.style.display = "none"
                     sidemenuabsolute.classList.add("flex");
                 }
                 let { right, top } = materialiconbluetext.getBoundingClientRect();
@@ -914,13 +918,44 @@ const creategroupuserbody = (memberId, deleteId) => {
             column.appendChild(username);
             rowgroupuserpoint.appendChild(bigcoinimg);
             rowgroupuserpoint.appendChild(point);
-            rowgroupuserpoint.appendChild(addcircleimg);
+            // rowgroupuserpoint.appendChild(addcircleimg);
             rowgroupuserpoint.appendChild(columnrelative);
             columnrelative.appendChild(materialiconbluetext);
             // columnrelative.appendChild(sidemenuabsolute);
             sidemenuabsolute.appendChild(menuitem);
             sidemenuabsolute.appendChild(menuitem2);
             sidemenuabsolute.appendChild(menuitem3);
+            
+            
+            point.onclick = () => {
+                let sendPointButton = document.getElementById("sendPoint")
+                let pointAddKidModal = document.getElementById("pointAddKidModal");
+                pointAddKidModal.style.display = "block"
+                let kidPointEdit = document.getElementById("kidPointEdit");
+                if(doc.data().point){
+                    kidPointEdit.value = doc.data().point
+                    console.log('ahah')
+                }else{
+                    kidPointEdit.value = '0'
+                }
+                console.log(doc.data())
+
+                sendPointButton.onclick = async() => {
+                    let kidPointEdit = document.getElementById("kidPointEdit");
+                    console.log(doc.data())
+                    if(kidPointEdit.value){
+                        await db.collection('users').doc(doc.id).update({
+                            point: kidPointEdit.value,
+                        }).then(() => {
+                            point.innerHTML = kidPointEdit.value
+                            let pointAddKidModal = document.getElementById("pointAddKidModal");
+                            pointAddKidModal.style.display = "none"
+
+                        })
+                    }
+                    
+                }
+            }
 
 
 
@@ -946,4 +981,13 @@ function copyToClipboard() {
     }, function(err) {
         console.error('Async: Could not copy text: ', err);
     });
+}
+
+// kjahfkuhsfabwhekjfuyai
+
+const pointAddKidModalClose =() => {
+    let pointAddKidModal = document.getElementById("pointAddKidModal");
+    pointAddKidModal .style.display = "none";
+    let kidPointEdit = document.getElementById("kidPointEdit");
+    kidPointEdit.value = ''
 }
