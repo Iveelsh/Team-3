@@ -96,7 +96,7 @@ const renderTasks = async(docs) => {
         let taskpointt = doc.data().TaskPoint;
         let assigneduserr = doc.data().AssignedUser;
         let assigneduserrName
-        if(assigneduserr){
+        if (assigneduserr) {
             assigneduserrName = await db.collection('users').doc(doc.data().AssignedUser).get();
         }
         assigneduserrName = assigneduserrName?.data()?.name;
@@ -162,9 +162,9 @@ const renderTasks = async(docs) => {
         taskdate.innerHTML = datee;
         taskname.innerHTML = tasknamee;
         point.innerHTML = taskpointt;
-        if(assigneduserr){
+        if (assigneduserr) {
             assigneduser.innerHTML = assigneduserrName;
-        }else{
+        } else {
             assigneduser.innerHTML = assigneduserr;
 
         }
@@ -447,9 +447,19 @@ firebase.auth().onAuthStateChanged((u) => {
                     renderTasks(docs);
                 })
             db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
-                document.getElementById("wish-container").innerHTML = "";
-                renderWishlist(querySnapshot)
+                    document.getElementById("wish-container").innerHTML = "";
+                    renderWishlist(querySnapshot)
+                })
+                // MESSENGER CHAT
+
+            db.collection(`groups/${groupId}/chats`).orderBy("time", "desc").get().then((docs) => {
+                screen.innerHTML = ""
+                docs.docs.forEach((doc) => {
+                    renderChats(doc)
+                });
             })
+
+            // MESSENGER CHAT
         }).then(() => {
             console.log("render success");
         }).catch((error) => {
@@ -520,4 +530,75 @@ const closeAddWishModal = () => {
 const wishInfoModalClose = () => {
     let wishInfoModal = document.getElementById("wishinfomodal");
     wishInfoModal.style.display = "none";
+}
+
+
+
+// MESSENGER CHAT
+let chat = document.getElementById("chat");
+let screen = document.getElementById("screen");
+let sendBut = document.getElementById("sendButn");
+sendBut.addEventListener('click', () => {
+    if (chat.value !== '') {
+        db.collection(`groups/${groupId}/chats`).doc().set({
+            user: user.uid,
+            text: chat.innerHTML.trim(),
+            time: firebase.firestore.FieldValue.serverTimestamp()
+        }).then((docRef) => {
+            let row = document.createElement("div");
+            let user = document.createElement("div");
+            let userName = document.createElement("div");
+            let chatContainer = document.createElement("div");
+            let chatEl = document.createElement("div");
+
+            userName.innerHTML = userDoc.name
+            chatEl.innerHTML = chat.innerHTML.trim()
+            userName.setAttribute('class', 'user')
+            row.setAttribute("class", "chat-ind")
+            user.setAttribute("class", "user-pic")
+            chatEl.classList.add('chat', 'bubble')
+            chatContainer.setAttribute("class", "chat-container")
+            chatContainer.classList.add("row")
+
+            row.appendChild(user)
+            row.appendChild(chatContainer)
+            chatContainer.appendChild(userName)
+            chatContainer.appendChild(chatEl)
+            screen.prepend(row)
+
+            chat.innerHTML = ''
+        }).catch((error) => {
+            console.error("Error adding document: ", error);
+        });
+    }
+})
+
+const renderChats = (doc) => {
+    let data = doc.data();
+    db.doc(`users/${data.user}`).get().then((doc) => {
+        let userData = doc.data()
+
+        let row = document.createElement("div");
+        let user = document.createElement("div");
+        let userName = document.createElement("div");
+        let chatContainer = document.createElement("div");
+        let chat = document.createElement("div");
+
+        userName.innerHTML = doc.data().name
+        chat.innerHTML = data.text
+        userName.setAttribute('class', 'user')
+
+        row.setAttribute("class", "chat-ind")
+        user.setAttribute("class", "user-pic")
+        chat.classList.add('chat', 'bubble')
+        chatContainer.setAttribute("class", "chat-container")
+
+        row.appendChild(user)
+        row.appendChild(chatContainer)
+        chatContainer.appendChild(userName)
+        chatContainer.appendChild(chat)
+        screen.appendChild(row)
+
+
+    })
 }
