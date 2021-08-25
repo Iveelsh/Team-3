@@ -3,55 +3,140 @@ body {
     padding: 0;
     background: rgb(56, 93, 209);
     background: linear-gradient(180deg, rgba(56, 93, 209, 1) 0%, rgba(166, 131, 195, 1) 50%, rgba(255, 210, 189, 1) 100%);
-    
 }
 
 .none {
-    display: none;
+    display: none !important;
 }
 
 .backpic {
+    position: absolute;
     width: 100%;
     height: 100%;
-    position: absolute;
     z-index: -1;
 }
 
+.Back {
+    font-size: 25px;
+    color: #172662;
+    font-weight: 450;
+    width: 550px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon {
+    font-size: 40px;
+    transform: translate(0px, 10px);
+}
+
+.close-button {
+    font-size: 43px;
+    color: #172662;
+    cursor: pointer;
+}
+
+.input {
+    border-bottom: 1.37px solid #172662;
+    align-items: center;
+    color: #283E93;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 13.5px;
+    margin: 10px;
+    padding: 5px;
+    width: 220px;
+}
+
+.input-small {
+    font-size: 12px;
+    color: #172662;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+}
+
+.pro-pic {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    border: 1px solid black;
+    transform: translate(114px, -140px);
+    display: flex;
+    justify-self: center;
+    align-self: center;
+}
+
+
+.blue_button {
+    border: none;
+    height: 45px;
+    width: 140px;
+    background-color: #232E6A;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.white_button {
+    border: none;
+    height: 45px;
+    width: 140px;
+    background-color: white;
+    border-radius: 5px;
+    color: #232E6A;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid #232E6A;
+}
+
+.information {
+    height: 170px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 .container {
     display: flex;
     justify-content: center;
-    padding-top: 70px;
-    align-content: initial;
-    padding-bottom: 66px;
+    height: 90vh;
+    width: 99vw;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .pro-container {
-    height: 420px;
-    width: 771px;
-    border-radius: 14px;   
-    background-color: white; 
+    height: 570px;
+    width: 1000px;
+    border-radius: 14px;
+    background-color: white;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
+    gap: 28px;
 }
 
-.top {
+
+/* .top {
     height: 5%;
     background: #F6F6F6;
     border-top-right-radius: 14px;
     border-top-left-radius: 14px;
     display: flex;
     align-items: center;
-}
-
-.middle {
-    height: 25%;
-    background: white;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-}
+} */
 
 .edit {
     position: absolute;
@@ -65,12 +150,10 @@ body {
 
 .profile {
     position: relative;
-    margin-left: 20px;
-    height: 150px;
-    width: 150px;
+    height: 109px;
+    width: 109px;
     border-radius: 50%;
     border: 1px solid black;
-    cursor: pointer;
 }
 
 .prohover {
@@ -89,69 +172,6 @@ body {
     height: 150px;
     width: 150px;
     border-radius: 50%;
-}
-
-.column {
-    display: flex;
-    flex-direction: column;
-}
-
-.columncontainer {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
-.name {
-    border: 1px black solid;
-    display: flex;
-    align-items: center;
-    margin-left: 60px;
-    border-radius: 10px;
-    height: 25px;
-    width: 160px;
-    background: #E2E2E2;
-}
-
-.email {
-    border: 1px black solid;
-    display: flex;
-    align-items: center;
-    margin-left: 60px;
-    border-radius: 10px;
-    height: 25px;
-    width: 200px;
-    background: #E2E2E2;
-}
-
-.role {
-    justify-content: center;
-    border: 1px black solid;
-    display: flex;
-    align-items: center;
-    margin-left: 60px;
-    border-radius: 10px;
-    height: 25px;
-    width: 120px;
-    background: #E2E2E2;
-}
-
-.phone {
-    border: 1px black solid;
-    display: flex;
-    align-items: center;
-    margin-left: 60px;
-    border-radius: 10px;
-    height: 25px;
-    width: 120px;
-    background: #E2E2E2;
-}
-
-.bottom {
-    height: 70%;
-    border-bottom-right-radius: 14px;
-    border-bottom-left-radius: 14px;
-    background: #E2E2E2;
 }
 
 .bottomtop {
@@ -221,29 +241,6 @@ body {
     margin-right: 10px;
 }
 
-.edit1 {
-    cursor: pointer;
-    position: absolute;
-    margin-left: 140px;
-}
-
-.edit2 {
-    position: absolute;
-    margin-left: 180px;
-    cursor: pointer;
-}
-
-.edit4 {
-    cursor: pointer;
-    position: absolute;
-    margin-left: 100px;
-}
-
-.row {
-    display: flex;
-    flex-direction: row;
-}
-
 .down {
     margin-top: 5px;
     margin-left: 50px;
@@ -261,9 +258,6 @@ body {
     border-radius: 5px;
 }
 
-.none {
-    display: none;
-}
 
 .dropitem {
     width: 100%;
@@ -283,7 +277,6 @@ body {
     justify-content: center;
     padding-top: 50px;
 }
-
 
 .flex {
     display: flex;
@@ -330,6 +323,7 @@ body {
     top: 30%;
 }
 
+
 .cont {
     width: 410px;
     height: 135px;
@@ -348,10 +342,6 @@ body {
     justify-content: center;
 }
 
-.baby {
-    width: 52.6px;
-    height: 52.6px;
-}
 
 .primary {
     height: 109px;
@@ -359,4 +349,36 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.top {
+    width: 927px;
+    height: 64px;
+    display: flex;
+    position: absolute;
+    top: 294px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cont-hidden {
+    width: 410px;
+    height: 135px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.size {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.row_2 {
+    display: flex;
+    flex-direction: row;
+    width: 350px;
+    justify-content: space-between;
 }
