@@ -236,6 +236,15 @@ const renderTasks = async(docs) => {
                 db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
                     Status: 'Done',
                 }).then(() => {
+                    let taskPoint = doc.data().TaskPoint;
+                    db.collection('users').doc(doc.data().AssignedUser).get().then((docs) => {
+                        let point = docs.data().point
+                        let newPoint;
+                        newPoint = Number(taskPoint) + Number(point)
+                        db.collection('users').doc(doc.data().AssignedUser).update({
+                            point:newPoint,
+                        })
+                    })
                     let infomodalcont = document.getElementById("infomodalcont");
                     infomodalcont.style.display = "none"
                 })
