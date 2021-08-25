@@ -165,14 +165,36 @@
                     <div class="column" id="wish-container">
                     </div>
                 </div>
-                <div id="groupinfo" class="none">
-                    <div class="name_edit">Бүлгэмийн нэр</div>
-                    <input type="text" class="Bulgemiin_ner" />
-                    <span class="material-icons edit"> edit </span>
 
-                    <div class="members_text">Гишүүд</div>
+                <!-- GROUP INFO STARTS-->
+                <div id="groupinfo" style="height: 100%; padding: 30px" class="none">
+                    <div class="groupcontainer">
+                        <div class="grouptopcontainer">
+                            <div class="fit">
+                                <span>Бүлгэмийн нэр</span>
+                                <div class="grouptopfield">
+                                    <div class="groupname" id="groupname">
+
+                                    </div>
+                                    <img class="editicon" src="./assets/Vectorrrrrrr.svg">
+                                </div>
+                            </div>
+                            <div class="fit">
+                                <span>Бүлгэмийн код</span>
+                                <div class="grouptopfield">
+                                    <div class="groupcode" id="groupcode">
+                                    </div>
+                                    <img class="editiconn" src="./assets/veeeeeee.svg" onclick="copyToClipboard()">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="containerrr" class="groupusercontainer ">
+                        </div>
+                    </div>
                 </div>
-
+                <!-- GROUP INFO ENDS -->
                 <!-- MESSENGER STARTS -->
                 <div class="none column messenger" style="height: 100%;" id="message">
                     <div class="send-chat-cont column center">

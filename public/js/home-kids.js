@@ -459,7 +459,18 @@ firebase.auth().onAuthStateChanged((u) => {
                 });
             })
 
-            // MESSENGER CHAT
+            // MESSENGER CHAT ENDS
+
+            //GROUP
+            db.collection(`groups/${groupId}/members`)
+                    .onSnapshot((querySnapshot) => {
+                        document.getElementById("containerrr").innerHTML = "";
+                        querySnapshot.docs.forEach(doc => {
+                            let memberId = doc.data().member
+                            creategroupuserbody(memberId, doc.id)
+
+                        })
+                    });
         }).then(() => {
             console.log("render success");
         }).catch((error) => {
@@ -601,4 +612,153 @@ const renderChats = (doc) => {
 
 
     })
+}
+
+const creategroupuserbody = (memberId, deleteId) => {
+    let userGroup = db.collection("users").doc(memberId);
+    db.collection("groups").doc(groupId).get().then((docs) => {
+        let joinCode = docs.data().joinCode;
+        let groupName = docs.data().groupname;
+        groupname.innerHTML = joinCode;
+        groupcode.innerHTML = groupName;
+        console.log(docs.data())
+    })
+
+
+    userGroup.get().then(doc => {
+        let data = doc.data()
+        if (data) {
+
+            // let groupname = document.getElementById("groupname");
+            // let groupcode = document.getElementById("groupcode");
+            // code = doc.gruopname;
+            // namee = doc.joinCode;
+            // groupname.innerHTML = namee;
+            // groupcode.innerHTML = code;
+
+            let container = document.getElementById("containerrr");
+            let groupuserbody = document.createElement("div");
+            let roww = document.createElement("div");
+            let row = document.createElement("div");
+            let proimg = document.createElement("img");
+            let column = document.createElement("div");
+            let role = document.createElement("span");
+            let username = document.createElement("span");
+            let rowgroupuserpoint = document.createElement("div");
+            let bigcoinimg = document.createElement("img");
+            let point = document.createElement("div");
+            let addcircleimg = document.createElement("img");
+            let columnrelative = document.createElement("div");
+            let materialiconbluetext = document.createElement("span");
+            let sidemenuabsolute = document.createElement("div");
+            let menuitem = document.createElement("div");
+            let menuitem2 = document.createElement("div");
+            let menuitem3 = document.createElement("div");
+            let x = document.createElement("img");
+            x.src = "./assets/Union.svg"
+
+            groupuserbody.classList.add("groupuserbody");
+            roww.classList.add("roww");
+            row.classList.add("row");
+            proimg.src = "./assets/poroooo.svg";
+            proimg.style.marginLeft = "15px";
+            column.classList.add("column");
+            role.classList.add("role");
+            username.classList.add("username");
+            rowgroupuserpoint.classList.add("row");
+            rowgroupuserpoint.classList.add("groupuserpoint");
+            bigcoinimg.src = "./assets/BigCoin.svg";
+            bigcoinimg.style.height = "25px";
+            bigcoinimg.style.width = "25px";
+            point.style.paddingRight = "25px";
+            addcircleimg.src = "./assets/add_circle_black_24dp.svg";
+            columnrelative.classList.add("column");
+            columnrelative.classList.add("relative");
+            materialiconbluetext.classList.add("material-icons");
+            materialiconbluetext.classList.add("blue-text");
+            sidemenuabsolute.classList.add("sidemenu");
+            // sidemenuabsolute.classList.add("absolute");
+            menuitem.classList.add("menuitem1"); //tuuh
+            menuitem2.classList.add("menuitem2"); //admin
+            menuitem3.classList.add("menuitem3"); //bulgem
+            addcircleimg.style.cursor = "pointer";
+
+            menuitem.onclick = () => {
+                console.log('tuuh')
+            }
+            menuitem2.onclick = () => {
+                console.log('admin')
+                if (data.role == 'admin') {
+                    db.collection("users").doc(memberId).update({
+                        role: 'kid'
+                    })
+                    role.innerHTML = 'Хүүхэд'
+                } else {
+                    db.collection("users").doc(memberId).update({
+                        role: 'admin'
+                    })
+                    role.innerHTML = 'Админ'
+                }
+
+            }
+            menuitem3.onclick = () => {
+                console.log('bulgemees hasah')
+                db.doc(`groups/${groupId}/members/${deleteId}`).delete()
+
+            }
+
+            materialiconbluetext.innerHTML = "more_vert";
+            materialiconbluetext.style.cursor = "pointer";
+            materialiconbluetext.onclick = a = () => {
+                if (sidemenuabsolute.classList.contains("flex")) {
+                    sidemenuabsolute.classList.remove("flex");
+                } else {
+                    sidemenuabsolute.classList.add("flex");
+                }
+                let { right, top } = materialiconbluetext.getBoundingClientRect();
+                sidemenuabsolute.style.left = Math.round(right) - 155 + "px";
+                sidemenuabsolute.style.top = Math.round(top) - 29 + window.scrollY + "px";
+            };
+
+            groupuserbody.appendChild(roww);
+            roww.appendChild(row);
+            roww.appendChild(rowgroupuserpoint);
+            row.appendChild(proimg);
+            row.appendChild(column);
+            column.appendChild(role);
+            column.appendChild(username);
+            rowgroupuserpoint.appendChild(bigcoinimg);
+            rowgroupuserpoint.appendChild(point);
+            rowgroupuserpoint.appendChild(addcircleimg);
+            rowgroupuserpoint.appendChild(columnrelative);
+            columnrelative.appendChild(materialiconbluetext);
+            // columnrelative.appendChild(sidemenuabsolute);
+            sidemenuabsolute.appendChild(menuitem);
+            sidemenuabsolute.appendChild(menuitem2);
+            sidemenuabsolute.appendChild(menuitem3);
+
+
+
+            role.innerHTML = data.role == 'admin' ? "Админ" : 'Хүүхэд';
+            username.innerHTML = data.name;
+            point.innerHTML = data.point ? data.point : 0;
+            menuitem.innerHTML = "Түүх харах";
+            menuitem2.innerHTML = data.role == 'kid' ? "Админ болгох" : "Админаас хасах";
+            menuitem3.innerHTML = "Бүлгэмээс гаргах";
+
+            container.appendChild(sidemenuabsolute);
+            container.appendChild(groupuserbody);
+        }
+    })
+
+};
+
+function copyToClipboard() {
+    let code = document.getElementById("groupcode");
+    navigator.clipboard.writeText(code.innerHTML).then(function() {
+
+        console.log('Async: Copying to clipboard was successful!');
+    }, function(err) {
+        console.error('Async: Could not copy text: ', err);
+    });
 }

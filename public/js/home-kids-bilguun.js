@@ -685,7 +685,7 @@ const creategroupuserbody = (memberId, deleteId) => {
 
 };
 
-function copyToClipboard() {
+const copyToClipboard = () => {
     let code = document.getElementById("groupcode");
     navigator.clipboard.writeText(code.innerHTML).then(function() {
 
