@@ -91,181 +91,185 @@ const renderTasks = async(docs) => {
     let taskcontainer = document.getElementById("taskcontainer");
     taskcontainer.innerHTML = "";
     await docs.forEach(async(doc) => {
+        
         // console.log(doc.data());
         let data = doc.data();
-        let taskpointt = doc.data().TaskPoint;
-        let assigneduserr = doc.data().AssignedUser;
-        let assigneduserrName
-        if (assigneduserr) {
-            assigneduserrName = await db.collection('users').doc(doc.data().AssignedUser).get();
-        }
-        assigneduserrName = assigneduserrName?.data()?.name;
+        if(data.Status != 'Done') {
 
-        let datee = convertDate(doc.data().CreatedAt.toDate());
-        let statuss = data.Status;
-        let tasknamee = data.TaskName;
-        let taskdess = data.TaskDes;
-
-
-        let taskinfomodalcont = document.createElement("div");
-        let taskmodal = document.createElement("div");
-        taskinfomodalcont.classList.add("modal");
-        taskinfomodalcont.appendChild(taskmodal);
-
-
-
-        let taskcontainer = document.getElementById("taskcontainer");
-        let taskbody = document.createElement("div");
-        let taskdate = document.createElement("span");
-        let taskrow = document.createElement("div");
-        let taskname = document.createElement("div");
-        let taskitem = document.createElement("div");
-        let coinicon = document.createElement("img");
-        let point = document.createElement("div");
-        let wall = document.createElement("div");
-        let assigneduser = document.createElement("div");
-
-
-
-
-        taskcontainer.classList.add("taskcontainer");
-
-        taskbody.classList.add("task-body");
-        taskbody.classList.add("column");
-
-        taskdate.classList.add("date");
-        taskdate.classList.add("blue-text");
-
-        taskname.classList.add("blue-text");
-        taskname.classList.add("bold");
-
-        taskrow.classList.add("row");
-        taskrow.classList.add("task-general");
-        taskitem.classList.add("row");
-        taskitem.classList.add("info");
-        coinicon.src = "./assets/Coin.svg"
-        wall.innerHTML = "|";
-
-
-
-        taskcontainer.appendChild(taskbody);
-        taskbody.appendChild(taskdate);
-        taskbody.appendChild(taskrow);
-        taskrow.appendChild(taskname);
-        taskrow.appendChild(taskitem);
-        taskitem.appendChild(coinicon);
-        taskitem.appendChild(point);
-        taskitem.appendChild(wall);
-        taskitem.appendChild(assigneduser);
-
-
-        taskdate.innerHTML = datee;
-        taskname.innerHTML = tasknamee;
-        point.innerHTML = taskpointt;
-        if (assigneduserr) {
-            assigneduser.innerHTML = assigneduserrName;
-        } else {
-            assigneduser.innerHTML = assigneduserr;
-
-        }
-
-
-        taskbody.style.cursor = "pointer";
-        taskbody.addEventListener('mouseover', () => {
-            taskbody.classList.add("texthover");
-            taskdate.classList.add("texthover")
-        });
-        taskbody.style.cursor = "pointer";
-        taskbody.addEventListener('mouseout', () => {
-            taskbody.classList.remove("texthover");
-            taskdate.classList.remove("texthover");
-        });
-
-        taskbody.onclick = async() => {
-            let userName;
-            await db.collection('users').doc(user.uid).get().then((docs) => {
-                userName = docs.id;
-            })
-            let infomodalcont = document.getElementById("infomodalcont");
-            infomodalcont.style.display = "block";
-            let modaluser = document.getElementById("task-user");
-            let modalpoint = document.getElementById("task-point");
-            let modalstatus = document.getElementById("modalstatus");
-            let modaldesc = document.getElementById("task-description");
-            let modaldate = document.getElementById("task-date");
-            let modalname = document.getElementById("task-name");
-            let assignButton = document.getElementById("getTask");
-            let doneTaskButton = document.getElementById("doneTask");
-            let taskProfile = document.getElementById("picture")
-
-
-            console.log(doc.data().AssignedUser)
-
-            if (doc.data().AssignedUser) {
-                taskProfile.removeAttribute("src")
-
-                if (doc.data().AssignedUser === userName) {
-                    if (doc.data().Status === 'inreview') {
-                        assignButton.style.display = "none"
-                        doneTaskButton.style.display = "none"
+            let taskpointt = doc.data().TaskPoint;
+            let assigneduserr = doc.data().AssignedUser;
+            let assigneduserrName
+            if (assigneduserr) {
+                assigneduserrName = await db.collection('users').doc(doc.data().AssignedUser).get();
+            }
+            assigneduserrName = assigneduserrName?.data()?.name;
+    
+            let datee = convertDate(doc.data().CreatedAt.toDate());
+            let statuss = data.Status;
+            let tasknamee = data.TaskName;
+            let taskdess = data.TaskDes;
+    
+    
+            let taskinfomodalcont = document.createElement("div");
+            let taskmodal = document.createElement("div");
+            taskinfomodalcont.classList.add("modal");
+            taskinfomodalcont.appendChild(taskmodal);
+    
+    
+    
+            let taskcontainer = document.getElementById("taskcontainer");
+            let taskbody = document.createElement("div");
+            let taskdate = document.createElement("span");
+            let taskrow = document.createElement("div");
+            let taskname = document.createElement("div");
+            let taskitem = document.createElement("div");
+            let coinicon = document.createElement("img");
+            let point = document.createElement("div");
+            let wall = document.createElement("div");
+            let assigneduser = document.createElement("div");
+    
+    
+    
+    
+            taskcontainer.classList.add("taskcontainer");
+    
+            taskbody.classList.add("task-body");
+            taskbody.classList.add("column");
+    
+            taskdate.classList.add("date");
+            taskdate.classList.add("blue-text");
+    
+            taskname.classList.add("blue-text");
+            taskname.classList.add("bold");
+    
+            taskrow.classList.add("row");
+            taskrow.classList.add("task-general");
+            taskitem.classList.add("row");
+            taskitem.classList.add("info");
+            coinicon.src = "./assets/Coin.svg"
+            wall.innerHTML = "|";
+    
+    
+    
+            taskcontainer.appendChild(taskbody);
+            taskbody.appendChild(taskdate);
+            taskbody.appendChild(taskrow);
+            taskrow.appendChild(taskname);
+            taskrow.appendChild(taskitem);
+            taskitem.appendChild(coinicon);
+            taskitem.appendChild(point);
+            taskitem.appendChild(wall);
+            taskitem.appendChild(assigneduser);
+    
+    
+            taskdate.innerHTML = datee;
+            taskname.innerHTML = tasknamee;
+            point.innerHTML = taskpointt;
+            if (assigneduserr) {
+                assigneduser.innerHTML = assigneduserrName;
+            } else {
+                assigneduser.innerHTML = assigneduserr;
+    
+            }
+    
+    
+            taskbody.style.cursor = "pointer";
+            taskbody.addEventListener('mouseover', () => {
+                taskbody.classList.add("texthover");
+                taskdate.classList.add("texthover")
+            });
+            taskbody.style.cursor = "pointer";
+            taskbody.addEventListener('mouseout', () => {
+                taskbody.classList.remove("texthover");
+                taskdate.classList.remove("texthover");
+            });
+    
+            taskbody.onclick = async() => {
+                let userName;
+                await db.collection('users').doc(user.uid).get().then((docs) => {
+                    userName = docs.id;
+                })
+                let infomodalcont = document.getElementById("infomodalcont");
+                infomodalcont.style.display = "block";
+                let modaluser = document.getElementById("task-user");
+                let modalpoint = document.getElementById("task-point");
+                let modalstatus = document.getElementById("modalstatus");
+                let modaldesc = document.getElementById("task-description");
+                let modaldate = document.getElementById("task-date");
+                let modalname = document.getElementById("task-name");
+                let assignButton = document.getElementById("getTask");
+                let doneTaskButton = document.getElementById("doneTask");
+                let taskProfile = document.getElementById("picture")
+    
+    
+                console.log(doc.data().AssignedUser)
+    
+                if (doc.data().AssignedUser) {
+                    taskProfile.removeAttribute("src")
+    
+                    if (doc.data().AssignedUser === userName) {
+                        if (doc.data().Status === 'inreview') {
+                            assignButton.style.display = "none"
+                            doneTaskButton.style.display = "none"
+                        } else {
+                            assignButton.style.display = "none"
+                            doneTaskButton.style.display = "block"
+                        }
                     } else {
                         assignButton.style.display = "none"
-                        doneTaskButton.style.display = "block"
+                        doneTaskButton.style.display = "none"
+    
                     }
                 } else {
-                    assignButton.style.display = "none"
-                    doneTaskButton.style.display = "none"
-
+                    assignButton.style.display = "";
+                    taskProfile.src = "./assets/noUserProfile.svg";
+    
                 }
-            } else {
-                assignButton.style.display = "";
-                taskProfile.src = "./assets/noUserProfile.svg";
-
+    
+                doneTaskButton.onclick = () => {
+                    console.log(doc.data())
+                    db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
+                        Status: 'inreview',
+                    }).then(() => {
+                        console.log('changed status to review')
+                        infomodalcont.style.display = "none";
+    
+                    }).catch((error) => {
+                        console.log(error)
+                    })
+                }
+    
+    
+                assignButton.onclick = () => {
+                    db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
+                        AssignedUser: user.uid,
+                        Status: 'inprogress',
+                    }).then(() => {
+                        infomodalcont.style.display = "none";
+    
+                    })
+                }
+    
+                if (assigneduserr) {
+                    modaluser.innerHTML = assigneduserrName;
+                } else {
+                    modaluser.innerHTML = 'User'
+                }
+                modalpoint.innerHTML = taskpointt ? taskpointt : 0;
+                // modalstatus.innerHTML = statuss;
+                modaldesc.innerHTML = taskdess;
+                modaldate.innerHTML = datee;
+                modalname.innerHTML = tasknamee;
+    
+                // document.getElementById('nope').onclick = () => {
+                //     deletemodal.style.display = "none";
+                // }
             }
-
-            doneTaskButton.onclick = () => {
-                console.log(doc.data())
-                db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
-                    Status: 'inreview',
-                }).then(() => {
-                    console.log('changed status to review')
-                    infomodalcont.style.display = "none";
-
-                }).catch((error) => {
-                    console.log(error)
-                })
-            }
-
-
-            assignButton.onclick = () => {
-                db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
-                    AssignedUser: user.uid,
-                    Status: 'inprogress',
-                }).then(() => {
-                    infomodalcont.style.display = "none";
-
-                })
-            }
-
-            if (assigneduserr) {
-                modaluser.innerHTML = assigneduserrName;
-            } else {
-                modaluser.innerHTML = 'User'
-            }
-            modalpoint.innerHTML = taskpointt ? taskpointt : 0;
-            // modalstatus.innerHTML = statuss;
-            modaldesc.innerHTML = taskdess;
-            modaldate.innerHTML = datee;
-            modalname.innerHTML = tasknamee;
-
-            // document.getElementById('nope').onclick = () => {
-            //     deletemodal.style.display = "none";
-            // }
-        }
-        window.onclick = (event) => {
-            let modal = document.getElementById("infomodalcont");
-            if (event.target == modal) {
-                modal.style.display = "none";
+            window.onclick = (event) => {
+                let modal = document.getElementById("infomodalcont");
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
             }
         }
 
@@ -442,7 +446,7 @@ firebase.auth().onAuthStateChanged((u) => {
         let userGroup = db.collection('users').doc(userUid);
         userGroup.get().then((doc) => {
             groupId = doc.data().groupId;
-            db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc')
+            db.collection(`groups/${groupId}/tasks`).where('Status', "!=", "Done").orderBy('Status', 'desc')
                 .onSnapshot((docs) => {
                     renderTasks(docs);
                 })
