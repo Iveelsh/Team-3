@@ -241,17 +241,20 @@
 
 .group-toggled {
     left: 0;
+    position: relative;
     transition: 1s left ease;
 }
 
 .group-hide-left {
     left: -100%;
-    transition: 1s left ease;
+    /* transition: 1s left ease; */
+    position: absolute;
 }
 
 .group-hide-right {
     left: calc(100% + 1px);
-    transition: 1s left ease;
+    position: absolute;
+    /* transition: 1s left ease; */
 }
 
 .center {
