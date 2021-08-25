@@ -98,7 +98,7 @@
     width: 200px;
     height: 40px;
     font-size: 20px;
-    background-color: #C4C4C4;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -121,6 +121,12 @@
 .small-container-text {
     font-size: 35px
 }
+.font{
+    font-family: 'Roboto', sans-serif;
+}
+.cursor{
+    cursor: pointer;
+}
 
 .input-groupname {
     height: 30px;
@@ -132,7 +138,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: #212D5B;
     color: white;
     height: 50px;
     width: 213px;
