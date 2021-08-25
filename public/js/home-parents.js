@@ -103,298 +103,301 @@ const renderTasks = async(docs) => {
     await docs.forEach(async(doc) => {
         // console.log(doc.data());
         let data = doc.data();
-        let taskpointt = doc.data().TaskPoint;
-        let assigneduserr = doc.data().AssignedUser;
-        let assigneduserrName
-        if (assigneduserr) {
-            assigneduserrName = await db.collection('users').doc(doc.data().AssignedUser).get();
-
-        }
-        console.log(assigneduserrName);
-
-        assigneduserrName = assigneduserrName?.data()?.name;
-        console.log(assigneduserrName);
-        // db.collection('users').doc(doc.data().AssignedUser).get().then((docs) => {
-        //     assigneduserrName = docs.data().name
-        //     console.log(docs.data().name)
-
-        // })
-
-        let datee = convertDate(doc.data().CreatedAt.toDate());
-        let statuss = data.Status;
-        let tasknamee = data.TaskName;
-        let taskdess = data.TaskDes;
-
-
-        let taskinfomodalcont = document.createElement("div");
-        let taskmodal = document.createElement("div");
-        taskinfomodalcont.classList.add("modal");
-        taskinfomodalcont.appendChild(taskmodal);
-
-
-
-        let taskcontainer = document.getElementById("taskcontainer");
-        let deleteTaskButton = document.getElementById('deleteTaskButton');
-        let deleteTask = document.getElementById("deleteTask")
-
-
-        let taskbody = document.createElement("div");
-        let taskdate = document.createElement("span");
-        let taskrow = document.createElement("div");
-        let taskname = document.createElement("div");
-        let taskitem = document.createElement("div");
-        let coinicon = document.createElement("img");
-        let point = document.createElement("div");
-        let wall = document.createElement("div");
-        let assigneduser = document.createElement("div");
-
-        taskcontainer.classList.add("taskcontainer");
-
-        taskbody.classList.add("task-body");
-        taskbody.classList.add("column");
-
-        taskdate.classList.add("date");
-        taskdate.classList.add("blue-text");
-
-        taskname.classList.add("blue-text");
-        taskname.classList.add("bold");
-
-        taskrow.classList.add("row");
-        taskrow.classList.add("task-general");
-        taskitem.classList.add("row");
-        taskitem.classList.add("info");
-        coinicon.src = "./assets/Coin.svg"
-        wall.innerHTML = "|";
-
-        taskcontainer.appendChild(taskbody);
-        taskbody.appendChild(taskdate);
-        taskbody.appendChild(taskrow);
-        taskrow.appendChild(taskname);
-        taskrow.appendChild(taskitem);
-        taskitem.appendChild(coinicon);
-        taskitem.appendChild(point);
-        taskitem.appendChild(wall);
-        taskitem.appendChild(assigneduser);
-
-        taskdate.innerHTML = datee;
-        taskname.innerHTML = tasknamee;
-        point.innerHTML = taskpointt;
-        if (assigneduserr) {
-            assigneduser.innerHTML = assigneduserrName;
-        } else {
-            assigneduser.innerHTML = assigneduserr;
-
-        }
-
-
-        taskbody.style.cursor = "pointer";
-        taskbody.addEventListener('mouseover', () => {
-            taskbody.classList.add("texthover");
-            taskdate.classList.add("texthover")
-        });
-        taskbody.style.cursor = "pointer";
-        taskbody.addEventListener('mouseout', () => {
-            taskbody.classList.remove("texthover");
-            taskdate.classList.remove("texthover");
-        });
-
-        taskbody.onclick = async() => {
-            let userName;
-            await db.collection('users').doc(user.uid).get().then((docs) => {
-                userName = docs.data().name;
-            })
-            let infomodalcont = document.getElementById("infomodalcont");
-            infomodalcont.style.display = "block";
-            let modaluser = document.getElementById("task-user");
-            let modalpoint = document.getElementById("task-point");
-            let modalstatus = document.getElementById("modalstatus");
-            let modaldesc = document.getElementById("task-description");
-            let modaldate = document.getElementById("task-date");
-            let modalname = document.getElementById("task-name");
-            let assignKidButton = document.getElementsByClassName("assignKidButton")[0];
-            let didTaskButton = document.getElementById("didTaskButton");
-            let deleteModalScreen = document.getElementById("deleteModalScreen")
-            let editTaskButton = document.getElementById("editTaskButton");
-            let taskProfile = document.getElementById("picture")
-
-
-            if (doc.data().AssignedUser) {
-                taskProfile.removeAttribute("src")
-                assignKidButton.style.display = "none";
+        if(data.Status != 'Done'){
+            let taskpointt = doc.data().TaskPoint;
+            let assigneduserr = doc.data().AssignedUser;
+            let assigneduserrName
+            if (assigneduserr) {
+                assigneduserrName = await db.collection('users').doc(doc.data().AssignedUser).get();
+    
+            }
+            console.log(assigneduserrName);
+    
+            assigneduserrName = assigneduserrName?.data()?.name;
+            console.log(assigneduserrName);
+            // db.collection('users').doc(doc.data().AssignedUser).get().then((docs) => {
+            //     assigneduserrName = docs.data().name
+            //     console.log(docs.data().name)
+    
+            // })
+    
+            let datee = convertDate(doc.data().CreatedAt.toDate());
+            let statuss = data.Status;
+            let tasknamee = data.TaskName;
+            let taskdess = data.TaskDes;
+    
+    
+            let taskinfomodalcont = document.createElement("div");
+            let taskmodal = document.createElement("div");
+            taskinfomodalcont.classList.add("modal");
+            taskinfomodalcont.appendChild(taskmodal);
+    
+    
+    
+            let taskcontainer = document.getElementById("taskcontainer");
+            let deleteTaskButton = document.getElementById('deleteTaskButton');
+            let deleteTask = document.getElementById("deleteTask")
+    
+    
+            let taskbody = document.createElement("div");
+            let taskdate = document.createElement("span");
+            let taskrow = document.createElement("div");
+            let taskname = document.createElement("div");
+            let taskitem = document.createElement("div");
+            let coinicon = document.createElement("img");
+            let point = document.createElement("div");
+            let wall = document.createElement("div");
+            let assigneduser = document.createElement("div");
+    
+            taskcontainer.classList.add("taskcontainer");
+    
+            taskbody.classList.add("task-body");
+            taskbody.classList.add("column");
+    
+            taskdate.classList.add("date");
+            taskdate.classList.add("blue-text");
+    
+            taskname.classList.add("blue-text");
+            taskname.classList.add("bold");
+    
+            taskrow.classList.add("row");
+            taskrow.classList.add("task-general");
+            taskitem.classList.add("row");
+            taskitem.classList.add("info");
+            coinicon.src = "./assets/Coin.svg"
+            wall.innerHTML = "|";
+    
+            taskcontainer.appendChild(taskbody);
+            taskbody.appendChild(taskdate);
+            taskbody.appendChild(taskrow);
+            taskrow.appendChild(taskname);
+            taskrow.appendChild(taskitem);
+            taskitem.appendChild(coinicon);
+            taskitem.appendChild(point);
+            taskitem.appendChild(wall);
+            taskitem.appendChild(assigneduser);
+    
+            taskdate.innerHTML = datee;
+            taskname.innerHTML = tasknamee;
+            point.innerHTML = taskpointt;
+            if (assigneduserr) {
+                assigneduser.innerHTML = assigneduserrName;
             } else {
-                taskProfile.src = "./assets/noUserProfile.svg";
-                assignKidButton.style.display = "";
+                assigneduser.innerHTML = assigneduserr;
+    
             }
-
-            if (doc.data().Status === 'inreview') {
-                didTaskButton.style.display = "block"
-            } else {
-                didTaskButton.style.display = "none"
-            }
-
-            didTaskButton.onclick = () => {
-                db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
-                    Status: 'Done',
-                }).then(() => {
-                    let taskPoint = doc.data().TaskPoint;
-                    db.collection('users').doc(doc.data().AssignedUser).get().then((docs) => {
-                        let point = docs.data().point
-                        let newPoint;
-                        newPoint = Number(taskPoint) + Number(point)
-                        db.collection('users').doc(doc.data().AssignedUser).update({
-                            point:newPoint,
-                        })
-                    })
-                    let infomodalcont = document.getElementById("infomodalcont");
-                    infomodalcont.style.display = "none"
+    
+    
+            taskbody.style.cursor = "pointer";
+            taskbody.addEventListener('mouseover', () => {
+                taskbody.classList.add("texthover");
+                taskdate.classList.add("texthover")
+            });
+            taskbody.style.cursor = "pointer";
+            taskbody.addEventListener('mouseout', () => {
+                taskbody.classList.remove("texthover");
+                taskdate.classList.remove("texthover");
+            });
+    
+            taskbody.onclick = async() => {
+                let userName;
+                await db.collection('users').doc(user.uid).get().then((docs) => {
+                    userName = docs.data().name;
                 })
-            }
-
-            deleteTaskButton.onclick = () => {
-                console.log(doc.data())
-                deleteModalScreen.classList.remove("none")
-            }
-
-
-            deleteTask.onclick = () => {
-                db.collection(`groups/${groupId}/tasks`).doc(doc.id).delete().then(() => {
-                    console.log('deleted data')
-                    let taskInfoMenu = document.getElementById("taskInfoMenu");
-
-                    infomodalcont.style.display = "none"
-                    deleteModalScreen.classList.add("none")
-                    taskInfoMenu.classList.add('none')
-
-
-                })
-            }
-
-            editTaskButton.onclick = () => {
-                // modalname.setAttribute("contenteditable", "true")
-
-                let finishedEditButton = document.getElementById("finishedEditButton")
-                finishedEditButton.classList.remove('none')
-                let taskInfoMenu = document.getElementById("taskInfoMenu");
-                taskInfoMenu.classList.add('none')
-
-                modalname.setAttribute("contenteditable", 'true')
-                modalpoint.setAttribute("contenteditable", 'true')
-                modaldesc.setAttribute("contenteditable", 'true')
-
-                finishedEditButton.onclick = async() => {
-                    await db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
-                        TaskName: modalname.innerHTML,
-                        TaskPoint: modalpoint.innerHTML,
-                        TaskDes: modaldesc.innerHTML,
-                    })
-                    finishedEditButton.classList.add('none')
-                    console.log('dun')
-
+                let infomodalcont = document.getElementById("infomodalcont");
+                infomodalcont.style.display = "block";
+                let modaluser = document.getElementById("task-user");
+                let modalpoint = document.getElementById("task-point");
+                let modalstatus = document.getElementById("modalstatus");
+                let modaldesc = document.getElementById("task-description");
+                let modaldate = document.getElementById("task-date");
+                let modalname = document.getElementById("task-name");
+                let assignKidButton = document.getElementsByClassName("assignKidButton")[0];
+                let didTaskButton = document.getElementById("didTaskButton");
+                let deleteModalScreen = document.getElementById("deleteModalScreen")
+                let editTaskButton = document.getElementById("editTaskButton");
+                let taskProfile = document.getElementById("picture")
+    
+    
+                if (doc.data().AssignedUser) {
+                    taskProfile.removeAttribute("src")
+                    assignKidButton.style.display = "none";
+                } else {
+                    taskProfile.src = "./assets/noUserProfile.svg";
+                    assignKidButton.style.display = "";
                 }
-            }
-            assignKidButton.onclick = () => {
-                let groupId;
-                let assignKidModal = document.getElementById("assign-kids-modal-screen");
-                assignKidModal.style.display = "flex";
-                console.log('wut')
-                console.log(doc.data())
-                console.log(user.uid)
-                let userUid = user.uid
-                let userGroup = db.collection('users').doc(userUid);
-                userGroup.get().then((doc) => {
-                    groupId = doc.data().groupId;
-                    db.collection('users').where("groupId", "==", groupId)
-                        .get().then((querySnapshot) => {
-                            let memberContainer = document.getElementById("members-container");
-                            memberContainer.innerHTML = ''
-                            querySnapshot.forEach((doc) => {
-                                if (doc.data().role == 'kid') {
-                                    console.log(doc.data().name)
-                                    let memberProfileCont = document.createElement('div');
-                                    let memberNameCont = document.createElement('div');
-                                    let memberName = document.createElement('div')
-                                    let memberPointCont = document.createElement('div');
-                                    let memberPoint = document.createElement('div');
-                                    let coin = document.createElement('img');
-
-                                    let memberNameId = doc.id;
-
-                                    memberProfileCont.classList.add('row');
-                                    memberProfileCont.classList.add('gray-border')
-                                    memberNameCont.classList.add("row");
-                                    memberPointCont.classList.add('row');
-                                    memberName.classList.add("big-text");
-                                    memberName.classList.add("blue-text");
-                                    memberPoint.classList.add("big-text")
-
-
-                                    memberContainer.appendChild(memberProfileCont)
-
-                                    memberProfileCont.appendChild(memberNameCont);
-                                    memberProfileCont.appendChild(memberPointCont);
-                                    memberNameCont.appendChild(memberName);
-                                    memberPointCont.appendChild(memberPoint);
-                                    memberPointCont.appendChild(coin);
-
-                                    memberName.innerHTML = doc.data().name;
-
-                                    if (!doc.data().point) {
-                                        memberPoint.innerHTML = "0"
-                                    } else {
-                                        memberPoint.innerHTML = doc.data().point
-                                    }
-                                    coin.setAttribute("src", "./assets/Coin.svg")
-
-                                    memberProfileCont.onclick = async() => {
-                                        console.log(tasknamee)
-                                        console.log(groupId)
-                                        await db.collection(`groups/${groupId}/tasks`).where("TaskName", "==", tasknamee)
-                                            .get().then((querySnapshot) => {
-                                                querySnapshot.forEach((docs) => {
-                                                    docs.ref.update({
-                                                        AssignedUser: memberNameId,
-                                                        Status: "inprogress"
-                                                    })
-                                                })
-                                            })
-                                        assignKidModal.style.display = "none"
-                                        let infomodalcont = document.getElementById("infomodalcont");
-                                        infomodalcont.style.display = "none"
-                                    }
-
-                                }
+    
+                if (doc.data().Status === 'inreview') {
+                    didTaskButton.style.display = "block"
+                } else {
+                    didTaskButton.style.display = "none"
+                }
+    
+                didTaskButton.onclick = () => {
+                    db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
+                        Status: 'Done',
+                    }).then(() => {
+                        let taskPoint = doc.data().TaskPoint;
+                        db.collection('users').doc(doc.data().AssignedUser).get().then((docs) => {
+                            let point = docs.data().point
+                            let newPoint;
+                            newPoint = Number(taskPoint) + Number(point)
+                            db.collection('users').doc(doc.data().AssignedUser).update({
+                                point:newPoint,
                             })
                         })
-                })
-                let closeAssignKidsModal = document.getElementById("closeAssignKidsModal");
-                closeAssignKidsModal.onclick = () => {
-                    assignKidModal.style.display = "none";
+                        let infomodalcont = document.getElementById("infomodalcont");
+                        infomodalcont.style.display = "none"
+                    })
                 }
-
+    
+                deleteTaskButton.onclick = () => {
+                    console.log(doc.data())
+                    deleteModalScreen.classList.remove("none")
+                }
+    
+    
+                deleteTask.onclick = () => {
+                    db.collection(`groups/${groupId}/tasks`).doc(doc.id).delete().then(() => {
+                        console.log('deleted data')
+                        let taskInfoMenu = document.getElementById("taskInfoMenu");
+    
+                        infomodalcont.style.display = "none"
+                        deleteModalScreen.classList.add("none")
+                        taskInfoMenu.classList.add('none')
+    
+    
+                    })
+                }
+    
+                editTaskButton.onclick = () => {
+                    // modalname.setAttribute("contenteditable", "true")
+    
+                    let finishedEditButton = document.getElementById("finishedEditButton")
+                    finishedEditButton.classList.remove('none')
+                    let taskInfoMenu = document.getElementById("taskInfoMenu");
+                    taskInfoMenu.classList.add('none')
+    
+                    modalname.setAttribute("contenteditable", 'true')
+                    modalpoint.setAttribute("contenteditable", 'true')
+                    modaldesc.setAttribute("contenteditable", 'true')
+    
+                    finishedEditButton.onclick = async() => {
+                        await db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
+                            TaskName: modalname.innerHTML,
+                            TaskPoint: modalpoint.innerHTML,
+                            TaskDes: modaldesc.innerHTML,
+                        })
+                        finishedEditButton.classList.add('none')
+                        console.log('dun')
+    
+                    }
+                }
+                assignKidButton.onclick = () => {
+                    let groupId;
+                    let assignKidModal = document.getElementById("assign-kids-modal-screen");
+                    assignKidModal.style.display = "flex";
+                    console.log('wut')
+                    console.log(doc.data())
+                    console.log(user.uid)
+                    let userUid = user.uid
+                    let userGroup = db.collection('users').doc(userUid);
+                    userGroup.get().then((doc) => {
+                        groupId = doc.data().groupId;
+                        db.collection('users').where("groupId", "==", groupId)
+                            .get().then((querySnapshot) => {
+                                let memberContainer = document.getElementById("members-container");
+                                memberContainer.innerHTML = ''
+                                querySnapshot.forEach((doc) => {
+                                    if (doc.data().role == 'kid') {
+                                        console.log(doc.data().name)
+                                        let memberProfileCont = document.createElement('div');
+                                        let memberNameCont = document.createElement('div');
+                                        let memberName = document.createElement('div')
+                                        let memberPointCont = document.createElement('div');
+                                        let memberPoint = document.createElement('div');
+                                        let coin = document.createElement('img');
+    
+                                        let memberNameId = doc.id;
+    
+                                        memberProfileCont.classList.add('row');
+                                        memberProfileCont.classList.add('gray-border')
+                                        memberNameCont.classList.add("row");
+                                        memberPointCont.classList.add('row');
+                                        memberName.classList.add("big-text");
+                                        memberName.classList.add("blue-text");
+                                        memberPoint.classList.add("big-text")
+    
+    
+                                        memberContainer.appendChild(memberProfileCont)
+    
+                                        memberProfileCont.appendChild(memberNameCont);
+                                        memberProfileCont.appendChild(memberPointCont);
+                                        memberNameCont.appendChild(memberName);
+                                        memberPointCont.appendChild(memberPoint);
+                                        memberPointCont.appendChild(coin);
+    
+                                        memberName.innerHTML = doc.data().name;
+    
+                                        if (!doc.data().point) {
+                                            memberPoint.innerHTML = "0"
+                                        } else {
+                                            memberPoint.innerHTML = doc.data().point
+                                        }
+                                        coin.setAttribute("src", "./assets/Coin.svg")
+    
+                                        memberProfileCont.onclick = async() => {
+                                            console.log(tasknamee)
+                                            console.log(groupId)
+                                            await db.collection(`groups/${groupId}/tasks`).where("TaskName", "==", tasknamee)
+                                                .get().then((querySnapshot) => {
+                                                    querySnapshot.forEach((docs) => {
+                                                        docs.ref.update({
+                                                            AssignedUser: memberNameId,
+                                                            Status: "inprogress"
+                                                        })
+                                                    })
+                                                })
+                                            assignKidModal.style.display = "none"
+                                            let infomodalcont = document.getElementById("infomodalcont");
+                                            infomodalcont.style.display = "none"
+                                        }
+    
+                                    }
+                                })
+                            })
+                    })
+                    let closeAssignKidsModal = document.getElementById("closeAssignKidsModal");
+                    closeAssignKidsModal.onclick = () => {
+                        assignKidModal.style.display = "none";
+                    }
+    
+                }
+    
+                if (assigneduserr) {
+                    modaluser.innerHTML = assigneduserrName;
+                } else {
+                    modaluser.innerHTML = 'User'
+                }
+                modalpoint.innerHTML = taskpointt ? taskpointt : 0;
+                // modalstatus.innerHTML = statuss;
+                modaldesc.innerHTML = taskdess;
+                modaldate.innerHTML = datee;
+                modalname.innerHTML = tasknamee;
+    
+    
+    
+                // document.getElementById('nope').onclick = () => {
+                //     deletemodal.style.display = "none";
+                // }
+            }
+            window.onclick = (event) => {
+                let modal = document.getElementById("infomodalcont");
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
             }
 
-            if (assigneduserr) {
-                modaluser.innerHTML = assigneduserrName;
-            } else {
-                modaluser.innerHTML = 'User'
-            }
-            modalpoint.innerHTML = taskpointt ? taskpointt : 0;
-            // modalstatus.innerHTML = statuss;
-            modaldesc.innerHTML = taskdess;
-            modaldate.innerHTML = datee;
-            modalname.innerHTML = tasknamee;
-
-
-
-            // document.getElementById('nope').onclick = () => {
-            //     deletemodal.style.display = "none";
-            // }
-        }
-        window.onclick = (event) => {
-            let modal = document.getElementById("infomodalcont");
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
         }
     });
 }
