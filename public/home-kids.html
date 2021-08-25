@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900" rel="stylesheet">
     <link rel="stylesheet" href="./style/dropdown.css" />
     <link rel="stylesheet" href="./style/header-footer.css" />
     <link rel="stylesheet" href="./style/home-kids.css" />
@@ -96,7 +97,7 @@
                                 </button>
 
                                 <button onclick="changeTaskDone()" class="assign-task-btn row" id="doneTask">
-                                    <div>Duussan</div>
+                                    <div>DДууссан</div>
                                 </button>
                             </div>
                         </div>
@@ -171,7 +172,36 @@
 
                     <div class="members_text">Гишүүд</div>
                 </div>
-                <div id="message" class="none">message</div>
+
+                <!-- MESSENGER STARTS -->
+                <div class="none column messenger" style="height: 100%;" id="message">
+                    <div class="send-chat-cont column center">
+                        <div> Family</div>
+                    </div>
+                    <div id="screen" class="content">
+                        <div class="chat-ind">
+                            <div class="user-pic"></div>
+                            <div class="chat-container">
+                                <div class="user">Username</div>
+                                <div class="chat bubble">Lorem Ipsum </div>
+                                <!-- <button class="buttonC">X</button> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="send-chat-cont">
+                        <div class="center row send-chat">
+                            <span id="chat" placeholder="Мессеж бичих ..." contenteditable></span>
+                            <button id="sendButn" class="row center">
+                                <span class="material-icons">
+                                    send
+                                    </span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- MESSENGER ENDS -->
             </div>
         </div>
         <!-- FOOTER START -->

@@ -9,7 +9,7 @@ let message = document.getElementById("message");
 
 let user;
 let groupId;
-
+let userDoc;
 const displaytask = () => {
     task.classList.remove("none");
     wishlist.classList.add("none");
@@ -97,14 +97,29 @@ const remove = () => {
     taskmodal.style.display = "none";
 }
 
-const renderTasks = (docs) => {
+const renderTasks = async(docs) => {
     let taskcontainer = document.getElementById("taskcontainer");
     taskcontainer.innerHTML = "";
-    docs.forEach((doc) => {
+    await docs.forEach(async(doc) => {
         // console.log(doc.data());
         let data = doc.data();
         let taskpointt = doc.data().TaskPoint;
         let assigneduserr = doc.data().AssignedUser;
+        let assigneduserrName
+        if (assigneduserr) {
+            assigneduserrName = await db.collection('users').doc(doc.data().AssignedUser).get();
+
+        }
+        console.log(assigneduserrName);
+
+        assigneduserrName = assigneduserrName?.data()?.name;
+        console.log(assigneduserrName);
+        // db.collection('users').doc(doc.data().AssignedUser).get().then((docs) => {
+        //     assigneduserrName = docs.data().name
+        //     console.log(docs.data().name)
+
+        // })
+
         let datee = convertDate(doc.data().CreatedAt.toDate());
         let statuss = data.Status;
         let tasknamee = data.TaskName;
@@ -164,7 +179,12 @@ const renderTasks = (docs) => {
         taskdate.innerHTML = datee;
         taskname.innerHTML = tasknamee;
         point.innerHTML = taskpointt;
-        assigneduser.innerHTML = assigneduserr;
+        if (assigneduserr) {
+            assigneduser.innerHTML = assigneduserrName;
+        } else {
+            assigneduser.innerHTML = assigneduserr;
+
+        }
 
 
         taskbody.style.cursor = "pointer";
@@ -216,6 +236,15 @@ const renderTasks = (docs) => {
                 db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
                     Status: 'Done',
                 }).then(() => {
+                    let taskPoint = doc.data().TaskPoint;
+                    db.collection('users').doc(doc.data().AssignedUser).get().then((docs) => {
+                        let point = docs.data().point
+                        let newPoint;
+                        newPoint = Number(taskPoint) + Number(point)
+                        db.collection('users').doc(doc.data().AssignedUser).update({
+                            point:newPoint,
+                        })
+                    })
                     let infomodalcont = document.getElementById("infomodalcont");
                     infomodalcont.style.display = "none"
                 })
@@ -288,6 +317,8 @@ const renderTasks = (docs) => {
                                     let memberPoint = document.createElement('div');
                                     let coin = document.createElement('img');
 
+                                    let memberNameId = doc.id;
+
                                     memberProfileCont.classList.add('row');
                                     memberProfileCont.classList.add('gray-border')
                                     memberNameCont.classList.add("row");
@@ -321,7 +352,7 @@ const renderTasks = (docs) => {
                                             .get().then((querySnapshot) => {
                                                 querySnapshot.forEach((docs) => {
                                                     docs.ref.update({
-                                                        AssignedUser: memberName.innerHTML,
+                                                        AssignedUser: memberNameId,
                                                         Status: "inprogress"
                                                     })
                                                 })
@@ -343,7 +374,7 @@ const renderTasks = (docs) => {
             }
 
             if (assigneduserr) {
-                modaluser.innerHTML = assigneduserr;
+                modaluser.innerHTML = assigneduserrName;
             } else {
                 modaluser.innerHTML = 'User'
             }
@@ -534,7 +565,9 @@ firebase.auth().onAuthStateChanged((u) => {
         let userGroup = db.collection('users').doc(userUid);
         userGroup.get().then((doc) => {
             groupId = doc.data().groupId;
-            db.collection(`groups/${groupId}/tasks`).where("Status", "!=", "Done")
+            userDoc = doc.data()
+            
+            db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc')
                 .onSnapshot((docs) => {
                     console.log("here")
                     renderTasks(docs);
@@ -544,10 +577,17 @@ firebase.auth().onAuthStateChanged((u) => {
 
                 renderWishlist(querySnapshot)
             })
-        }).then(() => {
-            console.log("render success");
-        }).catch((error) => {
-            console.log(error);
+
+            // MESSENGER CHAT
+
+            db.collection(`groups/${groupId}/chats`).orderBy("time", "desc").get().then((docs) => {
+                screen.innerHTML = ""
+                docs.docs.forEach((doc) => {
+                    renderChats(doc)
+                });
+            })
+
+            // MESSENGER CHAT
         })
     } else {
         console.log("please login")
@@ -673,4 +713,73 @@ const showTaskInfoMenu = () => {
     } else {
         taskInfoMenu.classList.add("none")
     }
+}
+
+// MESSENGER CHAT
+let chat = document.getElementById("chat");
+let screen = document.getElementById("screen");
+let sendBut = document.getElementById("sendButn");
+sendBut.addEventListener('click', () => {
+    if (chat.value !== '') {
+        db.collection(`groups/${groupId}/chats`).doc().set({
+            user: user.uid,
+            text: chat.innerHTML.trim(),
+            time: firebase.firestore.FieldValue.serverTimestamp()
+        }).then((docRef) => {
+            let row = document.createElement("div");
+            let user = document.createElement("div");
+            let userName = document.createElement("div");
+            let chatContainer = document.createElement("div");
+            let chatEl = document.createElement("div");
+    
+            userName.innerHTML = userDoc.name
+            chatEl.innerHTML = chat.innerHTML.trim()
+            userName.setAttribute('class', 'user')
+            row.setAttribute("class", "chat-ind")
+            user.setAttribute("class", "user-pic")
+            chatEl.classList.add('chat', 'bubble')
+            chatContainer.setAttribute("class", "chat-container")
+            chatContainer.classList.add("row")
+    
+            row.appendChild(user)
+            row.appendChild(chatContainer)
+            chatContainer.appendChild(userName)
+            chatContainer.appendChild(chatEl)
+            screen.prepend(row)
+
+            chat.innerHTML = ''
+        }).catch((error) => {
+            console.error("Error adding document: ", error);
+        });
+    }
+})
+
+const renderChats = (doc) => {
+let data=doc.data();
+    db.doc(`users/${data.user}`).get().then((doc) => {
+        let userData = doc.data()
+
+        let row = document.createElement("div");
+        let user = document.createElement("div");
+        let userName = document.createElement("div");
+        let chatContainer = document.createElement("div");
+        let chat = document.createElement("div");
+
+        userName.innerHTML = doc.data().name
+        chat.innerHTML = data.text
+        userName.setAttribute('class', 'user')
+
+        row.setAttribute("class", "chat-ind")
+        user.setAttribute("class", "user-pic")
+        chat.classList.add('chat', 'bubble')
+        chatContainer.setAttribute("class", "chat-container")
+
+        row.appendChild(user)
+        row.appendChild(chatContainer)
+        chatContainer.appendChild(userName)
+        chatContainer.appendChild(chat)
+        screen.appendChild(row)
+
+
+    })
 }

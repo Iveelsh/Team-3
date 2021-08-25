@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="./style/dropdown.css" />
+    <link rel="stylesheet" href="./style/header-footer.css" />
+    <link rel="stylesheet" href="./style/groupCreateJoin.css" />
+</head>
+
+<body id="body">
+    <div class="everything">
+        <!-- HEADER START -->
+        <div class="header">
+            <img src="./assets/logo.svg" class="logo" />
+            <div class="header-text">My family</div>
+            <!-- PROFILE DROPDOWN -->
+            <div class="profile-dropdown-cont">
+                <button class="profile-btn" onclick="displayProfileDrop()">
+            <img src="./assets/profile.svg" width="34px" />
+          </button>
+                <div class="profile-dropdown-content">
+                    <div><span class="material-icons">person</span>
+                        <div class="underline">Profile</div>
+                    </div>
+                    <div><span class="material-icons">settings</span>
+                        <div class="underline">Settings</div>
+                    </div>
+                    <div onclick="logOut()">
+                        <span class="material-icons">logout</span>
+                        <div class="underline">Log out</div>
+                    </div>
+                </div>
+            </div>
+            <!-- PROFILE DROPDOWN -->
+        </div>
+        <!-- HEADER END-->
+
+        <!-- CONTENT STARTS -->
+        <div class="main">
+            <div class="group-create group-toggled center">
+                <div class="creategroup-form">
+                    <div class="small-container-text text-margin">Hervee ta etseg eh bol group uusgene uu.</div>
+                    <div class="small-container-text">Бүлгэм үүсгэх</div>
+                    <!-- <input id="groupName" class="input-groupname small-container-margin" type="text" placeholder="Group name" /> -->
+                    <input id="groupName" class="gray-border small-text" type="text" placeholder="Group name" />
+                    <div onclick="createGroup()" class="urgelj-button">Үргэлжлүүлэх<span class="material-icons">
+                        east
+                        </span></div>
+                    <div class="text">
+                        <div>Hervee ta huuhed bol bulgemd negdene uu.</div>
+                    </div>
+                    <div id="button" onclick="showJoinForm()" class="groupjoin-button">Бүлгэмд нэгдэх</div>
+                </div>
+                <!-- <div class="group-form create">
+                    <div class="text">
+                        <div>Hervee ta huuhed bol bulgemd negdene uu.</div>
+                    </div>
+                    <div id="button" onclick="showJoinForm()" class="groupjoin-button">Bulgem negdeh</div>
+                </div> -->
+            </div>
+            <div class="group-join group-hide-right center">
+                <div class="group-form join">
+                    <div class="small-container-text text-margin">Hervee ta huuhed bol bulgemd negdene uu</div>
+                    <div class="small-container-text">Бүлгэмд нэгдэх</div>
+                    <input id="groupCode" class="input-groupname small-container-margin" type="text" placeholder="Bulgem code" />
+                    <div onclick="joinGroup()" class="urgelj-button">Үргэлжлүүлэх<span class="material-icons">
+                        east
+                        </span></div>
+                    <div class="text">
+                        <!-- <div class="text-margin">Sain baina uu</div> -->
+                        <div>Hervee ta etseg eh bol bulgemd uusgene uu.</div>
+                    </div>
+                    <div id=" button " onclick="showCreateForm() " class="groupjoin-button ">Бүлгэм үүсгэх</div>
+
+                </div>
+                <!-- <div class="joingroup-form">
+                    <div class="small-container-text text-margin">Hervee ta huuhed bol bulgemd negdene uu</div>
+                    <div class="small-container-text">Bulgemd negdeh</div>
+                    <input id="groupCode" class="input-groupname small-container-margin" type="text" placeholder="Bulgem code" />
+                    <div onclick="joinGroup()" class="urgelj-button">Urgeljluuleh<span class="material-icons">
+                        east
+                        </span></div>
+
+                </div> -->
+            </div>
+        </div>
+
+        <!-- CONTENT ENDS -->
+
+        <!-- FOOTER START -->
+        <div class="footer">
+            <img src="./assets/logo.svg" class="logo-footer" />
+            <div class="footer-text">
+                <a class="">Бидний Тухай</a>
+                <a class="aboutus holboo">Холбоо Барих</a>
+                <a class="aboutus asuultuud">Асуултууд</a>
+            </div>
+            <div class="copyright">
+                <div class="longline"></div>
+                <div>© 2021</div>
+            </div>
+        </div>
+    </div>
+    <!-- FOOTER END -->
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
+
+<script src="./js/firebase.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/mn.min.js" integrity="sha512-NXfKWzo7Fc6s2DkGrbmby3OwtW110lOabB+gdPAfemN3JycsfoBr89lElJzrYKIKQ512l0WNQg+aT9fLBPmlmA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="./js/utility.js"></script>
+
+<script src="./js/groupCreateJoin.js"></script>
+
+</html>
