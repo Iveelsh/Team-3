@@ -43,12 +43,16 @@ firebase.auth().onAuthStateChanged((u) => {
             email.innerHTML = doc.data().mail;
             phone.innerHTML = doc.data().phoneNumber;
             role.innerHTML = doc.data().role;
-            document.getElementById('profile-pic').src = doc.data().profilePic
+            if(doc.data().profilePic){
+                document.getElementById('profile-pic').src = doc.data().profilePic
+            }else{
+                document.getElementById('profile-pic').src = './assets/poroooo.svg'
+            }
             console.log(doc.data())
         });
     } else {
         console.log("please login")
-        window.location.href = "../html/landingPage.html"
+        window.location.href = "index.html"
     }
 });
 
