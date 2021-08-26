@@ -220,7 +220,14 @@ const renderTasks = async(docs) => {
 
 
                 if (doc.data().AssignedUser) {
-                    taskProfile.removeAttribute("src")
+                    db.collection('users').doc(doc.data().AssignedUser).get().then((doc) => {
+                        if(doc.data().profilePic){
+                            taskProfile.src = doc.data().profilePic
+                        }else{
+                            taskProfile.src = "./assets/poroooo.svg"
+                        }
+                        console.log(doc.data())
+                    })
                     assignKidButton.style.display = "none";
                 } else {
                     taskProfile.src = "./assets/noUserProfile.svg";
