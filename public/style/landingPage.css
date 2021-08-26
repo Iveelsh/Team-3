@@ -190,45 +190,110 @@
 
 .pos1 {
     position: absolute;
-    top: 185px;
-    left: -30px;
+    top: 164px;
+    left: 1027px;
+    width: 54px;
+    height: 54px;
 }
 .pos2 {
     position: absolute;
-    top: 185px;
-    left: 790px;
+    top: 400px;
+    left: 18px;
+    width: 55px;
+    height: 55px;
 }
 .pos3 {
     position: absolute;
-    top: 167px;
-    left: 1400px;
+    top: 989px;
+    left: 619px;
+    width: 81px;
+    height: 81px;
 }
 .pos4 {
     position: absolute;
-    top: 841px;
-    left: 347px;
+    top: 1140px;
+    left: 6.5px;
+    width: 135px;
+    height: 135px;
 }
 .pos5 {
     position: absolute;
-    top: 1140px;
-    left: 30px;
+    top: 1761px;
+    left: 360px;
+    width: 64px;
+    height: 64px;
 }
 .pos6 {
     position: absolute;
-    top: 1441px;
-    left: 1454px;
+    top: 2524px;
+    left: 1300px;
+    width: 60px;
+    height: 60px;
 }
 .pos7 {
     position: absolute;
-    top: 1724px;
-    left: 611px;
+    top: 3132px;
+    left: 303px;
+    width: 75px;
+    height: 75px;
 }
 .pos8 {
     position: absolute;
-    top: 2037px;
-    left: -80px;
+    top: 4127px;
+    left: 910px;
+    width: 73px;
+    height: 73px;
+}
+.pos9 {
+    position: absolute;
+    top: 4826px;
+    left: 50px;
+    width: 36px;
+    height: 61px;
+}
+.pos10 {
+    position: absolute;
+    top: 4894px;
+    left: 1259px;
+    width: 44px;
+    height: 56px;
+}
+.pos11 {
+    position: absolute;
+    top: 5629px;
+    left: 84px;
+    width: 156px;
+    height: 136px;
+}
+.pos12 {
+    position: absolute;
+    top: 6128px;
+    left: 810px;
+    width: 47px;
+    height: 47px;
+}
+.pos13 {
+    position: absolute;
+    top: 6855px;
+    left: 331px;
+    width: 59px;
+    height: 59px;
+}
+.pos14 {
+    position: absolute;
+    top: 7101px;
+    left: 1212px;
+    width: 53px;
+    height: 53px;
 }
 
+.pos15 {
+    position: absolute;
+    top: 2037px;
+    left: -80px;
+    width: 80px;
+    height: 64px;
+}
 .tutorial {
     display: flex;
     margin-top: 400px;

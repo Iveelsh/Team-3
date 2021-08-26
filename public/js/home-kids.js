@@ -772,3 +772,7 @@ function copyToClipboard() {
         console.error('Async: Could not copy text: ', err);
     });
 }
+
+const goToProfile = () => {
+    window.location.href = "profile.html"
+}
