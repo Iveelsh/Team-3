@@ -571,6 +571,8 @@ sendBut.addEventListener('click', () => {
             userName.setAttribute('class', 'user')
             row.setAttribute("class", "chat-ind")
             user.setAttribute("class", "user-pic")
+            user.style.backgroundImage = `url(${userDoc.profilePic ? userDoc.profilePic : './assets/poroooo.svg'})`
+            user.style.backgroundSize = `contain`
             chatEl.classList.add('chat', 'bubble')
             chatContainer.setAttribute("class", "chat-container")
             chatContainer.classList.add("row")
@@ -605,6 +607,8 @@ const renderChats = (doc) => {
 
         row.setAttribute("class", "chat-ind")
         user.setAttribute("class", "user-pic")
+        user.style.backgroundImage=`url(${userData.profilePic ? userData.profilePic : './assets/poroooo.svg'})`
+        user.style.backgroundSize=`contain`
         chat.classList.add('chat', 'bubble')
         chatContainer.setAttribute("class", "chat-container")
 
@@ -664,8 +668,10 @@ const creategroupuserbody = (memberId, deleteId) => {
             groupuserbody.classList.add("groupuserbody");
             roww.classList.add("roww");
             row.classList.add("row");
-            proimg.src = "./assets/poroooo.svg";
+            proimg.src = `${data.profilePic ? data.profilePic : './assets/poroooo.svg'}`;
             proimg.style.marginLeft = "15px";
+            proimg.style.width = '53px'
+            proimg.style.height = '53px'
             column.classList.add("column");
             role.classList.add("role");
             username.classList.add("username");

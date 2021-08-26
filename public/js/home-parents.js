@@ -103,42 +103,42 @@ const renderTasks = async(docs) => {
     await docs.forEach(async(doc) => {
         // console.log(doc.data());
         let data = doc.data();
-        if(data.Status != 'Done'){
+        if (data.Status != 'Done') {
             let taskpointt = doc.data().TaskPoint;
             let assigneduserr = doc.data().AssignedUser;
             let assigneduserrName
             if (assigneduserr) {
                 assigneduserrName = await db.collection('users').doc(doc.data().AssignedUser).get();
-    
+
             }
             console.log(assigneduserrName);
-    
+
             assigneduserrName = assigneduserrName?.data()?.name;
             console.log(assigneduserrName);
             // db.collection('users').doc(doc.data().AssignedUser).get().then((docs) => {
             //     assigneduserrName = docs.data().name
             //     console.log(docs.data().name)
-    
+
             // })
-    
+
             let datee = convertDate(doc.data().CreatedAt.toDate());
             let statuss = data.Status;
             let tasknamee = data.TaskName;
             let taskdess = data.TaskDes;
-    
-    
+
+
             let taskinfomodalcont = document.createElement("div");
             let taskmodal = document.createElement("div");
             taskinfomodalcont.classList.add("modal");
             taskinfomodalcont.appendChild(taskmodal);
-    
-    
-    
+
+
+
             let taskcontainer = document.getElementById("taskcontainer");
             let deleteTaskButton = document.getElementById('deleteTaskButton');
             let deleteTask = document.getElementById("deleteTask")
-    
-    
+
+
             let taskbody = document.createElement("div");
             let taskdate = document.createElement("span");
             let taskrow = document.createElement("div");
@@ -148,25 +148,25 @@ const renderTasks = async(docs) => {
             let point = document.createElement("div");
             let wall = document.createElement("div");
             let assigneduser = document.createElement("div");
-    
+
             taskcontainer.classList.add("taskcontainer");
-    
+
             taskbody.classList.add("task-body");
             taskbody.classList.add("column");
-    
+
             taskdate.classList.add("date");
             taskdate.classList.add("blue-text");
-    
+
             taskname.classList.add("blue-text");
             taskname.classList.add("bold");
-    
+
             taskrow.classList.add("row");
             taskrow.classList.add("task-general");
             taskitem.classList.add("row");
             taskitem.classList.add("info");
             coinicon.src = "./assets/Coin.svg"
             wall.innerHTML = "|";
-    
+
             taskcontainer.appendChild(taskbody);
             taskbody.appendChild(taskdate);
             taskbody.appendChild(taskrow);
@@ -176,7 +176,7 @@ const renderTasks = async(docs) => {
             taskitem.appendChild(point);
             taskitem.appendChild(wall);
             taskitem.appendChild(assigneduser);
-    
+
             taskdate.innerHTML = datee;
             taskname.innerHTML = tasknamee;
             point.innerHTML = taskpointt;
@@ -184,10 +184,10 @@ const renderTasks = async(docs) => {
                 assigneduser.innerHTML = assigneduserrName;
             } else {
                 assigneduser.innerHTML = assigneduserr;
-    
+
             }
-    
-    
+
+
             taskbody.style.cursor = "pointer";
             taskbody.addEventListener('mouseover', () => {
                 taskbody.classList.add("texthover");
@@ -198,7 +198,7 @@ const renderTasks = async(docs) => {
                 taskbody.classList.remove("texthover");
                 taskdate.classList.remove("texthover");
             });
-    
+
             taskbody.onclick = async() => {
                 let userName;
                 await db.collection('users').doc(user.uid).get().then((docs) => {
@@ -217,8 +217,8 @@ const renderTasks = async(docs) => {
                 let deleteModalScreen = document.getElementById("deleteModalScreen")
                 let editTaskButton = document.getElementById("editTaskButton");
                 let taskProfile = document.getElementById("picture")
-    
-    
+
+
                 if (doc.data().AssignedUser) {
                     taskProfile.removeAttribute("src")
                     assignKidButton.style.display = "none";
@@ -226,13 +226,13 @@ const renderTasks = async(docs) => {
                     taskProfile.src = "./assets/noUserProfile.svg";
                     assignKidButton.style.display = "";
                 }
-    
+
                 if (doc.data().Status === 'inreview') {
                     didTaskButton.style.display = "block"
                 } else {
                     didTaskButton.style.display = "none"
                 }
-    
+
                 didTaskButton.onclick = () => {
                     db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
                         Status: 'Done',
@@ -243,45 +243,45 @@ const renderTasks = async(docs) => {
                             let newPoint;
                             newPoint = Number(taskPoint) + Number(point)
                             db.collection('users').doc(doc.data().AssignedUser).update({
-                                point:newPoint,
+                                point: newPoint,
                             })
                         })
                         let infomodalcont = document.getElementById("infomodalcont");
                         infomodalcont.style.display = "none"
                     })
                 }
-    
+
                 deleteTaskButton.onclick = () => {
                     console.log(doc.data())
                     deleteModalScreen.classList.remove("none")
                 }
-    
-    
+
+
                 deleteTask.onclick = () => {
                     db.collection(`groups/${groupId}/tasks`).doc(doc.id).delete().then(() => {
                         console.log('deleted data')
                         let taskInfoMenu = document.getElementById("taskInfoMenu");
-    
+
                         infomodalcont.style.display = "none"
                         deleteModalScreen.classList.add("none")
                         taskInfoMenu.classList.add('none')
-    
-    
+
+
                     })
                 }
-    
+
                 editTaskButton.onclick = () => {
                     // modalname.setAttribute("contenteditable", "true")
-    
+
                     let finishedEditButton = document.getElementById("finishedEditButton")
                     finishedEditButton.classList.remove('none')
                     let taskInfoMenu = document.getElementById("taskInfoMenu");
                     taskInfoMenu.classList.add('none')
-    
+
                     modalname.setAttribute("contenteditable", 'true')
                     modalpoint.setAttribute("contenteditable", 'true')
                     modaldesc.setAttribute("contenteditable", 'true')
-    
+
                     finishedEditButton.onclick = async() => {
                         await db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
                             TaskName: modalname.innerHTML,
@@ -290,7 +290,7 @@ const renderTasks = async(docs) => {
                         })
                         finishedEditButton.classList.add('none')
                         console.log('dun')
-    
+
                     }
                 }
                 assignKidButton.onclick = () => {
@@ -317,9 +317,9 @@ const renderTasks = async(docs) => {
                                         let memberPointCont = document.createElement('div');
                                         let memberPoint = document.createElement('div');
                                         let coin = document.createElement('img');
-    
+
                                         let memberNameId = doc.id;
-    
+
                                         memberProfileCont.classList.add('row');
                                         memberProfileCont.classList.add('gray-border')
                                         memberNameCont.classList.add("row");
@@ -327,25 +327,25 @@ const renderTasks = async(docs) => {
                                         memberName.classList.add("big-text");
                                         memberName.classList.add("blue-text");
                                         memberPoint.classList.add("big-text")
-    
-    
+
+
                                         memberContainer.appendChild(memberProfileCont)
-    
+
                                         memberProfileCont.appendChild(memberNameCont);
                                         memberProfileCont.appendChild(memberPointCont);
                                         memberNameCont.appendChild(memberName);
                                         memberPointCont.appendChild(memberPoint);
                                         memberPointCont.appendChild(coin);
-    
+
                                         memberName.innerHTML = doc.data().name;
-    
+
                                         if (!doc.data().point) {
                                             memberPoint.innerHTML = "0"
                                         } else {
                                             memberPoint.innerHTML = doc.data().point
                                         }
                                         coin.setAttribute("src", "./assets/Coin.svg")
-    
+
                                         memberProfileCont.onclick = async() => {
                                             console.log(tasknamee)
                                             console.log(groupId)
@@ -362,7 +362,7 @@ const renderTasks = async(docs) => {
                                             let infomodalcont = document.getElementById("infomodalcont");
                                             infomodalcont.style.display = "none"
                                         }
-    
+
                                     }
                                 })
                             })
@@ -371,9 +371,9 @@ const renderTasks = async(docs) => {
                     closeAssignKidsModal.onclick = () => {
                         assignKidModal.style.display = "none";
                     }
-    
+
                 }
-    
+
                 if (assigneduserr) {
                     modaluser.innerHTML = assigneduserrName;
                 } else {
@@ -384,9 +384,9 @@ const renderTasks = async(docs) => {
                 modaldesc.innerHTML = taskdess;
                 modaldate.innerHTML = datee;
                 modalname.innerHTML = tasknamee;
-    
-    
-    
+
+
+
                 // document.getElementById('nope').onclick = () => {
                 //     deletemodal.style.display = "none";
                 // }
@@ -569,7 +569,7 @@ firebase.auth().onAuthStateChanged((u) => {
         userGroup.get().then((doc) => {
             groupId = doc.data().groupId;
             userDoc = doc.data()
-            
+
             db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc')
                 .onSnapshot((docs) => {
                     console.log("here")
@@ -594,14 +594,14 @@ firebase.auth().onAuthStateChanged((u) => {
 
             //GROUP
             db.collection(`groups/${groupId}/members`)
-                    .onSnapshot((querySnapshot) => {
-                        document.getElementById("containerrr").innerHTML = "";
-                        querySnapshot.docs.forEach(doc => {
-                            let memberId = doc.data().member
-                            creategroupuserbody(memberId, doc.id)
+                .onSnapshot((querySnapshot) => {
+                    document.getElementById("containerrr").innerHTML = "";
+                    querySnapshot.docs.forEach(doc => {
+                        let memberId = doc.data().member
+                        creategroupuserbody(memberId, doc.id)
 
-                        })
-                    });
+                    })
+                });
         })
     } else {
         console.log("please login")
@@ -745,16 +745,19 @@ sendBut.addEventListener('click', () => {
             let userName = document.createElement("div");
             let chatContainer = document.createElement("div");
             let chatEl = document.createElement("div");
-    
+
             userName.innerHTML = userDoc.name
             chatEl.innerHTML = chat.innerHTML.trim()
             userName.setAttribute('class', 'user')
             row.setAttribute("class", "chat-ind")
             user.setAttribute("class", "user-pic")
+            user.style.backgroundImage = `url(${userDoc.profilePic ? userDoc.profilePic : './assets/poroooo.svg'})`
+            user.style.backgroundSize = `contain`
+            
             chatEl.classList.add('chat', 'bubble')
             chatContainer.setAttribute("class", "chat-container")
             chatContainer.classList.add("row")
-    
+
             row.appendChild(user)
             row.appendChild(chatContainer)
             chatContainer.appendChild(userName)
@@ -769,7 +772,7 @@ sendBut.addEventListener('click', () => {
 })
 
 const renderChats = (doc) => {
-let data=doc.data();
+    let data = doc.data();
     db.doc(`users/${data.user}`).get().then((doc) => {
         let userData = doc.data()
 
@@ -785,6 +788,8 @@ let data=doc.data();
 
         row.setAttribute("class", "chat-ind")
         user.setAttribute("class", "user-pic")
+        user.style.backgroundImage = `url(${userData.profilePic ? userData.profilePic : './assets/poroooo.svg'})`
+        user.style.backgroundSize = `contain`
         chat.classList.add('chat', 'bubble')
         chatContainer.setAttribute("class", "chat-container")
 
@@ -812,15 +817,8 @@ const creategroupuserbody = (memberId, deleteId) => {
 
     userGroup.get().then(doc => {
         let data = doc.data()
+        console.log(data)
         if (data) {
-
-            // let groupname = document.getElementById("groupname");
-            // let groupcode = document.getElementById("groupcode");
-            // code = doc.gruopname;
-            // namee = doc.joinCode;
-            // groupname.innerHTML = namee;
-            // groupcode.innerHTML = code;
-
             let container = document.getElementById("containerrr");
             let groupuserbody = document.createElement("div");
             let roww = document.createElement("div");
@@ -845,8 +843,10 @@ const creategroupuserbody = (memberId, deleteId) => {
             groupuserbody.classList.add("groupuserbody");
             roww.classList.add("roww");
             row.classList.add("row");
-            proimg.src = "./assets/poroooo.svg";
+            proimg.src = `${data.profilePic ? data.profilePic : './assets/poroooo.svg'}`;
             proimg.style.marginLeft = "15px";
+            proimg.style.width = '53px'
+            proimg.style.height = '53px'
             column.classList.add("column");
             role.classList.add("role");
             username.classList.add("username");
@@ -925,17 +925,17 @@ const creategroupuserbody = (memberId, deleteId) => {
             sidemenuabsolute.appendChild(menuitem);
             sidemenuabsolute.appendChild(menuitem2);
             sidemenuabsolute.appendChild(menuitem3);
-            
-            
+
+
             point.onclick = () => {
                 let sendPointButton = document.getElementById("sendPoint")
                 let pointAddKidModal = document.getElementById("pointAddKidModal");
                 pointAddKidModal.style.display = "block"
                 let kidPointEdit = document.getElementById("kidPointEdit");
-                if(doc.data().point){
+                if (doc.data().point) {
                     kidPointEdit.value = doc.data().point
                     console.log('ahah')
-                }else{
+                } else {
                     kidPointEdit.value = '0'
                 }
                 console.log(doc.data())
@@ -943,7 +943,7 @@ const creategroupuserbody = (memberId, deleteId) => {
                 sendPointButton.onclick = async() => {
                     let kidPointEdit = document.getElementById("kidPointEdit");
                     console.log(doc.data())
-                    if(kidPointEdit.value){
+                    if (kidPointEdit.value) {
                         await db.collection('users').doc(doc.id).update({
                             point: kidPointEdit.value,
                         }).then(() => {
@@ -953,7 +953,7 @@ const creategroupuserbody = (memberId, deleteId) => {
 
                         })
                     }
-                    
+
                 }
             }
 
@@ -985,9 +985,9 @@ function copyToClipboard() {
 
 // kjahfkuhsfabwhekjfuyai
 
-const pointAddKidModalClose =() => {
+const pointAddKidModalClose = () => {
     let pointAddKidModal = document.getElementById("pointAddKidModal");
-    pointAddKidModal .style.display = "none";
+    pointAddKidModal.style.display = "none";
     let kidPointEdit = document.getElementById("kidPointEdit");
     kidPointEdit.value = ''
 }
