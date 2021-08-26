@@ -5,7 +5,7 @@ firebase.auth().onAuthStateChanged((user) => {
         db.collection("users").doc(uid).get().then((doc) => {
             let data = doc.data();
             if (!data.groupId) {
-                window.location.href = "groupAdd.html"
+                window.location.href = "groupCreateJoin.html"
             } else {
                 if (data.role === "admin") {
                     window.location.href = "home-parents.html"
