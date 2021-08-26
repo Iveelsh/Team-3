@@ -175,6 +175,7 @@
     width: 100%;
     min-height: 500px;
     border-radius: 14px;
+    overflow-y: scroll;
 }
 
 .task-side {
@@ -433,7 +434,7 @@
     align-items: center;
 }
 
-#message {}
+/* #message {} */
 
 #screen {
     background-image: url('../assets/chat-bg.svg');

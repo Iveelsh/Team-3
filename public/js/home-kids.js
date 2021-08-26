@@ -205,7 +205,14 @@ const renderTasks = async(docs) => {
                 console.log(doc.data().AssignedUser)
     
                 if (doc.data().AssignedUser) {
-                    taskProfile.removeAttribute("src")
+                    db.collection('users').doc(doc.data().AssignedUser).get().then((doc) => {
+                        if(doc.data().profilePic){
+                            taskProfile.src = doc.data().profilePic
+                        }else{
+                            taskProfile.src = "./assets/poroooo.svg"
+                        }
+                        console.log(doc.data())
+                    })
     
                     if (doc.data().AssignedUser === userName) {
                         if (doc.data().Status === 'inreview') {
