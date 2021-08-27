@@ -250,7 +250,7 @@ const renderTasks = async(docs) => {
                             let newPoint;
                             newPoint = Number(taskPoint) + Number(point)
                             db.collection('users').doc(doc.data().AssignedUser).update({
-                                point: newPoint,
+                                point: newPoint.toString(),
                             })
                         })
                         let infomodalcont = document.getElementById("infomodalcont");
@@ -818,7 +818,7 @@ const creategroupuserbody = (memberId, deleteId) => {
         let groupName = docs.data().groupname;
         groupname.innerHTML = joinCode;
         groupcode.innerHTML = groupName;
-        console.log(docs.data())
+        // console.log(docs.data())
     })
 
 
@@ -894,10 +894,15 @@ const creategroupuserbody = (memberId, deleteId) => {
                 }
 
             }
-            menuitem3.onclick = () => {
+            menuitem3.onclick = async() => {
                 console.log('bulgemees hasah')
-                db.doc(`groups/${groupId}/members/${deleteId}`).delete()
-
+                userGroup.update({
+                    groupId: '',
+                    profilePic: '',
+                    role: '',
+                    point: '',
+                })
+                await db.doc(`groups/${groupId}/members/${deleteId}`).delete();
             }
 
             materialiconbluetext.innerHTML = "more_vert";
@@ -923,11 +928,14 @@ const creategroupuserbody = (memberId, deleteId) => {
             row.appendChild(column);
             column.appendChild(role);
             column.appendChild(username);
-            rowgroupuserpoint.appendChild(bigcoinimg);
-            rowgroupuserpoint.appendChild(point);
+            if(doc.data().role == 'kid'){
+
+                rowgroupuserpoint.appendChild(bigcoinimg);
+                rowgroupuserpoint.appendChild(point);
+            }
+                columnrelative.appendChild(materialiconbluetext);     
             // rowgroupuserpoint.appendChild(addcircleimg);
             rowgroupuserpoint.appendChild(columnrelative);
-            columnrelative.appendChild(materialiconbluetext);
             // columnrelative.appendChild(sidemenuabsolute);
             sidemenuabsolute.appendChild(menuitem);
             sidemenuabsolute.appendChild(menuitem2);

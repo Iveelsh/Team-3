@@ -662,7 +662,7 @@ const creategroupuserbody = (memberId, deleteId) => {
             let rowgroupuserpoint = document.createElement("div");
             let bigcoinimg = document.createElement("img");
             let point = document.createElement("div");
-            let addcircleimg = document.createElement("img");
+            // let addcircleimg = document.createElement("img");
             let columnrelative = document.createElement("div");
             let materialiconbluetext = document.createElement("span");
             let sidemenuabsolute = document.createElement("div");
@@ -688,7 +688,7 @@ const creategroupuserbody = (memberId, deleteId) => {
             bigcoinimg.style.height = "25px";
             bigcoinimg.style.width = "25px";
             point.style.paddingRight = "25px";
-            addcircleimg.src = "./assets/add_circle_black_24dp.svg";
+            // addcircleimg.src = "./assets/add_circle_black_24dp.svg";
             columnrelative.classList.add("column");
             columnrelative.classList.add("relative");
             materialiconbluetext.classList.add("material-icons");
@@ -698,7 +698,7 @@ const creategroupuserbody = (memberId, deleteId) => {
             menuitem.classList.add("menuitem1"); //tuuh
             menuitem2.classList.add("menuitem2"); //admin
             menuitem3.classList.add("menuitem3"); //bulgem
-            addcircleimg.style.cursor = "pointer";
+            // addcircleimg.style.cursor = "pointer";
 
             menuitem.onclick = () => {
                 console.log('tuuh')
@@ -744,14 +744,21 @@ const creategroupuserbody = (memberId, deleteId) => {
             row.appendChild(column);
             column.appendChild(role);
             column.appendChild(username);
-            rowgroupuserpoint.appendChild(bigcoinimg);
-            rowgroupuserpoint.appendChild(point);
-            rowgroupuserpoint.appendChild(addcircleimg);
+
+            if(doc.data().role == 'kid'){
+                rowgroupuserpoint.appendChild(bigcoinimg);
+                rowgroupuserpoint.appendChild(point);
+            }
+            
             rowgroupuserpoint.appendChild(columnrelative);
-            columnrelative.appendChild(materialiconbluetext);
-            // columnrelative.appendChild(sidemenuabsolute);
+                if(doc.data().role == "kid"){
+                    columnrelative.appendChild(sidemenuabsolute);
+                    columnrelative.appendChild(materialiconbluetext);     
+                }
             sidemenuabsolute.appendChild(menuitem);
-            sidemenuabsolute.appendChild(menuitem2);
+            // if(doc.data().role == 'kid'){
+            //     sidemenuabsolute.appendChild(menuitem2);
+            // }
             sidemenuabsolute.appendChild(menuitem3);
 
 
