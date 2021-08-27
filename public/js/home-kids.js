@@ -452,41 +452,45 @@ firebase.auth().onAuthStateChanged((u) => {
         let userUid = user.uid
         let userGroup = db.collection('users').doc(userUid);
         userGroup.get().then((doc) => {
-            groupId = doc.data().groupId;
-            db.collection(`groups/${groupId}/tasks`).where('Status', "!=", "Done").orderBy('Status', 'desc')
-                .onSnapshot((docs) => {
-                    renderTasks(docs);
-                })
-            db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
-                    document.getElementById("wish-container").innerHTML = "";
-                    renderWishlist(querySnapshot)
-                })
-                // MESSENGER CHAT
-
-            db.collection(`groups/${groupId}/chats`).orderBy("time", "desc").get().then((docs) => {
-                screen.innerHTML = ""
-                docs.docs.forEach((doc) => {
-                    renderChats(doc)
-                });
-            })
-
-            // MESSENGER CHAT ENDS
-
-            //GROUP
-            db.collection(`groups/${groupId}/members`)
-                    .onSnapshot((querySnapshot) => {
-                        document.getElementById("containerrr").innerHTML = "";
-                        querySnapshot.docs.forEach(doc => {
-                            let memberId = doc.data().member
-                            creategroupuserbody(memberId, doc.id)
-
-                        })
+            if(groupId = doc.data().groupId){
+                db.collection(`groups/${groupId}/tasks`).where('Status', "!=", "Done").orderBy('Status', 'desc')
+                    .onSnapshot((docs) => {
+                        renderTasks(docs);
+                    })
+                db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
+                        document.getElementById("wish-container").innerHTML = "";
+                        renderWishlist(querySnapshot)
+                    })
+                    // MESSENGER CHAT
+    
+                db.collection(`groups/${groupId}/chats`).orderBy("time", "desc").get().then((docs) => {
+                    screen.innerHTML = ""
+                    docs.docs.forEach((doc) => {
+                        renderChats(doc)
                     });
+                })
+    
+                // MESSENGER CHAT ENDS
+    
+                //GROUP
+                db.collection(`groups/${groupId}/members`)
+                        .onSnapshot((querySnapshot) => {
+                            document.getElementById("containerrr").innerHTML = "";
+                            querySnapshot.docs.forEach(doc => {
+                                let memberId = doc.data().member
+                                creategroupuserbody(memberId, doc.id)
+    
+                            })
+                        });
+            }else{
+                window.location.href = 'groupCreateJoin.html';
+            }
         }).then(() => {
             console.log("render success");
         }).catch((error) => {
             console.log(error);
         })
+            
     } else {
         console.log("please login")
         window.location.href = "index.html"
