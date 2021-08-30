@@ -22,6 +22,7 @@ body {
     padding-top: 20px;
     padding-bottom: 20px;
     align-items: center;
+    z-index: 2;
 }
 
 .header-text {
@@ -82,6 +83,7 @@ body {
     align-items: center;
     padding-bottom: 80px;
     justify-content: space-between;
+    z-index: 2;
 }
 
 .longline {
