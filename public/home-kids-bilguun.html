@@ -121,6 +121,9 @@
                             <div class="pointer gray line-text" onclick="filterByStatus('inprogress')" id="Settings">
                                 Хийж байгаа даалгавар
                             </div>
+                            <div class="pointer gray line-text" onclick="filterByStatus('mytaskk')" id="Mytask">
+                                Mиний даалгавар
+                            </div>
                         </div>
                     </div>
 
@@ -181,7 +184,6 @@
                 <div id="groupinfo" style="height: 100%; width: 100%;" class="none">
 
 
-
                     <div class="groupcontainer">
                         <div class="grouptopcontainer">
                             <div class="fit">
@@ -204,6 +206,7 @@
 
                         </div>
 
+
                         <div id="containerrr" class="groupusercontainer ">
                         </div>
                     </div>
@@ -223,6 +226,50 @@
                 <div class="longline"></div>
                 <div>© 2021</div>
             </div>
+        </div>
+    </div>
+    <div id="historymodal" class="historymodal none">
+
+        <div class="historycontainer">
+            <div class="extratop">
+                <img class="x" onclick="einname()" src="./assets/close_black_24dp.svg" height="25px" width="25px">
+            </div>
+
+            <div class="historytop">
+                <img src="./assets/avatar size 3.svg">
+                <div id="username">UserName</div>
+            </div>
+            <div class="historymid">
+                <div>History</div>
+                <div class="coi">
+                    <img src="./assets/coin icon.svg" height="20px" width="20px">
+                    <span id="point">0</span>
+                </div>
+            </div>
+            <div class="historybot">
+                <div id="historycontainer" class="historytaskcontainer">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="confirmmodal" class="kickconfirmmodal none">
+        <div class="confirmmodal">
+            <div class="confirmtop">
+                <img src="./assets/dizzy-new-idea 2.svg">
+            </div>
+            <div class="confirmmid">
+                <div class="hitler">
+                    Та бүлгэмээс гаргахдаа итгэлтэй байна уу ?
+                </div>
+
+            </div>
+            <div class="confirmbot">
+                <img id="justin" style="cursor:pointer;" src="./assets/Button.svg" height="70%" width="25%">
+                <img onclick="kickclose()" style="cursor:pointer;" src="./assets/Button 2.svg" height="70%" width="25%">
+            </div>
+
         </div>
     </div>
     <!-- FOOTER END -->
