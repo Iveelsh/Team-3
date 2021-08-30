@@ -41,7 +41,12 @@ firebase.auth().onAuthStateChanged((u) => {
             let role = document.getElementById("role");
             name.innerHTML = doc.data().name;
             email.innerHTML = doc.data().mail;
-            phone.innerHTML = doc.data().phoneNumber;
+            if(doc.data().phoneNumber == "undefined"){
+                phone.innerHTML = "";
+            }
+            else{
+                phone.innerHTML = doc.data().phoneNumber;
+            }
             role.innerHTML = doc.data().role;
             if(doc.data().profilePic){
                 document.getElementById('profile-pic').src = doc.data().profilePic
