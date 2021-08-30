@@ -221,9 +221,9 @@ const renderTasks = async(docs) => {
 
                 if (doc.data().AssignedUser) {
                     db.collection('users').doc(doc.data().AssignedUser).get().then((doc) => {
-                        if(doc.data().profilePic){
+                        if (doc.data().profilePic) {
                             taskProfile.src = doc.data().profilePic
-                        }else{
+                        } else {
                             taskProfile.src = "./assets/poroooo.svg"
                         }
                         console.log(doc.data())
@@ -589,13 +589,36 @@ firebase.auth().onAuthStateChanged((u) => {
             })
 
             // MESSENGER CHAT
-
-            db.collection(`groups/${groupId}/chats`).orderBy("time", "desc").get().then((docs) => {
-                screen.innerHTML = ""
-                docs.docs.forEach((doc) => {
-                    renderChats(doc)
+            let recievedChats = 0;
+            db.collection(`groups/${groupId}/chats`)
+                .orderBy("time", "desc")
+                .onSnapshot((docs) => {
+                    // screen.innerHTML = "";
+                    let a = docs.docs.map((doc) => {
+                        let data = doc.data()
+                        return new Promise((res, rej) => {
+                            db.doc(`users/${data.user}`)
+                                .get()
+                                .then((doc) => {
+                                    res({
+                                        ...data,
+                                        userName: doc.data().name,
+                                        profilePic: doc.data()?.profilePic,
+                                    });
+                                });
+                        });
+                    });
+                
+                    Promise.all(a).then(allData => {
+                        let test = allData.sort(function(a, b) {
+                            return new Date(b.time) - new Date(a.time);
+                        });
+                        while(recievedChats < test.length) {
+                            renderChats(test[recievedChats]);
+                            recievedChats++;
+                        }
+                    })
                 });
-            })
 
             // MESSENGER CHAT
 
@@ -740,75 +763,46 @@ const showTaskInfoMenu = () => {
 let chat = document.getElementById("chat");
 let screen = document.getElementById("screen");
 let sendBut = document.getElementById("sendButn");
+
 sendBut.addEventListener('click', () => {
-    if (chat.value !== '') {
+    
+})
+const send = () => {
+    if (chat.innerHTML.trim() !== '') {
         db.collection(`groups/${groupId}/chats`).doc().set({
             user: user.uid,
             text: chat.innerHTML.trim(),
             time: firebase.firestore.FieldValue.serverTimestamp()
-        }).then((docRef) => {
-            let row = document.createElement("div");
-            let user = document.createElement("div");
-            let userName = document.createElement("div");
-            let chatContainer = document.createElement("div");
-            let chatEl = document.createElement("div");
-
-            userName.innerHTML = userDoc.name
-            chatEl.innerHTML = chat.innerHTML.trim()
-            userName.setAttribute('class', 'user')
-            row.setAttribute("class", "chat-ind")
-            user.setAttribute("class", "user-pic")
-            user.style.backgroundImage = `url(${userDoc.profilePic ? userDoc.profilePic : './assets/poroooo.svg'})`
-            user.style.backgroundSize = `contain`
-            
-            chatEl.classList.add('chat', 'bubble')
-            chatContainer.setAttribute("class", "chat-container")
-            chatContainer.classList.add("row")
-
-            row.appendChild(user)
-            row.appendChild(chatContainer)
-            chatContainer.appendChild(userName)
-            chatContainer.appendChild(chatEl)
-            screen.prepend(row)
-
-            chat.innerHTML = ''
-        }).catch((error) => {
-            console.error("Error adding document: ", error);
-        });
+        })
     }
-})
-
-const renderChats = (doc) => {
-    let data = doc.data();
-    db.doc(`users/${data.user}`).get().then((doc) => {
-        let userData = doc.data()
-
-        let row = document.createElement("div");
-        let user = document.createElement("div");
-        let userName = document.createElement("div");
-        let chatContainer = document.createElement("div");
-        let chat = document.createElement("div");
-
-        userName.innerHTML = doc.data().name
-        chat.innerHTML = data.text
-        userName.setAttribute('class', 'user')
-
-        row.setAttribute("class", "chat-ind")
-        user.setAttribute("class", "user-pic")
-        user.style.backgroundImage = `url(${userData.profilePic ? userData.profilePic : './assets/poroooo.svg'})`
-        user.style.backgroundSize = `contain`
-        chat.classList.add('chat', 'bubble')
-        chatContainer.setAttribute("class", "chat-container")
-
-        row.appendChild(user)
-        row.appendChild(chatContainer)
-        chatContainer.appendChild(userName)
-        chatContainer.appendChild(chat)
-        screen.appendChild(row)
-
-
-    })
 }
+
+const renderChats = (data) => {
+    let row = document.createElement("div");
+    let user = document.createElement("div");
+    let userName = document.createElement("div");
+    let chatContainer = document.createElement("div");
+    let chat = document.createElement("div");
+
+    userName.innerHTML = data.userName;
+    chat.innerHTML = data.text;
+    userName.setAttribute("class", "user");
+
+    row.setAttribute("class", "chat-ind");
+    user.setAttribute("class", "user-pic");
+    user.style.backgroundImage = `url(${
+      data.profilePic ? data.profilePic : "./assets/poroooo.svg"
+    })`;
+    user.style.backgroundSize = `contain`;
+    chat.classList.add("chat", "bubble");
+    chatContainer.setAttribute("class", "chat-container");
+
+    row.appendChild(user);
+    row.appendChild(chatContainer);
+    chatContainer.appendChild(userName);
+    chatContainer.appendChild(chat);
+    screen.appendChild(row);
+};
 
 
 const creategroupuserbody = (memberId, deleteId) => {
@@ -816,8 +810,8 @@ const creategroupuserbody = (memberId, deleteId) => {
     db.collection("groups").doc(groupId).get().then((docs) => {
         let joinCode = docs.data().joinCode;
         let groupName = docs.data().groupname;
-        groupname.innerHTML = joinCode;
-        groupcode.innerHTML = groupName;
+        groupname.innerHTML = groupName;
+        groupcode.innerHTML = joinCode;
         console.log(docs.data())
     })
 
