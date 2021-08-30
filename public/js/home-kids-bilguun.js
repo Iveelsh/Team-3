@@ -819,7 +819,7 @@ const einname = () => {
     hismodal.classList.add("none");
 }
 
-function copyToClipboard() {
+const copyToClipboard = () => {
     let code = document.getElementById("groupcode");
     navigator.clipboard.writeText(code.innerHTML).then(function() {
 

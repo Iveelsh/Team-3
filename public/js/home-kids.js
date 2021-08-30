@@ -91,181 +91,192 @@ const renderTasks = async(docs) => {
     let taskcontainer = document.getElementById("taskcontainer");
     taskcontainer.innerHTML = "";
     await docs.forEach(async(doc) => {
+        
         // console.log(doc.data());
         let data = doc.data();
-        let taskpointt = doc.data().TaskPoint;
-        let assigneduserr = doc.data().AssignedUser;
-        let assigneduserrName
-        if (assigneduserr) {
-            assigneduserrName = await db.collection('users').doc(doc.data().AssignedUser).get();
-        }
-        assigneduserrName = assigneduserrName?.data()?.name;
+        if(data.Status != 'Done') {
 
-        let datee = convertDate(doc.data().CreatedAt.toDate());
-        let statuss = data.Status;
-        let tasknamee = data.TaskName;
-        let taskdess = data.TaskDes;
-
-
-        let taskinfomodalcont = document.createElement("div");
-        let taskmodal = document.createElement("div");
-        taskinfomodalcont.classList.add("modal");
-        taskinfomodalcont.appendChild(taskmodal);
-
-
-
-        let taskcontainer = document.getElementById("taskcontainer");
-        let taskbody = document.createElement("div");
-        let taskdate = document.createElement("span");
-        let taskrow = document.createElement("div");
-        let taskname = document.createElement("div");
-        let taskitem = document.createElement("div");
-        let coinicon = document.createElement("img");
-        let point = document.createElement("div");
-        let wall = document.createElement("div");
-        let assigneduser = document.createElement("div");
-
-
-
-
-        taskcontainer.classList.add("taskcontainer");
-
-        taskbody.classList.add("task-body");
-        taskbody.classList.add("column");
-
-        taskdate.classList.add("date");
-        taskdate.classList.add("blue-text");
-
-        taskname.classList.add("blue-text");
-        taskname.classList.add("bold");
-
-        taskrow.classList.add("row");
-        taskrow.classList.add("task-general");
-        taskitem.classList.add("row");
-        taskitem.classList.add("info");
-        coinicon.src = "./assets/Coin.svg"
-        wall.innerHTML = "|";
-
-
-
-        taskcontainer.appendChild(taskbody);
-        taskbody.appendChild(taskdate);
-        taskbody.appendChild(taskrow);
-        taskrow.appendChild(taskname);
-        taskrow.appendChild(taskitem);
-        taskitem.appendChild(coinicon);
-        taskitem.appendChild(point);
-        taskitem.appendChild(wall);
-        taskitem.appendChild(assigneduser);
-
-
-        taskdate.innerHTML = datee;
-        taskname.innerHTML = tasknamee;
-        point.innerHTML = taskpointt;
-        if (assigneduserr) {
-            assigneduser.innerHTML = assigneduserrName;
-        } else {
-            assigneduser.innerHTML = assigneduserr;
-
-        }
-
-
-        taskbody.style.cursor = "pointer";
-        taskbody.addEventListener('mouseover', () => {
-            taskbody.classList.add("texthover");
-            taskdate.classList.add("texthover")
-        });
-        taskbody.style.cursor = "pointer";
-        taskbody.addEventListener('mouseout', () => {
-            taskbody.classList.remove("texthover");
-            taskdate.classList.remove("texthover");
-        });
-
-        taskbody.onclick = async() => {
-            let userName;
-            await db.collection('users').doc(user.uid).get().then((docs) => {
-                userName = docs.id;
-            })
-            let infomodalcont = document.getElementById("infomodalcont");
-            infomodalcont.style.display = "block";
-            let modaluser = document.getElementById("task-user");
-            let modalpoint = document.getElementById("task-point");
-            let modalstatus = document.getElementById("modalstatus");
-            let modaldesc = document.getElementById("task-description");
-            let modaldate = document.getElementById("task-date");
-            let modalname = document.getElementById("task-name");
-            let assignButton = document.getElementById("getTask");
-            let doneTaskButton = document.getElementById("doneTask");
-            let taskProfile = document.getElementById("picture")
-
-
-            console.log(doc.data().AssignedUser)
-
-            if (doc.data().AssignedUser) {
-                taskProfile.removeAttribute("src")
-
-                if (doc.data().AssignedUser === userName) {
-                    if (doc.data().Status === 'inreview') {
-                        assignButton.style.display = "none"
-                        doneTaskButton.style.display = "none"
+            let taskpointt = doc.data().TaskPoint;
+            let assigneduserr = doc.data().AssignedUser;
+            let assigneduserrName
+            if (assigneduserr) {
+                assigneduserrName = await db.collection('users').doc(doc.data().AssignedUser).get();
+            }
+            assigneduserrName = assigneduserrName?.data()?.name;
+    
+            let datee = convertDate(doc.data().CreatedAt.toDate());
+            let statuss = data.Status;
+            let tasknamee = data.TaskName;
+            let taskdess = data.TaskDes;
+    
+    
+            let taskinfomodalcont = document.createElement("div");
+            let taskmodal = document.createElement("div");
+            taskinfomodalcont.classList.add("modal");
+            taskinfomodalcont.appendChild(taskmodal);
+    
+    
+    
+            let taskcontainer = document.getElementById("taskcontainer");
+            let taskbody = document.createElement("div");
+            let taskdate = document.createElement("span");
+            let taskrow = document.createElement("div");
+            let taskname = document.createElement("div");
+            let taskitem = document.createElement("div");
+            let coinicon = document.createElement("img");
+            let point = document.createElement("div");
+            let wall = document.createElement("div");
+            let assigneduser = document.createElement("div");
+    
+    
+    
+    
+            taskcontainer.classList.add("taskcontainer");
+    
+            taskbody.classList.add("task-body");
+            taskbody.classList.add("column");
+    
+            taskdate.classList.add("date");
+            taskdate.classList.add("blue-text");
+    
+            taskname.classList.add("blue-text");
+            taskname.classList.add("bold");
+    
+            taskrow.classList.add("row");
+            taskrow.classList.add("task-general");
+            taskitem.classList.add("row");
+            taskitem.classList.add("info");
+            coinicon.src = "./assets/Coin.svg"
+            wall.innerHTML = "|";
+    
+    
+    
+            taskcontainer.appendChild(taskbody);
+            taskbody.appendChild(taskdate);
+            taskbody.appendChild(taskrow);
+            taskrow.appendChild(taskname);
+            taskrow.appendChild(taskitem);
+            taskitem.appendChild(coinicon);
+            taskitem.appendChild(point);
+            taskitem.appendChild(wall);
+            taskitem.appendChild(assigneduser);
+    
+    
+            taskdate.innerHTML = datee;
+            taskname.innerHTML = tasknamee;
+            point.innerHTML = taskpointt;
+            if (assigneduserr) {
+                assigneduser.innerHTML = assigneduserrName;
+            } else {
+                assigneduser.innerHTML = assigneduserr;
+    
+            }
+    
+    
+            taskbody.style.cursor = "pointer";
+            taskbody.addEventListener('mouseover', () => {
+                taskbody.classList.add("texthover");
+                taskdate.classList.add("texthover")
+            });
+            taskbody.style.cursor = "pointer";
+            taskbody.addEventListener('mouseout', () => {
+                taskbody.classList.remove("texthover");
+                taskdate.classList.remove("texthover");
+            });
+    
+            taskbody.onclick = async() => {
+                let userName;
+                await db.collection('users').doc(user.uid).get().then((docs) => {
+                    userName = docs.id;
+                })
+                let infomodalcont = document.getElementById("infomodalcont");
+                infomodalcont.style.display = "block";
+                let modaluser = document.getElementById("task-user");
+                let modalpoint = document.getElementById("task-point");
+                let modalstatus = document.getElementById("modalstatus");
+                let modaldesc = document.getElementById("task-description");
+                let modaldate = document.getElementById("task-date");
+                let modalname = document.getElementById("task-name");
+                let assignButton = document.getElementById("getTask");
+                let doneTaskButton = document.getElementById("doneTask");
+                let taskProfile = document.getElementById("picture")
+    
+    
+                console.log(doc.data().AssignedUser)
+    
+                if (doc.data().AssignedUser) {
+                    db.collection('users').doc(doc.data().AssignedUser).get().then((doc) => {
+                        if(doc.data().profilePic){
+                            taskProfile.src = doc.data().profilePic
+                        }else{
+                            taskProfile.src = "./assets/poroooo.svg"
+                        }
+                        console.log(doc.data())
+                    })
+    
+                    if (doc.data().AssignedUser === userName) {
+                        if (doc.data().Status === 'inreview') {
+                            assignButton.style.display = "none"
+                            doneTaskButton.style.display = "none"
+                        } else {
+                            assignButton.style.display = "none"
+                            doneTaskButton.style.display = "block"
+                        }
                     } else {
                         assignButton.style.display = "none"
-                        doneTaskButton.style.display = "block"
+                        doneTaskButton.style.display = "none"
+    
                     }
                 } else {
-                    assignButton.style.display = "none"
-                    doneTaskButton.style.display = "none"
-
+                    assignButton.style.display = "";
+                    taskProfile.src = "./assets/noUserProfile.svg";
+    
                 }
-            } else {
-                assignButton.style.display = "";
-                taskProfile.src = "./assets/noUserProfile.svg";
-
+    
+                doneTaskButton.onclick = () => {
+                    console.log(doc.data())
+                    db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
+                        Status: 'inreview',
+                    }).then(() => {
+                        console.log('changed status to review')
+                        infomodalcont.style.display = "none";
+    
+                    }).catch((error) => {
+                        console.log(error)
+                    })
+                }
+    
+    
+                assignButton.onclick = () => {
+                    db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
+                        AssignedUser: user.uid,
+                        Status: 'inprogress',
+                    }).then(() => {
+                        infomodalcont.style.display = "none";
+    
+                    })
+                }
+    
+                if (assigneduserr) {
+                    modaluser.innerHTML = assigneduserrName;
+                } else {
+                    modaluser.innerHTML = 'User'
+                }
+                modalpoint.innerHTML = taskpointt ? taskpointt : 0;
+                // modalstatus.innerHTML = statuss;
+                modaldesc.innerHTML = taskdess;
+                modaldate.innerHTML = datee;
+                modalname.innerHTML = tasknamee;
+    
+                // document.getElementById('nope').onclick = () => {
+                //     deletemodal.style.display = "none";
+                // }
             }
-
-            doneTaskButton.onclick = () => {
-                console.log(doc.data())
-                db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
-                    Status: 'inreview',
-                }).then(() => {
-                    console.log('changed status to review')
-                    infomodalcont.style.display = "none";
-
-                }).catch((error) => {
-                    console.log(error)
-                })
-            }
-
-
-            assignButton.onclick = () => {
-                db.collection(`groups/${groupId}/tasks`).doc(doc.id).update({
-                    AssignedUser: user.uid,
-                    Status: 'inprogress',
-                }).then(() => {
-                    infomodalcont.style.display = "none";
-
-                })
-            }
-
-            if (assigneduserr) {
-                modaluser.innerHTML = assigneduserrName;
-            } else {
-                modaluser.innerHTML = 'User'
-            }
-            modalpoint.innerHTML = taskpointt ? taskpointt : 0;
-            // modalstatus.innerHTML = statuss;
-            modaldesc.innerHTML = taskdess;
-            modaldate.innerHTML = datee;
-            modalname.innerHTML = tasknamee;
-
-            // document.getElementById('nope').onclick = () => {
-            //     deletemodal.style.display = "none";
-            // }
-        }
-        window.onclick = (event) => {
-            let modal = document.getElementById("infomodalcont");
-            if (event.target == modal) {
-                modal.style.display = "none";
+            window.onclick = (event) => {
+                let modal = document.getElementById("infomodalcont");
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
             }
         }
 
@@ -441,30 +452,45 @@ firebase.auth().onAuthStateChanged((u) => {
         let userUid = user.uid
         let userGroup = db.collection('users').doc(userUid);
         userGroup.get().then((doc) => {
-            groupId = doc.data().groupId;
-            db.collection(`groups/${groupId}/tasks`).orderBy('CreatedAt', 'desc')
-                .onSnapshot((docs) => {
-                    renderTasks(docs);
+            if(groupId = doc.data().groupId){
+                db.collection(`groups/${groupId}/tasks`).where('Status', "!=", "Done").orderBy('Status', 'desc')
+                    .onSnapshot((docs) => {
+                        renderTasks(docs);
+                    })
+                db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
+                        document.getElementById("wish-container").innerHTML = "";
+                        renderWishlist(querySnapshot)
+                    })
+                    // MESSENGER CHAT
+    
+                db.collection(`groups/${groupId}/chats`).orderBy("time", "desc").get().then((docs) => {
+                    screen.innerHTML = ""
+                    docs.docs.forEach((doc) => {
+                        renderChats(doc)
+                    });
                 })
-            db.collection(`groups/${groupId}/wishlist`).orderBy('CreatedAt', 'desc').onSnapshot((querySnapshot) => {
-                    document.getElementById("wish-container").innerHTML = "";
-                    renderWishlist(querySnapshot)
-                })
-                // MESSENGER CHAT
-
-            db.collection(`groups/${groupId}/chats`).orderBy("time", "desc").get().then((docs) => {
-                screen.innerHTML = ""
-                docs.docs.forEach((doc) => {
-                    renderChats(doc)
-                });
-            })
-
-            // MESSENGER CHAT
+    
+                // MESSENGER CHAT ENDS
+    
+                //GROUP
+                db.collection(`groups/${groupId}/members`)
+                        .onSnapshot((querySnapshot) => {
+                            document.getElementById("containerrr").innerHTML = "";
+                            querySnapshot.docs.forEach(doc => {
+                                let memberId = doc.data().member
+                                creategroupuserbody(memberId, doc.id)
+    
+                            })
+                        });
+            }else{
+                window.location.href = 'groupCreateJoin.html';
+            }
         }).then(() => {
             console.log("render success");
         }).catch((error) => {
             console.log(error);
         })
+            
     } else {
         console.log("please login")
         window.location.href = "index.html"
@@ -556,6 +582,8 @@ sendBut.addEventListener('click', () => {
             userName.setAttribute('class', 'user')
             row.setAttribute("class", "chat-ind")
             user.setAttribute("class", "user-pic")
+            user.style.backgroundImage = `url(${userDoc.profilePic ? userDoc.profilePic : './assets/poroooo.svg'})`
+            user.style.backgroundSize = `contain`
             chatEl.classList.add('chat', 'bubble')
             chatContainer.setAttribute("class", "chat-container")
             chatContainer.classList.add("row")
@@ -590,6 +618,8 @@ const renderChats = (doc) => {
 
         row.setAttribute("class", "chat-ind")
         user.setAttribute("class", "user-pic")
+        user.style.backgroundImage=`url(${userData.profilePic ? userData.profilePic : './assets/poroooo.svg'})`
+        user.style.backgroundSize=`contain`
         chat.classList.add('chat', 'bubble')
         chatContainer.setAttribute("class", "chat-container")
 
@@ -601,4 +631,166 @@ const renderChats = (doc) => {
 
 
     })
+}
+
+const creategroupuserbody = (memberId, deleteId) => {
+    let userGroup = db.collection("users").doc(memberId);
+    db.collection("groups").doc(groupId).get().then((docs) => {
+        let joinCode = docs.data().joinCode;
+        let groupName = docs.data().groupname;
+        groupname.innerHTML = joinCode;
+        groupcode.innerHTML = groupName;
+        console.log(docs.data())
+    })
+
+
+    userGroup.get().then(doc => {
+        let data = doc.data()
+        if (data) {
+
+            // let groupname = document.getElementById("groupname");
+            // let groupcode = document.getElementById("groupcode");
+            // code = doc.gruopname;
+            // namee = doc.joinCode;
+            // groupname.innerHTML = namee;
+            // groupcode.innerHTML = code;
+
+            let container = document.getElementById("containerrr");
+            let groupuserbody = document.createElement("div");
+            let roww = document.createElement("div");
+            let row = document.createElement("div");
+            let proimg = document.createElement("img");
+            let column = document.createElement("div");
+            let role = document.createElement("span");
+            let username = document.createElement("span");
+            let rowgroupuserpoint = document.createElement("div");
+            let bigcoinimg = document.createElement("img");
+            let point = document.createElement("div");
+            // let addcircleimg = document.createElement("img");
+            let columnrelative = document.createElement("div");
+            let materialiconbluetext = document.createElement("span");
+            let sidemenuabsolute = document.createElement("div");
+            let menuitem = document.createElement("div");
+            let menuitem2 = document.createElement("div");
+            let menuitem3 = document.createElement("div");
+            let x = document.createElement("img");
+            x.src = "./assets/Union.svg"
+
+            groupuserbody.classList.add("groupuserbody");
+            roww.classList.add("roww");
+            row.classList.add("row");
+            proimg.src = `${data.profilePic ? data.profilePic : './assets/poroooo.svg'}`;
+            proimg.style.marginLeft = "15px";
+            proimg.style.width = '53px'
+            proimg.style.height = '53px'
+            column.classList.add("column");
+            role.classList.add("role");
+            username.classList.add("username");
+            rowgroupuserpoint.classList.add("row");
+            rowgroupuserpoint.classList.add("groupuserpoint");
+            bigcoinimg.src = "./assets/BigCoin.svg";
+            bigcoinimg.style.height = "25px";
+            bigcoinimg.style.width = "25px";
+            point.style.paddingRight = "25px";
+            // addcircleimg.src = "./assets/add_circle_black_24dp.svg";
+            columnrelative.classList.add("column");
+            columnrelative.classList.add("relative");
+            materialiconbluetext.classList.add("material-icons");
+            materialiconbluetext.classList.add("blue-text");
+            sidemenuabsolute.classList.add("sidemenu");
+            // sidemenuabsolute.classList.add("absolute");
+            menuitem.classList.add("menuitem1"); //tuuh
+            menuitem2.classList.add("menuitem2"); //admin
+            menuitem3.classList.add("menuitem3"); //bulgem
+            // addcircleimg.style.cursor = "pointer";
+
+            menuitem.onclick = () => {
+                console.log('tuuh')
+            }
+            menuitem2.onclick = () => {
+                console.log('admin')
+                if (data.role == 'admin') {
+                    db.collection("users").doc(memberId).update({
+                        role: 'kid'
+                    })
+                    role.innerHTML = 'Хүүхэд'
+                } else {
+                    db.collection("users").doc(memberId).update({
+                        role: 'admin'
+                    })
+                    role.innerHTML = 'Админ'
+                }
+
+            }
+            menuitem3.onclick = () => {
+                console.log('bulgemees hasah')
+                db.doc(`groups/${groupId}/members/${deleteId}`).delete()
+
+            }
+
+            materialiconbluetext.innerHTML = "more_vert";
+            materialiconbluetext.style.cursor = "pointer";
+            materialiconbluetext.onclick = a = () => {
+                if (sidemenuabsolute.classList.contains("flex")) {
+                    sidemenuabsolute.classList.remove("flex");
+                } else {
+                    sidemenuabsolute.classList.add("flex");
+                }
+                let { right, top } = materialiconbluetext.getBoundingClientRect();
+                sidemenuabsolute.style.left = Math.round(right) - 155 + "px";
+                sidemenuabsolute.style.top = Math.round(top) - 29 + window.scrollY + "px";
+            };
+
+            groupuserbody.appendChild(roww);
+            roww.appendChild(row);
+            roww.appendChild(rowgroupuserpoint);
+            row.appendChild(proimg);
+            row.appendChild(column);
+            column.appendChild(role);
+            column.appendChild(username);
+
+            if(doc.data().role == 'kid'){
+                rowgroupuserpoint.appendChild(bigcoinimg);
+                rowgroupuserpoint.appendChild(point);
+            }
+            
+            rowgroupuserpoint.appendChild(columnrelative);
+                if(doc.data().role == "kid"){
+                    columnrelative.appendChild(sidemenuabsolute);
+                    columnrelative.appendChild(materialiconbluetext);     
+                }
+            sidemenuabsolute.appendChild(menuitem);
+            // if(doc.data().role == 'kid'){
+            //     sidemenuabsolute.appendChild(menuitem2);
+            // }
+            sidemenuabsolute.appendChild(menuitem3);
+
+
+
+            role.innerHTML = data.role == 'admin' ? "Админ" : 'Хүүхэд';
+            username.innerHTML = data.name;
+            point.innerHTML = data.point ? data.point : 0;
+            menuitem.innerHTML = "Түүх харах";
+            menuitem2.innerHTML = data.role == 'kid' ? "Админ болгох" : "Админаас хасах";
+            menuitem3.innerHTML = "Бүлгэмээс гаргах";
+
+            container.appendChild(sidemenuabsolute);
+            container.appendChild(groupuserbody);
+        }
+    })
+
+};
+
+function copyToClipboard() {
+    let code = document.getElementById("groupcode");
+    navigator.clipboard.writeText(code.innerHTML).then(function() {
+
+        console.log('Async: Copying to clipboard was successful!');
+    }, function(err) {
+        console.error('Async: Could not copy text: ', err);
+    });
+}
+
+const goToProfile = () => {
+    window.location.href = "profile.html"
 }

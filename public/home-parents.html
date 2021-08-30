@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>TIBBEM</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900" rel="stylesheet">
     <link rel="stylesheet" href="./style/dropdown.css" />
@@ -263,12 +263,57 @@
                     <div class="column" id="wish-container">
                     </div>
                 </div>
-                <div id="groupinfo" class="none">
-                    <div class="name_edit">Бүлгэмийн нэр</div>
-                    <input type="text" class="Bulgemiin_ner" />
-                    <span class="material-icons edit"> edit </span>
+                <div id="groupinfo" style="height: 100%; padding: 30px" class="none">
+                    <div id = "pointAddKidModal" class="wishinfomodal">
+                        <div class="wishmodal column">
+                            <div class="row blue-text relative center">
+                                <div class="big-text blue-text">Оноо</div>
+                                <img onclick="pointAddKidModalClose()" class="close-modal" src="./assets/Close.svg" />
+                            </div>
+                            <!-- <div class="column center">
+                                <div id="" class="blue-text small-text">Name</div>
+                                <div id="" class="gray-border small-text blue-text"></div>
+                            </div> -->
+                            <div class="column center">
+                                <div class=" row">
+                                    <img src="./assets/Coin.svg" />
+                                    <input id="kidPointEdit" class="gray-border" />
+                                </div>
+                            </div>
+                            <div class=" center column ">
+                                <button id="sendPoint" class="addWishPointButton row center ">
+                                    <!-- <img src="./assets/assign.svg " alt=" " /> -->
+                                    <div>Илгээх</div>
+                                  </button>
+                            </div>
 
-                    <div class="members_text">Гишүүд</div>
+                        </div>
+                    </div>
+                    <div class="groupcontainer">
+                        <div class="grouptopcontainer">
+                            <div class="fit">
+                                <span>Бүлгэмийн нэр</span>
+                                <div class="grouptopfield">
+                                    <div class="groupname" id="groupname">
+
+                                    </div>
+                                    <img class="editicon" src="./assets/Vectorrrrrrr.svg">
+                                </div>
+                            </div>
+                            <div class="fit">
+                                <span>Бүлгэмийн код</span>
+                                <div class="grouptopfield">
+                                    <div class="groupcode" id="groupcode">
+                                    </div>
+                                    <img class="editiconn" src="./assets/veeeeeee.svg" onclick="copyToClipboard()">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="containerrr" class="groupusercontainer ">
+                        </div>
+                    </div>
                 </div>
 
                 <!-- MESSENGER STARTS -->

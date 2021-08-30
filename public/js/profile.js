@@ -13,22 +13,6 @@ const drop = () => {
 
 }
 
-const change = (a) => {
-    let droptext = document.getElementById("droptext");
-    let dropdown = document.getElementById("dropdown");
-
-    if (a == "year") {
-        droptext.innerHTML = "last year";
-        dropdown.classList.add("none");
-    } else if (a == "month") {
-        droptext.innerHTML = " last month"
-        dropdown.classList.add("none");
-    } else if (a == "week") {
-        droptext.innerHTML = "last week"
-        dropdown.classList.add("none");
-    }
-
-}
 const prohover = () => {
     let pro = document.getElementById("prohover");
     let edit = document.getElementById("edit");
@@ -50,64 +34,28 @@ firebase.auth().onAuthStateChanged((u) => {
         user = u
         let userUid = user.uid
         let userGroup = db.collection('users').doc(userUid);
-        db.collection('users').doc(userUid).get().then(doc => {
+        db.collection('users').doc(userUid).onSnapshot(doc => {
             let name = document.getElementById("name");
             let email = document.getElementById("email");
             let phone = document.getElementById("phone");
             let role = document.getElementById("role");
             name.innerHTML = doc.data().name;
             email.innerHTML = doc.data().mail;
-            phone.innerHTML = doc.data().phone;
+            phone.innerHTML = doc.data().phoneNumber;
             role.innerHTML = doc.data().role;
+            if(doc.data().profilePic){
+                document.getElementById('profile-pic').src = doc.data().profilePic
+            }else{
+                document.getElementById('profile-pic').src = './assets/poroooo.svg'
+            }
             console.log(doc.data())
         });
     } else {
         console.log("please login")
-        window.location.href = "../html/landingPage.html"
+        window.location.href = "index.html"
     }
 });
 
-
-
-
-
-const renderusertask = () => {
-
-    let container = document.getElementById("container")
-    let taskbody = document.createElement("div");
-    let date = document.createElement("div");
-    let taskitem = document.createElement("div");
-    let item = document.createElement("div");
-    let row = document.createElement("div");
-    let coin = document.createElement("img");
-    let itemm = document.createElement("div");
-
-    // class uguh: \/
-
-    taskbody.classList.add("taskbody");
-    date.classList.add("date");
-    taskitem.classList.add("taskitem");
-    item.classList.add("item");
-    row.classList.add("row");
-    coin.src = "../assets/coin icon.svg";
-    itemm.classList.add("item");
-    itemm.style.margintop = "5px";
-
-    // append child
-
-    taskbody.appendChild(date);
-    taskbody.appendChild(taskitem);
-    taskitem.appendChild(item);
-    taskitem.appendChild(row);
-    row.appendChild(coin);
-    row.appendChild(itemm);
-
-    // date.innerHTML = doc.data().date;
-    // item.innerHTML = doc.data().taskname;
-    // itemm.innerHTML = doc.date().point;
-
-    container.appendChild(taskbody);
-}
 
 
 // db.collection("groups").where("fuck", "==", userGroup)
@@ -121,3 +69,137 @@ const renderusertask = () => {
 //     .catch((error) => {
 //         console.log("Error getting documents: ", error);
 //     });
+
+
+
+// let avatar1 = document.getElementsByName(./assets/)
+
+
+const arr = ['./assets/avatarboy.svg', 
+'./assets/avatarwoman.svg', 
+'./assets/avatarbatman.svg', 
+'./assets/avatarharley.svg', 
+'./assets/avatargirl.svg','./assets/avatarman.svg',
+'./assets/avatarsheep.svg'];
+
+arr.forEach((item, index) => {
+    let temp = document.createElement('div');
+
+})
+let left = 0  //zun f
+let mid = 1 //gol s
+let right = 2 //barun t 
+let neg = document.getElementById('neg')
+let hoyr = document.getElementById('hoyr')
+let gurav = document.getElementById('gurav')
+neg.src = arr[0]
+hoyr.src = arr[1]
+gurav.src = arr[2]
+
+
+const next = () => {
+    if (mid == 6) {
+        mid = 0;
+        left = 6;
+        right = 1;
+    }
+    else if (mid == 5) {
+        left = mid;
+        mid++;
+        right = 0;
+    }
+    else {
+        left = mid;
+        mid++;
+        right++;
+    }
+
+    neg.src = arr[left];
+    hoyr.src = arr[mid];
+    gurav.src = arr[right];
+}
+const back = () => {
+    if (mid == 0) {
+        mid = 6;
+        left = 5;
+        right = 0;
+    }
+    else if (mid == 6) {
+        left = 4;
+        right = 6;
+        mid--;
+    }
+    else if (mid == 1) {
+        left = 6;
+        mid--;
+        right = 1;
+    }
+    else {
+        left--;
+        mid--;
+        right--;
+    }
+
+    neg.src = arr[left];
+    hoyr.src = arr[mid];
+    gurav.src = arr[right];
+}
+
+let change_pic = document.getElementById("change-pic");
+let not_change = document.getElementById("not-change");
+let change_btns = document.getElementById("change-btns");
+let change = document.getElementById("change");
+
+let nameInp = document.getElementById("name");
+let emailInp = document.getElementById("email");
+let phoneInp = document.getElementById("phone");
+
+let namesave = nameInp.innerHTML;
+let phonesave = phoneInp.innerHTML;
+
+const goToEdit =  () => {
+    namesave = nameInp.innerHTML;
+    phonesave = phoneInp.innerHTML;
+
+
+    change_pic.classList.remove("none");
+    not_change.classList.add("none");
+    change_btns.classList.remove("none");
+    change.style.display = "none";
+    nameInp.contentEditable = true;
+    phoneInp.contentEditable = true;
+}
+const backToPro = () => {
+
+    nameInp.contentEditable = false;
+    phoneInp.contentEditable = false;
+
+    nameInp.innerHTML = namesave; 
+    phoneInp.innerHTML = phonesave; 
+
+    change_pic.classList.add("none");
+    not_change.classList.remove("none");
+    change_btns.classList.add("none");
+    change.style.display = "block";
+
+} 
+
+const edit = () => {
+    db.collection('users').doc(user.uid).update({
+        name:  nameInp.innerHTML,
+        phoneNumber: phoneInp.innerHTML,
+        profilePic: arr[mid]
+    })
+    change_pic.classList.add("none");
+    not_change.classList.remove("none");
+    change_btns.classList.add("none");
+    change.style.display = "block";
+}
+
+const BackToHomeParents = () => {
+    window.location.href = 'home-parents.html'
+}
+
+const BackToHomeKids = () => {
+    window.location.href = 'home-kids.html'
+}

@@ -20,11 +20,11 @@
             <!-- PROFILE DROPDOWN -->
             <div class="profile-dropdown-cont">
                 <button class="profile-btn" onclick="displayProfileDrop()">
-            <img src="./assets/profile.svg" width="34px" />
-          </button>
+                    <img src="./assets/profile.svg" width="34px" />
+                </button>
                 <div class="profile-dropdown-content">
                     <div><span class="material-icons">person</span>
-                        <div class="underline">Profile</div>
+                        <div class="underline">Home page</div>
                     </div>
                     <div onclick="logOut()">
                         <span class="material-icons">logout</span>
@@ -36,102 +36,96 @@
         </div>
         <!-- HEADER END-->
         <img src="./assets/Group 265.svg" class="backpic">
-    
+
         <div class="container">
             <div class="pro-container">
-                <div class="profile_header">
-                    <div class="profile_box">
-                        <span class="material-icons">
-                            account_circle
+                <div class="top">
+                    <div class="Back">
+                        <span class="material-icons size" onclick="BackToHomeParents()">
+                            arrow_back
                         </span>
                         Нүүр Хуудас
                     </div>
-                    <span class="material-icons">
-                        close
-                    </span>
+                </div>
+                <div class="pro-cont" id="not-change">
+                    <div class="cont_hidden">
+                        <img id="profile-pic" class="primary" />
+                    </div>
                 </div>
 
-
-
-
-
-
-                <!-- <div class="top">
-                    <img style="cursor: pointer;" src="./assets/urgeljluuleh button.svg"> Нүүр хуудас
-                </div>
-                <div class="middle">
-                    <div onmouseover="prohover()" onmouseleave="prohoverr()" class="profile">
-                        <div id="prohover" class="prohover none">
-                            Change profile picture
+                <div class="pro-cont none" id="change-pic">
+                    <div class="cont">
+                        <div>
+                            <img style="cursor: pointer;" src="./assets/back.svg" onclick="back()">
                         </div>
-                        <div id="edit" class="edit">
-                            <div style="margin-top: 120px;">Change</div>
+
+                        <img id="neg" class="secondary" />
+                        <img id="hoyr" class="primary" />
+
+                        <img id="gurav" class="secondary" />
+
+                        <div>
+                            <img style="cursor: pointer;" src="./assets/next.svg" onclick="next()">
                         </div>
                     </div>
-                    <div class="columncontainer ">
-                        <div class="column ">
-                            <span style="margin-left: 60px;font-size:small; ">Нэр</span>
+                </div>
+
+                <div class="information">
+                    <div class="row">
+                        <div class="input">
+                            <span class="input-small">Нэр</span>
                             <div class="name">
                                 <div id="name"></div>
-                                <div class="edit1 ">
-                                    <img src="./assets/edit.png">
-                                </div>
-        
                             </div>
                         </div>
-                        <div class="column ">
-                            <span style="margin-left: 60px;font-size:small; ">И-майл</span>
-                            <div class="email ">
-                                <div id="email"></div>
-                                <div class="edit2 ">
-                                    <img src="./assets/edit.png">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columncontainer ">
-                        <div class="column ">
-                            <span style="margin-left: 60px;font-size:small; ">Үүрэг</span>
+                        <div class="input">
+                            <span class="input-small">Үүрэг</span>
                             <div class="role ">
                                 <div id="role"></div>
                             </div>
                         </div>
-                        <div class="column ">
-                            <span style="margin-left: 60px; font-size:small; ">Утасны дугаар</span>
-                            <div class="phone ">
-                                <div id="phone"></div>
-                                <div class="edit4 ">
-                                    <img src="./assets/edit.png">
-                                </div>
+                    </div>
+                    <div class="row">
+                        <div class="input">
+                            <span class="input-small">И-майл</span>
+                            <div class="email ">
+                                <div id="email"></div>
                             </div>
                         </div>
-                    </div> -->
-        
-            </div>
-        </div>
-        
-
-        <div class="footer">
-            <img src="./assets/logo.svg" class="logo-footer" />
-            <div class="footer-text">
-                <a class="">Бидний Тухай</a>
-                <a class="aboutus holboo">Холбоо Барих</a>
-                <a class="aboutus asuultuud">Асуултууд</a>
-            </div>
-            <div class="copyright">
-                <div class="longline"></div>
-                <div>© 2021</div>
+                        <div class="input">
+                            <span class="input-small">Утасны дугаар</span>
+                            <div class="phone ">
+                                <div id="phone"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="blue_button" id="change" onclick="goToEdit()">Өөрчлөх</button>
+                <div class="row_2 none" id="change-btns">
+                    <button class="white_button" onclick="backToPro()">Буцах</button>
+                    <button class="blue_button" onclick="edit()">Хадгалах</button>
+                </div>
             </div>
         </div>
     </div>
-    
 
+    <div class="footer">
+        <img src="./assets/logo.svg" class="logo-footer" />
+        <div class="footer-text">
+            <a class="">Бидний Тухай</a>
+            <a class="aboutus holboo">Холбоо Барих</a>
+            <a class="aboutus asuultuud">Асуултууд</a>
+        </div>
+        <div class="copyright">
+            <div class="longline"></div>
+            <div>© 2021</div>
+        </div>
+    </div>
+    </div>
 </body>
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
 <script src="./js/firebase.js"></script>
 <script src="./js/profile.js"></script>
-<script src="./js/home-kids.js"></script>
-
 </html>

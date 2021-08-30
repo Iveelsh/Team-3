@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>TIBBEM</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900" rel="stylesheet">
     <link rel="stylesheet" href="./style/dropdown.css" />
@@ -25,11 +25,8 @@
             <img src="./assets/profile.svg" width="34px" />
           </button>
                 <div class="profile-dropdown-content">
-                    <div><span class="material-icons">person</span>
+                    <div onclick="goToProfile()"><span class="material-icons">person</span>
                         <div class="underline">Profile</div>
-                    </div>
-                    <div><span class="material-icons">settings</span>
-                        <div class="underline">Settings</div>
                     </div>
                     <div onclick="logOut()">
                         <span class="material-icons">logout</span>
@@ -97,7 +94,7 @@
                                 </button>
 
                                 <button onclick="changeTaskDone()" class="assign-task-btn row" id="doneTask">
-                                    <div>DДууссан</div>
+                                    <div>Дууссан</div>
                                 </button>
                             </div>
                         </div>
@@ -165,14 +162,36 @@
                     <div class="column" id="wish-container">
                     </div>
                 </div>
-                <div id="groupinfo" class="none">
-                    <div class="name_edit">Бүлгэмийн нэр</div>
-                    <input type="text" class="Bulgemiin_ner" />
-                    <span class="material-icons edit"> edit </span>
 
-                    <div class="members_text">Гишүүд</div>
+                <!-- GROUP INFO STARTS-->
+                <div id="groupinfo" style="height: 100%; padding: 30px" class="none">
+                    <div class="groupcontainer">
+                        <div class="grouptopcontainer">
+                            <div class="fit">
+                                <span>Бүлгэмийн нэр</span>
+                                <div class="grouptopfield">
+                                    <div class="groupname" id="groupname">
+
+                                    </div>
+                                    <img class="editicon" src="./assets/Vectorrrrrrr.svg">
+                                </div>
+                            </div>
+                            <div class="fit">
+                                <span>Бүлгэмийн код</span>
+                                <div class="grouptopfield">
+                                    <div class="groupcode" id="groupcode">
+                                    </div>
+                                    <img class="editiconn" src="./assets/veeeeeee.svg" onclick="copyToClipboard()">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="containerrr" class="groupusercontainer ">
+                        </div>
+                    </div>
                 </div>
-
+                <!-- GROUP INFO ENDS -->
                 <!-- MESSENGER STARTS -->
                 <div class="none column messenger" style="height: 100%;" id="message">
                     <div class="send-chat-cont column center">
