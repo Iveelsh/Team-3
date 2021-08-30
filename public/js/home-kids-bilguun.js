@@ -1,3 +1,52 @@
+firebase.auth().onAuthStateChanged((u) => {
+    if (u) {
+        user = u;
+        let userUid = user.uid;
+        let userGroup = db.collection("users").doc(userUid);
+        console.log(userUid)
+        userGroup
+            .get()
+            .then((doc) => {
+                groupId = doc.data().groupId;
+                db.collection(`groups/${groupId}/tasks`)
+                    .orderBy("CreatedAt", "desc")
+                    .onSnapshot((querySnapshot) => {
+                        // document.getElementById("wishlist").innerHTML = "";
+                        renderTasks(querySnapshot);
+                    });
+                db.collection(`groups/${groupId}/wishlist`)
+                    .orderBy("CreatedAt", "desc")
+                    .onSnapshot((querySnapshot) => {
+                        console.log(groupId)
+                        document.getElementById("wish-container").innerHTML = "";
+                        renderWishlist(querySnapshot);
+                    });
+                db.collection(`groups/${groupId}/members`)
+                    .onSnapshot((querySnapshot) => {
+                        document.getElementById("containerrr").innerHTML = "";
+                        querySnapshot.docs.forEach(doc => {
+                            let memberId = doc.data().member
+                            creategroupuserbody(memberId, doc.id)
+
+                        })
+                    });
+            })
+            .then(() => {
+                console.log("render success");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    } else {
+        console.log("please login");
+        window.location.href = "index.html";
+    }
+});
+
+
+
+
+
 let taskb = document.getElementById("taskb");
 let wishb = document.getElementById("wishb");
 let groupb = document.getElementById("groupb");
@@ -85,12 +134,12 @@ const remove = () => {
     let taskmodal = document.getElementById("taskmodal");
     taskmodal.style.display = "none";
 };
-
-const renderTasks = (docs) => {
-    let taskcontainer = document.getElementById("taskcontainer");
+let taskbody = document.createElement("div");
+const renderTasks = (docs, lol) => {
+    let taskcontainer = lol ? document.getElementById("historycontainer") : document.getElementById("taskcontainer");
     taskcontainer.innerHTML = "";
     docs.forEach((doc) => {
-        // console.log(doc.data());
+        console.log(doc.data()) //z;
         let data = doc.data();
         let taskpointt = doc.data().TaskPoint;
         let assigneduserr = doc.data().AssignedUser;
@@ -104,8 +153,6 @@ const renderTasks = (docs) => {
         taskinfomodalcont.classList.add("modal");
         taskinfomodalcont.appendChild(taskmodal);
 
-        let taskcontainer = document.getElementById("taskcontainer");
-        let taskbody = document.createElement("div");
         let taskdate = document.createElement("span");
         let taskrow = document.createElement("div");
         let taskname = document.createElement("div");
@@ -200,6 +247,7 @@ const renderTasks = (docs) => {
             }
         };
     });
+
 };
 
 const Destroy = () => {
@@ -373,6 +421,15 @@ const filterByStatus = (status) => {
                         renderTasks(docs);
                     });
                 break;
+            case "mytaskk":
+                change.innerHTML = "Mиний даалгавар";
+                db.collection(`groups/${groupId}/tasks`)
+                    .where("AssignedUser", "==", user.uid)
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs);
+                    });
+                break;
         }
     } else {
         window.alert("please login");
@@ -380,50 +437,7 @@ const filterByStatus = (status) => {
     }
 };
 
-firebase.auth().onAuthStateChanged((u) => {
-    if (u) {
-        user = u;
-        let userUid = user.uid;
-        let userGroup = db.collection("users").doc(userUid);
-        console.log(userUid)
-        userGroup
-            .get()
-            .then((doc) => {
-                groupId = doc.data().groupId;
-                db.collection(`groups/${groupId}/tasks`)
-                    .orderBy("CreatedAt", "desc")
-                    .onSnapshot((querySnapshot) => {
-                        // document.getElementById("wishlist").innerHTML = "";
-                        renderTasks(querySnapshot);
-                    });
-                db.collection(`groups/${groupId}/wishlist`)
-                    .orderBy("CreatedAt", "desc")
-                    .onSnapshot((querySnapshot) => {
-                        console.log(groupId)
-                        document.getElementById("wish-container").innerHTML = "";
-                        renderWishlist(querySnapshot);
-                    });
-                db.collection(`groups/${groupId}/members`)
-                    .onSnapshot((querySnapshot) => {
-                        document.getElementById("containerrr").innerHTML = "";
-                        querySnapshot.docs.forEach(doc => {
-                            let memberId = doc.data().member
-                            creategroupuserbody(memberId, doc.id)
 
-                        })
-                    });
-            })
-            .then(() => {
-                console.log("render success");
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    } else {
-        console.log("please login");
-        window.location.href = "index.html";
-    }
-});
 
 const logOut = () => {
     firebase
@@ -551,8 +565,8 @@ const creategroupuserbody = (memberId, deleteId) => {
     db.collection("groups").doc(groupId).get().then((docs) => {
         let joinCode = docs.data().joinCode;
         let groupName = docs.data().groupname;
-        groupname.innerHTML = joinCode;
-        groupcode.innerHTML = groupName;
+        groupname.innerHTML = groupName;
+        groupcode.innerHTML = joinCode;
         console.log(docs.data())
     })
 
@@ -561,8 +575,78 @@ const creategroupuserbody = (memberId, deleteId) => {
         let data = doc.data()
         if (data) {
 
+
+
+            // ||
+            // ||
+            // ||
+            // ||
+            // ||
+            // ||
+            // ||
+            // ||
+            // ||
+
+            // const filterByUserName = (user) => {
+            //     if (user) {
+            //         let change = document.getElementById("filter");
+            //         console.log(user);
+            //         switch (`user: ${userName}`) {
+            //             case "all":
+            //                 change.innerHTML = "Бүх даалгавар";
+            //                 db.collection(`groups/${groupId}/tasks`)
+            //                     .orderBy("CreatedAt", "desc")
+            //                     .get()
+            //                     .then((docs) => renderTasks(docs));
+            //                 break;
+            //             case "unassigned":
+            //                 change.innerHTML = "Эзэнгүй даалгавар";
+            //                 db.collection(`groups/${groupId}/tasks`)
+            //                     .where("AssignedUser", "==", "")
+            //                     .get()
+            //                     .then((docs) => {
+            //                         renderTasks(docs);
+            //                     });
+            //                 break;
+            //             case "inreview":
+            //                 change.innerHTML = "Шалгуулах даалгавар";
+
+            //                 db.collection(`groups/${groupId}/tasks`)
+            //                     .where("Status", "==", status)
+            //                     .get()
+            //                     .then((docs) => {
+            //                         renderTasks(docs);
+            //                     });
+            //                 break;
+            //             case "inprogress":
+            //                 change.innerHTML = "Хийж байгаа даалгавар";
+            //                 db.collection(`groups/${groupId}/tasks`)
+            //                     .where("Status", "==", status)
+            //                     .get()
+            //                     .then((docs) => {
+            //                         renderTasks(docs);
+            //                     });
+            //                 break;
+            //         }
+            //     } else {
+            //         window.alert("please login");
+            //         // window.location.href = "landingPage.html";
+            //     }
+            // };
+
+
+
+            // ||
+            // ||
+            // ||
+            // ||
+            // ||
+            // ||
+            // ||
+            // ||
+            // ||
             // let groupname = document.getElementById("groupname");
-            // let groupcode = document.getElementById("groupcode");
+            // let groupcode = document.getElementById("    groupcode");
             // code = doc.gruopname;
             // namee = doc.joinCode;
             // groupname.innerHTML = namee;
@@ -615,8 +699,10 @@ const creategroupuserbody = (memberId, deleteId) => {
             menuitem3.classList.add("menuitem3"); //bulgem
             addcircleimg.style.cursor = "pointer";
 
-            menuitem.onclick = () => {
-                console.log('tuuh')
+
+            sidemenuabsolute.onmouseleave = close = () => {
+                sidemenuabsolute.classList.remove("flex");
+                sidemenuabsolute.classList.add("none");
             }
             menuitem2.onclick = () => {
                 console.log('admin')
@@ -634,10 +720,26 @@ const creategroupuserbody = (memberId, deleteId) => {
 
             }
             menuitem3.onclick = () => {
-                console.log('bulgemees hasah')
-                db.doc(`groups/${groupId}/members/${deleteId}`).delete()
+                let confirm = document.getElementById("confirmmodal");
+                confirm.classList.remove("none");
+                confirm.classList.add("flex");
+                window.onclick = function(event) {
+                    if (event.target == confirm) {
+                        confirm.classList.remove("flex");
+                        confirm.classList.add("none");
+                    }
+                }
 
             }
+
+            let justin = document.getElementById("justin");
+            justin.onclick = () => {
+                let i = document.getElementById("confirmmodal");
+                i.classList.remove("flex")
+                i.classList.add("none");
+                db.doc(`groups/${groupId}/members/${deleteId}`).delete()
+            }
+
 
             materialiconbluetext.innerHTML = "more_vert";
             materialiconbluetext.style.cursor = "pointer";
@@ -668,6 +770,32 @@ const creategroupuserbody = (memberId, deleteId) => {
             sidemenuabsolute.appendChild(menuitem);
             sidemenuabsolute.appendChild(menuitem2);
             sidemenuabsolute.appendChild(menuitem3);
+            menuitem.onclick = () => {
+
+                let hismodal = document.getElementById("historymodal");
+                hismodal.classList.remove("none")
+                hismodal.classList.add("flex");
+                db.collection(`groups/${groupId}/tasks`)
+                    .where("AssignedUser", "==", memberId)
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs, true);
+                        console.log(docs)
+                        docs.forEach(doc => {
+                            console.log(doc.data())
+                        })
+                    });
+                window.onclick = function(event) {
+                    if (event.target == hismodal) {
+                        hismodal.classList.remove("flex");
+                        hismodal.classList.add("none");
+                    }
+                }
+                console.log("history")
+            }
+
+
+
 
 
 
@@ -680,10 +808,16 @@ const creategroupuserbody = (memberId, deleteId) => {
 
             container.appendChild(sidemenuabsolute);
             container.appendChild(groupuserbody);
+
         }
     })
 
 };
+const einname = () => {
+    let hismodal = document.getElementById("historymodal");
+    hismodal.classList.remove("flex");
+    hismodal.classList.add("none");
+}
 
 function copyToClipboard() {
     let code = document.getElementById("groupcode");
@@ -693,4 +827,57 @@ function copyToClipboard() {
     }, function(err) {
         console.error('Async: Could not copy text: ', err);
     });
+}
+
+
+const filterByUserName = (status) => {
+    if (user) {
+        let change = document.getElementById("filter");
+        console.log(status);
+        switch (status) {
+            case "all":
+                change.innerHTML = "Бүх даалгавар";
+                db.collection(`groups/${groupId}/tasks`)
+                    .orderBy("CreatedAt", "desc")
+                    .get()
+                    .then((docs) => renderTasks(docs));
+                break;
+            case "unassigned":
+                change.innerHTML = "Эзэнгүй даалгавар";
+                db.collection(`groups/${groupId}/tasks`)
+                    .where("AssignedUser", "==", "")
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs);
+                    });
+                break;
+            case "inreview":
+                change.innerHTML = "Шалгуулах даалгавар";
+
+                db.collection(`groups/${groupId}/tasks`)
+                    .where("Status", "==", status)
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs);
+                    });
+                break;
+            case "inprogress":
+                change.innerHTML = "Хийж байгаа даалгавар";
+                db.collection(`groups/${groupId}/tasks`)
+                    .where("Status", "==", status)
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs);
+                    });
+                break;
+        }
+    } else {
+        window.alert("please login");
+        // window.location.href = "landingPage.html";
+    }
+};
+const kickclose = () => {
+    let i = document.getElementById("confirmmodal");
+    i.classList.remove("flex")
+    i.classList.add("none");
 }
