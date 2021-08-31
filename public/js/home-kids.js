@@ -436,10 +436,18 @@ const filterByStatus = (status) => {
                         renderTasks(docs);
                     });
                 break;
+            case "mytaskk":
+                change.innerHTML = "Mиний даалгавар";
+                db.collection(`groups/${groupId}/tasks`)
+                    .where("AssignedUser", "==", user.uid)
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs);
+                    });
+                break;
         }
     } else {
         window.alert("please login");
-        // window.location.href = "landingPage.html";
     }
 };
 

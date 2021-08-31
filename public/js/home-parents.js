@@ -111,10 +111,10 @@ const renderTasks = async(docs) => {
                 assigneduserrName = await db.collection('users').doc(doc.data().AssignedUser).get();
 
             }
-            console.log(assigneduserrName);
+            // console.log(assigneduserrName);
 
             assigneduserrName = assigneduserrName?.data()?.name;
-            console.log(assigneduserrName);
+            // console.log(assigneduserrName);
             // db.collection('users').doc(doc.data().AssignedUser).get().then((docs) => {
             //     assigneduserrName = docs.data().name
             //     console.log(docs.data().name)
@@ -418,7 +418,7 @@ const Destroy = () => {
 const renderWishlist = (docs) => {
     console.log("Wishlist render success")
     docs.forEach(async(doc) => {
-        console.log(doc.data())
+        // console.log(doc.data())
         let data = doc.data();
         let userWish = data.wish;
         let userWishPoint = data.point;
@@ -829,13 +829,13 @@ const creategroupuserbody = (memberId, deleteId) => {
         let groupName = docs.data().groupname;
         groupname.innerHTML = groupName;
         groupcode.innerHTML = joinCode;
-        console.log(docs.data())
+        // console.log(docs.data())
     })
 
 
     userGroup.get().then(doc => {
         let data = doc.data()
-        console.log(data)
+        // console.log(data)
         if (data) {
             let container = document.getElementById("containerrr");
             let groupuserbody = document.createElement("div");
@@ -887,9 +887,34 @@ const creategroupuserbody = (memberId, deleteId) => {
             menuitem3.classList.add("menuitem3"); //bulgem
             // addcircleimg.style.cursor = "pointer";
 
-            menuitem.onclick = () => {
-                console.log('tuuh')
+            sidemenuabsolute.onmouseleave = close = () => {
+                sidemenuabsolute.classList.remove("flex");
+                sidemenuabsolute.classList.add("none");
             }
+
+            menuitem.onclick = () => {
+                let hismodal = document.getElementById("historymodal");
+                hismodal.classList.remove("none")
+                hismodal.classList.add("flex");
+                db.collection(`groups/${groupId}/tasks`)
+                    .where("AssignedUser", "==", memberId)
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs, true);
+                        console.log(docs)
+                        docs.forEach(doc => {
+                            console.log(doc.data())
+                        })
+                    });
+                window.onclick = function(event) {
+                    if (event.target == hismodal) {
+                        hismodal.classList.remove("flex");
+                        hismodal.classList.add("none");
+                    }
+                }
+                console.log("history")
+            }
+
             menuitem2.onclick = () => {
                 console.log('admin')
                 if (data.role == 'admin') {
@@ -906,14 +931,31 @@ const creategroupuserbody = (memberId, deleteId) => {
 
             }
             menuitem3.onclick = async() => {
-                console.log('bulgemees hasah')
-                userGroup.update({
-                    groupId: '',
-                    profilePic: '',
-                    role: '',
-                    point: '',
-                })
-                await db.doc(`groups/${groupId}/members/${deleteId}`).delete();
+                // console.log('bulgemees hasah')
+                // userGroup.update({
+                //     groupId: '',
+                //     profilePic: '',
+                //     role: '',
+                //     point: '',
+                // })
+                // await db.doc(`groups/${groupId}/members/${deleteId}`).delete();
+                let confirm = document.getElementById("confirmmodal");
+                confirm.classList.remove("none");
+                confirm.classList.add("flex");
+                window.onclick = function(event) {
+                    if (event.target == confirm) {
+                        confirm.classList.remove("flex");
+                        confirm.classList.add("none");
+                    }
+                }
+
+            }
+            let justin = document.getElementById("justin");
+            justin.onclick = () => {
+                let i = document.getElementById("confirmmodal");
+                i.classList.remove("flex")
+                i.classList.add("none");
+                db.doc(`groups/${groupId}/members/${deleteId}`).delete()
             }
 
             materialiconbluetext.innerHTML = "more_vert";
@@ -940,7 +982,6 @@ const creategroupuserbody = (memberId, deleteId) => {
             column.appendChild(role);
             column.appendChild(username);
             if(doc.data().role == 'kid'){
-
                 rowgroupuserpoint.appendChild(bigcoinimg);
                 rowgroupuserpoint.appendChild(point);
             }
@@ -976,14 +1017,11 @@ const creategroupuserbody = (memberId, deleteId) => {
                             point.innerHTML = kidPointEdit.value
                             let pointAddKidModal = document.getElementById("pointAddKidModal");
                             pointAddKidModal.style.display = "none"
-
                         })
                     }
 
                 }
             }
-
-
 
             role.innerHTML = data.role == 'admin' ? "Админ" : 'Хүүхэд';
             username.innerHTML = data.name;
@@ -1002,7 +1040,6 @@ const creategroupuserbody = (memberId, deleteId) => {
 function copyToClipboard() {
     let code = document.getElementById("groupcode");
     navigator.clipboard.writeText(code.innerHTML).then(function() {
-
         console.log('Async: Copying to clipboard was successful!');
     }, function(err) {
         console.error('Async: Could not copy text: ', err);
@@ -1016,4 +1053,15 @@ const pointAddKidModalClose = () => {
     pointAddKidModal.style.display = "none";
     let kidPointEdit = document.getElementById("kidPointEdit");
     kidPointEdit.value = ''
+}
+
+const einname = () => {
+    let hismodal = document.getElementById("historymodal");
+    hismodal.classList.remove("flex");
+    hismodal.classList.add("none");
+}
+const kickclose = () => {
+    let i = document.getElementById("confirmmodal");
+    i.classList.remove("flex")
+    i.classList.add("none");
 }

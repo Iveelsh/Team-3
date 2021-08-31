@@ -1058,3 +1058,142 @@ span[placeholder]:empty:before {
     top: 941px;
     opacity: 40%;
 }
+/* slabkdhijklnjefdj */
+.flex {
+    display: flex;
+}
+
+.x {
+    right: 5px;
+    cursor: pointer;
+}
+
+.extratop {
+    height: 5%;
+    width: 100%;
+    padding-top: 2px;
+    padding-right: 3px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.none {
+    display: none;
+}
+
+.historymodal {
+    z-index: 9999999999999999999999999999999999;
+    padding-top: 10%;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 200%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.541);
+}
+
+.historycontainer {
+    height: 40%;
+    width: 50%;
+    background-color: white;
+    border-radius: 13px;
+}
+
+.historytop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+    width: 100%;
+    height: 27%;
+    background-color: white;
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+.historymid {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 75%;
+    justify-content: space-around;
+    height: 10%;
+    width: 100%;
+    background-color: white
+}
+
+.historybot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 66%;
+    background-color: #f9f9f9;
+    border-bottom-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+}
+
+.coi {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.kickconfirmmodal {
+    z-index: 99999999999999999999999999999999999999999999999999999999999999;
+    position: absolute;
+    height: 200%;
+    width: 100%;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.459);
+    padding-top: 13%;
+}
+
+.confirmmodal {
+    height: 25%;
+    width: 35%;
+    background-color: white;
+    border-radius: 13px;
+}
+
+.confirmtop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 100%;
+}
+
+.hitler {
+    font-weight: bold;
+    font-size: 31.1175px;
+    line-height: 36px;
+    text-align: center;
+    color: #232E6A;
+}
+
+.confirmmid {
+    height: 20%;
+    width: 100%;
+    justify-content: center;
+}
+
+.confirmbot {
+    height: 30%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.historybot {}
+
+.historytaskcontainer {
+    height: 100%;
+    width: 90%;
+    overflow-y: scroll;
+}
