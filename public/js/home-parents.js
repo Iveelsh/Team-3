@@ -148,6 +148,17 @@ const renderTasks = async(docs) => {
             let point = document.createElement("div");
             let wall = document.createElement("div");
             let assigneduser = document.createElement("div");
+            let tuuzulaan = document.createElement('img');
+            let tuuznogoon = document.createElement('img');
+            let tuuzshar = document.createElement('img');
+
+            tuuzulaan.src = './assets/tuuzulaan.svg'
+            tuuznogoon.src = './assets/tuuznogoon.svg'
+            tuuzshar.src = './assets/tuuzshar.svg'
+
+            tuuzulaan.classList.add("tuuzposition");
+            tuuznogoon.classList.add("tuuzposition");
+            tuuzshar.classList.add("tuuzposition");
 
             taskcontainer.classList.add("taskcontainer");
 
@@ -166,6 +177,19 @@ const renderTasks = async(docs) => {
             taskitem.classList.add("info");
             coinicon.src = "./assets/Coin.svg"
             wall.innerHTML = "|";
+
+
+
+            if(statuss == "") {
+                taskbody.appendChild(tuuzulaan);
+            }
+            else if (statuss == "inprogress") {
+                taskbody.appendChild(tuuzshar);
+            }
+            else if (statuss == "inreview") {
+                taskbody.appendChild(tuuznogoon);
+            }
+
 
             taskcontainer.appendChild(taskbody);
             taskbody.appendChild(taskdate);

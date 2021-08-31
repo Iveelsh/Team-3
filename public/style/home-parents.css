@@ -578,9 +578,19 @@
     padding: 30px;
     padding-bottom: 50px;
 }
+.gap {
+    gap: 40px;
+}
+
+.tuuzposition {
+    position: absolute;
+    bottom: -5px;
+    left: -5px;
+}
 
 .tiimButton {
     background: #212D5B;
+    display: flex;
     border-radius: 10px;
     border: none;
     color: white;
@@ -596,6 +606,7 @@
 
 .uguiButton {
     background: white;
+    display: flex;
     border-radius: 10px;
     border: 1px solid #212D5B;
     color: #212D5B;
