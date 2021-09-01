@@ -1,256 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TIBBEM</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./style/dropdown.css" />
     <link rel="stylesheet" href="./style/header-footer.css" />
     <link rel="stylesheet" href="./style/home-kids.css" />
-</head>
+  </head>
 
-<body id="body">
+  <body id="body">
     <div class="everything">
-        <!-- HEADER START -->
-        <div class="header">
-            <img src="./assets/logo.svg" class="logo" />
-            <div class="header-text">My family</div>
-            <!-- PROFILE DROPDOWN -->
-            <div class="profile-dropdown-cont">
-                <button class="profile-btn" onclick="displayProfileDrop()">
+      <!-- HEADER START -->
+      <div class="header">
+        <img src="./assets/logo.svg" class="logo" />
+        <div class="header-text">My family</div>
+        <!-- PROFILE DROPDOWN -->
+        <div class="profile-dropdown-cont">
+          <button class="profile-btn" onclick="displayProfileDrop()">
             <img src="./assets/profile.svg" width="34px" />
           </button>
-                <div class="profile-dropdown-content">
-                    <div onclick="goToProfile()"><span class="material-icons">person</span>
-                        <div class="underline">Profile</div>
-                    </div>
-                    <div onclick="logOut()">
-                        <span class="material-icons">logout</span>
-                        <div class="underline">Log out</div>
-                    </div>
-                </div>
+          <div class="profile-dropdown-content">
+            <div onclick="goToProfile()">
+              <span class="material-icons">person</span>
+              <div class="underline">Profile</div>
             </div>
-            <!-- PROFILE DROPDOWN -->
+            <div onclick="logOut()">
+              <span class="material-icons">logout</span>
+              <div class="underline">Log out</div>
+            </div>
+          </div>
         </div>
-        <!-- HEADER END-->
+        <!-- PROFILE DROPDOWN -->
+      </div>
+      <!-- HEADER END-->
 
-        <div class="main">
-            <div class="side-menu">
-                <button id="taskb" onclick="displaytask();" class="side-button black">
+      <div class="main">
+        <div class="side-menu">
+          <button id="taskb" onclick="displaytask();" class="side-button black">
             Даалгавар
           </button>
-                <button id="wishb" onclick="displaywishlist();" class="side-button">
+          <button id="wishb" onclick="displaywishlist();" class="side-button">
             Хүслийн жагсаалт
           </button>
-                <button id="groupb" onclick="displaygroupinfo();" class="side-button">
+          <button id="groupb" onclick="displaygroupinfo();" class="side-button">
             Бүлгэмийн мэдээлэл
           </button>
-                <button id="messb" onclick="displaymessage()" class="side-button">
+          <button id="messb" onclick="displaymessage()" class="side-button">
             Харилцан яриа
           </button>
-            </div>
-            <div class="modal" id="modal">
-                <div class="modal-item">modal</div>
-            </div>
-            <div class="container">
-                <div id="task" class="task-side">
-                    <!-- TASK DETAIL MODAL START -->
-                    <div id="infomodalcont" class="modal">
-                        <div id="infomodal" class="task-modal">
-                            <div class="row relative center">
-                                <div class="blue-text big-text center">Даалгавар</div>
-                                <img onclick="closeModal2()" class="close-modal" src="./assets/Close.svg" />
-                            </div>
-                            <div class="column center">
-                                <img id="picture" />
-                                <div class="blue-text small-text" id="task-user">User</div>
-                            </div>
-                            <div class="row">
-                                <div class="column">
-                                    <div class="blue-text small-text">Даалгаварын нэр</div>
-                                    <div class="gray-border" id="task-name">Task</div>
-                                </div>
-                                <div class="column">
-                                    <div class="blue-text small-text">Даалгаварын оноо</div>
-                                    <div class="gray-border row point">
-                                        <img src="./assets/Coin.svg" />
-                                        <div id="task-point">0</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="column">
-                                <div class="blue-text small-text">Даалгаварын тайбар</div>
-                                <div class="blue-text small-text" id="task-date">Он сар</div>
-                                <div class="gray-border" id="task-description">Desc</div>
-                            </div>
-                            <div class="column center">
-                                <button class="assign-task-btn row" id="getTask">
-                                <img src="./assets/assign.svg" alt="" />
-                                <div>Даалгавар авах</div>
-                                </button>
-
-                                <button onclick="changeTaskDone()" class="assign-task-btn row" id="doneTask">
-                                    <div>Дууссан</div>
-                                </button>
-                            </div>
-                        </div>
+        </div>
+        <div class="modal" id="modal">
+          <div class="modal-item">modal</div>
+        </div>
+        <div class="container">
+          <div id="task" class="task-side">
+            <!-- TASK DETAIL MODAL START -->
+            <div id="infomodalcont" class="modal">
+              <div id="infomodal" class="task-modal">
+                <div class="row relative center">
+                  <div class="blue-text big-text center">Даалгавар</div>
+                  <img
+                    onclick="closeModal2()"
+                    class="close-modal"
+                    src="./assets/Close.svg"
+                  />
+                </div>
+                <div class="column center">
+                  <img id="picture" />
+                  <div class="blue-text small-text" id="task-user">User</div>
+                </div>
+                <div class="row">
+                  <div class="column">
+                    <div class="blue-text small-text">Даалгаварын нэр</div>
+                    <div class="gray-border" id="task-name">Task</div>
+                  </div>
+                  <div class="column">
+                    <div class="blue-text small-text">Даалгаварын оноо</div>
+                    <div class="gray-border row point">
+                      <img src="./assets/Coin.svg" />
+                      <div id="task-point">0</div>
                     </div>
-                    <!-- TASK DETAIL MODAL END  -->
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="blue-text small-text">Даалгаварын тайбар</div>
+                  <div class="blue-text small-text" id="task-date">Он сар</div>
+                  <div class="gray-border" id="task-description">Desc</div>
+                </div>
+                <div class="column center">
+                  <button class="assign-task-btn row" id="getTask">
+                    <img src="./assets/assign.svg" alt="" />
+                    <div>Даалгавар авах</div>
+                  </button>
 
-                    <div class="dropdown-container">
-                        <button id="Dropbtn" onclick="myfunction()" style="color: black">
-                <p class="paragraph white pointer" id="filter">Бүх даалгавар</p>
-                <span class="pointer material-icons arrow-icon icon"
-                  >arrow_drop_down</span
+                  <button
+                    onclick="changeTaskDone()"
+                    class="assign-task-btn row"
+                    id="doneTask"
+                  >
+                    <div>Дууссан</div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- TASK DETAIL MODAL END  -->
+
+            <div class="container_9000">
+              <div class="dropdown-container">
+                <button
+                  id="Dropbtn"
+                  onclick="myfunction()"
+                  style="color: black"
                 >
-              </button>
-                        <div style="visibility: hidden" id="Dropdowns" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="drop-container">
-                            <div class="pointer gray line-text" onclick="filterByStatus('all')" id="Wishlist">
-                                Бүх даалгавар
-                            </div>
-                            <div class="pointer gray line-text" onclick="filterByStatus('inreview')" id="Wishlist">
-                                Шалгуулах даалгавар
-                            </div>
-                            <div class="pointer gray line-text" onclick="filterByStatus('unassigned')" id="Home">
-                                Эзэнгүй даалгавар
-                            </div>
-                            <div class="pointer gray line-text" onclick="filterByStatus('inprogress')" id="Settings">
-                                Хийж байгаа даалгавар
-                            </div>
-                        </div>
-                    </div>
+                  <p class="paragraph white pointer" id="filter">
+                    Бүх даалгавар
+                  </p>
+                  <span class="pointer material-icons arrow-icon icon"
+                    >arrow_drop_down</span
+                  >
+                </button>
+                <div
+                  style="visibility: hidden"
+                  id="Dropdowns"
+                  onmouseleave="dropLeavefunction()"
+                  onmouseenter="dropfunction()"
+                  class="drop-container"
+                >
+                  <div
+                    class="pointer gray line-text"
+                    onclick="filterByStatus('all')"
+                    id="Wishlist"
+                  >
+                    Бүх даалгавар
+                  </div>
+                  <div
+                    class="pointer gray line-text"
+                    onclick="filterByStatus('inreview')"
+                    id="Wishlist"
+                  >
+                    Шалгуулах даалгавар
+                  </div>
+                  <div
+                    class="pointer gray line-text"
+                    onclick="filterByStatus('unassigned')"
+                    id="Home"
+                  >
+                    Эзэнгүй даалгавар
+                  </div>
+                  <div
+                    class="pointer gray line-text"
+                    onclick="filterByStatus('inprogress')"
+                    id="Settings"
+                  >
+                    Хийж байгаа даалгавар
+                  </div>
+                </div>
+              </div>
 
-                    <!-- TASK LIST START-->
+              <div class="instructions">
+                <div class="row_1111">
+                  <div class="red_circle"></div>
+                  <div class="red_circle_text">Эзэнгүй даалгавар</div>
+                </div>
 
-                    <div class="column" id="taskcontainer"></div>
-                    <!-- TASK LIST END-->
+                <div class="row_2222">
+                  <div class="yellow_circle"></div>
+                  <div class="yellow_circle_text">Хийж байгаа даалгавар</div>
+                </div>
 
-                    <input style="display: none" type="text" id="filterinput" /><button style="display: none" onclick="filter()">
+                <div class="row_3333">
+                  <div class="green_circle"></div>
+                  <div class="green_circle_text">Шалгуулах даалгавар</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TASK LIST START-->
+
+            <div class="column" id="taskcontainer"></div>
+            <!-- TASK LIST END-->
+
+            <input style="display: none" type="text" id="filterinput" /><button
+              style="display: none"
+              onclick="filter()"
+            >
               click me
             </button>
+          </div>
+          <div id="wishlist" class="wishlist none">
+            <div id="wishaddmodal-full" class="wishaddmodal-full">
+              <div id="wishaddmodal" class="wishaddmodal column">
+                <div class="row blue-text relative center">
+                  <div class="big-text">Хүсэл нэмэх</div>
+                  <img
+                    onclick="closeAddWishModal()"
+                    class="close-modal"
+                    src="./assets/Close.svg"
+                  />
                 </div>
-                <div id="wishlist" class="wishlist none">
-
-                    <div id="wishaddmodal-full" class="wishaddmodal-full">
-                        <div id="wishaddmodal" class="wishaddmodal column">
-                            <div class="row blue-text relative center">
-                                <div class="big-text">Хүсэл нэмэх</div>
-                                <img onclick="closeAddWishModal()" class="close-modal" src="./assets/Close.svg" />
-                            </div>
-                            <div class="column center">
-                                <div>
-                                    <div class="blue-text small-text">Хүслийн нэр</div>
-                                    <input type="text" class="gray-border" id="addwish">
-
-                                </div>
-                                <button class="add-wish-btn" onclick="addWish()">
-                                    Нэмэх
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="add-wish blue-text column center small-text" onclick="wishmodal()">
-                        <span class="material-icons">
-                            add_circle
-                            </span>
-                        <div>Хүсэл нэмэх</div>
-                    </div>
-                    <div class="column" id="wish-container">
-                    </div>
+                <div class="column center">
+                  <div>
+                    <div class="blue-text small-text">Хүслийн нэр</div>
+                    <input type="text" class="gray-border" id="addwish" />
+                  </div>
+                  <button class="add-wish-btn" onclick="addWish()">
+                    Нэмэх
+                  </button>
                 </div>
-
-                <!-- GROUP INFO STARTS-->
-                <div id="groupinfo" style="height: 100%; padding: 30px" class="none">
-                    <div class="groupcontainer">
-                        <div class="grouptopcontainer">
-                            <div class="fit">
-                                <span>Бүлгэмийн нэр</span>
-                                <div class="grouptopfield">
-                                    <div class="groupname" id="groupname">
-
-                                    </div>
-                                    <img class="editicon" src="./assets/Vectorrrrrrr.svg">
-                                </div>
-                            </div>
-                            <div class="fit">
-                                <span>Бүлгэмийн код</span>
-                                <div class="grouptopfield">
-                                    <div class="groupcode" id="groupcode">
-                                    </div>
-                                    <img class="editiconn" src="./assets/veeeeeee.svg" onclick="copyToClipboard()">
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div id="containerrr" class="groupusercontainer ">
-                        </div>
-                    </div>
-                </div>
-                <!-- GROUP INFO ENDS -->
-                <!-- MESSENGER STARTS -->
-                <div class="none column messenger" style="height: 100%;" id="message">
-                    <div class="send-chat-cont column center">
-                        <div> Family</div>
-                    </div>
-                    <div id="screen" class="content">
-                        <div class="chat-ind">
-                            <div class="user-pic"></div>
-                            <div class="chat-container">
-                                <div class="user">Username</div>
-                                <div class="chat bubble">Lorem Ipsum </div>
-                                <!-- <button class="buttonC">X</button> -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="send-chat-cont">
-                        <div class="center row send-chat">
-                            <span id="chat" placeholder="Мессеж бичих ..." contenteditable></span>
-                            <button id="sendButn" class="row center">
-                                <span class="material-icons">
-                                    send
-                                    </span>
-                            </button>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- MESSENGER ENDS -->
+              </div>
             </div>
+            <div
+              class="add-wish blue-text column center small-text"
+              onclick="wishmodal()"
+            >
+              <span class="material-icons"> add_circle </span>
+              <div>Хүсэл нэмэх</div>
+            </div>
+            <div class="column" id="wish-container"></div>
+          </div>
+
+          <!-- GROUP INFO STARTS-->
+          <div id="groupinfo" style="height: 100%; padding: 30px" class="none">
+            <div class="groupcontainer">
+              <div class="grouptopcontainer">
+                <div class="fit">
+                  <span>Бүлгэмийн нэр</span>
+                  <div class="grouptopfield">
+                    <div class="groupname" id="groupname"></div>
+                    <img class="editicon" src="./assets/Vectorrrrrrr.svg" />
+                  </div>
+                </div>
+                <div class="fit">
+                  <span>Бүлгэмийн код</span>
+                  <div class="grouptopfield">
+                    <div class="groupcode" id="groupcode"></div>
+                    <img
+                      class="editiconn"
+                      src="./assets/veeeeeee.svg"
+                      onclick="copyToClipboard()"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div id="containerrr" class="groupusercontainer"></div>
+            </div>
+          </div>
+          <!-- GROUP INFO ENDS -->
+          <!-- MESSENGER STARTS -->
+          <div class="none column messenger" style="height: 100%" id="message">
+            <div class="send-chat-cont column center">
+              <div>Family</div>
+            </div>
+            <div id="screen" class="content">
+              <div class="chat-ind">
+                <div class="user-pic"></div>
+                <div class="chat-container">
+                  <div class="user">Username</div>
+                  <div class="chat bubble">Lorem Ipsum</div>
+                  <!-- <button class="buttonC">X</button> -->
+                </div>
+              </div>
+            </div>
+
+            <div class="send-chat-cont">
+              <div class="center row send-chat">
+                <span
+                  id="chat"
+                  placeholder="Мессеж бичих ..."
+                  contenteditable
+                ></span>
+                <button id="sendButn" class="row center">
+                  <span class="material-icons"> send </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- MESSENGER ENDS -->
         </div>
-        <!-- FOOTER START -->
-        <div class="footer">
-            <img src="./assets/logo.svg" class="logo-footer" />
-            <div class="footer-text">
-                <a class="">Бидний Тухай</a>
-                <a class="aboutus holboo">Холбоо Барих</a>
-                <a class="aboutus asuultuud">Асуултууд</a>
-            </div>
-            <div class="copyright">
-                <div class="longline"></div>
-                <div>© 2021</div>
-            </div>
+      </div>
+      <!-- FOOTER START -->
+      <div class="footer">
+        <img src="./assets/logo.svg" class="logo-footer" />
+        <div class="footer-text">
+          <a class="">Бидний Тухай</a>
+          <a class="aboutus holboo">Холбоо Барих</a>
+          <a class="aboutus asuultuud">Асуултууд</a>
         </div>
+        <div class="copyright">
+          <div class="longline"></div>
+          <div>© 2021</div>
+        </div>
+      </div>
     </div>
     <!-- FOOTER END -->
-</body>
+  </body>
 
-<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
 
-<script src="./js/firebase.js"></script>
+  <script src="./js/firebase.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/mn.min.js" integrity="sha512-NXfKWzo7Fc6s2DkGrbmby3OwtW110lOabB+gdPAfemN3JycsfoBr89lElJzrYKIKQ512l0WNQg+aT9fLBPmlmA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="./js/utility.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/mn.min.js"
+    integrity="sha512-NXfKWzo7Fc6s2DkGrbmby3OwtW110lOabB+gdPAfemN3JycsfoBr89lElJzrYKIKQ512l0WNQg+aT9fLBPmlmA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="./js/utility.js"></script>
 
-<script src="./js/dropdown.js"></script>
-<script src="./js/home-kids.js"></script>
-
+  <script src="./js/dropdown.js"></script>
+  <script src="./js/home-kids.js"></script>
 </html>
