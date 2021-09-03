@@ -88,6 +88,7 @@ const remove = () => {
 };
 
 const renderTasks = async (docs) => {
+  document.getElementsByClassName('loader')[0].style.display="none"
   let taskcontainer = document.getElementById("taskcontainer");
   taskcontainer.innerHTML = "";
   await docs.forEach(async (doc) => {

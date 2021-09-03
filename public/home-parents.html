@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TIBBEM</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="./style/loading.css">
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900" rel="stylesheet" />
     <link rel="stylesheet" href="./style/dropdown.css" />
     <link rel="stylesheet" href="./style/header-footer.css" />
@@ -28,7 +29,7 @@
               style="cursor: pointer"
             />
           </button>
-                <div class="profile-dropdown-content">
+                <div class="profile-dropdown-content" style="display: none;">
                     <div onclick="goToProfile()">
                         <span class="material-icons">person</span>
                         <div class="underline">Profile</div>
@@ -53,7 +54,11 @@
         <img src="./assets/Rectangle 270.svg" class="bg-6" />
         <img src="./assets/Rectangle 268.svg" class="bg-7" />
 
+        <div class="loader">
+            <img class="spin" src="./assets/loooooooo.svg" height="100px" width="100px">
+        </div>
         <div class="main">
+
             <div class="side-menu">
                 <button id="taskb" onclick="displaytask();" class="side-button black">
             Даалгавар

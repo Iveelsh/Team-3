@@ -21,6 +21,7 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 const loginWithEmailAndPassword = () => {
+    document.getElementsByClassName('loader')[0].style.display = "flex"
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
     firebase.auth().signInWithEmailAndPassword(email, password)

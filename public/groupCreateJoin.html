@@ -21,15 +21,13 @@
             <!-- PROFILE DROPDOWN -->
             <div class="profile-dropdown-cont">
                 <button class="profile-btn" onclick="displayProfileDrop()">
-            <img src="./assets/profile.svg" width="34px" />
-          </button>
-                <div class="profile-dropdown-content">
-                    <div><span class="material-icons">person</span>
-                        <div class="underline">Profile</div>
-                    </div>
-                    <div><span class="material-icons">settings</span>
-                        <div class="underline">Settings</div>
-                    </div>
+        <img
+          src="./assets/profile.svg"
+          width="34px"
+          style="cursor: pointer"
+        />
+      </button>
+                <div class="profile-dropdown-content" style="display: none;">
                     <div onclick="logOut()">
                         <span class="material-icons">logout</span>
                         <div class="underline">Log out</div>
@@ -59,7 +57,7 @@
                         east
                         </span></div>
                     <div class="text">
-                        <div class = "font small-text">Хэрвээ та хүүхэд бол бүлгэмд нэгдэнэ үү</div>
+                        <div class="font small-text">Хэрвээ та хүүхэд бол бүлгэмд нэгдэнэ үү</div>
                     </div>
                     <div id="button" onclick="showJoinForm()" class="groupjoin-button cursor">Бүлгэмд нэгдэх</div>
                 </div>
@@ -80,7 +78,7 @@
                         </span></div>
                     <div class="text">
                         <!-- <div class="text-margin">Sain baina uu</div> -->
-                        <div class = "small-text font">Хэрвээ та эцэг эх бол бүлгэм үүсгэнэ үү</div>
+                        <div class="small-text font">Хэрвээ та эцэг эх бол бүлгэм үүсгэнэ үү</div>
                     </div>
                     <div id=" button " onclick="showCreateForm() " class="small-text groupjoin-button cursor">Бүлгэм үүсгэх</div>
 

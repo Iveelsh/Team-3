@@ -97,3 +97,28 @@ const joinGroup = async() => {
         window.location.href = "index.html"
     }
 }
+
+const logOut = () => {
+    firebase
+        .auth()
+        .signOut()
+        .then(() => {
+            console.log("Succesfully logged out");
+            window.location.href = "index.html";
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
+
+const displayProfileDrop = () => {
+    let profileDrop = document.getElementsByClassName(
+        "profile-dropdown-content"
+    )[0];
+    if (profileDrop.style.display == "none") {
+        profileDrop.style.display = "block";
+        return
+    } else {
+        profileDrop.style.display = "none";
+    }
+};

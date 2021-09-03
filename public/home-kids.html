@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./style/dropdown.css" />
     <link rel="stylesheet" href="./style/header-footer.css" />
     <link rel="stylesheet" href="./style/home-kids.css" />
+    <link rel="stylesheet" href="./style/loading.css">
 </head>
 
 <body id="body">
@@ -24,7 +25,7 @@
                 <button class="profile-btn" onclick="displayProfileDrop()">
             <img src="./assets/profile.svg" width="34px" />
           </button>
-                <div class="profile-dropdown-content">
+                <div class="profile-dropdown-content" style="display: none;">
                     <div onclick="goToProfile()">
                         <span class="material-icons">person</span>
                         <div class="underline">Profile</div>
@@ -45,7 +46,9 @@
         <img src="./assets/Rectangle 270.svg" class="bg-5" />
         <img src="./assets/Rectangle 270.svg" class="bg-6" />
         <img src="./assets/Rectangle 268.svg" class="bg-7" />
-
+        <div class="loader">
+            <img class="spin" src="./assets/loooooooo.svg" height="100px" width="100px">
+        </div>
         <div class="main">
             <div class="side-menu">
                 <button id="taskb" onclick="displaytask();" class="side-button black">

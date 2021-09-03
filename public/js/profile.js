@@ -26,6 +26,29 @@ const prohoverr = () => {
 
 }
 
+const logOut = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        console.log("Succesfully logged out");
+        window.location.href = "index.html";
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  
+  const displayProfileDrop = () => {
+    let profileDrop = document.getElementsByClassName(
+      "profile-dropdown-content"
+    )[0];
+    if (profileDrop.style.display == "none") {
+      profileDrop.style.display = "block";
+    } else {
+      profileDrop.style.display = "none";
+    }
+  };
 
 
 
@@ -35,11 +58,13 @@ firebase.auth().onAuthStateChanged((u) => {
         let userUid = user.uid
         let userGroup = db.collection('users').doc(userUid);
         db.collection('users').doc(userUid).onSnapshot(doc => {
+
+            document.getElementsByClassName('loader')[0].style.display = "none"
             let name = document.getElementById("name");
             let email = document.getElementById("email");
             let phone = document.getElementById("phone");
             let role = document.getElementById("role");
-            if(doc.data().role == 'kid') {
+            if (doc.data().role == 'kid') {
                 document.getElementById('bakcTo').onclick = BackToHomeKids
             } else {
 
@@ -47,16 +72,15 @@ firebase.auth().onAuthStateChanged((u) => {
             }
             name.innerHTML = doc.data().name;
             email.innerHTML = doc.data().mail;
-            if(doc.data().phoneNumber == "undefined"){
+            if (doc.data().phoneNumber == "undefined") {
                 phone.innerHTML = "";
-            }
-            else{
+            } else {
                 phone.innerHTML = doc.data().phoneNumber;
             }
             role.innerHTML = doc.data().role == 'kid' ? "Хүүхэд" : "Админ";
-            if(doc.data().profilePic){
+            if (doc.data().profilePic) {
                 document.getElementById('profile-pic').src = doc.data().profilePic
-            }else{
+            } else {
                 document.getElementById('profile-pic').src = './assets/poroooo.svg'
             }
             console.log(doc.data())
@@ -67,18 +91,19 @@ firebase.auth().onAuthStateChanged((u) => {
     }
 });
 
-const arr = ['./assets/avatarboy.svg', 
-'./assets/avatarwoman.svg', 
-'./assets/avatarbatman.svg', 
-'./assets/avatarharley.svg', 
-'./assets/avatargirl.svg','./assets/avatarman.svg',
-'./assets/avatarsheep.svg'];
+const arr = ['./assets/avatarboy.svg',
+    './assets/avatarwoman.svg',
+    './assets/avatarbatman.svg',
+    './assets/avatarharley.svg',
+    './assets/avatargirl.svg', './assets/avatarman.svg',
+    './assets/avatarsheep.svg'
+];
 
 arr.forEach((item, index) => {
     let temp = document.createElement('div');
 
 })
-let left = 0  //zun f
+let left = 0 //zun f
 let mid = 1 //gol s
 let right = 2 //barun t 
 let neg = document.getElementById('neg')
@@ -94,13 +119,11 @@ const next = () => {
         mid = 0;
         left = 6;
         right = 1;
-    }
-    else if (mid == 5) {
+    } else if (mid == 5) {
         left = mid;
         mid++;
         right = 0;
-    }
-    else {
+    } else {
         left = mid;
         mid++;
         right++;
@@ -115,18 +138,15 @@ const back = () => {
         mid = 6;
         left = 5;
         right = 0;
-    }
-    else if (mid == 6) {
+    } else if (mid == 6) {
         left = 4;
         right = 6;
         mid--;
-    }
-    else if (mid == 1) {
+    } else if (mid == 1) {
         left = 6;
         mid--;
         right = 1;
-    }
-    else {
+    } else {
         left--;
         mid--;
         right--;
@@ -149,7 +169,7 @@ let phoneInp = document.getElementById("phone");
 let namesave = nameInp.innerHTML;
 let phonesave = phoneInp.innerHTML;
 
-const goToEdit =  () => {
+const goToEdit = () => {
     namesave = nameInp.innerHTML;
     phonesave = phoneInp.innerHTML;
 
@@ -166,19 +186,19 @@ const backToPro = () => {
     nameInp.contentEditable = false;
     phoneInp.contentEditable = false;
 
-    nameInp.innerHTML = namesave; 
-    phoneInp.innerHTML = phonesave; 
+    nameInp.innerHTML = namesave;
+    phoneInp.innerHTML = phonesave;
 
     change_pic.classList.add("none");
     not_change.classList.remove("none");
     change_btns.classList.add("none");
     change.style.display = "block";
 
-} 
+}
 
 const edit = () => {
     db.collection('users').doc(user.uid).update({
-        name:  nameInp.innerHTML,
+        name: nameInp.innerHTML,
         phoneNumber: phoneInp.innerHTML,
         profilePic: arr[mid]
     })

@@ -10,21 +10,28 @@
     <link rel="stylesheet" href="./style/profile.css">
     <link rel="stylesheet" href="./style/dropdown.css" />
     <link rel="stylesheet" href="./style/header-footer.css" />
+    <link rel="stylesheet" href="./style/loading.css">
 </head>
 
 <body>
     <div class="everything">
+        <!-- HEADER START -->
         <div class="header">
             <img src="./assets/logo.svg" class="logo" />
             <div class="header-text">My family</div>
             <!-- PROFILE DROPDOWN -->
             <div class="profile-dropdown-cont">
                 <button class="profile-btn" onclick="displayProfileDrop()">
-                    <img src="./assets/profile.svg" width="34px" />
-                </button>
-                <div class="profile-dropdown-content">
-                    <div><span class="material-icons">person</span>
-                        <div class="underline">Home page</div>
+            <img
+              src="./assets/profile.svg"
+              width="34px"
+              style="cursor: pointer"
+            />
+          </button>
+                <div class="profile-dropdown-content" style="display: none;">
+                    <div onclick="goToProfile()">
+                        <span class="material-icons">person</span>
+                        <div class="underline">Profile</div>
                     </div>
                     <div onclick="logOut()">
                         <span class="material-icons">logout</span>
@@ -36,15 +43,16 @@
         </div>
         <!-- HEADER END-->
         <img src="./assets/Group 265.svg" class="backpic">
-
+        <div class="loader">
+            <img class="spin" src="./assets/loooooooo.svg" height="100px" width="100px">
+        </div>
         <div class="container">
             <div class="pro-container">
                 <div class="top">
                     <div class="Back">
                         <span class="material-icons size" id="bakcTo">
                             arrow_back
-                        </span>
-                        Нүүр Хуудас
+                        </span> Нүүр Хуудас
                     </div>
                 </div>
                 <div class="pro-cont" id="not-change">
@@ -128,4 +136,5 @@
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
 <script src="./js/firebase.js"></script>
 <script src="./js/profile.js"></script>
+
 </html>
