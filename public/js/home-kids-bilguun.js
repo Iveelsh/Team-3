@@ -780,9 +780,9 @@ const creategroupuserbody = (memberId, deleteId) => {
                     .get()
                     .then((docs) => {
                         renderTasks(docs, true);
-                        console.log(docs)
                         docs.forEach(doc => {
                             console.log(doc.data())
+                            console.log(docs.data())
                         })
                     });
                 window.onclick = function(event) {
@@ -793,11 +793,6 @@ const creategroupuserbody = (memberId, deleteId) => {
                 }
                 console.log("history")
             }
-
-
-
-
-
 
             role.innerHTML = data.role == 'admin' ? "Админ" : 'Хүүхэд';
             username.innerHTML = data.name;

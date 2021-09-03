@@ -58,37 +58,81 @@
           <button id="messb" onclick="displaymessage()" class="side-button">
             Харилцан яриа
           </button>
-        </div>
-        <div class="modal" id="modal">
-          <div class="modal-item">modal</div>
-        </div>
-        <div class="container">
-          <div id="task" class="task-side">
-            <!-- TASK DETAIL MODAL START -->
-            <div id="infomodalcont" class="modal">
-              <div id="infomodal" class="task-modal">
-                <div class="row relative center">
-                  <div class="blue-text big-text center">Даалгавар</div>
-                  <img
-                    onclick="closeModal2()"
-                    class="close-modal"
-                    src="./assets/Close.svg"
-                  />
-                </div>
-                <div class="column center">
-                  <img id="picture" />
-                  <div class="blue-text small-text" id="task-user">User</div>
-                </div>
-                <div class="row">
-                  <div class="column">
-                    <div class="blue-text small-text">Даалгаварын нэр</div>
-                    <div class="gray-border" id="task-name">Task</div>
-                  </div>
-                  <div class="column">
-                    <div class="blue-text small-text">Даалгаварын оноо</div>
-                    <div class="gray-border row point">
-                      <img src="./assets/Coin.svg" />
-                      <div id="task-point">0</div>
+
+            </div>
+            <div class="modal" id="modal">
+                <div class="modal-item">modal</div>
+            </div>
+            <div class="container">
+                <div id="task" class="task-side">
+                    <!-- TASK DETAIL MODAL START -->
+                    <div id="infomodalcont" class="modal">
+                        <div id="infomodal" class="task-modal">
+                            <div class="row relative center">
+                                <div class="blue-text big-text center">Даалгавар</div>
+                                <img onclick="closeModal2()" class="close-modal" src="./assets/Close.svg" />
+                            </div>
+                            <div class="column center">
+                                <img id="picture" />
+                                <div class="blue-text small-text" id="task-user">User</div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <div class="blue-text small-text">Даалгаварын нэр</div>
+                                    <div class="gray-border" id="task-name">Task</div>
+                                </div>
+                                <div class="column">
+                                    <div class="blue-text small-text">Даалгаварын оноо</div>
+                                    <div class="gray-border row point">
+                                        <img src="./assets/Coin.svg" />
+                                        <div id="task-point">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="blue-text small-text">Даалгаварын тайбар</div>
+                                <div class="blue-text small-text" id="task-date">Он сар</div>
+                                <div class="gray-border" id="task-description">Desc</div>
+                            </div>
+                            <div class="column center">
+                                <button class="assign-task-btn row" id="getTask">
+                                <img src="./assets/assign.svg" alt="" />
+                                <div>Даалгавар авах</div>
+                                </button>
+
+                                <button onclick="changeTaskDone()" class="assign-task-btn row" id="doneTask">
+                                    <div>Дууссан</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TASK DETAIL MODAL END  -->
+
+                    <div class="dropdown-container">
+                        <button id="Dropbtn" onclick="myfunction()" style="color: black">
+                <p class="paragraph white pointer" id="filter">Бүх даалгавар</p>
+                <span class="pointer material-icons arrow-icon icon"
+                  >arrow_drop_down</span
+                >
+              </button>
+                        <div style="visibility: hidden" id="Dropdowns" onmouseleave="dropLeavefunction()" onmouseenter="dropfunction()" class="drop-container">
+                            <div class="pointer gray line-text" onclick="filterByStatus('all')" id="Wishlist">
+                                Бүх даалгавар
+                            </div>
+                            <div class="pointer gray line-text" onclick="filterByStatus('inreview')" id="Wishlist">
+                                Шалгуулах даалгавар
+                            </div>
+                            <div class="pointer gray line-text" onclick="filterByStatus('unassigned')" id="Home">
+                                Эзэнгүй даалгавар
+                            </div>
+                            <div class="pointer gray line-text" onclick="filterByStatus('inprogress')" id="Settings">
+                                Хийж байгаа даалгавар
+                            </div>
+                            <div class="pointer gray line-text" onclick="filterByStatus('mytaskk')" id="Mytask">
+                                Mиний даалгавар
+                            </div>
+                        </div>
+
                     </div>
                   </div>
                 </div>

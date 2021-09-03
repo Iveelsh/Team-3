@@ -418,44 +418,58 @@ const renderWishlist = (docs) => {
 };
 
 const filterByStatus = (status) => {
-  if (user) {
-    let change = document.getElementById("filter");
-    console.log(status);
-    switch (status) {
-      case "all":
-        change.innerHTML = "Бүх даалгавар";
-        db.collection(`groups/${groupId}/tasks`).onSnapshot((docs) => {
-          renderTasks(docs);
-        });
-        break;
-      case "unassigned":
-        change.innerHTML = "Эзэнгүй даалгавар";
-        db.collection(`groups/${groupId}/tasks`)
-          .where("AssignedUser", "==", "")
-          .get()
-          .then((docs) => {
-            renderTasks(docs);
-          });
-        break;
-      case "inreview":
-        change.innerHTML = "Шалгуулах даалгавар";
 
-        db.collection(`groups/${groupId}/tasks`)
-          .where("Status", "==", status)
-          .get()
-          .then((docs) => {
-            renderTasks(docs);
-          });
-        break;
-      case "inprogress":
-        change.innerHTML = "Хийж байгаа даалгавар";
-        db.collection(`groups/${groupId}/tasks`)
-          .where("Status", "==", status)
-          .get()
-          .then((docs) => {
-            renderTasks(docs);
-          });
-        break;
+    if (user) {
+        let change = document.getElementById("filter");
+        console.log(status);
+        switch (status) {
+            case "all":
+                change.innerHTML = "Бүх даалгавар";
+                db.collection(`groups/${groupId}/tasks`).onSnapshot((docs) => {
+                    renderTasks(docs);
+                });
+                break;
+            case "unassigned":
+                change.innerHTML = "Эзэнгүй даалгавар";
+                db.collection(`groups/${groupId}/tasks`)
+                    .where("AssignedUser", "==", "")
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs);
+                    });
+                break;
+            case "inreview":
+                change.innerHTML = "Шалгуулах даалгавар";
+
+                db.collection(`groups/${groupId}/tasks`)
+                    .where("Status", "==", status)
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs);
+                    });
+                break;
+            case "inprogress":
+                change.innerHTML = "Хийж байгаа даалгавар";
+                db.collection(`groups/${groupId}/tasks`)
+                    .where("Status", "==", status)
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs);
+                    });
+                break;
+            case "mytaskk":
+                change.innerHTML = "Mиний даалгавар";
+                db.collection(`groups/${groupId}/tasks`)
+                    .where("AssignedUser", "==", user.uid)
+                    .get()
+                    .then((docs) => {
+                        renderTasks(docs);
+                    });
+                break;
+        }
+    } else {
+        window.alert("please login");
+
     }
   } else {
     window.alert("please login");
@@ -816,5 +830,6 @@ function copyToClipboard() {
 }
 
 const goToProfile = () => {
-  window.location.href = "profile.html";
+    window.location.href = "profile.html";
+
 };
