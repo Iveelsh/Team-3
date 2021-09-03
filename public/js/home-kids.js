@@ -308,112 +308,115 @@ const Destroy = () => {
 const renderWishlist = (docs) => {
   console.log("Wishlist render success");
   docs.forEach(async (doc) => {
-    console.log(doc.data());
-    let data = doc.data();
-    let userWish = data.wish;
-    let userWishPoint = data.point;
-    let wishAddedDate = convertDate(doc.data().CreatedAt.toDate());
-
-    let wishes = document.getElementById("wish-container");
-
-    let wishWithButtonCont = document.createElement("div");
-    wishWithButtonCont.classList.add("row");
-
-    let wishBody = document.createElement("div");
-    wishBody.classList.add("wish-body", "task-body", "row");
-    let icon = document.createElement("img");
-    icon.src = "./assets/wishlist.svg";
-    wishBody.appendChild(icon);
-
-    let wish = document.createElement("div");
-    wish.classList.add("w100", "column");
-    wishBody.appendChild(wish);
-
-    let date = document.createElement("span");
-    date.classList.add("date", "blue-text");
-    date.innerHTML = wishAddedDate;
-    wish.appendChild(date);
-
-    let wishrow = document.createElement("div");
-    wishrow.classList.add("row", "task-general");
-    wish.appendChild(wishrow);
-
-    let wishname = document.createElement("div");
-    wishname.classList.add("blue-text", "bold");
-    wishname.innerHTML = userWish;
-    wishrow.appendChild(wishname);
-
-    let coinrow = document.createElement("div");
-    coinrow.classList.add("row", "info");
-    wishrow.appendChild(coinrow);
-
-    let coin = document.createElement("img");
-    coin.src = "./assets/Coin.svg";
-    coinrow.appendChild(coin);
-    let point = document.createElement("div");
-    point.innerHTML = userWishPoint ? userWishPoint : "";
-    coinrow.appendChild(point);
-
-    let wishDeleteButton = document.createElement("div");
-    let wishDeleteIcon = document.createElement("span");
-    wishDeleteIcon.classList.add("material-icons");
-    wishDeleteIcon.innerHTML = "delete";
-    wishDeleteButton.classList.add(
-      "wishDeleteButton",
-      "center",
-      "column",
-      "small-text"
-    );
-    wishDeleteButton.innerHTML = "Устгах";
-    wishDeleteButton.appendChild(wishDeleteIcon);
-
-    wishWithButtonCont.appendChild(wishBody);
-    wishWithButtonCont.appendChild(wishDeleteButton);
-    wishes.appendChild(wishWithButtonCont);
-
-    // if (userWishPoint) {
-    //     let point = document.createElement("div")
-    //     coinShow.appendChild(point);
-    //     point.innerHTML = userWishPoint
-    //         // point.
-    // } else {
-    //     let point = document.createElement("div")
-    //     coinShow.appendChild(point);
-    //     point.classList.add("wishpoint-input");
-    // }
-
-    wishWithButtonCont.addEventListener("mouseover", () => {
-      wishDeleteButton.style.display = "flex";
-      wishBody.style.width = "90%";
-      wishDeleteButton.style.width = "10%";
-    });
-    wishWithButtonCont.addEventListener("mouseout", () => {
-      wishDeleteButton.style.display = "none";
-
-      wishBody.style.width = "100%";
-      wishDeleteButton.style.width = "0%";
-    });
-
-    wishDeleteButton.onclick = () => {
+    if(doc.data().userName == user.uid){
       console.log(doc.data());
-      db.collection(`groups/${groupId}/wishlist`)
-        .doc(doc.id)
-        .delete()
-        .then(() => {
-          console.log("successfully deleted");
-        });
-    };
+      let data = doc.data();
+      let userWish = data.wish;
+      let userWishPoint = data.point;
+      let wishAddedDate = convertDate(doc.data().CreatedAt.toDate());
+  
+      let wishes = document.getElementById("wish-container");
+  
+      let wishWithButtonCont = document.createElement("div");
+      wishWithButtonCont.classList.add("row");
+  
+      let wishBody = document.createElement("div");
+      wishBody.classList.add("wish-body", "task-body", "row");
+      let icon = document.createElement("img");
+      icon.src = "./assets/wishlist.svg";
+      wishBody.appendChild(icon);
+  
+      let wish = document.createElement("div");
+      wish.classList.add("w100", "column");
+      wishBody.appendChild(wish);
+  
+      let date = document.createElement("span");
+      date.classList.add("date", "blue-text");
+      date.innerHTML = wishAddedDate;
+      wish.appendChild(date);
+  
+      let wishrow = document.createElement("div");
+      wishrow.classList.add("row", "task-general");
+      wish.appendChild(wishrow);
+  
+      let wishname = document.createElement("div");
+      wishname.classList.add("blue-text", "bold");
+      wishname.innerHTML = userWish;
+      wishrow.appendChild(wishname);
+  
+      let coinrow = document.createElement("div");
+      coinrow.classList.add("row", "info");
+      wishrow.appendChild(coinrow);
+  
+      let coin = document.createElement("img");
+      coin.src = "./assets/Coin.svg";
+      coinrow.appendChild(coin);
+      let point = document.createElement("div");
+      point.innerHTML = userWishPoint ? userWishPoint : "";
+      coinrow.appendChild(point);
+  
+      let wishDeleteButton = document.createElement("div");
+      let wishDeleteIcon = document.createElement("span");
+      wishDeleteIcon.classList.add("material-icons");
+      wishDeleteIcon.innerHTML = "delete";
+      wishDeleteButton.classList.add(
+        "wishDeleteButton",
+        "center",
+        "column",
+        "small-text"
+      );
+      wishDeleteButton.innerHTML = "Устгах";
+      wishDeleteButton.appendChild(wishDeleteIcon);
+  
+      wishWithButtonCont.appendChild(wishBody);
+      wishWithButtonCont.appendChild(wishDeleteButton);
+      wishes.appendChild(wishWithButtonCont);
+  
+      // if (userWishPoint) {
+      //     let point = document.createElement("div")
+      //     coinShow.appendChild(point);
+      //     point.innerHTML = userWishPoint
+      //         // point.
+      // } else {
+      //     let point = document.createElement("div")
+      //     coinShow.appendChild(point);
+      //     point.classList.add("wishpoint-input");
+      // }
+  
+      wishWithButtonCont.addEventListener("mouseover", () => {
+        wishDeleteButton.style.display = "flex";
+        wishBody.style.width = "90%";
+        wishDeleteButton.style.width = "10%";
+      });
+      wishWithButtonCont.addEventListener("mouseout", () => {
+        wishDeleteButton.style.display = "none";
+  
+        wishBody.style.width = "100%";
+        wishDeleteButton.style.width = "0%";
+      });
+  
+      wishDeleteButton.onclick = () => {
+        console.log(doc.data());
+        db.collection(`groups/${groupId}/wishlist`)
+          .doc(doc.id)
+          .delete()
+          .then(() => {
+            console.log("successfully deleted");
+          });
+      };
+  
+      window.onclick = (event) => {
+        let wishModal = document.getElementById("wishinfomodal");
+        let wishPoint = document.getElementById("wishPoint");
+        let wishDesc = document.getElementById("wishDesc");
+        if (event.target == wishModal) {
+          wishModal.style.display = "none";
+          wishPoint.innerHTML = "";
+          wishDesc.innerHTML = "";
+        }
+      };
 
-    window.onclick = (event) => {
-      let wishModal = document.getElementById("wishinfomodal");
-      let wishPoint = document.getElementById("wishPoint");
-      let wishDesc = document.getElementById("wishDesc");
-      if (event.target == wishModal) {
-        wishModal.style.display = "none";
-        wishPoint.innerHTML = "";
-        wishDesc.innerHTML = "";
-      }
-    };
+    }
   });
 };
 
