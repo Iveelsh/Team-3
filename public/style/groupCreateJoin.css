@@ -16,6 +16,9 @@
     font-size: 32px;
     line-height: 37px;
 }
+body{
+    overflow-x: hidden;
+}
 
 .small-text {
     font-style: normal;
@@ -287,3 +290,47 @@
     align-items: center;
     position: relative;
 }
+.bg-1{
+    position: absolute;
+    top: -4px;
+    left: 100px;
+    opacity: 40%;
+    z-index: 1;
+  }
+  .bg-2{
+    position: absolute;
+    top: 409px;
+    left: 109px;
+    opacity: 40%;
+  }
+  
+  .bg-3{
+    position: absolute;
+    top: 450px;
+    left: 300px;
+    opacity: 40%;
+  }
+  .bg-4{
+    position: absolute;
+    top: 940px;
+    left: 35px;
+    opacity: 40%;
+  }
+  .bg-5{
+    position: absolute;
+    right: 0px;
+    top: 40px;
+    opacity: 40%;
+  }
+  .bg-6{
+    position: absolute;
+    right: 0px;
+    top: 744px;
+    opacity: 40%;
+  }
+  .bg-7{
+    position: absolute;
+    right: 200px;
+    top: 500px;
+    opacity: 40%;
+  }
