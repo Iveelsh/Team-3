@@ -614,36 +614,57 @@ firebase.auth().onAuthStateChanged((u) => {
             })
 
             // MESSENGER CHAT
-            let recievedChats = 0;
             db.collection(`groups/${groupId}/chats`)
-                .orderBy("time", "desc")
-                .onSnapshot((docs) => {
-                    // screen.innerHTML = "";
-                    let a = docs.docs.map((doc) => {
-                        let data = doc.data()
-                        return new Promise((res, rej) => {
-                            db.doc(`users/${data.user}`)
-                                .get()
-                                .then((doc) => {
-                                    res({
-                                        ...data,
-                                        userName: doc.data().name,
-                                        profilePic: doc.data()?.profilePic,
-                                    });
-                                });
-                        });
-                    });
-                
-                    Promise.all(a).then(allData => {
-                        let test = allData.sort(function(a, b) {
-                            return new Date(b.time) - new Date(a.time);
-                        });
-                        while(recievedChats < test.length) {
-                            renderChats(test[recievedChats]);
-                            recievedChats++;
-                        }
-                    })
+        .orderBy("time", "asc")
+        .get()
+        .then((docs) => {
+          // screen.innerHTML = "";
+          let a = docs.docs.map((doc) => {
+            let data = doc.data();
+            return new Promise((res, rej) => {
+              db.doc(`users/${data.user}`)
+                .get()
+                .then((doc) => {
+                  res({
+                    ...data,
+                    userName: doc.data().name,
+                    profilePic: doc.data()?.profilePic,
+                  });
                 });
+            });
+          });
+
+          Promise.all(a).then((allData) => {
+            allData.forEach((chat) => renderChats(chat));
+          });
+        });
+
+      db.collection(`groups/${groupId}/chats`)
+        .orderBy("time", "asc")
+        .onSnapshot((snapshot) => {
+          let a = snapshot.docChanges().map((change) => {
+            if (change.type === "added") {
+              let data = change.doc.data();
+              console.log(data)
+              return new Promise((res, rej) => {
+                db.doc(`users/${data.user}`)
+                  .get()
+                  .then((doc) => {
+                    res({
+                      ...data,
+                      userName: doc.data().name,
+                      profilePic: doc.data()?.profilePic,
+                    });
+                  });
+              });
+            }
+          });
+          Promise.all(a).then((allData) => {
+            allData.forEach((chat) => renderChats(chat));
+          });
+        });
+
+      
 
             // MESSENGER CHAT
 
@@ -805,20 +826,20 @@ let chat = document.getElementById("chat");
 let screen = document.getElementById("screen");
 let sendBut = document.getElementById("sendButn");
 
-sendBut.addEventListener('click', () => {
-    
-})
 const send = () => {
     if (chat.innerHTML.trim() !== '') {
         db.collection(`groups/${groupId}/chats`).doc().set({
             user: user.uid,
             text: chat.innerHTML.trim(),
             time: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(() => {
+            chat.innerHTML = ""
         })
     }
 }
 
 const renderChats = (data) => {
+    if(!data)  return
     let row = document.createElement("div");
     let user = document.createElement("div");
     let userName = document.createElement("div");
@@ -842,7 +863,7 @@ const renderChats = (data) => {
     row.appendChild(chatContainer);
     chatContainer.appendChild(userName);
     chatContainer.appendChild(chat);
-    screen.appendChild(row);
+    screen.prepend(row);
 };
 
 

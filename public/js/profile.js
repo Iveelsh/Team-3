@@ -39,6 +39,12 @@ firebase.auth().onAuthStateChanged((u) => {
             let email = document.getElementById("email");
             let phone = document.getElementById("phone");
             let role = document.getElementById("role");
+            if(doc.data().role == 'kid') {
+                document.getElementById('bakcTo').onclick = BackToHomeKids
+            } else {
+
+                document.getElementById('bakcTo').onclick = BackToHomeParents
+            }
             name.innerHTML = doc.data().name;
             email.innerHTML = doc.data().mail;
             if(doc.data().phoneNumber == "undefined"){
@@ -47,7 +53,7 @@ firebase.auth().onAuthStateChanged((u) => {
             else{
                 phone.innerHTML = doc.data().phoneNumber;
             }
-            role.innerHTML = doc.data().role;
+            role.innerHTML = doc.data().role == 'kid' ? "Хүүхэд" : "Админ";
             if(doc.data().profilePic){
                 document.getElementById('profile-pic').src = doc.data().profilePic
             }else{
@@ -60,25 +66,6 @@ firebase.auth().onAuthStateChanged((u) => {
         window.location.href = "index.html"
     }
 });
-
-
-
-// db.collection("groups").where("fuck", "==", userGroup)
-//     .get()
-//     .then((querySnapshot) => {
-//         querySnapshot.forEach((doc) => {
-//             // doc.data() is never undefined for query doc snapshots
-//             console.log(doc.id, " => ", doc.data());
-//         });
-//     })
-//     .catch((error) => {
-//         console.log("Error getting documents: ", error);
-//     });
-
-
-
-// let avatar1 = document.getElementsByName(./assets/)
-
 
 const arr = ['./assets/avatarboy.svg', 
 './assets/avatarwoman.svg', 

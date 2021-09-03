@@ -495,13 +495,38 @@ firebase.auth().onAuthStateChanged((u) => {
             renderWishlist(querySnapshot);
           });
         // MESSENGER CHAT
-
         db.collection(`groups/${groupId}/chats`)
-          .orderBy("time", "desc")
-          .onSnapshot((docs) => {
-            screen.innerHTML = "";
-            let a = docs.docs.map((doc) => {
-              let data = doc.data();
+        .orderBy("time", "asc")
+        .get()
+        .then((docs) => {
+          // screen.innerHTML = "";
+          let a = docs.docs.map((doc) => {
+            let data = doc.data();
+            return new Promise((res, rej) => {
+              db.doc(`users/${data.user}`)
+                .get()
+                .then((doc) => {
+                  res({
+                    ...data,
+                    userName: doc.data().name,
+                    profilePic: doc.data()?.profilePic,
+                  });
+                });
+            });
+          });
+
+          Promise.all(a).then((allData) => {
+            allData.forEach((chat) => renderChats(chat));
+          });
+        });
+
+      db.collection(`groups/${groupId}/chats`)
+        .orderBy("time", "asc")
+        .onSnapshot((snapshot) => {
+          let a = snapshot.docChanges().map((change) => {
+            if (change.type === "added") {
+              let data = change.doc.data();
+              console.log(data)
               return new Promise((res, rej) => {
                 db.doc(`users/${data.user}`)
                   .get()
@@ -513,19 +538,16 @@ firebase.auth().onAuthStateChanged((u) => {
                     });
                   });
               });
-            });
-            Promise.all(a).then((allData) => {
-              let test = allData.sort(function (a, b) {
-                return new Date(b.time) - new Date(a.time);
-              });
-              console.log(chatContainer);
-              test.forEach((item) => {
-                renderChats(item);
-              });
-            });
+            }
           });
+          Promise.all(a).then((allData) => {
+            allData.forEach((chat) => renderChats(chat));
+          });
+        });
 
-        // MESSENGER CHAT ENDS
+      
+
+            // MESSENGER CHAT
 
         //GROUP
         db.collection(`groups/${groupId}/members`).onSnapshot(
@@ -625,45 +647,47 @@ const wishInfoModalClose = () => {
 let chat = document.getElementById("chat");
 let screen = document.getElementById("screen");
 let sendBut = document.getElementById("sendButn");
-sendBut.addEventListener("click", () => {
-  if (chat.value !== "") {
-    db.collection(`groups/${groupId}/chats`)
-      .add({
-        user: user.uid,
-        text: chat.innerHTML.trim(),
-        time: firebase.firestore.FieldValue.serverTimestamp(),
-      })
-      .then(() => {
-        chat.innerHTML = "";
-      });
-  }
-});
+
+const send = () => {
+    if (chat.innerHTML.trim() !== '') {
+        db.collection(`groups/${groupId}/chats`).doc().set({
+            user: user.uid,
+            text: chat.innerHTML.trim(),
+            time: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(() => {
+            chat.innerHTML = ""
+        })
+    }
+}
 
 const renderChats = (data) => {
-  let row = document.createElement("div");
-  let user = document.createElement("div");
-  let userName = document.createElement("div");
-  let chat = document.createElement("div");
+    if(!data)  return
+    let row = document.createElement("div");
+    let user = document.createElement("div");
+    let userName = document.createElement("div");
+    let chatContainer = document.createElement("div");
+    let chat = document.createElement("div");
 
-  userName.innerHTML = data.userName;
-  chat.innerHTML = data.text;
-  userName.setAttribute("class", "user");
+    userName.innerHTML = data.userName;
+    chat.innerHTML = data.text;
+    userName.setAttribute("class", "user");
 
-  row.setAttribute("class", "chat-ind");
-  user.setAttribute("class", "user-pic");
-  user.style.backgroundImage = `url(${
-    data.profilePic ? data.profilePic : "./assets/poroooo.svg"
-  })`;
-  user.style.backgroundSize = `contain`;
-  chat.classList.add("chat", "bubble");
-  chatContainer.setAttribute("class", "chat-container");
+    row.setAttribute("class", "chat-ind");
+    user.setAttribute("class", "user-pic");
+    user.style.backgroundImage = `url(${
+      data.profilePic ? data.profilePic : "./assets/poroooo.svg"
+    })`;
+    user.style.backgroundSize = `contain`;
+    chat.classList.add("chat", "bubble");
+    chatContainer.setAttribute("class", "chat-container");
 
-  row.appendChild(user);
-  row.appendChild(chatContainer);
-  chatContainer.appendChild(userName);
-  chatContainer.appendChild(chat);
-  screen.appendChild(row);
+    row.appendChild(user);
+    row.appendChild(chatContainer);
+    chatContainer.appendChild(userName);
+    chatContainer.appendChild(chat);
+    screen.prepend(row);
 };
+
 
 const creategroupuserbody = (memberId, deleteId) => {
   let userGroup = db.collection("users").doc(memberId);
