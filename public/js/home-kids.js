@@ -603,20 +603,14 @@ const displayProfileDrop = () => {
 
 const addWish = async () => {
   let wishName = document.getElementById("addwish").value;
-  let userName;
+  // let userName;
   console.log(user);
   if (user) {
-    await db
-      .collection("users")
-      .doc(user.uid)
-      .get()
-      .then((doc) => {
-        userName = doc.data().name;
-      });
-    db.collection(`groups/${groupId}/wishlist`)
+    if(wishName){
+      db.collection(`groups/${groupId}/wishlist`)
       .doc()
       .set({
-        userName: userName,
+        userName: user.uid,
         wish: wishName,
         CreatedAt: firebase.firestore.FieldValue.serverTimestamp(),
       })
@@ -629,6 +623,7 @@ const addWish = async () => {
       .catch((error) => {
         console.error("Error writing document: ", error);
       });
+    }
   } else {
     window.alert("Please login");
     window.location.href = "index.html";
