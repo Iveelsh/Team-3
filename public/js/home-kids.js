@@ -471,11 +471,7 @@ const filterByStatus = (status) => {
         window.alert("please login");
 
     }
-  } else {
-    window.alert("please login");
-    // window.location.href = "landingPage.html";
   }
-};
 
 firebase.auth().onAuthStateChanged((u) => {
   if (u) {
