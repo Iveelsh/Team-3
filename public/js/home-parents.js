@@ -503,7 +503,13 @@ const renderWishlist = (docs) => {
             let wishName = document.getElementById("wishName");
             // let addPoint = document.getElementById("addPoint");
             wishName.innerHTML = data.wish;
-            wishUser.innerHTML = doc.data().userName
+            // wishUser.innerHTML = doc.data().userName
+            let wishUserId = doc.data().userName
+            let wishUserName;
+            db.collection ("users").doc(wishUserId).get().then((docs) => {
+                wishUser.innerHTML = docs.data().name
+            })
+
             let addPointButton = document.getElementById("addPointButton");
 
             addPointButton.onclick = () => {
