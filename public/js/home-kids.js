@@ -425,7 +425,7 @@ const filterByStatus = (status) => {
         switch (status) {
             case "all":
                 change.innerHTML = "Бүх даалгавар";
-                db.collection(`groups/${groupId}/tasks`).onSnapshot((docs) => {
+                db.collection(`groups/${groupId}/tasks`).get().then((docs) => {
                     renderTasks(docs);
                 });
                 break;
@@ -494,6 +494,8 @@ firebase.auth().onAuthStateChanged((u) => {
             document.getElementById("wish-container").innerHTML = "";
             renderWishlist(querySnapshot);
           });
+
+
         // MESSENGER CHAT
         db.collection(`groups/${groupId}/chats`)
         .orderBy("time", "asc")
@@ -705,13 +707,6 @@ const creategroupuserbody = (memberId, deleteId) => {
   userGroup.get().then((doc) => {
     let data = doc.data();
     if (data) {
-      // let groupname = document.getElementById("groupname");
-      // let groupcode = document.getElementById("groupcode");
-      // code = doc.gruopname;
-      // namee = doc.joinCode;
-      // groupname.innerHTML = namee;
-      // groupcode.innerHTML = code;
-
       let container = document.getElementById("containerrr");
       let groupuserbody = document.createElement("div");
       let roww = document.createElement("div");
@@ -759,32 +754,11 @@ const creategroupuserbody = (memberId, deleteId) => {
       sidemenuabsolute.classList.add("sidemenu");
       // sidemenuabsolute.classList.add("absolute");
       menuitem.classList.add("menuitem1"); //tuuh
-      menuitem2.classList.add("menuitem2"); //admin
-      menuitem3.classList.add("menuitem3"); //bulgem
       // addcircleimg.style.cursor = "pointer";
 
       menuitem.onclick = () => {
         console.log("tuuh");
       };
-      menuitem2.onclick = () => {
-        console.log("admin");
-        if (data.role == "admin") {
-          db.collection("users").doc(memberId).update({
-            role: "kid",
-          });
-          role.innerHTML = "Хүүхэд";
-        } else {
-          db.collection("users").doc(memberId).update({
-            role: "admin",
-          });
-          role.innerHTML = "Админ";
-        }
-      };
-      menuitem3.onclick = () => {
-        console.log("bulgemees hasah");
-        db.doc(`groups/${groupId}/members/${deleteId}`).delete();
-      };
-
       materialiconbluetext.innerHTML = "more_vert";
       materialiconbluetext.style.cursor = "pointer";
       materialiconbluetext.onclick = a = () => {
@@ -827,9 +801,7 @@ const creategroupuserbody = (memberId, deleteId) => {
       username.innerHTML = data.name;
       point.innerHTML = data.point ? data.point : 0;
       menuitem.innerHTML = "Түүх харах";
-      menuitem2.innerHTML =
-        data.role == "kid" ? "Админ болгох" : "Админаас хасах";
-      menuitem3.innerHTML = "Бүлгэмээс гаргах";
+      
 
       container.appendChild(sidemenuabsolute);
       container.appendChild(groupuserbody);
